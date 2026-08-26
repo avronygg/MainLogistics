@@ -22,17 +22,26 @@ export default function Revelar({
   retraso = 0,
   desplazamiento = 18,
   className = "",
+  como = "div",
 }: {
   children: ReactNode;
   /** Segundos. Para escalonar elementos de una misma fila. */
   retraso?: number;
   desplazamiento?: number;
   className?: string;
+  /**
+   * Etiqueta a renderizar. Por defecto `div`, pero dentro de una lista
+   * tiene que ser `li`: un `div` entre `ul` y `li` es HTML inválido y
+   * rompe la semántica de lista para el lector de pantalla, que deja de
+   * anunciar cuántos elementos hay.
+   */
+  como?: "div" | "li";
 }) {
   const reducir = useReducedMotion();
+  const Etiqueta = como === "li" ? motion.li : motion.div;
 
   return (
-    <motion.div
+    <Etiqueta
       className={className}
       initial={
         reducir
@@ -48,6 +57,6 @@ export default function Revelar({
       }}
     >
       {children}
-    </motion.div>
+    </Etiqueta>
   );
 }

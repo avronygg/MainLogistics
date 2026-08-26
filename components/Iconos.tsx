@@ -120,3 +120,102 @@ export function IconoCarga(p: Props) {
     </Base>
   );
 }
+
+/* ── Equipos y servicios ──────────────────────────────────────────────
+   Ocho íconos, uno por servicio. Cada uno dibuja el equipo real, no una
+   metáfora: el comprador de logística reconoce una batea de un silo a
+   simple vista, y confundirlos delata que no se conoce el rubro. */
+
+/** Contenedor corrugado con gancho de grúa: retiro en puerto. */
+export function IconoContenedor(p: Props) {
+  return (
+    <Base {...p}>
+      <path d="M12 2.5v3M9.5 5.5h5" />
+      <rect x="3" y="9" width="18" height="9" rx="1.2" />
+      <path d="M7.5 9v9M12 9v9M16.5 9v9" />
+    </Base>
+  );
+}
+
+/** Perfil de cama baja: cuello alto y plataforma hundida al centro. */
+export function IconoCamaBaja(p: Props) {
+  return (
+    <Base {...p}>
+      <path d="M2 9h4l2 3h8l2-3h4" />
+      <circle cx="7" cy="16" r="1.7" />
+      <circle cx="17" cy="16" r="1.7" />
+    </Base>
+  );
+}
+
+/** Rampla plana: plataforma recta con carga paletizada encima. */
+export function IconoRampla(p: Props) {
+  return (
+    <Base {...p}>
+      <path d="M2 13h20" />
+      <rect x="6.5" y="7.5" width="9" height="5.5" rx="0.8" />
+      <path d="M11 7.5v5.5" />
+      <circle cx="7" cy="16.5" r="1.7" />
+      <circle cx="17" cy="16.5" r="1.7" />
+    </Base>
+  );
+}
+
+/** Camión pequeño de reparto: cabina corta y furgón. */
+export function IconoCamionPequeno(p: Props) {
+  return (
+    <Base {...p}>
+      <path d="M2 15V7.5h11V15" />
+      <path d="M13 10.5h3.8L20 14v1h-7" />
+      <circle cx="6.5" cy="16.8" r="1.7" />
+      <circle cx="16.5" cy="16.8" r="1.7" />
+    </Base>
+  );
+}
+
+/** Batea: tolva que se angosta abajo, para áridos y graneles. */
+export function IconoBatea(p: Props) {
+  return (
+    <Base {...p}>
+      <path d="M3.5 7.5h17l-2.6 7H6.1z" />
+      <path d="M3.5 7.5h17" />
+      <circle cx="8.5" cy="17" r="1.7" />
+      <circle cx="16" cy="17" r="1.7" />
+    </Base>
+  );
+}
+
+/** Silo: estanque cilíndrico sobre patas, carga a granel cerrada. */
+export function IconoSilo(p: Props) {
+  return (
+    <Base {...p}>
+      <rect x="3.5" y="8" width="17" height="7.5" rx="3.75" />
+      <path d="M9 8v7.5M15 8v7.5" />
+      <path d="M7.5 15.5v2.5M16.5 15.5v2.5" />
+    </Base>
+  );
+}
+
+/** Módulo BESS: batería con borne y el rayo de carga. */
+export function IconoBess(p: Props) {
+  return (
+    <Base {...p}>
+      <rect x="2.5" y="7" width="16" height="10" rx="1.6" />
+      <path d="M18.5 10.5v3" />
+      <path d="M11.6 9.4 9 12.4h3l-1.4 2.6" />
+    </Base>
+  );
+}
+
+/** Bodega con estantería: desconsolidado y almacenaje. */
+export function IconoBodega(p: Props) {
+  return (
+    <Base {...p}>
+      <path d="M3 9.5 12 4.5l9 5" />
+      <path d="M4.5 9.5V20h15V9.5" />
+      <path d="M3 20h18" />
+      <path d="M8.5 20v-5.5h7V20" />
+      <path d="M12 14.5V20" />
+    </Base>
+  );
+}

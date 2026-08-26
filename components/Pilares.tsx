@@ -3,11 +3,12 @@ import Link from "next/link";
 import RutaChile from "./RutaChile";
 import Revelar from "./Revelar";
 import Contador from "./Contador";
-import Titulo from "./Titulo";
 import Etiqueta from "./Etiqueta";
 
 /**
- * Segunda sección: los pilares, en bento y sobre fondo claro.
+ * Bento de apoyo de la sección de servicios: control en ruta, cobertura
+ * y seguridad. No abre banda propia — se renderiza dentro de <Servicios />
+ * para no romper la alternancia claro/oscuro de la página.
  *
  * Ritmo tomado de la referencia verde: una card alta con foto a la
  * izquierda y, a la derecha, bloques de distinto peso — uno con el dato
@@ -34,18 +35,20 @@ const CARGAS = [
 
 export default function Pilares() {
   return (
-    <section id="servicios" className="tema-claro scroll-mt-[clamp(6rem,12vw,8.5rem)]">
-      <div className="mx-auto w-full max-w-[var(--ancho-max)] px-[var(--borde-x)] py-[var(--seccion-y)]">
-        <div className="max-w-[46rem]">
-          <Titulo linea1="Con MAIN, su carga siempre" destacado="bajo control" />
-          <p className="mt-4 max-w-[54ch] text-[clamp(1rem,0.4vw+0.92rem,1.125rem)] leading-[1.6] text-[var(--texto-sec)]">
-            <span className="realce">Saber dónde está</span> en cada momento.{" "}
-            <span className="realce">Cumplir la norma</span> que exige su
-            industria. <span className="realce">Llegar a la hora</span> acordada.
-          </p>
-        </div>
+    <div className="mt-[clamp(3.5rem,6vw,5rem)] border-t border-[color-mix(in_oklab,var(--borde)_60%,transparent)] pt-[clamp(2.5rem,4vw,3.5rem)]">
+      <div className="max-w-[46rem]">
+        <h3 className="text-[clamp(1.5rem,1.8vw+1.05rem,2.15rem)] font-semibold leading-[1.12] tracking-[-0.032em] text-[var(--texto)]">
+          Con MAIN, su carga siempre{" "}
+          <span className="text-[var(--morado-texto)]">bajo control</span>.
+        </h3>
+        <p className="mt-3.5 max-w-[54ch] text-[clamp(1rem,0.4vw+0.92rem,1.125rem)] leading-[1.6] text-[var(--texto-sec)]">
+          <span className="realce">Saber dónde está</span> en cada momento.{" "}
+          <span className="realce">Cumplir la norma</span> que exige su
+          industria. <span className="realce">Llegar a la hora</span> acordada.
+        </p>
+      </div>
 
-        <div className="mt-[clamp(2.5rem,4vw,3.5rem)] grid grid-cols-1 gap-5 md:grid-cols-12">
+      <div className="mt-[clamp(2rem,3vw,2.75rem)] grid grid-cols-1 gap-5 md:grid-cols-12">
           {/* Tecnología — card alta de imagen. */}
           <article className="group sobre-foto relative isolate overflow-hidden rounded-[var(--r-img)] md:col-span-5">
             <Image
@@ -65,11 +68,11 @@ export default function Pilares() {
             </Etiqueta>
 
             <div className="relative flex h-full min-h-[clamp(17rem,24vw,21rem)] flex-col items-start justify-end p-6 sm:p-7">
-              <h3 className="max-w-[17ch] text-[clamp(1.35rem,1.5vw+1rem,1.85rem)] font-semibold leading-[1.15] tracking-[-0.03em] text-[var(--texto)]">
+              <h4 className="max-w-[17ch] text-[clamp(1.35rem,1.5vw+1rem,1.85rem)] font-semibold leading-[1.15] tracking-[-0.03em] text-[var(--texto)]">
                 Vea su carga en{" "}
                 <span className="text-[var(--morado-texto)]">tiempo real</span>,
                 no espere el llamado.
-              </h3>
+              </h4>
               <p className="mt-3 max-w-[34ch] text-[15px] leading-[1.55] text-[var(--texto-sec)]">
                 <span className="font-medium text-[var(--texto)]">
                   GPS y monitoreo permanente.
@@ -91,9 +94,9 @@ export default function Pilares() {
 
             <div className="grid grid-cols-1 items-center gap-6 p-6 pt-16 lg:grid-cols-[1fr_auto] lg:gap-8 lg:p-7 lg:pt-[4.75rem]">
               <div>
-                <h3 className="text-[clamp(1.35rem,1.5vw+1rem,1.85rem)] font-semibold leading-[1.15] tracking-[-0.03em] text-[var(--texto)]">
+                <h4 className="text-[clamp(1.35rem,1.5vw+1rem,1.85rem)] font-semibold leading-[1.15] tracking-[-0.03em] text-[var(--texto)]">
                   De Arica a Punta Arenas.
-                </h3>
+                </h4>
 
                 {/* El dato es la decoración: el número domina el bloque. */}
                 <p className="mt-5 flex items-baseline gap-2 leading-none">
@@ -125,9 +128,9 @@ export default function Pilares() {
             <article className="relative flex h-full min-h-[clamp(19rem,26vw,23rem)] flex-col overflow-hidden rounded-[var(--r-card)] bg-[var(--morado-solido)] p-6 sm:p-7">
               <Etiqueta claro>Qué movemos</Etiqueta>
 
-              <h3 className="mt-5 max-w-[22ch] text-[clamp(1.35rem,1.5vw+1rem,1.85rem)] font-semibold leading-[1.15] tracking-[-0.03em] text-white">
+              <h4 className="mt-5 max-w-[22ch] text-[clamp(1.35rem,1.5vw+1rem,1.85rem)] font-semibold leading-[1.15] tracking-[-0.03em] text-white">
                 Ocho tipos de carga, un solo proveedor.
-              </h3>
+              </h4>
               <p className="mt-3 max-w-[44ch] text-[15px] leading-[1.55] text-white/75">
                 Desde carga general hasta sobredimensionada, con el equipo que cada una exige.
               </p>
@@ -179,10 +182,10 @@ export default function Pilares() {
             <Etiqueta className="absolute left-5 top-5">Seguridad</Etiqueta>
 
             <div className="relative flex h-full min-h-[clamp(17rem,24vw,21rem)] flex-col items-start justify-end p-6">
-              <h3 className="max-w-[15ch] text-[clamp(1.2rem,1vw+0.95rem,1.5rem)] font-semibold leading-[1.18] tracking-[-0.028em] text-[var(--texto)]">
+              <h4 className="max-w-[15ch] text-[clamp(1.2rem,1vw+0.95rem,1.5rem)] font-semibold leading-[1.18] tracking-[-0.028em] text-[var(--texto)]">
                 Su carga siempre{" "}
                 <span className="text-[var(--morado-texto)]">segura</span>.
-              </h3>
+              </h4>
               <p className="mt-2.5 max-w-[32ch] text-[14.5px] leading-[1.5] text-[var(--texto-sec)]">
                 <span className="font-medium text-[var(--texto)]">
                   Transportistas verificados
@@ -192,8 +195,7 @@ export default function Pilares() {
             </div>
           </article>
 
-        </div>
       </div>
-    </section>
+    </div>
   );
 }

@@ -1,6 +1,6 @@
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
-import Pilares from "@/components/Pilares";
+import Servicios from "@/components/Servicios";
 import QueMovemos from "@/components/QueMovemos";
 import Cumplimiento from "@/components/Cumplimiento";
 import Resenas from "@/components/Resenas";
@@ -19,7 +19,7 @@ export default function Home() {
             hero oscuro · claro · oscuro · claro · oscuro · claro · oscuro ·
             claro · pie oscuro. */}
         <Hero />
-        <Pilares />
+        <Servicios />
         <QueMovemos />
         <Cumplimiento />
         <Resenas />
