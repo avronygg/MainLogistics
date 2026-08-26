@@ -1,0 +1,34 @@
+/* ============================================================
+   Ruta troncal Arica → Punta Arenas.
+
+   El riel va exactamente del centro del primer punto al centro del último:
+   cada ciudad se posiciona por su latitud y se centra con translateY(-50%),
+   así que el 0% y el 100% del contenedor SON esos dos centros. Antes el
+   riel sobraba por abajo y cruzaba el divisor.
+   ============================================================ */
+
+.pulso {
+  animation: ruta-pulso 4.5s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+@keyframes ruta-pulso {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  12%,
+  78% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(var(--recorrido, 260px));
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pulso {
+    animation: none;
+    opacity: 0;
+  }
+}

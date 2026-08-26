@@ -1,0 +1,53 @@
+/* ============================================================
+   Asesor flotante.
+   ============================================================ */
+
+/* Tres puntos de "escribiendo…", desfasados como en iOS. */
+.punto {
+  animation: asesor-escribe 1.3s ease-in-out infinite;
+}
+
+.punto2 {
+  animation-delay: 0.18s;
+}
+
+.punto3 {
+  animation-delay: 0.36s;
+}
+
+@keyframes asesor-escribe {
+  0%,
+  60%,
+  100% {
+    opacity: 0.35;
+    transform: translateY(0);
+  }
+  30% {
+    opacity: 1;
+    transform: translateY(-3px);
+  }
+}
+
+/* Punto de "en línea": late suave, no parpadea.
+   Un parpadeo duro leería como alerta, no como presencia. */
+.enLinea {
+  animation: asesor-latido 2.6s ease-in-out infinite;
+}
+
+@keyframes asesor-latido {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 color-mix(in oklab, var(--ok) 55%, transparent);
+  }
+  70% {
+    box-shadow: 0 0 0 5px transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .punto,
+  .enLinea {
+    animation: none;
+    opacity: 1;
+  }
+}

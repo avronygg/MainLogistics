@@ -1,0 +1,85 @@
+/* ============================================================
+   Carrusel infinito de reseñas.
+
+   Dos hileras que corren en sentidos opuestos y a distinta velocidad. Una
+   sola hilera se lee como una cinta de logos; dos cruzadas se leen como un
+   muro de opiniones, que es lo que tiene que parecer.
+
+   Cada hilera lleva dos copias de la lista y se desplaza exactamente el
+   ancho de una copia (50%), así el bucle no tiene costura ni hueco.
+   ============================================================ */
+
+.ventana {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 7%,
+    #000 93%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 7%,
+    #000 93%,
+    transparent 100%
+  );
+}
+
+/* Pista: la que se anima. NO lleva gap ni padding — el bucle desplaza el
+   50% de su ancho y cualquier separación acá desfasa la costura. */
+.pista {
+  display: flex;
+  width: max-content;
+}
+
+/* Copia: acá sí va la separación entre tarjetas. */
+.grupo {
+  display: flex;
+  width: max-content;
+  gap: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+.haciaIzquierda {
+  animation: correr-izquierda 64s linear infinite;
+}
+
+.haciaDerecha {
+  animation: correr-derecha 78s linear infinite;
+}
+
+/* Se detiene al pasar el cursor: si alguien quiere leer una reseña, tiene
+   que poder. */
+.ventana:hover .pista {
+  animation-play-state: paused;
+}
+
+@keyframes correr-izquierda {
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes correr-derecha {
+  from {
+    transform: translate3d(-50%, 0, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pista {
+    animation: none;
+  }
+
+  /* Sin movimiento, la máscara sobra y el usuario desplaza a mano. */
+  .ventana {
+    -webkit-mask-image: none;
+    mask-image: none;
+    overflow-x: auto;
+  }
+}

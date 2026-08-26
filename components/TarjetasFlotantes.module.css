@@ -1,0 +1,179 @@
+/* ============================================================
+   Simulación de GPS de la tarjeta de monitoreo.
+
+   El marcador recorre exactamente el mismo trazado que dibuja la ruta:
+   `offset-path` usa las unidades de usuario del SVG, así que la ruta y el
+   recorrido no pueden desincronizarse — es literalmente la misma `d`.
+   ============================================================ */
+
+.recorrido {
+  offset-path: path("M6 56C34 56 44 18 88 18s54 38 82 38");
+  offset-rotate: 0deg;
+  offset-distance: 0%;
+  animation: gps-avanzar 5s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+.halo {
+  offset-path: path("M6 56C34 56 44 18 88 18s54 38 82 38");
+  offset-rotate: 0deg;
+  offset-distance: 0%;
+  animation:
+    gps-avanzar 5s cubic-bezier(0.45, 0, 0.55, 1) infinite,
+    gps-halo 1.6s ease-out infinite;
+}
+
+@keyframes gps-avanzar {
+  to {
+    offset-distance: 100%;
+  }
+}
+
+@keyframes gps-halo {
+  0% {
+    r: 4;
+    opacity: 0.55;
+  }
+  100% {
+    r: 13;
+    opacity: 0;
+  }
+}
+
+/* Testigo de señal: parpadeo corto y seco, como un equipo transmitiendo. */
+.testigo {
+  animation: gps-testigo 1.6s steps(1, end) infinite;
+}
+
+@keyframes gps-testigo {
+  0%,
+  55% {
+    opacity: 1;
+  }
+  56%,
+  100% {
+    opacity: 0.2;
+  }
+}
+
+/* Reduced motion: el marcador se queda quieto a mitad de ruta y el testigo
+   deja de parpadear. La ruta sigue leyéndose igual. */
+@media (prefers-reduced-motion: reduce) {
+  .recorrido,
+  .halo {
+    animation: none;
+    offset-distance: 62%;
+  }
+
+  .testigo {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+/* ============================================================
+   Ruta en miniatura de la tarjeta de marca.
+
+   El divisor entre el logo y la bajada deja de ser una línea muerta y pasa
+   a ser una calzada que avanza: el mismo motivo del isotipo, a escala de
+   detalle. Es lo que le da vida sin recurrir a un glow, que el doc de marca
+   §8 prohíbe.
+
+   Bucle sin costura: el patrón repite cada 20px y el recorrido es
+   exactamente 20px, un período completo.
+   ============================================================ */
+
+.rutaMini {
+  position: relative;
+  height: 13px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--fondo) 45%, transparent);
+}
+
+/* Las dos líneas de borde de la calzada. */
+.rutaMini::before,
+.rutaMini::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: color-mix(in oklab, white 16%, transparent);
+}
+
+.rutaMini::before {
+  top: 2px;
+}
+
+.rutaMini::after {
+  bottom: 2px;
+}
+
+.segmentadaMini {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 200%;
+  height: 1.5px;
+  margin-top: -0.75px;
+  background: repeating-linear-gradient(
+    to right,
+    var(--morado-ui) 0,
+    var(--morado-ui) 7px,
+    transparent 7px,
+    transparent 20px
+  );
+  animation: ruta-avanzar 2.6s linear infinite;
+  will-change: transform;
+}
+
+@keyframes ruta-avanzar {
+  to {
+    transform: translate3d(-20px, 0, 0);
+  }
+}
+
+/* Barrido especular: una luz que cruza el vidrio cada tanto. Es un reflejo,
+   no un resplandor — el vidrio devuelve luz, no la emite. */
+.brillo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(
+    105deg,
+    transparent 42%,
+    color-mix(in oklab, white 16%, transparent) 50%,
+    transparent 58%
+  );
+  transform: translate3d(-130%, 0, 0);
+  animation: barrido 7s cubic-bezier(0.5, 0, 0.3, 1) infinite;
+}
+
+@keyframes barrido {
+  0%,
+  62% {
+    transform: translate3d(-130%, 0, 0);
+  }
+  100% {
+    transform: translate3d(130%, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .segmentadaMini {
+    animation: none;
+  }
+
+  .brillo::after {
+    animation: none;
+    opacity: 0;
+  }
+}
+
+/* La segunda tarjeta barre desfasada: dos destellos simultáneos se leen
+   como un parpadeo de la página, no como luz cruzando el vidrio. */
+.brillo[data-barrido="tarde"]::after {
+  animation-delay: -3.5s;
+}

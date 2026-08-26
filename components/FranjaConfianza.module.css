@@ -1,0 +1,60 @@
+/* ============================================================
+   Carrusel de logos, tipo teleprompter.
+
+   Dos copias idénticas de la lista, una al lado de la otra, y el conjunto
+   se desplaza exactamente el ancho de una copia (-50%). Al terminar vuelve
+   al inicio y el corte es invisible: nunca hay un salto ni un hueco.
+
+   Solo transform, así que corre en la capa de composición.
+   ============================================================ */
+
+.ventana {
+  overflow: hidden;
+  /* Los logos entran y salen desvanecidos, no cortados contra el borde. */
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 9%,
+    #000 91%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 9%,
+    #000 91%,
+    transparent 100%
+  );
+}
+
+.cinta {
+  display: flex;
+  width: max-content;
+  /* Sin gap ni padding en la pista: el bucle desplaza exactamente el 50%
+     de su propio ancho, así que cualquier separación que viva acá y no
+     dentro de cada copia rompe la cuenta y produce un salto visible. */
+  animation: desfilar 52s linear infinite;
+}
+
+.ventana:hover .cinta {
+  animation-play-state: paused;
+}
+
+@keyframes desfilar {
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cinta {
+    animation: none;
+  }
+
+  /* Sin movimiento la máscara sobra: los logos quedan quietos y completos. */
+  .ventana {
+    -webkit-mask-image: none;
+    mask-image: none;
+    overflow-x: auto;
+  }
+}

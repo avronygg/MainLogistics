@@ -39,3 +39,14 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# capturas de verificacion visual
+/shots
+
+# variables locales
+.env*.local
+
+# material de origen del cliente: documento de marca, fotos y video sin
+# procesar, logos descargados. No participa del build — solo lo leen los
+# scripts de regeneracion de imagenes. Fuera del repo publico.
+/brand

@@ -1,26 +1,446 @@
 @import "tailwindcss";
 
+/* ============================================================
+   Main Logistics — tokens
+   Fuente: brand/main-logistics-marca.md §8 + DESIGN.md
+   ============================================================ */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* --- Superficies. Tinte frío propio; no se les agrega calidez. --- */
+  --fondo: oklch(19% 0.013 233); /* #0E1519 */
+  --sup-1: oklch(27.1% 0.033 239); /* #172935 */
+  --sup-2: oklch(33.3% 0.042 242); /* #22394A */
+  --borde: oklch(38.2% 0.043 242); /* #2E4658 */
+
+  /* --- Morado. Tres pasos: ver DESIGN.md, la razón es contraste. --- */
+  --morado-solido: oklch(50.5% 0.239 288); /* #6735E1 · solo relleno, blanco encima 6.62:1 */
+  --morado-ui: oklch(60.6% 0.219 292.7); /* #8B5CF6 · íconos, líneas, texto ≥24px */
+  --morado-texto: oklch(74% 0.16 292.7); /* #AF95FF · todo texto morado <24px, AA en las 3 superficies */
+
+  /* --- Acento. Un solo elemento amarillo por pantalla. --- */
+  --amarillo: oklch(87.2% 0.171 90.8); /* #FFCF27 */
+
+  /* --- Texto --- */
+  --texto: oklch(93.3% 0.005 248); /* #E6E9EC */
+  --texto-sec: oklch(72.2% 0.022 243.5); /* #9AA7B2 */
+
+  /* --- Semánticos. Fuera de la paleta de marca. Nunca solos: siempre con texto o forma. --- */
+  --ok: oklch(68.6% 0.167 155);
+  --warn: oklch(74.7% 0.17 62);
+  --error: oklch(63.7% 0.21 28.5);
+
+  /* --- Radios. Variables, nunca uniformes. --- */
+  --r-img: 28px;
+  --r-card: 18px;
+  --r-chip: 10px;
+  --r-pill: 999px;
+
+  /* --- Curvas. Exponenciales de salida. Sin rebote, sin elástico. --- */
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-quint: cubic-bezier(0.83, 0, 0.17, 1);
+
+  --dur-hover: 150ms;
+  --dur-estado: 300ms;
+  --dur-entrada: 600ms;
+  --dur-coreografia: 900ms;
+
+  /* --- z-index semántico. Nunca 999. --- */
+  --z-carretera: 0;
+  --z-contenido: 10;
+  --z-flotante: 20;
+  --z-sticky: 30;
+  --z-nav: 40;
+  --z-sheet: 50;
+  --z-toast: 60;
+
+  /* --- Ritmo vertical. Fluido, variado. --- */
+  --seccion-y: clamp(5rem, 11vw, 9.5rem);
+  --borde-x: clamp(1.25rem, 5vw, 4rem);
+  --ancho-max: 1240px;
+
+  /* Lo que el vidrio le hace al fondo que desenfoca. Se invierte en claro. */
+  --vidrio-brillo: 0.72;
+
+  /* Velo sobre fotografía. Fijo a propósito: no se invierte con el tema,
+     porque el texto sobre foto va siempre en claro. */
+  --velo-foto: #0e1519;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-fondo: var(--fondo);
+  --color-sup-1: var(--sup-1);
+  --color-sup-2: var(--sup-2);
+  --color-borde: var(--borde);
+  --color-morado-solido: var(--morado-solido);
+  --color-morado-ui: var(--morado-ui);
+  --color-morado-texto: var(--morado-texto);
+  --color-amarillo: var(--amarillo);
+  --color-texto: var(--texto);
+  --color-texto-sec: var(--texto-sec);
+  --color-ok: var(--ok);
+  --color-warn: var(--warn);
+  --color-error: var(--error);
+
+  --radius-img: var(--r-img);
+  --radius-card: var(--r-card);
+  --radius-chip: var(--r-chip);
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  --ease-quart: var(--ease-out-quart);
+  --ease-expo: var(--ease-out-expo);
+  --ease-quint: var(--ease-in-out-quint);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ============================================================
+   Base
+   ============================================================ */
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--fondo);
+  color: var(--texto);
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  font-size: 17px;
+  /* +0.06 sobre lo habitual: el texto claro sobre oscuro se lee más liviano y necesita más aire */
+  line-height: 1.66;
+  font-feature-settings: "cv11", "ss01";
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+
+::selection {
+  background: var(--morado-solido);
+  color: #fff;
+}
+
+/* Foco visible y consistente. No se elimina nunca. */
+:focus-visible {
+  outline: 2px solid var(--morado-texto);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+  letter-spacing: -0.03em; /* piso absoluto: -0.04em */
+  font-weight: 600;
+  line-height: 1.08;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+/* Dato codificado: patentes, folios, RUT, tonelajes, IDs, normativas.
+   Regla semántica, no decorativa. Si no es auditable, no va en mono. */
+.dato {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+/* ============================================================
+   Vidrio — neutro. Toma prestado el color de atrás, no emite.
+   Solo donde algo flota de verdad: nav, cards del hero, overlays.
+   ============================================================ */
+
+.vidrio {
+  background: color-mix(in oklab, var(--sup-1) 74%, transparent);
+  border: 1px solid color-mix(in oklab, white 15%, transparent);
+  box-shadow:
+    0 8px 32px rgb(0 0 0 / 0.45),
+    inset 0 1px 0 color-mix(in oklab, white 7%, transparent);
+}
+
+/* Variante del nav: vidrio de verdad, no un sólido oscuro.
+   La legibilidad la sostienen el desenfoque fuerte, la saturación y el
+   filo de luz superior, no la opacidad. El texto del nav va en blanco. */
+.vidrio-nav {
+  background: color-mix(in oklab, var(--sup-1) 62%, transparent);
+  border: 1px solid color-mix(in oklab, white 14%, transparent);
+  box-shadow:
+    0 12px 40px rgb(0 0 0 / 0.42),
+    inset 0 1px 0 color-mix(in oklab, white 16%, transparent);
+}
+
+@supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+  .vidrio {
+    background: color-mix(in oklab, var(--sup-1) 46%, transparent);
+    -webkit-backdrop-filter: blur(38px) saturate(180%) brightness(var(--vidrio-brillo));
+    backdrop-filter: blur(38px) saturate(180%) brightness(var(--vidrio-brillo));
+  }
+
+  .vidrio-nav {
+    background: color-mix(in oklab, var(--sup-1) 46%, transparent);
+    -webkit-backdrop-filter: blur(34px) saturate(180%) brightness(0.62);
+    backdrop-filter: blur(34px) saturate(180%) brightness(0.62);
+  }
+}
+
+/* ============================================================
+   Carretera — el único ornamento. Motivo del isotipo.
+   Plano en perspectiva, animado solo por transform (capa GPU).
+   ============================================================ */
+
+@keyframes avanzar {
+  to {
+    transform: translate3d(0, 50%, 0);
+  }
+}
+
+@keyframes latido {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(0.82);
+  }
+}
+
+@keyframes entrar {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ============================================================
+   Reduced motion — alternativa real, no supresión.
+   La carretera se detiene, el titular queda en su estado final,
+   los reveals pasan a inmediatos.
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Segmento que desciende por el indicador de scroll. Mismo motivo de la
+   carretera, a escala de detalle: recorre un track de 32px. */
+@keyframes descender {
+  0% {
+    transform: translateY(-120%);
+    opacity: 0;
+  }
+  22%,
+  72% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(400%);
+    opacity: 0;
+  }
+}
+
+/* Cápsula de vidrio del titular. Ancho fijo — el de la frase más larga —
+   para que "SIEMPRE" no se mueva cuando cambia la palabra. Más marcada
+   que el vidrio de una card: acá el vidrio ES el elemento, no el soporte. */
+.capsula-frase {
+  background: color-mix(in oklab, var(--sup-1) 34%, transparent);
+  border: 1px solid color-mix(in oklab, white 16%, transparent);
+  box-shadow:
+    0 10px 32px rgb(0 0 0 / 0.35),
+    inset 0 1px 0 color-mix(in oklab, white 18%, transparent);
+}
+
+@supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+  .capsula-frase {
+    background: color-mix(in oklab, var(--sup-1) 20%, transparent);
+    -webkit-backdrop-filter: blur(20px) saturate(170%);
+    backdrop-filter: blur(20px) saturate(170%);
+  }
+}
+
+/* Degradado del titular.
+   Rompe a propósito dos reglas del sistema (el "cero degradados" del doc de
+   marca §8 y la prohibición de background-clip:text): es una decisión del
+   cliente, tomada mirando la referencia. Se aísla en esta clase para poder
+   quitarla en una línea.
+
+   Restricción que sí se respeta: la parada más oscura no baja de
+   --texto-sec, que da 7.5:1 sobre el fondo. Un degradado que se va a
+   transparente dejaría el pie de las letras ilegible sobre el cielo claro.
+
+   drop-shadow en vez de text-shadow: con el relleno recortado al texto, la
+   sombra de texto se vería a través del glifo. */
+.titulo-degradado {
+  background-image: linear-gradient(
+    to bottom,
+    #fff 0%,
+    var(--texto) 38%,
+    color-mix(in oklab, var(--texto) 55%, var(--texto-sec)) 74%,
+    var(--texto-sec) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ============================================================
+   Tema claro por sección.
+   El sitio alterna bandas oscuras y claras. Todo el sistema usa
+   variables, así que una sección clara solo redefine los tokens y
+   heredan cards, vidrio, bordes y botones.
+
+   Los valores están verificados con `node scripts/tema-claro.mjs`:
+   las quince combinaciones de texto sobre superficie pasan AA.
+   El morado se oscurece: #8B5CF6 sobre blanco da 2.4:1 y es ilegible.
+   ============================================================ */
+
+.tema-claro {
+  --fondo: #eef1f4;
+  --sup-1: #ffffff;
+  --sup-2: #e2e8ee;
+  --borde: #d3dae1;
+
+  --texto: #16212a;
+  --texto-sec: #55636f;
+
+  --morado-ui: #5a2bd0; /* 7.8:1 sobre blanco */
+  --morado-texto: #5426c4; /* 8.57:1 sobre blanco */
+  /* --morado-solido no cambia: sigue siendo relleno con blanco encima */
+
+  /* El vidrio claro aclara lo que hay detrás en vez de oscurecerlo. */
+  --vidrio-brillo: 1.08;
+
+  background: var(--fondo);
+  color: var(--texto);
+}
+
+/* Sobre claro el vidrio necesita otro borde y otra sombra: un filo blanco
+   sobre fondo claro no se ve, y una sombra negra fuerte ensucia. */
+.tema-claro .vidrio {
+  border-color: color-mix(in oklab, #16212a 10%, transparent);
+  box-shadow:
+    0 10px 30px rgb(22 33 42 / 0.1),
+    inset 0 1px 0 rgb(255 255 255 / 0.7);
+}
+
+/* Realce dentro de un párrafo: la palabra que importa sube al color
+   de cuerpo y a peso medio. Sin subrayados ni cajas de color. */
+.realce {
+  color: var(--texto);
+  font-weight: 500;
+}
+
+/* Flotación de las tarjetas del hero. Recorrido corto y desfasado entre
+   ellas: si suben y bajan al unísono se lee como un fallo de scroll, no
+   como algo que flota. Solo transform, capa de composición. */
+@keyframes flotar {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -9px, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flota {
+    animation: none !important;
+  }
+}
+
+/* Contenido sobre fotografía oscura.
+   Fija los tokens de texto a sus valores de tema oscuro sin importar si la
+   sección es clara: encima de una foto oscura el texto va siempre en claro,
+   y el morado tiene que ser el claro (#AF95FF, 7.5:1 sobre #0E1519) o no se
+   lee. Sin esto, una card de foto dentro de .tema-claro hereda el texto
+   oscuro y desaparece. */
+.sobre-foto {
+  /* Todos los tokens de superficie, no solo los de texto: si falta uno,
+     cualquier color-mix que lo use hereda el valor del tema claro y sale
+     lavado. Pasó exactamente eso con --fondo en los chips. */
+  --fondo: #0e1519;
+  --sup-1: #172935;
+  --sup-2: #22394a;
+  --borde: #2e4658;
+
+  --texto: #e6e9ec;
+  --texto-sec: #b8c2ca;
+  --morado-texto: #af95ff;
+  --morado-ui: #8b5cf6;
+
+  --vidrio-brillo: 0.72;
+
+  color: var(--texto);
+}
+
+/* El vidrio dentro de una card de foto tiene que ser vidrio OSCURO aunque la
+   sección sea clara. La superficie y el brillo ya vienen de .sobre-foto; acá
+   solo el borde y la sombra, que no son variables. */
+.tema-claro .sobre-foto .vidrio {
+  border-color: color-mix(in oklab, white 15%, transparent);
+  box-shadow:
+    0 10px 30px rgb(0 0 0 / 0.45),
+    inset 0 1px 0 color-mix(in oklab, white 16%, transparent);
+}
+
+/* Tamaño del titular del hero.
+   Los valores de móvil salen de medir en el navegador el máximo que
+   mantiene las dos líneas (scripts/max-titular.mjs), no de estimar el ancho
+   de los caracteres: la estimación dejaba un 27% de tamaño sin usar.
+   La recta medida es 9,73vw − 3,33px; acá va con 6% de margen por si la
+   fuente de respaldo mide distinto antes de que cargue Geist.
+   Desde sm manda el contenedor y no el ancho de pantalla, así que la
+   fórmula cambia. */
+.titular-hero {
+  font-size: clamp(1.6rem, 9.14vw - 0.195rem, 2.4rem);
+}
+
+@media (min-width: 640px) {
+  .titular-hero {
+    font-size: clamp(2.25rem, 3.5vw + 0.85rem, 4rem);
+  }
+}
+
+/* Burbuja de mensaje entrante, en vidrio CLARO con texto oscuro.
+   Es el lenguaje de un mensaje recibido en iOS: el globo del otro es claro,
+   el tuyo es de color. Acá va claro sobre la página oscura, así que el
+   contraste lo da la inversión, no un borde.
+
+   El texto usa el mismo #16212a del tema claro, que sobre este fondo da muy
+   por encima de AA. */
+.burbuja-clara {
+  background: color-mix(in oklab, white 88%, transparent);
+  border: 1px solid color-mix(in oklab, white 60%, transparent);
+  box-shadow:
+    0 10px 30px rgb(0 0 0 / 0.3),
+    inset 0 1px 0 rgb(255 255 255 / 0.85);
+  color: #16212a;
+}
+
+@supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+  .burbuja-clara {
+    background: color-mix(in oklab, white 72%, transparent);
+    -webkit-backdrop-filter: blur(26px) saturate(170%);
+    backdrop-filter: blur(26px) saturate(170%);
+  }
 }

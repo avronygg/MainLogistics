@@ -1,0 +1,199 @@
+/* ============================================================
+   La carretera — motivo del isotipo, único ornamento de la marca.
+
+   Geometría: el plano pivota sobre su borde INFERIOR (el cercano,
+   pegado al borde de la escena) y se aleja del observador. Así los
+   puntos lejanos convergen en el perspective-origin, que es el punto
+   de fuga. Pivotar sobre el borde superior mete el plano detrás de
+   la cámara y la perspectiva se invierte.
+
+   Solo la segmentada central se mueve, y por transform puro.
+   El desvanecido hacia el horizonte lo hace el velo en espacio de
+   pantalla, no una máscara sobre el plano: dentro del plano el 90%
+   del alto local cae en los primeros 100px de pantalla y una máscara
+   ahí es incontrolable.
+
+   Deliberadamente NO es una grilla synthwave: sin travesaños, dos
+   bordes de calzada y una segmentada. Se lee como carretera.
+   ============================================================ */
+
+.escena {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  perspective: 260px;
+  perspective-origin: 50% 46%;
+  z-index: var(--z-carretera);
+  pointer-events: none;
+}
+
+.plano {
+  position: absolute;
+  bottom: 0;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  overflow: hidden;
+  transform-origin: 50% 100%;
+  transform: rotateX(82deg);
+}
+
+/* Asfalto: cuerpo tenue entre los bordes, para que la calzada
+   no sea solo dos líneas flotando. */
+.calzada {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    transparent 32%,
+    color-mix(in oklab, var(--sup-1) 28%, transparent) 36%,
+    color-mix(in oklab, var(--sup-1) 92%, transparent) 50%,
+    color-mix(in oklab, var(--sup-1) 28%, transparent) 64%,
+    transparent 68%
+  );
+}
+
+/* Los dos bordes de la calzada. Estáticos: en una carretera real
+   las líneas laterales no se mueven. */
+.rieles {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(
+      to right,
+      transparent 35.7%,
+      color-mix(in oklab, var(--texto) 26%, transparent) 35.7%,
+      color-mix(in oklab, var(--texto) 26%, transparent) 36.3%,
+      transparent 36.3%
+    ),
+    linear-gradient(
+      to right,
+      transparent 63.7%,
+      color-mix(in oklab, var(--texto) 26%, transparent) 63.7%,
+      color-mix(in oklab, var(--texto) 26%, transparent) 64.3%,
+      transparent 64.3%
+    );
+}
+
+/* Segmentada central.
+   Abarca de -100% a +100% del plano y baja exactamente 100% del plano
+   (50% de su propio alto). El patrón repite cada 5% de su alto, así que
+   el recorrido son 10 períodos exactos y el bucle no tiene costura. */
+.segmentada {
+  position: absolute;
+  left: 50%;
+  top: -100%;
+  width: 0.7%;
+  height: 200%;
+  translate: -50% 0;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    color-mix(in oklab, var(--texto) 52%, transparent) 0,
+    color-mix(in oklab, var(--texto) 52%, transparent) 1.35%,
+    transparent 1.35%,
+    transparent 5%
+  );
+  animation: avanzar 4.5s linear infinite;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .segmentada {
+    animation: none;
+  }
+}
+
+/* Velo — en espacio de pantalla.
+   Tapa la banda comprimida del horizonte para que la carretera emerja
+   de la oscuridad, oscurece la izquierda donde va el titular, y cierra
+   contra el fondo abajo. */
+.velo {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      to bottom,
+      var(--fondo) 0%,
+      var(--fondo) 40%,
+      color-mix(in oklab, var(--fondo) 66%, transparent) 56%,
+      color-mix(in oklab, var(--fondo) 26%, transparent) 74%,
+      color-mix(in oklab, var(--fondo) 72%, transparent) 93%,
+      var(--fondo) 100%
+    ),
+    linear-gradient(
+      to right,
+      var(--fondo) 0%,
+      color-mix(in oklab, var(--fondo) 35%, transparent) 20%,
+      transparent 40%,
+      transparent 60%,
+      color-mix(in oklab, var(--fondo) 35%, transparent) 80%,
+      var(--fondo) 100%
+    );
+}
+
+/* Luz de escena: una sola, suave, sobre el velo. Es lo que hace que
+   la carretera parezca emerger hacia algo, no cortarse. Sin halo por
+   elemento, sin neón. */
+.horizonte {
+  position: absolute;
+  left: 50%; /* sigue al punto de fuga */
+  top: 46%;
+  width: min(110vw, 1100px);
+  aspect-ratio: 5 / 2;
+  translate: -50% -46%;
+  background: radial-gradient(
+    ellipse at center,
+    color-mix(in oklab, var(--morado-ui) 30%, transparent) 0%,
+    color-mix(in oklab, var(--morado-solido) 12%, transparent) 32%,
+    transparent 66%
+  );
+  opacity: 0.55;
+}
+
+.video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Velo para el modo video.
+   El metraje tiene cielos claros y nieve; el titular va en blanco encima.
+   Sin un scrim denso el texto se pierde, que es exactamente lo que el doc
+   de marca §8 manda evitar. Tres capas: oscurecido parejo, gradiente
+   vertical para anclar el texto, y viñeta lateral para cerrar el cuadro. */
+.veloVideo {
+  position: absolute;
+  inset: 0;
+  background:
+    /* Franja del camión: opacidad CERO entre 54% y 74%. Arriba y abajo el
+       scrim es lo único que sostiene el texto — no hay sombras de texto. */
+    linear-gradient(
+      to bottom,
+      color-mix(in oklab, var(--fondo) 96%, transparent) 0%,
+      color-mix(in oklab, var(--fondo) 86%, transparent) 22%,
+      color-mix(in oklab, var(--fondo) 60%, transparent) 38%,
+      color-mix(in oklab, var(--fondo) 22%, transparent) 47%,
+      transparent 54%,
+      transparent 74%,
+      color-mix(in oklab, var(--fondo) 44%, transparent) 86%,
+      color-mix(in oklab, var(--fondo) 92%, transparent) 100%
+    );
+}
+
+/* Sin filtro: el metraje se ve tal cual. El contraste del texto lo
+   sostiene el scrim de arriba, no un oscurecido general del video. */
+
+/* Encuadre del video en pantallas angostas.
+   El video es 16:9 y el hero es muy vertical, así que en un teléfono
+   `cover` solo deja ver un 26% del ancho. Centrado, ese 26% cae en el
+   medio del remolque y el camión no se entiende.
+   Con `cover`, `object-position: P%` deja visible desde P·(1−visible)
+   hasta ahí + visible. Al 20% y con un 26% visible, la ventana cae entre
+   el 15% y el 41% del cuadro: justo la cabina y el arranque de la carga. */
+@media (max-width: 767px) {
+  .video {
+    object-position: 20% center;
+  }
+}
