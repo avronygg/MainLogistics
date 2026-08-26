@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { IDIOMAS, NOMBRES, type Idioma } from "@/mensajes/idiomas";
+import { BANDERAS } from "./Banderas";
 
 /**
  * Selector de idioma.
@@ -17,8 +18,22 @@ import { IDIOMAS, NOMBRES, type Idioma } from "@/mensajes/idiomas";
  * el de la persona.
  *
  * El nombre de cada idioma va EN ese idioma — "中文", no "Chino". Quien busca
- * el suyo en una lista no lo reconoce traducido al que está viendo.
+ * el suyo en una lista no lo reconoce traducido al que está viendo. Y la
+ * bandera nunca va sola: un idioma no es un país, así que la bandera ayuda a
+ * reconocer y el nombre es el que informa.
  */
+
+/**
+ * Deja la elección en una cookie de un año, para que la próxima visita a la
+ * raíz entre directo en ese idioma.
+ *
+ * Vive fuera del componente porque escribir `document.cookie` es mutar algo
+ * externo a React, y el compilador lo marca — con razón — si ocurre dentro.
+ */
+function recordarPreferencia(idioma: Idioma) {
+  document.cookie = `ml-idioma=${idioma}; path=/; max-age=31536000; samesite=lax`;
+}
+
 export default function SelectorIdioma({
   actual,
   etiqueta,
@@ -50,12 +65,14 @@ export default function SelectorIdioma({
   }, [abierto]);
 
   function elegir(idioma: Idioma) {
-    document.cookie = `ml-idioma=${idioma}; path=/; max-age=31536000; samesite=lax`;
+    recordarPreferencia(idioma);
     setAbierto(false);
     // `replace` y no `push`: el idioma anterior no es un paso atrás que
     // alguien quiera deshacer, y ensuciaría el historial del formulario.
     router.replace(`/${idioma}`);
   }
+
+  const BanderaActual = BANDERAS[actual];
 
   return (
     <div ref={contenedor} className={`relative ${className}`}>
@@ -67,16 +84,7 @@ export default function SelectorIdioma({
         aria-label={`${etiqueta} — ${NOMBRES[actual].propio}`}
         className="flex min-h-[40px] items-center gap-1.5 rounded-full border border-white/15 px-3 text-[13.5px] font-medium tracking-[-0.01em] text-[var(--texto)] transition-colors duration-[var(--dur-hover)] hover:bg-white/[0.08] focus:outline-none focus-visible:shadow-[0_0_0_3px_color-mix(in_oklab,var(--morado-solido)_45%,transparent)]"
       >
-        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" className="size-4">
-          <circle cx="8" cy="8" r="6.3" stroke="currentColor" strokeWidth="1.4" />
-          <path
-            d="M1.7 8h12.6M8 1.7c1.7 1.8 2.6 3.9 2.6 6.3S9.7 12.5 8 14.3C6.3 12.5 5.4 10.4 5.4 8S6.3 3.5 8 1.7Z"
-            stroke="currentColor"
-            strokeWidth="1.4"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
+        <BanderaActual className="h-[13px] w-[17px]" />
         {NOMBRES[actual].corto}
       </button>
 
@@ -84,9 +92,14 @@ export default function SelectorIdioma({
         <ul
           role="listbox"
           aria-label={etiqueta}
-          className="vidrio-nav absolute right-0 top-[calc(100%+0.5rem)] z-10 min-w-[9.5rem] rounded-[16px] p-1.5"
+          /* Más sólido que la barra: un menú se lee, no ambienta. Con la
+             opacidad del nav, el hero se colaba detrás de los nombres y
+             "中文" quedaba encima de la tarjeta del GPS. */
+          className="vidrio-nav absolute right-0 top-[calc(100%+0.5rem)] z-10 min-w-[10.5rem] rounded-[16px] bg-[color-mix(in_oklab,var(--sup-1)_94%,transparent)] p-1.5"
         >
-          {IDIOMAS.map((i) => (
+          {IDIOMAS.map((i) => {
+            const Bandera = BANDERAS[i];
+            return (
             <li key={i}>
               <button
                 type="button"
@@ -99,7 +112,10 @@ export default function SelectorIdioma({
                     : "text-[var(--texto-sec)]"
                 }`}
               >
-                {NOMBRES[i].propio}
+                <span className="flex items-center gap-2.5">
+                  <Bandera className="h-[13px] w-[17px]" />
+                  {NOMBRES[i].propio}
+                </span>
                 {/* El idioma activo no se marca solo con el peso de la
                     tipografía: lleva una marca que se ve en escala de grises. */}
                 {i === actual && (
@@ -120,7 +136,8 @@ export default function SelectorIdioma({
                 )}
               </button>
             </li>
-          ))}
+            );
+          })}
         </ul>
       )}
     </div>
