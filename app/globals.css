@@ -444,3 +444,29 @@ p {
     backdrop-filter: blur(26px) saturate(170%);
   }
 }
+
+/* ── Chino ──────────────────────────────────────────────────────────────
+   Geist no trae ideogramas: sin esto, cada carácter chino cae en la
+   tipografía de respaldo del navegador y la página se ve armada con dos
+   fuentes distintas. Tampoco se sirve una fuente web — Noto Sans SC completo
+   pesa varios megabytes, y el equipo de quien lee en chino ya trae una CJK
+   mejor que cualquiera que le mandemos por la red.
+
+   Geist va PRIMERO igual: resuelve los latinos (Main Logistics, las patentes,
+   los nombres de comuna) y deja los ideogramas a la del sistema. */
+:root[data-cjk] body,
+:root[data-cjk] .dato {
+  font-family:
+    var(--font-geist-sans), "PingFang SC", "HarmonyOS Sans SC", "Hiragino Sans GB",
+    "Microsoft YaHei", "Noto Sans CJK SC", "Source Han Sans SC", ui-sans-serif,
+    system-ui, sans-serif;
+}
+
+/* La mono se reserva para dato auditable, que en chino sigue siendo latino
+   y numérico — patentes, folios, tonelajes. Mantiene Geist Mono y solo suma
+   el respaldo CJK por si algún dato trae un carácter chino. */
+:root[data-cjk] .dato {
+  font-family:
+    var(--font-geist-mono), ui-monospace, "PingFang SC", "Microsoft YaHei",
+    monospace;
+}

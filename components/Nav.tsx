@@ -4,13 +4,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-
-const ENLACES = [
-  { href: "#servicios", texto: "Servicios" },
-  { href: "#cargas", texto: "Qué movemos" },
-  { href: "#cobertura", texto: "Cobertura" },
-  { href: "#contacto", texto: "Contacto" },
-];
+import SelectorIdioma from "./SelectorIdioma";
+import type { Mensajes } from "@/mensajes";
+import type { Idioma } from "@/mensajes/idiomas";
 
 /**
  * Lockup horizontal en blanco sobre transparencia, sin caja ni fondo.
@@ -32,7 +28,17 @@ function Isotipo({ className = "" }: { className?: string }) {
   );
 }
 
-export default function Nav() {
+export default function Nav({ m, idioma }: { m: Mensajes; idioma: Idioma }) {
+  // Los anclas son de la página, no del idioma: `#servicios` sigue siendo
+  // `#servicios` en chino. Traducir el fragmento rompería cada enlace que
+  // alguien ya compartió.
+  const enlaces = [
+    { href: "#servicios", texto: m.nav.servicios },
+    { href: "#cargas", texto: m.nav.queMovemos },
+    { href: "#cobertura", texto: m.nav.cobertura },
+    { href: "#contacto", texto: m.nav.contacto },
+  ];
+
   const [compacto, setCompacto] = useState(false);
   const [abierto, setAbierto] = useState(false);
   const reducirMovimiento = useReducedMotion();
@@ -62,7 +68,7 @@ export default function Nav() {
   return (
     <header className="fixed inset-x-0 top-0 z-[var(--z-nav)] px-[var(--borde-x)] pt-3 sm:pt-4">
       <nav
-        aria-label="Principal"
+        aria-label={m.nav.principal}
         data-compacto={compacto || abierto}
         className={[
           // Tres columnas de 1fr/auto/1fr: los enlaces quedan centrados
@@ -76,7 +82,7 @@ export default function Nav() {
       >
         <Link
           href="#inicio"
-          aria-label="Main Logistics, inicio"
+          aria-label={m.nav.inicio}
           className="col-start-1 flex w-fit items-center rounded-full px-2.5 py-1"
           onClick={() => setAbierto(false)}
         >
@@ -84,7 +90,7 @@ export default function Nav() {
         </Link>
 
         <ul className="col-start-2 hidden items-center gap-1 lg:flex">
-          {ENLACES.map((e) => (
+          {enlaces.map((e) => (
             <li key={e.href}>
               <Link
                 href={e.href}
@@ -123,12 +129,18 @@ export default function Nav() {
             </span>
           </Link>
 
+          {/* Visible en todos los anchos: en móvil el CTA de "Cotizar" se
+              esconde, así que acá sobra el espacio, y esconder el cambio de
+              idioma detrás del menú lo vuelve invisible justo para quien más
+              lo necesita — alguien que abrió el sitio y no entiende nada. */}
+          <SelectorIdioma actual={idioma} etiqueta={m.nav.cambiarIdioma} />
+
           <button
             type="button"
             onClick={() => setAbierto((v) => !v)}
             aria-expanded={abierto}
             aria-controls="menu-movil"
-            aria-label={abierto ? "Cerrar menú" : "Abrir menú"}
+            aria-label={abierto ? m.nav.cerrarMenu : m.nav.abrirMenu}
             className="grid size-10 place-items-center rounded-full border border-white/15 text-[var(--texto)] transition-colors duration-[var(--dur-hover)] hover:bg-white/[0.06] lg:hidden"
           >
             <svg viewBox="0 0 20 20" fill="none" className="size-5">
@@ -157,7 +169,7 @@ export default function Nav() {
             className="vidrio-nav mx-auto mt-2 max-w-[var(--ancho-max)] overflow-hidden rounded-[28px] p-2 lg:hidden"
           >
             <ul>
-              {ENLACES.map((e, i) => (
+              {enlaces.map((e, i) => (
                 <motion.li
                   key={e.href}
                   initial={{ opacity: 0, y: -8 }}
