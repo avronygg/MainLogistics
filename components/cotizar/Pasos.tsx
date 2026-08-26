@@ -3,17 +3,18 @@
 import { CampoTexto, Selector, Tarjetas, Casillas } from "./Campos";
 import { REGIONES, comunasDe } from "../datos/chile";
 import {
-  TIPOS_CARGA,
-  EQUIPOS,
-  FECHAS,
-  MODALIDADES,
-  FRECUENCIAS,
-  DURACIONES,
-  REQUISITOS,
-  VALORES,
-  CANALES,
+  tiposCarga,
+  equipos,
+  fechas,
+  modalidades,
+  frecuencias,
+  duraciones,
+  requisitos,
+  valoresDeclarados,
+  canales,
 } from "../datos/cotizacion";
 import type { Cotizacion, Errores } from "../datos/formulario";
+import type { Mensajes } from "@/mensajes";
 
 /**
  * Los seis pasos del formulario.
@@ -23,14 +24,21 @@ import type { Cotizacion, Errores } from "../datos/formulario";
  * focusable" y el envío falla en silencio. Por eso además el formulario va
  * con `noValidate` y la validación en JS es la fuente de verdad; los `type`
  * e `inputMode` quedan solo por el teclado que abren.
+ *
+ * `m` baja por prop hasta el último campo. No hay contexto de React de por
+ * medio a propósito: media sección del sitio son componentes de servidor y
+ * no podrían leerlo.
  */
 
 type Props = {
   d: Cotizacion;
   set: <K extends keyof Cotizacion>(campo: K, valor: Cotizacion[K]) => void;
   e: Errores;
+  m: Mensajes;
 };
 
+/* Los nombres de región son la dirección real de un lugar de Chile: van
+   iguales en los cuatro idiomas, igual que "Main Logistics". */
 const REGIONES_OPCIONES = REGIONES.map((r) => ({
   valor: r.region,
   etiqueta: r.region,
@@ -38,15 +46,17 @@ const REGIONES_OPCIONES = REGIONES.map((r) => ({
 
 /* ── 1 · Su carga ────────────────────────────────────────────────────── */
 
-function PasoCarga({ d, set, e }: Props) {
+function PasoCarga({ d, set, e, m }: Props) {
+  const c = m.cotizar.campos;
+
   return (
     <div className="flex flex-col gap-7">
       <Tarjetas
         nombre="tipoCarga"
-        leyenda="¿Qué va a transportar?"
+        leyenda={c.tipoCargaLeyenda}
         valor={d.tipoCarga}
         alCambiar={(v) => set("tipoCarga", v)}
-        opciones={TIPOS_CARGA}
+        opciones={tiposCarga(m)}
         error={e.tipoCarga}
         columnas={3}
       />
@@ -54,11 +64,11 @@ function PasoCarga({ d, set, e }: Props) {
       {d.tipoCarga === "otra" && (
         <CampoTexto
           id="tipoCargaOtra"
-          etiqueta="¿Qué carga es?"
+          etiqueta={c.tipoCargaOtraEtiqueta}
           valor={d.tipoCargaOtra}
           alCambiar={(v) => set("tipoCargaOtra", v)}
           error={e.tipoCargaOtra}
-          placeholder="Descríbala en pocas palabras"
+          placeholder={c.tipoCargaOtraPlaceholder}
           maxLength={120}
           autoComplete="off"
         />
@@ -66,11 +76,11 @@ function PasoCarga({ d, set, e }: Props) {
 
       <Tarjetas
         nombre="equipo"
-        leyenda="¿Qué equipo necesita?"
-        ayuda="Si no está seguro, elija la última opción y lo asesoramos."
+        leyenda={c.equipoLeyenda}
+        ayuda={c.equipoAyuda}
         valor={d.equipo}
         alCambiar={(v) => set("equipo", v)}
-        opciones={EQUIPOS}
+        opciones={equipos(m)}
         error={e.equipo}
       />
     </div>
@@ -88,7 +98,9 @@ function Extremo({
   d,
   set,
   e,
+  m,
 }: Props & { lado: "origen" | "destino"; leyenda: string }) {
+  const c = m.cotizar.campos;
   const cRegion = `${lado}Region` as const;
   const cComuna = `${lado}Comuna` as const;
   const cDireccion = `${lado}Direccion` as const;
@@ -103,7 +115,7 @@ function Extremo({
       <div className="mt-3 flex flex-col gap-4">
         <Selector
           id={cRegion}
-          etiqueta="Región"
+          etiqueta={c.region}
           valor={region}
           alCambiar={(v) => {
             set(cRegion, v);
@@ -111,28 +123,29 @@ function Extremo({
             if (d[cComuna]) set(cComuna, "");
           }}
           opciones={REGIONES_OPCIONES}
-          vacio="Seleccione región"
+          vacio={c.regionVacio}
           error={e[cRegion]}
         />
 
         <Selector
           id={cComuna}
-          etiqueta="Comuna"
+          etiqueta={c.comuna}
           valor={d[cComuna]}
           alCambiar={(v) => set(cComuna, v)}
-          opciones={comunasDe(region).map((c) => ({ valor: c, etiqueta: c }))}
-          vacio={region ? "Seleccione comuna" : "Elija primero la región"}
+          // Los nombres de comuna tampoco se traducen: son direcciones.
+          opciones={comunasDe(region).map((co) => ({ valor: co, etiqueta: co }))}
+          vacio={region ? c.comunaVacio : c.comunaSinRegion}
           deshabilitado={!region}
           error={e[cComuna]}
         />
 
         <CampoTexto
           id={cDireccion}
-          etiqueta="Dirección o referencia"
-          opcional
+          etiqueta={c.direccion}
+          opcional={c.opcional}
           valor={d[cDireccion]}
           alCambiar={(v) => set(cDireccion, v)}
-          placeholder="Calle, número, sector, faena…"
+          placeholder={c.direccionPlaceholder}
           maxLength={160}
           autoComplete="off"
         />
@@ -142,26 +155,30 @@ function Extremo({
 }
 
 function PasoRuta(p: Props) {
+  const c = p.m.cotizar.campos;
+
   return (
     <div className="flex flex-col gap-8">
-      <Extremo {...p} lado="origen" leyenda="Origen" />
+      <Extremo {...p} lado="origen" leyenda={c.origen} />
       <div className="h-px bg-[color-mix(in_oklab,var(--borde)_70%,transparent)]" />
-      <Extremo {...p} lado="destino" leyenda="Destino" />
+      <Extremo {...p} lado="destino" leyenda={c.destino} />
     </div>
   );
 }
 
 /* ── 3 · Cuándo ──────────────────────────────────────────────────────── */
 
-function PasoFecha({ d, set, e }: Props) {
+function PasoFecha({ d, set, e, m }: Props) {
+  const c = m.cotizar.campos;
+
   return (
     <div className="flex flex-col gap-7">
       <Tarjetas
         nombre="fecha"
-        leyenda="¿Cuándo necesita el servicio?"
+        leyenda={c.fechaLeyenda}
         valor={d.fecha}
         alCambiar={(v) => set("fecha", v)}
-        opciones={FECHAS}
+        opciones={fechas(m)}
         error={e.fecha}
         columnas={3}
       />
@@ -171,7 +188,7 @@ function PasoFecha({ d, set, e }: Props) {
       {d.fecha === "especifica" && (
         <CampoTexto
           id="fechaDia"
-          etiqueta="Día del servicio"
+          etiqueta={c.fechaDiaEtiqueta}
           tipo="date"
           valor={d.fechaDia}
           alCambiar={(v) => set("fechaDia", v)}
@@ -185,15 +202,17 @@ function PasoFecha({ d, set, e }: Props) {
 
 /* ── 4 · Modalidad ───────────────────────────────────────────────────── */
 
-function PasoModalidad({ d, set, e }: Props) {
+function PasoModalidad({ d, set, e, m }: Props) {
+  const c = m.cotizar.campos;
+
   return (
     <div className="flex flex-col gap-7">
       <Tarjetas
         nombre="modalidad"
-        leyenda="¿Es un traslado puntual o se repite?"
+        leyenda={c.modalidadLeyenda}
         valor={d.modalidad}
         alCambiar={(v) => set("modalidad", v)}
-        opciones={MODALIDADES}
+        opciones={modalidades(m)}
         error={e.modalidad}
         columnas={3}
       />
@@ -203,11 +222,11 @@ function PasoModalidad({ d, set, e }: Props) {
       {d.modalidad === "recurrente" && (
         <Selector
           id="frecuencia"
-          etiqueta="¿Cada cuánto?"
+          etiqueta={c.frecuenciaEtiqueta}
           valor={d.frecuencia}
           alCambiar={(v) => set("frecuencia", v)}
-          opciones={FRECUENCIAS}
-          vacio="Seleccione frecuencia"
+          opciones={frecuencias(m)}
+          vacio={c.frecuenciaVacio}
           error={e.frecuencia}
         />
       )}
@@ -215,11 +234,11 @@ function PasoModalidad({ d, set, e }: Props) {
       {d.modalidad === "contrato" && (
         <Selector
           id="duracion"
-          etiqueta="Duración del contrato"
+          etiqueta={c.duracionEtiqueta}
           valor={d.duracion}
           alCambiar={(v) => set("duracion", v)}
-          opciones={DURACIONES}
-          vacio="Seleccione duración"
+          opciones={duraciones(m)}
+          vacio={c.duracionVacio}
           error={e.duracion}
         />
       )}
@@ -229,22 +248,24 @@ function PasoModalidad({ d, set, e }: Props) {
 
 /* ── 5 · Requisitos ──────────────────────────────────────────────────── */
 
-function PasoRequisitos({ d, set, e }: Props) {
+function PasoRequisitos({ d, set, e, m }: Props) {
+  const c = m.cotizar.campos;
+
   return (
     <div className="flex flex-col gap-7">
       <Casillas
         nombre="requisitos"
-        leyenda="¿Su carga tiene alguna exigencia especial?"
-        ayuda="Marque las que correspondan. Si no aplica ninguna, siga."
+        leyenda={c.requisitosLeyenda}
+        ayuda={c.requisitosAyuda}
         valores={d.requisitos}
         alCambiar={(v) => set("requisitos", v)}
-        opciones={REQUISITOS}
+        opciones={requisitos(m)}
       />
 
       {d.requisitos.includes("otro") && (
         <CampoTexto
           id="requisitoOtro"
-          etiqueta="¿Cuál es el requisito?"
+          etiqueta={c.requisitoOtroEtiqueta}
           valor={d.requisitoOtro}
           alCambiar={(v) => set("requisitoOtro", v)}
           error={e.requisitoOtro}
@@ -255,11 +276,11 @@ function PasoRequisitos({ d, set, e }: Props) {
 
       <Tarjetas
         nombre="valor"
-        leyenda="Valor declarado de la carga"
-        ayuda="Define la cobertura del seguro. Si no lo tiene a mano, elija la última opción."
+        leyenda={c.valorLeyenda}
+        ayuda={c.valorAyuda}
         valor={d.valor}
         alCambiar={(v) => set("valor", v)}
-        opciones={VALORES}
+        opciones={valoresDeclarados(m)}
         error={e.valor}
       />
     </div>
@@ -268,22 +289,24 @@ function PasoRequisitos({ d, set, e }: Props) {
 
 /* ── 6 · Sus datos ───────────────────────────────────────────────────── */
 
-function PasoContacto({ d, set, e }: Props) {
+function PasoContacto({ d, set, e, m }: Props) {
+  const c = m.cotizar.campos;
+
   return (
     <div className="flex flex-col gap-5">
       <CampoTexto
         id="empresa"
-        etiqueta="Empresa"
+        etiqueta={c.empresa}
         valor={d.empresa}
         alCambiar={(v) => set("empresa", v)}
         error={e.empresa}
-        placeholder="Razón social o nombre de fantasía"
+        placeholder={c.empresaPlaceholder}
         maxLength={100}
         autoComplete="organization"
       />
       <CampoTexto
         id="nombre"
-        etiqueta="Nombre de contacto"
+        etiqueta={c.nombre}
         valor={d.nombre}
         alCambiar={(v) => set("nombre", v)}
         error={e.nombre}
@@ -292,24 +315,24 @@ function PasoContacto({ d, set, e }: Props) {
       />
       <CampoTexto
         id="correo"
-        etiqueta="Correo"
+        etiqueta={c.correo}
         tipo="email"
         valor={d.correo}
         alCambiar={(v) => set("correo", v)}
         error={e.correo}
-        placeholder="nombre@empresa.cl"
+        placeholder={c.correoPlaceholder}
         maxLength={120}
         autoComplete="email"
         inputMode="email"
       />
       <CampoTexto
         id="telefono"
-        etiqueta="Teléfono o WhatsApp"
+        etiqueta={c.telefono}
         tipo="tel"
         valor={d.telefono}
         alCambiar={(v) => set("telefono", v)}
         error={e.telefono}
-        placeholder="+56 9 1234 5678"
+        placeholder={c.telefonoPlaceholder}
         maxLength={40}
         autoComplete="tel"
         inputMode="tel"
@@ -317,10 +340,10 @@ function PasoContacto({ d, set, e }: Props) {
 
       <Tarjetas
         nombre="canal"
-        leyenda="¿Por dónde prefiere que le respondamos?"
+        leyenda={c.canalLeyenda}
         valor={d.canal}
         alCambiar={(v) => set("canal", v)}
-        opciones={CANALES}
+        opciones={canales(m)}
         error={e.canal}
         columnas={3}
       />

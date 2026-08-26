@@ -2,6 +2,7 @@ import Image from "next/image";
 import Revelar from "./Revelar";
 import { IconoCasco, IconoEscudo, IconoSenal } from "./Iconos";
 import Titulo from "./Titulo";
+import type { Mensajes } from "@/mensajes";
 
 /**
  * Séptima sección: el equipo. Sobre fondo oscuro, entre "cómo funciona"
@@ -26,28 +27,20 @@ import Titulo from "./Titulo";
  * hay una confirmada.
  */
 
+/**
+ * Solo el ícono y la clave: el título y el detalle de cada estándar viven en
+ * el diccionario, bajo `equipo.estandares`. El ícono es un componente de
+ * React y no puede viajar en un archivo de mensajes, así que la tabla se
+ * queda acá y el texto se busca por clave. Es más legible que rearmar el
+ * arreglo entero dentro de una función que reciba `m`.
+ */
 const ESTANDARES = [
-  {
-    Icono: IconoEscudo,
-    titulo: "Papeles al día, revisados",
-    detalle:
-      "Documentación del transportista, del equipo y del conductor, revisada y vigente el día del despacho.",
-  },
-  {
-    Icono: IconoCasco,
-    titulo: "Experiencia en la carga que usted mueve",
-    detalle:
-      "Conductores y personal de bodega y descarga que ya trabajaron su tipo de carga antes de este despacho.",
-  },
-  {
-    Icono: IconoSenal,
-    titulo: "Una central que responde",
-    detalle:
-      "Alguien con nombre del otro lado durante todo el viaje, y que contesta el mismo día.",
-  },
-];
+  { clave: "papeles", Icono: IconoEscudo },
+  { clave: "experiencia", Icono: IconoCasco },
+  { clave: "central", Icono: IconoSenal },
+] as const;
 
-export default function Equipo() {
+export default function Equipo({ m }: { m: Mensajes }) {
   return (
     <section
       id="equipo"
@@ -65,13 +58,14 @@ export default function Equipo() {
 
       <div className="relative mx-auto w-full max-w-[var(--ancho-max)] px-[var(--borde-x)] py-[var(--seccion-y)]">
         <Revelar className="max-w-[46rem]">
-          <Titulo linea1="Quién mueve" destacado="su carga" />
+          <Titulo
+            linea1={m.equipo.tituloLinea1}
+            destacado={m.equipo.tituloDestacado}
+          />
           <p className="mt-4 max-w-[54ch] text-[clamp(1rem,0.4vw+0.92rem,1.125rem)] leading-[1.6] text-[var(--texto-sec)]">
-            Conductores, bodega y descarga.{" "}
-            <span className="realce">
-              Todos pasan el mismo estándar antes de tocar su carga
-            </span>
-            , sin importar de qué industria venga.
+            {m.equipo.bajadaInicio}{" "}
+            <span className="realce">{m.equipo.bajadaRealce}</span>
+            {m.equipo.bajadaFin}
           </p>
         </Revelar>
 
@@ -81,7 +75,7 @@ export default function Equipo() {
             <article className="sobre-foto group relative isolate flex h-full min-h-[clamp(24rem,38vw,31rem)] flex-col justify-end overflow-hidden rounded-[var(--r-img)]">
               <Image
                 src="/fotos/equipo-conductor.webp"
-                alt="Conductor de Main Logistics en la cabina, con gorra de la marca"
+                alt={m.equipo.conductor.altFoto}
                 width={1122}
                 height={1402}
                 quality={90}
@@ -92,9 +86,11 @@ export default function Equipo() {
 
               <div className="relative p-6 sm:p-7">
                 <h3 className="max-w-[18ch] text-[clamp(1.2rem,1vw+0.95rem,1.5rem)] font-semibold leading-[1.18] tracking-[-0.028em] text-[var(--texto)]">
-                  Transportistas{" "}
-                  <span className="text-[var(--morado-texto)]">verificados</span>{" "}
-                  antes de cargar.
+                  {m.equipo.conductor.tituloInicio}{" "}
+                  <span className="text-[var(--morado-texto)]">
+                    {m.equipo.conductor.tituloDestacado}
+                  </span>{" "}
+                  {m.equipo.conductor.tituloFin}
                 </h3>
               </div>
             </article>
@@ -102,18 +98,18 @@ export default function Equipo() {
 
           {/* Los tres estándares. */}
           <div className="grid gap-4 md:col-span-7">
-            {ESTANDARES.map(({ Icono, titulo, detalle }, i) => (
-              <Revelar key={titulo} retraso={0.18 + i * 0.1}>
+            {ESTANDARES.map(({ clave, Icono }, i) => (
+              <Revelar key={clave} retraso={0.18 + i * 0.1}>
                 <article className="flex items-start gap-4 rounded-[var(--r-card)] border border-[color-mix(in_oklab,var(--borde)_60%,transparent)] bg-[color-mix(in_oklab,var(--sup-1)_75%,transparent)] p-5 transition-colors duration-[var(--dur-estado)] ease-[var(--ease-quart)] hover:border-[color-mix(in_oklab,var(--morado-ui)_40%,var(--borde))]">
                   <span className="grid size-11 shrink-0 place-items-center rounded-[13px] bg-[color-mix(in_oklab,var(--morado-solido)_22%,transparent)] text-[var(--morado-texto)]">
                     <Icono className="size-[22px]" />
                   </span>
                   <div>
                     <h3 className="text-[16px] font-semibold tracking-[-0.02em] text-[var(--texto)]">
-                      {titulo}
+                      {m.equipo.estandares[clave].titulo}
                     </h3>
                     <p className="mt-1.5 max-w-[52ch] text-[14.5px] leading-[1.55] text-[var(--texto-sec)]">
-                      {detalle}
+                      {m.equipo.estandares[clave].detalle}
                     </p>
                   </div>
                 </article>
@@ -126,7 +122,7 @@ export default function Equipo() {
             <article className="sobre-foto group relative isolate flex h-full min-h-[clamp(16rem,22vw,19rem)] flex-col justify-end overflow-hidden rounded-[var(--r-img)]">
               <Image
                 src="/fotos/flota-puerta.webp"
-                alt="Puerta de camión con la marca Main Logistics"
+                alt={m.equipo.flota.altFoto}
                 width={1122}
                 height={1402}
                 quality={90}
@@ -137,7 +133,7 @@ export default function Equipo() {
 
               <div className="relative p-6 sm:p-7">
                 <h3 className="max-w-[24ch] text-[clamp(1.2rem,1vw+0.95rem,1.5rem)] font-semibold leading-[1.18] tracking-[-0.028em] text-[var(--texto)]">
-                  El estándar es el mismo, lo maneje quien lo maneje.
+                  {m.equipo.flota.titulo}
                 </h3>
               </div>
             </article>
@@ -148,7 +144,7 @@ export default function Equipo() {
             <article className="sobre-foto group relative isolate flex h-full min-h-[clamp(16rem,22vw,19rem)] flex-col justify-end overflow-hidden rounded-[var(--r-img)]">
               <Image
                 src="/fotos/equipo-bodega.webp"
-                alt="Operario de Main Logistics revisando pallets en bodega con una tablet"
+                alt={m.equipo.bodega.altFoto}
                 width={1092}
                 height={1440}
                 quality={90}
@@ -159,8 +155,11 @@ export default function Equipo() {
 
               <div className="relative p-6">
                 <h3 className="max-w-[20ch] text-[clamp(1.2rem,1vw+0.95rem,1.5rem)] font-semibold leading-[1.18] tracking-[-0.028em] text-[var(--texto)]">
-                  Bodega y descarga, con el{" "}
-                  <span className="text-[var(--morado-texto)]">mismo control</span>.
+                  {m.equipo.bodega.tituloInicio}{" "}
+                  <span className="text-[var(--morado-texto)]">
+                    {m.equipo.bodega.tituloDestacado}
+                  </span>
+                  {m.equipo.bodega.tituloFin}
                 </h3>
               </div>
             </article>
@@ -171,7 +170,7 @@ export default function Equipo() {
             <article className="sobre-foto group relative isolate flex h-full min-h-[clamp(16rem,22vw,19rem)] flex-col justify-end overflow-hidden rounded-[var(--r-img)]">
               <Image
                 src="/fotos/portal-tablet.webp"
-                alt="Tablet en cabina mostrando la ruta activa en el portal de Main Logistics"
+                alt={m.equipo.portal.altFoto}
                 width={916}
                 height={1717}
                 quality={90}
@@ -184,13 +183,13 @@ export default function Equipo() {
               <span className="absolute right-5 top-5 z-[1] inline-flex items-center gap-1.5 rounded-full border border-[color-mix(in_oklab,var(--amarillo)_45%,transparent)] bg-[color-mix(in_oklab,var(--fondo)_72%,transparent)] px-2.5 py-1 backdrop-blur-md">
                 <span className="size-1.5 rounded-full bg-[var(--amarillo)]" />
                 <span className="dato text-[10.5px] uppercase tracking-[0.1em] text-[var(--amarillo)]">
-                  En desarrollo
+                  {m.equipo.portal.estado}
                 </span>
               </span>
 
               <div className="relative p-6">
                 <h3 className="max-w-[20ch] text-[clamp(1.2rem,1vw+0.95rem,1.5rem)] font-semibold leading-[1.18] tracking-[-0.028em] text-[var(--texto)]">
-                  El portal para seguir su carga.
+                  {m.equipo.portal.titulo}
                 </h3>
               </div>
             </article>

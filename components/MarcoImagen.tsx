@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import type { Mensajes } from "@/mensajes";
 
 /**
  * Marco para una foto que todavía no existe.
@@ -14,6 +15,7 @@ import type { ReactNode } from "react";
  * la misma clase de contenedor y no cambia nada más.
  */
 export default function MarcoImagen({
+  m,
   brief,
   icono,
   className = "",
@@ -21,7 +23,14 @@ export default function MarcoImagen({
   comoFondo = false,
   children,
 }: {
-  /** Qué hay que fotografiar. Es el encargo, no una descripción. */
+  m: Mensajes;
+  /**
+   * Qué hay que fotografiar. Es el encargo, no una descripción.
+   *
+   * Sigue llegando por prop y no por clave: cada brief es de la sección que
+   * lo pide, así que vive en el diccionario de esa sección. Acá solo entra
+   * el rótulo "Foto pendiente", que sí es el mismo en todos los marcos.
+   */
   brief: string;
   icono?: ReactNode;
   className?: string;
@@ -100,7 +109,7 @@ export default function MarcoImagen({
           >
             {icono}
             <span className="dato text-[10px] uppercase tracking-[0.14em]">
-              Foto pendiente
+              {m.comunes.fotoPendiente}
             </span>
           </span>
           <span

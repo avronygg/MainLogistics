@@ -5,6 +5,7 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import Titulo from "./Titulo";
 import MarcoImagen from "./MarcoImagen";
 import { IconoEscudo } from "./Iconos";
+import type { Mensajes } from "@/mensajes";
 
 /**
  * Quinta sección: cumplimiento, con pestañas por industria.
@@ -25,6 +26,12 @@ import { IconoEscudo } from "./Iconos";
 type Industria = {
   id: string;
   nombre: string;
+  /**
+   * Chips del marco normativo. Los códigos y siglas —SICEP, DS 298, ASIQUIM,
+   * SAG, CORMA— NO salen del diccionario: son el identificador de la norma y
+   * se escriben igual en los cuatro idiomas. La única etiqueta que además es
+   * una palabra, y por eso sí viene de `m`, es la de contenedores.
+   */
   marco: string[];
   /** Encargo de la foto que va en esta pestaña. */
   foto: string;
@@ -33,84 +40,94 @@ type Industria = {
   puntos: string[];
 };
 
-const INDUSTRIAS: Industria[] = [
-  {
-    id: "mineria",
-    nombre: "Minería",
-    marco: ["SICEP"],
-    foto: "Camión de Main entrando a faena minera: portería, polvo, chaleco reflectante y el equipo homologado a la vista.",
-    titulo: "La homologación se pide antes de cargar.",
-    detalle:
-      "Documentación del transportista, del equipo y del conductor, revisada y vigente el día del despacho. En la portería ya es tarde.",
-    puntos: [
-      "Homologación de transportista y equipo para faena",
-      "Control de fatiga y descansos en ruta",
-      "Continuidad de abastecimiento en turnos",
-    ],
-  },
-  {
-    id: "peligrosa",
-    nombre: "Carga peligrosa",
-    marco: ["DS 298", "ASIQUIM"],
-    foto: "Detalle del rótulo de sustancia peligrosa en la rampla, con la hoja de seguridad en primer plano.",
-    titulo: "Lo que no está rotulado, no sale.",
-    detalle:
-      "Rotulación según la clase de la sustancia, hoja de seguridad a bordo y conductor con curso vigente. La documentación viaja con la carga, no después.",
-    puntos: [
-      "Rotulación y segregación según clase",
-      "Hoja de seguridad y elementos de emergencia a bordo",
-      "Conductor con curso de sustancias peligrosas vigente",
-    ],
-  },
-  {
-    id: "agro",
-    nombre: "Agro y salmonicultura",
-    marco: ["SAG"],
-    foto: "Interior de un furgón refrigerado con el registrador de temperatura en pantalla y la carga estibada.",
-    titulo: "La cadena de frío se corta una vez.",
-    detalle:
-      "Temperatura registrada durante todo el viaje, no solo al cargar y al descargar. En temporada, la ventana horaria manda tanto como el termómetro.",
-    puntos: [
-      "Registro de temperatura del viaje completo",
-      "Protocolos fitosanitarios y certificación de origen",
-      "Ventanas de temporada y coordinación de packing",
-    ],
-  },
-  {
-    id: "forestal",
-    nombre: "Forestal",
-    marco: ["CORMA"],
-    foto: "Rollizos amarrados sobre la rampla en camino de tierra, con la eslinga tensada en primer plano.",
-    titulo: "El amarre se revisa antes de salir y en cada parada.",
-    detalle:
-      "Volumen alto sobre caminos que no siempre están pavimentados, con tránsito de faena en la misma ruta.",
-    puntos: [
-      "Buenas prácticas de seguridad en faena forestal",
-      "Amarre certificado y revisión en ruta",
-      "Coordinación con tránsito de faena",
-    ],
-  },
-  {
-    id: "contenedores",
-    nombre: "Contenedores",
-    marco: ["Puerto"],
-    foto: "Contenedor saliendo del terminal portuario con el sello visible en la puerta.",
-    titulo: "La ventana de retiro no espera.",
-    detalle:
-      "Coordinación con terminal, sello verificado y devolución dentro del plazo libre. Un día de sobreestadía cuesta más que el flete.",
-    puntos: [
-      "Coordinación de ventana con el terminal",
-      "Verificación de sello al retiro y a la entrega",
-      "Control de días libres y devolución",
-    ],
-  },
-];
+/**
+ * La lista se arma como función de `m` en vez de guardar solo claves: así
+ * cada pestaña se sigue leyendo entera en un solo lugar —nombre, encargo de
+ * foto, título, detalle y puntos juntos— y se ve de una qué muestra cada
+ * tab. Un arreglo de puras claves obligaría a saltar al diccionario para
+ * entender qué hay adentro.
+ */
+function industrias(m: Mensajes): Industria[] {
+  const c = m.cumplimiento;
 
-export default function Cumplimiento() {
+  return [
+    {
+      id: "mineria",
+      nombre: c.mineria.nombre,
+      marco: ["SICEP"],
+      foto: c.mineria.briefFoto,
+      titulo: c.mineria.titulo,
+      detalle: c.mineria.detalle,
+      puntos: [
+        c.mineria.puntos.homologacion,
+        c.mineria.puntos.fatiga,
+        c.mineria.puntos.continuidad,
+      ],
+    },
+    {
+      id: "peligrosa",
+      nombre: c.peligrosa.nombre,
+      marco: ["DS 298", "ASIQUIM"],
+      foto: c.peligrosa.briefFoto,
+      titulo: c.peligrosa.titulo,
+      detalle: c.peligrosa.detalle,
+      puntos: [
+        c.peligrosa.puntos.rotulacion,
+        c.peligrosa.puntos.hojaSeguridad,
+        c.peligrosa.puntos.curso,
+      ],
+    },
+    {
+      id: "agro",
+      nombre: c.agro.nombre,
+      marco: ["SAG"],
+      foto: c.agro.briefFoto,
+      titulo: c.agro.titulo,
+      detalle: c.agro.detalle,
+      puntos: [
+        c.agro.puntos.temperatura,
+        c.agro.puntos.fitosanitario,
+        c.agro.puntos.ventanas,
+      ],
+    },
+    {
+      id: "forestal",
+      nombre: c.forestal.nombre,
+      marco: ["CORMA"],
+      foto: c.forestal.briefFoto,
+      titulo: c.forestal.titulo,
+      detalle: c.forestal.detalle,
+      puntos: [
+        c.forestal.puntos.buenasPracticas,
+        c.forestal.puntos.amarre,
+        c.forestal.puntos.transito,
+      ],
+    },
+    {
+      id: "contenedores",
+      nombre: c.contenedores.nombre,
+      // "Puerto" no es una sigla ni el código de una norma: es una palabra
+      // que hay que traducir, al revés que los chips de las otras pestañas.
+      marco: [c.contenedores.marcoPuerto],
+      foto: c.contenedores.briefFoto,
+      titulo: c.contenedores.titulo,
+      detalle: c.contenedores.detalle,
+      puntos: [
+        c.contenedores.puntos.ventana,
+        c.contenedores.puntos.sello,
+        c.contenedores.puntos.diasLibres,
+      ],
+    },
+  ];
+}
+
+export default function Cumplimiento({ m }: { m: Mensajes }) {
   const reducir = useReducedMotion();
   const [activa, setActiva] = useState(0);
   const base = useId();
   const refs = useRef<(HTMLButtonElement | null)[]>([]);
+
+  const INDUSTRIAS = industrias(m);
 
   const alTeclear = (e: React.KeyboardEvent) => {
     const ultimo = INDUSTRIAS.length - 1;
@@ -134,16 +151,22 @@ export default function Cumplimiento() {
     <section id="cumplimiento" className="tema-claro scroll-mt-[clamp(6rem,12vw,8.5rem)]">
       <div className="mx-auto w-full max-w-[var(--ancho-max)] px-[var(--borde-x)] py-[var(--seccion-y)]">
         <div className="max-w-[46rem]">
-          <Titulo linea1="Permisos y certificaciones" destacado="al día en cada despacho" />
+          <Titulo
+            linea1={m.cumplimiento.tituloLinea1}
+            destacado={m.cumplimiento.tituloDestacado}
+          />
           <p className="mt-4 max-w-[52ch] text-[clamp(1rem,0.4vw+0.92rem,1.125rem)] leading-[1.6] text-[var(--texto-sec)]">
-            <span className="realce">Elija su industria</span> y vea qué se
-            revisa antes de que su carga salga.
+            {/* El `{" "}` explícito deja el espacio entre el realce y el resto
+                de la frase en el JSX y no al inicio de un valor del
+                diccionario, donde se pierde apenas alguien lo traduce. */}
+            <span className="realce">{m.cumplimiento.bajadaRealce}</span>{" "}
+            {m.cumplimiento.bajadaResto}
           </p>
         </div>
 
         <div
           role="tablist"
-          aria-label="Marcos normativos por industria"
+          aria-label={m.cumplimiento.etiquetaPestanas}
           onKeyDown={alTeclear}
           className="mt-[clamp(2rem,3.5vw,3rem)] flex flex-wrap gap-2"
         >
@@ -192,12 +215,13 @@ export default function Cumplimiento() {
             >
               <div>
                 <ul className="flex flex-wrap gap-1.5">
-                  {ind.marco.map((m) => (
+                  {/* `codigo` y no `m`: acá `m` es el diccionario. */}
+                  {ind.marco.map((codigo) => (
                     <li
-                      key={m}
+                      key={codigo}
                       className="dato rounded-[var(--r-chip)] bg-[color-mix(in_oklab,var(--morado-solido)_12%,transparent)] px-2.5 py-1 text-[11.5px] uppercase tracking-[0.06em] text-[var(--morado-texto)]"
                     >
-                      {m}
+                      {codigo}
                     </li>
                   ))}
                 </ul>
@@ -235,6 +259,7 @@ export default function Cumplimiento() {
               </div>
 
               <MarcoImagen
+                m={m}
                 className="order-first h-[clamp(11rem,18vw,14rem)] rounded-[var(--r-img)] md:order-last md:h-full md:min-h-[15rem]"
                 icono={<IconoEscudo className="size-7" />}
                 brief={ind.foto}

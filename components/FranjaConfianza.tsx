@@ -1,5 +1,6 @@
 import Image from "next/image";
 import s from "./FranjaConfianza.module.css";
+import type { Mensajes } from "@/mensajes";
 
 /**
  * Cinta de clientes.
@@ -28,6 +29,11 @@ type Marca = {
   escala?: string;
 };
 
+/**
+ * Esta lista no pasa por el diccionario: `nombre` es la razón social del
+ * cliente y va igual en los cuatro idiomas. Traducir "Guanaco Compañía
+ * Minera" sería inventar una empresa que no existe.
+ */
 const MARCAS: Marca[] = [
   { archivo: "cliente-02", nombre: "Ultraport" },
   { archivo: "cliente-09", nombre: "Antucoya · Antofagasta Minerals" },
@@ -62,13 +68,13 @@ function Logo({ marca }: { marca: Marca }) {
   );
 }
 
-export default function FranjaConfianza() {
+export default function FranjaConfianza({ m }: { m: Mensajes }) {
   return (
     <div className="flex flex-col items-center gap-3 sm:gap-6">
       <p className="hidden px-[var(--borde-x)] text-[12.5px] tracking-[-0.005em] text-[var(--texto-sec)] sm:block">
         {/* Alternativa honesta si Main participó junto al socio y no como
             proveedor titular: "Operaciones atendidas junto a Logística Yireh" */}
-        Confían en nosotros
+        {m.resenas.franja.encabezado}
       </p>
 
       <div className={`${s.ventana} w-full`}>
@@ -76,8 +82,8 @@ export default function FranjaConfianza() {
           {/* Dos pasadas: la segunda entra justo cuando la primera sale. */}
           {[0, 1].map((copia) => (
             <ul key={copia} aria-hidden={copia === 1} className="flex items-center">
-              {MARCAS.map((m) => (
-                <Logo key={`${copia}-${m.archivo}`} marca={m} />
+              {MARCAS.map((marca) => (
+                <Logo key={`${copia}-${marca.archivo}`} marca={marca} />
               ))}
             </ul>
           ))}

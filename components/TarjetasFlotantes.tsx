@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion, useReducedMotion } from "motion/react";
 import s from "./TarjetasFlotantes.module.css";
+import type { Mensajes } from "@/mensajes";
 
 /**
  * Las dos tarjetas de vidrio que flanquean al camión.
@@ -41,7 +42,9 @@ function Guia({ lado }: { lado: "izquierda" | "derecha" }) {
   );
 }
 
-export default function TarjetasFlotantes() {
+export default function TarjetasFlotantes({ m }: { m: Mensajes }) {
+  const t = m.hero.tarjetas;
+
   const reducir = useReducedMotion();
 
   const entrada = (retraso: number) => ({
@@ -74,11 +77,11 @@ export default function TarjetasFlotantes() {
           <span className="flex items-center gap-1.5">
             <span className={`${s.testigo} size-1.5 rounded-full bg-[var(--morado-ui)]`} />
             <span className="dato text-[9.5px] uppercase tracking-[0.12em] text-[var(--texto-sec)]">
-              GPS
+              {t.gps.etiqueta}
             </span>
           </span>
           <span className="dato text-[9.5px] uppercase tracking-[0.08em] text-[var(--morado-texto)]">
-            En ruta
+            {t.gps.estado}
           </span>
         </div>
 
@@ -111,10 +114,10 @@ export default function TarjetasFlotantes() {
         </div>
 
         <p className="mt-1.5 text-[10.5px] font-semibold leading-[1.25] tracking-[-0.015em] text-[var(--texto)] sm:mt-2 sm:text-[12.5px]">
-          Monitoreo en ruta
+          {t.gps.titulo}
         </p>
         <p className="mt-0.5 hidden text-[11px] leading-[1.4] text-[var(--texto)] opacity-80 sm:block">
-          Trazabilidad del retiro a la entrega
+          {t.gps.detalle}
         </p>
       </div>
       </motion.div>
@@ -146,9 +149,12 @@ export default function TarjetasFlotantes() {
         </div>
 
         <p className="mt-1.5 text-[9.5px] leading-[1.35] text-[var(--texto)] opacity-80 sm:mt-2.5 sm:text-[11.5px]">
-          Transporte de carga
+          {/* El corte de línea es fijo y va en el diccionario: la tarjeta es
+              angosta y dejar que el texto se parta solo deja una viuda de una
+              palabra. Cada idioma decide dónde corta su propia bajada. */}
+          {t.marca.bajadaLinea1}
           <br />
-          en todo Chile
+          {t.marca.bajadaLinea2}
         </p>
       </div>
       </motion.div>

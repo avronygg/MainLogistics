@@ -118,7 +118,7 @@ export default function Nav({ m, idioma }: { m: Mensajes; idioma: Idioma }) {
               "hover:shadow-[0_8px_20px_-8px_rgb(0_0_0/0.85),inset_0_1px_0_rgb(255_255_255/0.32)]",
             ].join(" ")}
           >
-            Cotizar
+            {m.nav.cotizar}
             <span
               aria-hidden="true"
               className="grid size-7 place-items-center rounded-full bg-white/20 transition-transform duration-[var(--dur-estado)] ease-[var(--ease-quart)] group-hover:scale-110 motion-reduce:group-hover:scale-100"
@@ -205,7 +205,7 @@ export default function Nav({ m, idioma }: { m: Mensajes; idioma: Idioma }) {
               onClick={() => setAbierto(false)}
               className="mt-2 flex min-h-[52px] items-center justify-center rounded-[14px] bg-[var(--morado-solido)] px-4 text-[16px] font-medium text-white sm:hidden"
             >
-              Cotizar mi operación
+              {m.nav.cotizarMovil}
             </Link>
           </motion.div>
         )}

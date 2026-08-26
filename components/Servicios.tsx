@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Titulo from "./Titulo";
 import Pilares from "./Pilares";
+import type { Mensajes } from "@/mensajes";
 import {
   IconoContenedor,
   IconoCamaBaja,
@@ -29,74 +30,35 @@ import {
  * El ancla #servicios vive acá; #cobertura sigue viviendo en el bento.
  */
 
+/**
+ * El arreglo guarda la clave del diccionario y el ícono, nada más: nombre,
+ * detalle y chips viven en `m.servicios.lista`.
+ *
+ * Se prefirió esto por sobre una función `servicios(m)` que devolviera los
+ * objetos ya armados porque lo que se edita acá es el pareo equipo–ícono y
+ * el orden de la grilla, y así queda a la vista de una pasada. El texto, que
+ * es lo que se traduce cuatro veces, vive en un solo archivo.
+ *
+ * `keyof Mensajes["servicios"]["lista"]` no es adorno: si alguien suma un
+ * servicio al diccionario y olvida el ícono —o al revés— no compila.
+ */
 type Servicio = {
-  nombre: string;
-  detalle: string;
-  /** Qué admite el equipo. Describe la pieza, no promete una capacidad. */
-  lleva: string[];
+  clave: keyof Mensajes["servicios"]["lista"];
   Icono: (p: { className?: string }) => React.ReactElement;
 };
 
-/* Copy heredado del sitio de Logística Yireh — mismo grupo, mismos
-   servicios— pasado de "tú" a "usted", que es el trato del resto del
-   sitio. Ver PRODUCT.md: el comprador es un jefe de operaciones, no un
-   consumidor final. */
 const SERVICIOS: Servicio[] = [
-  {
-    nombre: "Retiro de contenedores",
-    detalle:
-      "Retiramos sus contenedores en puerto y los movemos a destino sin demoras.",
-    lleva: ["Contenedor 20′", "Contenedor 40′", "Puerto"],
-    Icono: IconoContenedor,
-  },
-  {
-    nombre: "Cama baja",
-    detalle:
-      "Carga sobredimensionada y maquinaria pesada con equipos especializados.",
-    lleva: ["Maquinaria", "Sobredimensionada"],
-    Icono: IconoCamaBaja,
-  },
-  {
-    nombre: "Ramplas planas",
-    detalle:
-      "Carga general y paletizada sobre ramplas planas, para todo tipo de operación.",
-    lleva: ["General", "Paletizada"],
-    Icono: IconoRampla,
-  },
-  {
-    nombre: "Camiones pequeños",
-    detalle: "Distribución ágil para cargas menores y entregas de última milla.",
-    lleva: ["Carga menor", "Última milla"],
-    Icono: IconoCamionPequeno,
-  },
-  {
-    nombre: "Bateas",
-    detalle: "Traslado de áridos y graneles en batea, con cobertura puerto-destino.",
-    lleva: ["Áridos", "Graneles"],
-    Icono: IconoBatea,
-  },
-  {
-    nombre: "Silos",
-    detalle: "Transporte especializado de carga en silo para la industria.",
-    lleva: ["Granel cerrado"],
-    Icono: IconoSilo,
-  },
-  {
-    nombre: "Carga BESS",
-    detalle:
-      "Traslado de baterías y sistemas de almacenamiento de energía con manejo especializado.",
-    lleva: ["Baterías", "Alto valor"],
-    Icono: IconoBess,
-  },
-  {
-    nombre: "Desconsolidado y almacenaje",
-    detalle: "Desconsolidamos y almacenamos su carga en bodegas estratégicas.",
-    lleva: ["Bodega", "Consolidado"],
-    Icono: IconoBodega,
-  },
+  { clave: "contenedores", Icono: IconoContenedor },
+  { clave: "camaBaja", Icono: IconoCamaBaja },
+  { clave: "ramplasPlanas", Icono: IconoRampla },
+  { clave: "camionesPequenos", Icono: IconoCamionPequeno },
+  { clave: "bateas", Icono: IconoBatea },
+  { clave: "silos", Icono: IconoSilo },
+  { clave: "bess", Icono: IconoBess },
+  { clave: "almacenaje", Icono: IconoBodega },
 ];
 
-export default function Servicios() {
+export default function Servicios({ m }: { m: Mensajes }) {
   return (
     <section
       id="servicios"
@@ -104,11 +66,19 @@ export default function Servicios() {
     >
       <div className="mx-auto w-full max-w-[var(--ancho-max)] px-[var(--borde-x)] py-[var(--seccion-y)]">
         <div className="max-w-[46rem]">
-          <Titulo linea1="Un solo operador para" destacado="toda su operación" />
+          <Titulo
+            linea1={m.servicios.tituloLinea1}
+            destacado={m.servicios.tituloDestacado}
+          />
+
+          {/* La bajada va partida en tres porque el realce cae en medio de
+              la frase. Los espacios de unión quedan en el JSX, así que cada
+              pieza del diccionario es una frase limpia, sin espacios al
+              borde que se pierdan al traducir. */}
           <p className="mt-4 max-w-[54ch] text-[clamp(1rem,0.4vw+0.92rem,1.125rem)] leading-[1.6] text-[var(--texto-sec)]">
-            Contenedores, maquinaria, graneles o almacenaje.{" "}
-            <span className="realce">Ocho servicios</span> con el equipo que cada
-            carga exige, coordinados desde un mismo lugar.
+            {m.servicios.bajada.inicio}{" "}
+            <span className="realce">{m.servicios.bajada.realce}</span>{" "}
+            {m.servicios.bajada.fin}
           </p>
         </div>
 
@@ -123,52 +93,61 @@ export default function Servicios() {
             de equipos. El comprador de este rubro escanea para comparar, y
             una lista densa se compara; ocho tarjetas separadas, no. */}
         <ul className="mt-[clamp(2.5rem,4vw,3.5rem)] grid grid-cols-1 sm:grid-cols-2">
-          {SERVICIOS.map(({ nombre, detalle, lleva, Icono }, i) => (
-            <li
-              key={nombre}
-              className={[
-                "group relative border-t border-[var(--borde)]",
-                // El filete vertical solo en la columna derecha, y solo
-                // cuando hay dos columnas.
-                i % 2 === 1 ? "sm:border-l" : "",
-                // Última fila: filete de cierre para que la lista no quede
-                // abierta abajo.
-                i >= SERVICIOS.length - 2 ? "sm:border-b" : "",
-                i === SERVICIOS.length - 1 ? "border-b sm:border-b" : "",
-              ].join(" ")}
-            >
-              <div className="flex h-full items-start gap-4 rounded-[var(--r-chip)] px-1 py-6 transition-colors duration-[var(--dur-estado)] ease-[var(--ease-quart)] group-hover:bg-[color-mix(in_oklab,var(--sup-1)_70%,transparent)] sm:px-6">
-                <Icono
-                  className="mt-0.5 size-7 shrink-0 text-[var(--texto-sec)] transition-colors duration-[var(--dur-estado)] group-hover:text-[var(--morado-texto)]"
-                />
+          {SERVICIOS.map(({ clave, Icono }, i) => {
+            const servicio = m.servicios.lista[clave];
 
-                <div className="min-w-0">
-                  <h3 className="text-[16.5px] font-semibold leading-[1.25] tracking-[-0.02em] text-[var(--texto)]">
-                    {nombre}
-                  </h3>
-                  <p className="mt-1.5 max-w-[42ch] text-[14px] leading-[1.55] text-[var(--texto-sec)]">
-                    {detalle}
-                  </p>
+            return (
+              <li
+                key={clave}
+                className={[
+                  "group relative border-t border-[var(--borde)]",
+                  // El filete vertical solo en la columna derecha, y solo
+                  // cuando hay dos columnas.
+                  i % 2 === 1 ? "sm:border-l" : "",
+                  // Última fila: filete de cierre para que la lista no quede
+                  // abierta abajo.
+                  i >= SERVICIOS.length - 2 ? "sm:border-b" : "",
+                  i === SERVICIOS.length - 1 ? "border-b sm:border-b" : "",
+                ].join(" ")}
+              >
+                <div className="flex h-full items-start gap-4 rounded-[var(--r-chip)] px-1 py-6 transition-colors duration-[var(--dur-estado)] ease-[var(--ease-quart)] group-hover:bg-[color-mix(in_oklab,var(--sup-1)_70%,transparent)] sm:px-6">
+                  <Icono
+                    className="mt-0.5 size-7 shrink-0 text-[var(--texto-sec)] transition-colors duration-[var(--dur-estado)] group-hover:text-[var(--morado-texto)]"
+                  />
 
-                  {/* Qué carga admite cada equipo. Es lo que el comprador
-                      viene a resolver — "¿pueden con lo mío?" — y describe
-                      el equipo, no promete una capacidad que habría que
-                      confirmar. Sin Geist Mono: son palabras, no dato
-                      auditable, y la mono es regla semántica. */}
-                  <ul className="mt-3 flex flex-wrap gap-1.5">
-                    {lleva.map((l) => (
-                      <li
-                        key={l}
-                        className="rounded-[var(--r-chip)] bg-[var(--sup-1)] px-2 py-[3px] text-[12px] leading-none text-[var(--texto-sec)] transition-colors duration-[var(--dur-estado)] group-hover:bg-[var(--sup-2)]"
-                      >
-                        {l}
-                      </li>
-                    ))}
-                  </ul>
+                  <div className="min-w-0">
+                    <h3 className="text-[16.5px] font-semibold leading-[1.25] tracking-[-0.02em] text-[var(--texto)]">
+                      {servicio.nombre}
+                    </h3>
+                    <p className="mt-1.5 max-w-[42ch] text-[14px] leading-[1.55] text-[var(--texto-sec)]">
+                      {servicio.detalle}
+                    </p>
+
+                    {/* Qué carga admite cada equipo. Es lo que el comprador
+                        viene a resolver — "¿pueden con lo mío?" — y describe
+                        el equipo, no promete una capacidad que habría que
+                        confirmar. Sin Geist Mono: son palabras, no dato
+                        auditable, y la mono es regla semántica.
+
+                        Los chips son objeto con clave y no arreglo: con
+                        arreglo, una traducción podría traer dos chips donde
+                        el español trae tres y nadie se enteraría. Con claves,
+                        si falta uno no compila. */}
+                    <ul className="mt-3 flex flex-wrap gap-1.5">
+                      {Object.entries(servicio.lleva).map(([id, texto]) => (
+                        <li
+                          key={id}
+                          className="rounded-[var(--r-chip)] bg-[var(--sup-1)] px-2 py-[3px] text-[12px] leading-none text-[var(--texto-sec)] transition-colors duration-[var(--dur-estado)] group-hover:bg-[var(--sup-2)]"
+                        >
+                          {texto}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
-              </div>
-            </li>
-          ))}
+              </li>
+            );
+          })}
         </ul>
 
         {/* Una sola salida al final de la grilla, no un CTA por tarjeta:
@@ -178,7 +157,7 @@ export default function Servicios() {
             href="#cotizar"
             className="group inline-flex items-center gap-2.5 rounded-full bg-[var(--morado-solido)] px-5 py-3 text-[15px] font-medium text-white transition-transform duration-[var(--dur-estado)] ease-[var(--ease-quart)] hover:-translate-y-0.5 motion-reduce:hover:translate-y-0"
           >
-            Cotice su carga
+            {m.servicios.ctaPrincipal}
             <span className="grid size-6 place-items-center rounded-full bg-white/22 transition-transform duration-[var(--dur-estado)] ease-[var(--ease-quart)] group-hover:translate-x-0.5 motion-reduce:group-hover:translate-x-0">
               <svg viewBox="0 0 16 16" fill="none" className="size-3">
                 <path
@@ -192,13 +171,16 @@ export default function Servicios() {
             </span>
           </Link>
           <p className="text-[14.5px] leading-[1.5] text-[var(--texto-sec)]">
-            ¿No sabe qué equipo necesita?{" "}
-            <span className="font-medium text-[var(--texto)]">Lo asesoramos.</span>
+            {m.servicios.ayuda.pregunta}{" "}
+            <span className="font-medium text-[var(--texto)]">
+              {m.servicios.ayuda.respuesta}
+            </span>
           </p>
         </div>
 
-        {/* El bento de apoyo: control en ruta, cobertura y seguridad. */}
-        <Pilares />
+        {/* El bento de apoyo: control en ruta, cobertura y seguridad.
+            Recibe `m` por prop, no por contexto: es componente de servidor. */}
+        <Pilares m={m} />
       </div>
     </section>
   );

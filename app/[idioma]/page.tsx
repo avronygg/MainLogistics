@@ -36,17 +36,17 @@ export default async function Home({
         {/* El fondo alterna banda a banda, sin dos iguales seguidas:
             hero oscuro · claro · oscuro · claro · oscuro · claro · oscuro ·
             claro · pie oscuro. */}
-        <Hero />
-        <Servicios />
-        <QueMovemos />
-        <Cumplimiento />
-        <Resenas />
-        <ComoFunciona />
-        <Equipo />
-        <Cotizar />
+        <Hero m={m} />
+        <Servicios m={m} />
+        <QueMovemos m={m} />
+        <Cumplimiento m={m} />
+        <Resenas m={m} />
+        <ComoFunciona m={m} />
+        <Equipo m={m} />
+        <Cotizar m={m} />
       </main>
-      <Pie />
-      <Asesor />
+      <Pie m={m} />
+      <Asesor m={m} />
     </>
   );
 }

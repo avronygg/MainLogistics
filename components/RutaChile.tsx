@@ -15,6 +15,14 @@ import s from "./RutaChile.module.css";
  * Geometría: cada ciudad se centra con translateY(-50%) sobre su porcentaje,
  * así que el 0% y el 100% del contenedor coinciden con el centro del primer
  * y del último punto. El riel va de 0 a 100% y calza exacto.
+ *
+ * Este componente no recibe `m` y no tiene entrada en el diccionario: todo
+ * lo que se lee acá es dato, no copy. Los nombres de ciudad son la dirección
+ * real de un lugar y van igual en los cuatro idiomas, y las coordenadas van
+ * en Geist Mono (`.dato`), que en este sitio marca dato auditable — la
+ * notación 18°28′ S es la internacional y no se traduce. Si algún día se le
+ * agrega un rótulo o un `aria-label`, ESO sí entra al diccionario y el
+ * componente pasa a recibir `m` desde <Pilares />.
  */
 
 const CIUDADES = [

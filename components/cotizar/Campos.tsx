@@ -1,6 +1,6 @@
 "use client";
 
-import type { ReactNode } from "react";
+import { Fragment, type ReactNode } from "react";
 
 /**
  * Piezas de campo del formulario de cotización.
@@ -19,6 +19,54 @@ import type { ReactNode } from "react";
  *
  * El estado nunca se comunica solo por color: borde + ícono + mensaje.
  */
+
+/* ── Plantillas de texto ─────────────────────────────────────────────── */
+
+/**
+ * Rellena una plantilla del diccionario: `"Paso {n} de {total}"`.
+ *
+ * Va con plantilla y no con trozos concatenados porque el orden de las
+ * palabras cambia de un idioma a otro. Partir la frase en pedazos obligaría
+ * a los cuatro idiomas a armarla en el orden del español, que es justo lo
+ * que no se puede pedir.
+ *
+ * Una llave que no tenga valor se deja como está: se ve el hueco y se
+ * arregla, en vez de desaparecer sin dejar rastro.
+ */
+export function rellenar(
+  plantilla: string,
+  valores: Record<string, string | number>,
+): string {
+  return plantilla.replace(/\{(\w+)\}/g, (todo, clave: string) =>
+    clave in valores ? String(valores[clave]) : todo,
+  );
+}
+
+/**
+ * Igual que `rellenar`, pero las piezas son nodos: un enlace dentro de una
+ * frase. Sin esto, la frase de error se partiría en tres cadenas y ningún
+ * idioma podría mover el enlace de lugar.
+ */
+export function Plantilla({
+  texto,
+  piezas,
+}: {
+  texto: string;
+  piezas: Record<string, ReactNode>;
+}) {
+  return (
+    <>
+      {texto.split(/(\{\w+\})/g).map((parte, i) => {
+        const clave = /^\{\w+\}$/.test(parte) ? parte.slice(1, -1) : null;
+        return (
+          <Fragment key={i}>
+            {clave && clave in piezas ? piezas[clave] : parte}
+          </Fragment>
+        );
+      })}
+    </>
+  );
+}
 
 /* Foco de 3px. El anillo anterior era del morado al 14%, que sobre el fondo
    claro prácticamente no se ve — y el foco es la única señal de dónde está
@@ -81,7 +129,12 @@ export function Etiqueta({
   htmlFor?: string;
   children: ReactNode;
   ayuda?: string;
-  opcional?: boolean;
+  /**
+   * El texto de "(opcional)" ya traducido, o nada si el campo es obligatorio.
+   * Es una cadena y no un booleano justamente para que el texto venga del
+   * diccionario: un booleano obligaría a escribir la palabra acá adentro.
+   */
+  opcional?: string;
 }) {
   return (
     <>
@@ -94,7 +147,7 @@ export function Etiqueta({
             es obligatorio y sembrar asteriscos es puro ruido. */}
         {opcional && (
           <span className="ml-1.5 font-normal text-[var(--texto-sec)]">
-            (opcional)
+            {opcional}
           </span>
         )}
       </label>
@@ -124,7 +177,7 @@ export function CampoTexto({
   alCambiar: (v: string) => void;
   error?: string;
   ayuda?: string;
-  opcional?: boolean;
+  opcional?: string;
   tipo?: "text" | "email" | "tel" | "date";
 } & Omit<
   React.InputHTMLAttributes<HTMLInputElement>,

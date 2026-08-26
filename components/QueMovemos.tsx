@@ -1,6 +1,7 @@
 import Titulo from "./Titulo";
 import MarcoImagen from "./MarcoImagen";
 import { IconoCarga } from "./Iconos";
+import type { Mensajes } from "@/mensajes";
 /**
  * Cuarta sección: qué movemos.
  *
@@ -17,52 +18,36 @@ import { IconoCarga } from "./Iconos";
  */
 
 type Carga = {
-  nombre: string;
-  exige: string;
-  /** Marcos normativos o códigos: van en mono. */
+  /** Clave de la carga dentro de `m.cargas.tipos`. */
+  clave: keyof Mensajes["cargas"]["tipos"];
+  /**
+   * Marcos normativos o códigos: van en mono. Quedan acá y no en el
+   * diccionario a propósito — SICEP, ASIQUIM, SAG y CORMA son siglas de
+   * organismos chilenos y "DS 298" es el número de un decreto. Son nombres
+   * propios: no cambian de idioma, y tenerlos en un solo lugar evita que
+   * una traducción los deforme.
+   */
   normas?: string[];
 };
 
+/**
+ * El arreglo guarda solo la clave y los códigos; los textos viven en el
+ * diccionario. Se eligió esto por sobre una función que reciba `m` porque
+ * el orden de las filas es una decisión de esta sección —de lo más común a
+ * lo más excepcional— y así se lee de un vistazo sin las cadenas encima.
+ */
 const CARGAS: Carga[] = [
-  {
-    nombre: "General",
-    exige: "Rampla plana, furgón o carga paletizada, según volumen y ruta.",
-  },
-  {
-    nombre: "Minera",
-    exige: "Homologación para entrar a faena y control de fatiga en ruta.",
-    normas: ["SICEP"],
-  },
-  {
-    nombre: "Peligrosa",
-    exige: "Rotulación, hoja de seguridad y conductor con curso vigente.",
-    normas: ["DS 298", "ASIQUIM"],
-  },
-  {
-    nombre: "Refrigerada",
-    exige: "Cadena de frío continua con registro de temperatura del viaje.",
-    normas: ["SAG"],
-  },
-  {
-    nombre: "Forestal",
-    exige: "Amarre certificado y rutas rurales con tránsito de faena.",
-    normas: ["CORMA"],
-  },
-  {
-    nombre: "Contenedores",
-    exige: "Coordinación portuaria, ventana de retiro y sello verificado.",
-  },
-  {
-    nombre: "Maquinaria",
-    exige: "Cama baja, cálculo de altura libre y permisos de circulación.",
-  },
-  {
-    nombre: "Sobredimensionada",
-    exige: "Permiso especial, escolta y horario de circulación restringido.",
-  },
+  { clave: "general" },
+  { clave: "minera", normas: ["SICEP"] },
+  { clave: "peligrosa", normas: ["DS 298", "ASIQUIM"] },
+  { clave: "refrigerada", normas: ["SAG"] },
+  { clave: "forestal", normas: ["CORMA"] },
+  { clave: "contenedores" },
+  { clave: "maquinaria" },
+  { clave: "sobredimensionada" },
 ];
 
-export default function QueMovemos() {
+export default function QueMovemos({ m }: { m: Mensajes }) {
   return (
     <section
       id="cargas"
@@ -70,63 +55,71 @@ export default function QueMovemos() {
     >
       <div className="grid gap-[clamp(2rem,4vw,3.5rem)] lg:grid-cols-[minmax(0,26rem)_minmax(0,1fr)]">
         <div className="lg:sticky lg:top-[clamp(7rem,13vw,9rem)] lg:self-start">
-          <Titulo linea1="Cada carga exige lo suyo." destacado="Nosotros lo cumplimos" />
+          <Titulo linea1={m.cargas.tituloLinea1} destacado={m.cargas.tituloDestacado} />
           <p className="mt-4 max-w-[42ch] text-[clamp(1rem,0.4vw+0.92rem,1.125rem)] leading-[1.6] text-[var(--texto-sec)]">
-            Cada carga tiene su norma, su equipo y su documentación.{" "}
+            {m.cargas.bajada}{" "}
             <span className="realce">
-              Esta es la de cada una.
+              {m.cargas.bajadaRealce}
             </span>
           </p>
 
           <MarcoImagen
+            m={m}
             className="mt-8 h-[clamp(12rem,20vw,16rem)] rounded-[var(--r-img)]"
             icono={<IconoCarga className="size-7" />}
-            brief="Plano abierto de la rampla cargada con mezcla de carga: pallets, un contenedor y maquinaria en el mismo patio. Es la foto que prueba la versatilidad."
+            brief={m.cargas.briefFoto}
           />
 
           <p className="dato mt-8 flex items-baseline gap-2.5 leading-none">
+            {/* La cifra no sale del diccionario: es el largo de CARGAS, no
+                una frase. Si se tradujera, una traducción podría prometer
+                un número que el sitio no muestra. */}
             <span
               className="font-semibold tracking-[-0.045em] text-[var(--morado-ui)]"
               style={{ fontSize: "clamp(2.5rem, 3.5vw + 1rem, 4rem)" }}
             >
-              08
+              {String(CARGAS.length).padStart(2, "0")}
             </span>
             <span className="text-[12.5px] uppercase tracking-[0.1em] text-[var(--texto-sec)]">
-              tipos de carga
+              {m.cargas.etiquetaTipos}
             </span>
           </p>
         </div>
 
         <ul className="border-t border-[color-mix(in_oklab,var(--borde)_55%,transparent)]">
-          {CARGAS.map((c) => (
-            <li
-              key={c.nombre}
-              className="group grid grid-cols-1 items-baseline gap-x-6 gap-y-2 border-b border-[color-mix(in_oklab,var(--borde)_55%,transparent)] py-5 transition-colors duration-[var(--dur-estado)] ease-[var(--ease-quart)] hover:bg-[color-mix(in_oklab,var(--sup-1)_55%,transparent)] sm:grid-cols-[minmax(0,11rem)_minmax(0,1fr)] sm:px-3"
-            >
-              <h3 className="text-[clamp(1.0625rem,0.6vw+0.9rem,1.25rem)] font-semibold tracking-[-0.02em] text-[var(--texto)]">
-                {c.nombre}
-              </h3>
+          {CARGAS.map((c) => {
+            const tipo = m.cargas.tipos[c.clave];
 
-              <div>
-                <p className="text-[14.5px] leading-[1.55] text-[var(--texto-sec)]">
-                  {c.exige}
-                </p>
+            return (
+              <li
+                key={c.clave}
+                className="group grid grid-cols-1 items-baseline gap-x-6 gap-y-2 border-b border-[color-mix(in_oklab,var(--borde)_55%,transparent)] py-5 transition-colors duration-[var(--dur-estado)] ease-[var(--ease-quart)] hover:bg-[color-mix(in_oklab,var(--sup-1)_55%,transparent)] sm:grid-cols-[minmax(0,11rem)_minmax(0,1fr)] sm:px-3"
+              >
+                <h3 className="text-[clamp(1.0625rem,0.6vw+0.9rem,1.25rem)] font-semibold tracking-[-0.02em] text-[var(--texto)]">
+                  {tipo.nombre}
+                </h3>
 
-                {c.normas && (
-                  <ul className="mt-2.5 flex flex-wrap gap-1.5">
-                    {c.normas.map((n) => (
-                      <li
-                        key={n}
-                        className="dato rounded-[var(--r-chip)] border border-[color-mix(in_oklab,var(--borde)_80%,transparent)] px-2 py-0.5 text-[11px] text-[var(--morado-texto)]"
-                      >
-                        {n}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-            </li>
-          ))}
+                <div>
+                  <p className="text-[14.5px] leading-[1.55] text-[var(--texto-sec)]">
+                    {tipo.exige}
+                  </p>
+
+                  {c.normas && (
+                    <ul className="mt-2.5 flex flex-wrap gap-1.5">
+                      {c.normas.map((n) => (
+                        <li
+                          key={n}
+                          className="dato rounded-[var(--r-chip)] border border-[color-mix(in_oklab,var(--borde)_80%,transparent)] px-2 py-0.5 text-[11px] text-[var(--morado-texto)]"
+                        >
+                          {n}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              </li>
+            );
+          })}
         </ul>
       </div>
     </section>

@@ -48,6 +48,791 @@ export const es = {
     idioma: "Idioma",
     cambiarIdioma: "Cambiar idioma",
   },
+
+  /* ── Hero · portada ──────────────────────────────────────────────── */
+  hero: {
+    tituloLinea1: "Con Main, su carga.",
+    tituloLinea2: "Siempre",
+    bajadaLinea1: "Llevamos su carga a cualquier destino de Chile.",
+    bajadaLinea2: "Sabe en todo momento dónde va y a qué hora llega.",
+    ctaPrincipal: "Cotice su carga",
+    ctaSecundario: "Conozca nuestros servicios",
+    rotador: {
+      frases: ["a tiempo", "segura", "vigilada"],
+      alternativas: "a tiempo, segura o vigilada",
+    },
+    tarjetas: {
+      gps: {
+        etiqueta: "GPS",
+        estado: "En ruta",
+        titulo: "Monitoreo en ruta",
+        detalle: "Trazabilidad del retiro a la entrega",
+      },
+      marca: {
+        bajadaLinea1: "Transporte de carga",
+        bajadaLinea2: "en todo Chile",
+      },
+    },
+  },
+
+  /* ── Servicios · los ocho, y el bento de apoyo ───────────────────── */
+  servicios: {
+    tituloLinea1: "Un solo operador para",
+    tituloDestacado: "toda su operación",
+    bajada: {
+      inicio: "Contenedores, maquinaria, graneles o almacenaje.",
+      realce: "Ocho servicios",
+      fin: "con el equipo que cada carga exige, coordinados desde un mismo lugar.",
+    },
+    lista: {
+      contenedores: {
+        nombre: "Retiro de contenedores",
+        detalle: "Retiramos sus contenedores en puerto y los movemos a destino sin demoras.",
+        lleva: {
+          contenedor20: "Contenedor 20′",
+          contenedor40: "Contenedor 40′",
+          puerto: "Puerto",
+        },
+      },
+      camaBaja: {
+        nombre: "Cama baja",
+        detalle: "Carga sobredimensionada y maquinaria pesada con equipos especializados.",
+        lleva: {
+          maquinaria: "Maquinaria",
+          sobredimensionada: "Sobredimensionada",
+        },
+      },
+      ramplasPlanas: {
+        nombre: "Ramplas planas",
+        detalle: "Carga general y paletizada sobre ramplas planas, para todo tipo de operación.",
+        lleva: {
+          general: "General",
+          paletizada: "Paletizada",
+        },
+      },
+      camionesPequenos: {
+        nombre: "Camiones pequeños",
+        detalle: "Distribución ágil para cargas menores y entregas de última milla.",
+        lleva: {
+          cargaMenor: "Carga menor",
+          ultimaMilla: "Última milla",
+        },
+      },
+      bateas: {
+        nombre: "Bateas",
+        detalle: "Traslado de áridos y graneles en batea, con cobertura puerto-destino.",
+        lleva: {
+          aridos: "Áridos",
+          graneles: "Graneles",
+        },
+      },
+      silos: {
+        nombre: "Silos",
+        detalle: "Transporte especializado de carga en silo para la industria.",
+        lleva: {
+          granelCerrado: "Granel cerrado",
+        },
+      },
+      bess: {
+        nombre: "Carga BESS",
+        detalle: "Traslado de baterías y sistemas de almacenamiento de energía con manejo especializado.",
+        lleva: {
+          baterias: "Baterías",
+          altoValor: "Alto valor",
+        },
+      },
+      almacenaje: {
+        nombre: "Desconsolidado y almacenaje",
+        detalle: "Desconsolidamos y almacenamos su carga en bodegas estratégicas.",
+        lleva: {
+          bodega: "Bodega",
+          consolidado: "Consolidado",
+        },
+      },
+    },
+    ctaPrincipal: "Cotice su carga",
+    ayuda: {
+      pregunta: "¿No sabe qué equipo necesita?",
+      respuesta: "Lo asesoramos.",
+    },
+    pilares: {
+      titulo: {
+        inicio: "Con MAIN, su carga siempre",
+        realce: "bajo control",
+        fin: ".",
+      },
+      bajada: {
+        realceUbicacion: "Saber dónde está",
+        finUbicacion: "en cada momento.",
+        realceNorma: "Cumplir la norma",
+        finNorma: "que exige su industria.",
+        realceHora: "Llegar a la hora",
+        finHora: "acordada.",
+      },
+      tecnologia: {
+        altFoto: "Equipo de monitoreo con la marca Main Logistics, con el conector de datos a la vista",
+        etiqueta: "GPS en ruta",
+        titulo: {
+          inicio: "Vea su carga en",
+          realce: "tiempo real",
+          fin: ", no espere el llamado.",
+        },
+        detalle: {
+          realce: "GPS y monitoreo permanente.",
+          fin: "Trazabilidad desde el retiro hasta la entrega, con reportes auditables en línea.",
+        },
+      },
+      cobertura: {
+        etiqueta: "Cobertura",
+        titulo: "De Arica a Punta Arenas.",
+        detalle: {
+          realce: "Cobertura nacional",
+          fin: ", con el equipo y la documentación que pide cada industria.",
+        },
+      },
+      queMovemos: {
+        etiqueta: "Qué movemos",
+        titulo: "Ocho tipos de carga, un solo proveedor.",
+        detalle: "Desde carga general hasta sobredimensionada, con el equipo que cada una exige.",
+        cargas: {
+          general: "General",
+          minera: "Minera",
+          peligrosa: "Peligrosa",
+          refrigerada: "Refrigerada",
+          forestal: "Forestal",
+          contenedores: "Contenedores",
+          maquinaria: "Maquinaria",
+          sobredimensionada: "Sobredimensionada",
+        },
+        enlace: "Vea qué exige cada una",
+      },
+      seguridad: {
+        altFoto: "Amarre de carga con eslinga y trinquete tensado sobre la plataforma de un remolque",
+        etiqueta: "Seguridad",
+        titulo: {
+          inicio: "Su carga siempre",
+          realce: "segura",
+          fin: ".",
+        },
+        detalle: {
+          realce: "Transportistas verificados",
+          fin: ", documentación al día y el estándar de cada industria.",
+        },
+      },
+    },
+  },
+
+  /* ── Qué movemos · tipos de carga ────────────────────────────────── */
+  cargas: {
+    tituloLinea1: "Cada carga exige lo suyo.",
+    tituloDestacado: "Nosotros lo cumplimos",
+    bajada: "Cada carga tiene su norma, su equipo y su documentación.",
+    bajadaRealce: "Esta es la de cada una.",
+    briefFoto: "Plano abierto de la rampla cargada con mezcla de carga: pallets, un contenedor y maquinaria en el mismo patio. Es la foto que prueba la versatilidad.",
+    etiquetaTipos: "tipos de carga",
+    tipos: {
+      general: {
+        nombre: "General",
+        exige: "Rampla plana, furgón o carga paletizada, según volumen y ruta.",
+      },
+      minera: {
+        nombre: "Minera",
+        exige: "Homologación para entrar a faena y control de fatiga en ruta.",
+      },
+      peligrosa: {
+        nombre: "Peligrosa",
+        exige: "Rotulación, hoja de seguridad y conductor con curso vigente.",
+      },
+      refrigerada: {
+        nombre: "Refrigerada",
+        exige: "Cadena de frío continua con registro de temperatura del viaje.",
+      },
+      forestal: {
+        nombre: "Forestal",
+        exige: "Amarre certificado y rutas rurales con tránsito de faena.",
+      },
+      contenedores: {
+        nombre: "Contenedores",
+        exige: "Coordinación portuaria, ventana de retiro y sello verificado.",
+      },
+      maquinaria: {
+        nombre: "Maquinaria",
+        exige: "Cama baja, cálculo de altura libre y permisos de circulación.",
+      },
+      sobredimensionada: {
+        nombre: "Sobredimensionada",
+        exige: "Permiso especial, escolta y horario de circulación restringido.",
+      },
+    },
+  },
+
+  /* ── Cumplimiento · por industria ────────────────────────────────── */
+  cumplimiento: {
+    tituloLinea1: "Permisos y certificaciones",
+    tituloDestacado: "al día en cada despacho",
+    bajadaRealce: "Elija su industria",
+    bajadaResto: "y vea qué se revisa antes de que su carga salga.",
+    etiquetaPestanas: "Marcos normativos por industria",
+    mineria: {
+      nombre: "Minería",
+      briefFoto: "Camión de Main entrando a faena minera: portería, polvo, chaleco reflectante y el equipo homologado a la vista.",
+      titulo: "La homologación se pide antes de cargar.",
+      detalle: "Documentación del transportista, del equipo y del conductor, revisada y vigente el día del despacho. En la portería ya es tarde.",
+      puntos: {
+        homologacion: "Homologación de transportista y equipo para faena",
+        fatiga: "Control de fatiga y descansos en ruta",
+        continuidad: "Continuidad de abastecimiento en turnos",
+      },
+    },
+    peligrosa: {
+      nombre: "Carga peligrosa",
+      briefFoto: "Detalle del rótulo de sustancia peligrosa en la rampla, con la hoja de seguridad en primer plano.",
+      titulo: "Lo que no está rotulado, no sale.",
+      detalle: "Rotulación según la clase de la sustancia, hoja de seguridad a bordo y conductor con curso vigente. La documentación viaja con la carga, no después.",
+      puntos: {
+        rotulacion: "Rotulación y segregación según clase",
+        hojaSeguridad: "Hoja de seguridad y elementos de emergencia a bordo",
+        curso: "Conductor con curso de sustancias peligrosas vigente",
+      },
+    },
+    agro: {
+      nombre: "Agro y salmonicultura",
+      briefFoto: "Interior de un furgón refrigerado con el registrador de temperatura en pantalla y la carga estibada.",
+      titulo: "La cadena de frío se corta una vez.",
+      detalle: "Temperatura registrada durante todo el viaje, no solo al cargar y al descargar. En temporada, la ventana horaria manda tanto como el termómetro.",
+      puntos: {
+        temperatura: "Registro de temperatura del viaje completo",
+        fitosanitario: "Protocolos fitosanitarios y certificación de origen",
+        ventanas: "Ventanas de temporada y coordinación de packing",
+      },
+    },
+    forestal: {
+      nombre: "Forestal",
+      briefFoto: "Rollizos amarrados sobre la rampla en camino de tierra, con la eslinga tensada en primer plano.",
+      titulo: "El amarre se revisa antes de salir y en cada parada.",
+      detalle: "Volumen alto sobre caminos que no siempre están pavimentados, con tránsito de faena en la misma ruta.",
+      puntos: {
+        buenasPracticas: "Buenas prácticas de seguridad en faena forestal",
+        amarre: "Amarre certificado y revisión en ruta",
+        transito: "Coordinación con tránsito de faena",
+      },
+    },
+    contenedores: {
+      nombre: "Contenedores",
+      marcoPuerto: "Puerto",
+      briefFoto: "Contenedor saliendo del terminal portuario con el sello visible en la puerta.",
+      titulo: "La ventana de retiro no espera.",
+      detalle: "Coordinación con terminal, sello verificado y devolución dentro del plazo libre. Un día de sobreestadía cuesta más que el flete.",
+      puntos: {
+        ventana: "Coordinación de ventana con el terminal",
+        sello: "Verificación de sello al retiro y a la entrega",
+        diasLibres: "Control de días libres y devolución",
+      },
+    },
+  },
+
+  /* ── Reseñas y franja de clientes ────────────────────────────────── */
+  resenas: {
+    tituloLinea1: "Lo que dicen",
+    tituloDestacado: "nuestros clientes",
+    bajadaInicio: "Jefes de logística y abastecimiento que ",
+    bajadaRealce: "responden el teléfono",
+    bajadaFin: " si un colega pregunta por nosotros.",
+    testimonios: {
+      mineria: {
+        cita: "Acá va una cita concreta: un plazo que se cumplió con la planta parada, no una frase sobre calidad de servicio.",
+        nombre: "Nombre Apellido",
+        cargo: "Jefe de Logística",
+        empresa: "Empresa",
+        industria: "Minería",
+      },
+      agroexportacion: {
+        cita: "La segunda conviene que hable de la visibilidad. Qué cambió cuando dejaron de tener que llamar para saber dónde estaba la carga.",
+        nombre: "Nombre Apellido",
+        cargo: "Gerente de Operaciones",
+        empresa: "Empresa",
+        industria: "Agroexportación",
+      },
+      retail: {
+        cita: "Una sobre cumplimiento documental: la auditoría que pasó sin observaciones.",
+        nombre: "Nombre Apellido",
+        cargo: "Jefe de Abastecimiento",
+        empresa: "Empresa",
+        industria: "Retail",
+      },
+      cargaPeligrosa: {
+        cita: "Una que muestre que el estándar no cambia según lo que se mueva. Idealmente de quien mueve carga peligrosa.",
+        nombre: "Nombre Apellido",
+        cargo: "Jefe de Planta",
+        empresa: "Empresa",
+        industria: "Industria",
+      },
+      forestal: {
+        cita: "Otra sobre qué pasó cuando algo se desvió en ruta y cómo se enteraron antes de tener que preguntar.",
+        nombre: "Nombre Apellido",
+        cargo: "Coordinadora de Transporte",
+        empresa: "Empresa",
+        industria: "Forestal",
+      },
+      farmaceutica: {
+        cita: "La última puede ser corta. Qué le diría a un par que está evaluando proveedor.",
+        nombre: "Nombre Apellido",
+        cargo: "Gerente de Supply Chain",
+        empresa: "Empresa",
+        industria: "Farmacéutica",
+      },
+    },
+    franja: {
+      encabezado: "Confían en nosotros",
+    },
+  },
+
+  /* ── Cómo funciona · el timeline ─────────────────────────────────── */
+  comoFunciona: {
+    tituloLinea1: "Cómo funciona,",
+    tituloDestacado: "en tres pasos",
+    bajadaInicio: "Desde la cotización hasta la entrega,",
+    bajadaRealce: "siempre hay alguien con nombre",
+    bajadaFin: "del otro lado.",
+    paso: "Paso",
+    hitos: {
+      cotizacion: {
+        titulo: "Cotización",
+        detalle: "Usted nos dice qué mueve, desde dónde y hasta dónde. Le devolvemos una evaluación de factibilidad de la ruta, no un precio suelto.",
+        dato: "Respuesta por correo",
+      },
+      retiro: {
+        titulo: "Retiro",
+        detalle: "Transportista verificado y equipo acorde a la carga. La documentación se emite antes de que el camión salga.",
+        dato: "Guía de despacho electrónica",
+      },
+      entrega: {
+        titulo: "Entrega",
+        detalle: "Seguimiento durante todo el viaje. Si algo se desvía, lo sabemos antes que usted, y ya lo estamos resolviendo.",
+        dato: "Respaldo de entrega",
+      },
+    },
+    plazosAltFoto: "Reloj con la marca Main Logistics mostrando la hora de entrega",
+    plazosEtiqueta: "Plazos",
+    plazosTituloInicio: "Su carga siempre",
+    plazosTituloDestacado: "a tiempo",
+    plazosTituloFin: ".",
+    plazosDetalle: "Sin demoras que haya que explicar en una reunión.",
+  },
+
+  /* ── Equipo ──────────────────────────────────────────────────────── */
+  equipo: {
+    tituloLinea1: "Quién mueve",
+    tituloDestacado: "su carga",
+    bajadaInicio: "Conductores, bodega y descarga.",
+    bajadaRealce: "Todos pasan el mismo estándar antes de tocar su carga",
+    bajadaFin: ", sin importar de qué industria venga.",
+    conductor: {
+      altFoto: "Conductor de Main Logistics en la cabina, con gorra de la marca",
+      tituloInicio: "Transportistas",
+      tituloDestacado: "verificados",
+      tituloFin: "antes de cargar.",
+    },
+    estandares: {
+      papeles: {
+        titulo: "Papeles al día, revisados",
+        detalle: "Documentación del transportista, del equipo y del conductor, revisada y vigente el día del despacho.",
+      },
+      experiencia: {
+        titulo: "Experiencia en la carga que usted mueve",
+        detalle: "Conductores y personal de bodega y descarga que ya trabajaron su tipo de carga antes de este despacho.",
+      },
+      central: {
+        titulo: "Una central que responde",
+        detalle: "Alguien con nombre del otro lado durante todo el viaje, y que contesta el mismo día.",
+      },
+    },
+    flota: {
+      altFoto: "Puerta de camión con la marca Main Logistics",
+      titulo: "El estándar es el mismo, lo maneje quien lo maneje.",
+    },
+    bodega: {
+      altFoto: "Operario de Main Logistics revisando pallets en bodega con una tablet",
+      tituloInicio: "Bodega y descarga, con el",
+      tituloDestacado: "mismo control",
+      tituloFin: ".",
+    },
+    portal: {
+      altFoto: "Tablet en cabina mostrando la ruta activa en el portal de Main Logistics",
+      estado: "En desarrollo",
+      titulo: "El portal para seguir su carga.",
+    },
+  },
+
+  /* ── Cotización · el formulario de seis pasos ────────────────────── */
+  cotizar: {
+    tituloLinea1: "Cotice su carga.",
+    tituloDestacado: "Le respondemos en 24 horas",
+    bajada: "Cuéntenos qué mueve y le devolvemos una evaluación de factibilidad de la ruta, no un precio suelto.",
+    garantias: {
+      respuesta: "Le respondemos en menos de 24 horas hábiles",
+      sinCompromiso: "Sin compromiso ni registro previo",
+      rutaHonesta: "Si su ruta no nos calza, se lo decimos",
+    },
+    pasosCortos: "Seis pasos cortos.",
+    datosAlFinal: "Sus datos van al final.",
+    pasoDeTotal: "Paso {n} de {total}.",
+    guardado: {
+      retomado: "Retomamos donde quedó.",
+      empezarDeNuevo: "Empezar de nuevo",
+    },
+    pasos: {
+      carga: {
+        titulo: "Su carga",
+        bajada: "Qué mueve y con qué equipo.",
+      },
+      ruta: {
+        titulo: "La ruta",
+        bajada: "Desde dónde y hasta dónde.",
+      },
+      fecha: {
+        titulo: "Cuándo",
+        bajada: "La fecha del servicio.",
+      },
+      modalidad: {
+        titulo: "Modalidad",
+        bajada: "Una vez o de forma sostenida.",
+      },
+      requisitos: {
+        titulo: "Requisitos",
+        bajada: "Lo que su industria exige.",
+      },
+      contacto: {
+        titulo: "Sus datos",
+        bajada: "Para responderle.",
+      },
+    },
+    riel: {
+      resumen: "Resumen",
+      pasoNavegable: "Paso {n}, {titulo}, completado. Volver a editar.",
+      pasoActual: "Paso {n}, {titulo}, paso actual",
+      pasoCompletado: "Paso {n}, {titulo}, completado",
+      pasoPendiente: "Paso {n}, {titulo}, pendiente",
+    },
+    campos: {
+      opcional: "(opcional)",
+      trampaBots: "No completar",
+      tipoCargaLeyenda: "¿Qué va a transportar?",
+      tipoCargaOtraEtiqueta: "¿Qué carga es?",
+      tipoCargaOtraPlaceholder: "Descríbala en pocas palabras",
+      equipoLeyenda: "¿Qué equipo necesita?",
+      equipoAyuda: "Si no está seguro, elija la última opción y lo asesoramos.",
+      origen: "Origen",
+      destino: "Destino",
+      region: "Región",
+      regionVacio: "Seleccione región",
+      comuna: "Comuna",
+      comunaVacio: "Seleccione comuna",
+      comunaSinRegion: "Elija primero la región",
+      direccion: "Dirección o referencia",
+      direccionPlaceholder: "Calle, número, sector, faena…",
+      fechaLeyenda: "¿Cuándo necesita el servicio?",
+      fechaDiaEtiqueta: "Día del servicio",
+      modalidadLeyenda: "¿Es un traslado puntual o se repite?",
+      frecuenciaEtiqueta: "¿Cada cuánto?",
+      frecuenciaVacio: "Seleccione frecuencia",
+      duracionEtiqueta: "Duración del contrato",
+      duracionVacio: "Seleccione duración",
+      requisitosLeyenda: "¿Su carga tiene alguna exigencia especial?",
+      requisitosAyuda: "Marque las que correspondan. Si no aplica ninguna, siga.",
+      requisitoOtroEtiqueta: "¿Cuál es el requisito?",
+      valorLeyenda: "Valor declarado de la carga",
+      valorAyuda: "Define la cobertura del seguro. Si no lo tiene a mano, elija la última opción.",
+      empresa: "Empresa",
+      empresaPlaceholder: "Razón social o nombre de fantasía",
+      nombre: "Nombre de contacto",
+      correo: "Correo",
+      correoPlaceholder: "nombre@empresa.cl",
+      telefono: "Teléfono o WhatsApp",
+      telefonoPlaceholder: "+56 9 1234 5678",
+      canalLeyenda: "¿Por dónde prefiere que le respondamos?",
+    },
+    tiposCarga: {
+      contenedor: {
+        etiqueta: "Contenedor 20′ / 40′",
+        detalle: "Carga en contenedor",
+      },
+      suelta: {
+        etiqueta: "Carga suelta o paletizada",
+        detalle: "General o pallets",
+      },
+      granel: {
+        etiqueta: "Graneles",
+        detalle: "Áridos, silos, líquidos",
+      },
+      sobredimension: {
+        etiqueta: "Sobredimensionada",
+        detalle: "Excede medidas estándar",
+      },
+      peligrosa: {
+        etiqueta: "Peligrosa o especializada",
+        detalle: "Requiere manejo especial",
+      },
+      otra: {
+        etiqueta: "Otra",
+        detalle: "Cuéntenos cuál",
+      },
+    },
+    equipos: {
+      camionPequeno: {
+        etiqueta: "Camión pequeño",
+      },
+      ramplaPlana: {
+        etiqueta: "Rampla plana",
+      },
+      camaBaja: {
+        etiqueta: "Cama baja",
+      },
+      batea: {
+        etiqueta: "Batea",
+      },
+      silo: {
+        etiqueta: "Silo",
+      },
+      contenedor: {
+        etiqueta: "Equipo para contenedor",
+      },
+      asesoria: {
+        etiqueta: "No estoy seguro, necesito asesoría",
+      },
+    },
+    fechas: {
+      semana: {
+        etiqueta: "Esta semana",
+        detalle: "Próximos 3 días",
+      },
+      especifica: {
+        etiqueta: "Fecha específica",
+        detalle: "Yo elijo el día",
+      },
+      flexible: {
+        etiqueta: "Flexible",
+        detalle: "Coordinemos la fecha",
+      },
+    },
+    modalidades: {
+      puntual: {
+        etiqueta: "Puntual",
+        detalle: "Un solo traslado",
+      },
+      recurrente: {
+        etiqueta: "Recurrente",
+        detalle: "Se repite en el tiempo",
+      },
+      contrato: {
+        etiqueta: "Contrato",
+        detalle: "Volumen sostenido",
+      },
+    },
+    frecuencias: {
+      semanal: {
+        etiqueta: "Semanal",
+      },
+      quincenal: {
+        etiqueta: "Quincenal",
+      },
+      mensual: {
+        etiqueta: "Mensual",
+      },
+      otra: {
+        etiqueta: "Otra",
+      },
+    },
+    duraciones: {
+      tresMeses: {
+        etiqueta: "3 meses",
+      },
+      seisMeses: {
+        etiqueta: "6 meses",
+      },
+      doceMeses: {
+        etiqueta: "12 meses",
+      },
+      masDeDoceMeses: {
+        etiqueta: "Más de 12 meses",
+      },
+    },
+    requisitos: {
+      acreditacionMinera: {
+        etiqueta: "Acreditación minera",
+      },
+      cargaPeligrosa: {
+        etiqueta: "Carga peligrosa",
+      },
+      escolta: {
+        etiqueta: "Escolta o seguridad",
+      },
+      refrigeracion: {
+        etiqueta: "Refrigeración",
+      },
+      manipulacionEspecial: {
+        etiqueta: "Manipulación especial",
+      },
+      otro: {
+        etiqueta: "Otro",
+      },
+    },
+    valores: {
+      hasta1000: {
+        etiqueta: "Hasta 1.000 UF",
+      },
+      de1000a3000: {
+        etiqueta: "1.000 – 3.000 UF",
+      },
+      masDe3000: {
+        etiqueta: "Más de 3.000 UF",
+      },
+      conversar: {
+        etiqueta: "Prefiero conversarlo",
+      },
+    },
+    canales: {
+      whatsapp: {
+        etiqueta: "WhatsApp",
+      },
+      correo: {
+        etiqueta: "Correo",
+      },
+      llamada: {
+        etiqueta: "Llamada",
+      },
+    },
+    errores: {
+      tipoCarga: "Elija qué tipo de carga va a mover.",
+      tipoCargaOtra: "Cuéntenos qué carga es.",
+      equipo: "Elija un equipo, o pida asesoría.",
+      origenRegion: "Indique la región de origen.",
+      origenComuna: "Indique la comuna de origen.",
+      destinoRegion: "Indique la región de destino.",
+      destinoComuna: "Indique la comuna de destino.",
+      fecha: "Indique cuándo necesita el servicio.",
+      fechaDia: "Elija el día.",
+      modalidad: "Indique la modalidad.",
+      frecuencia: "Indique cada cuánto se repite.",
+      duracion: "Indique la duración del contrato.",
+      requisitoOtro: "Especifique el requisito.",
+      valor: "Indique el valor declarado, o que prefiere conversarlo.",
+      empresa: "Indique la empresa.",
+      nombre: "Indique su nombre.",
+      correoFalta: "Indique su correo.",
+      correoIlegible: "Revise el correo, parece incompleto.",
+      telefonoFalta: "Indique un teléfono.",
+      telefonoIlegible: "Revise el teléfono: son 9 dígitos en Chile.",
+      canal: "Elija por dónde prefiere que le respondamos.",
+    },
+    acciones: {
+      atras: "Atrás",
+      siguiente: "Siguiente",
+      revisar: "Revisar solicitud",
+      guardarYVolver: "Guardar y volver al resumen",
+      volver: "Volver",
+      enviar: "Enviar solicitud",
+      enviando: "Enviando…",
+    },
+    resumen: {
+      titulo: "Revise antes de enviar",
+      bajada: "Si algo no está bien, edítelo y vuelve acá mismo.",
+      editar: "Editar",
+      tipoCarga: "Tipo de carga",
+      equipo: "Equipo",
+      origen: "Origen",
+      destino: "Destino",
+      cuando: "Cuándo",
+      dia: "Día",
+      modalidad: "Modalidad",
+      duracion: "Duración",
+      requisitos: "Requisitos",
+      sinRequisitos: "Ninguno indicado",
+      valorDeclarado: "Valor declarado",
+      empresa: "Empresa",
+      contacto: "Contacto",
+      correo: "Correo",
+      telefono: "Teléfono",
+      prefiere: "Prefiere",
+    },
+    exito: {
+      titulo: "Recibimos su solicitud.",
+      cuerpo: "Le respondemos en menos de 24 horas hábiles con una evaluación de factibilidad de la ruta. Si necesita moverlo antes, escríbanos por WhatsApp.",
+      otraSolicitud: "Enviar otra solicitud",
+    },
+    errorEnvio: {
+      titulo: "No pudimos enviar su solicitud.",
+      enlaceWhatsapp: "envíela por WhatsApp",
+      conWhatsapp: "Nada se perdió: {whatsapp} con los datos ya escritos, o escriba a {correo}.",
+      sinWhatsapp: "Escríbanos a {correo} y le respondemos igual.",
+    },
+    avisos: {
+      faltaUnDato: "Falta 1 dato para continuar.",
+      faltanDatos: "Faltan {n} datos para continuar.",
+      faltaUnPaso: "Falta completar un paso antes de enviar.",
+      enviando: "Enviando su solicitud.",
+      recibida: "Solicitud recibida.",
+    },
+  },
+
+  /* ── Pie de página ───────────────────────────────────────────────── */
+  pie: {
+    descripcion: "Transporte de carga por carretera en todo Chile, de Arica a Punta Arenas. Respaldo del grupo MainBrain.",
+    ctaCotizar: "Cotice su carga",
+    columnaServicios: {
+      titulo: "Servicios",
+      tecnologia: "Tecnología y monitoreo",
+      queMovemos: "Qué movemos",
+      cobertura: "Cobertura nacional",
+      cumplimiento: "Cumplimiento",
+    },
+    columnaEmpresa: {
+      titulo: "Empresa",
+      comoFunciona: "Cómo funciona",
+      clientes: "Clientes",
+      cotizar: "Cotizar",
+    },
+    contacto: {
+      titulo: "Contacto",
+      razonSocialPendiente: "Razón social pendiente",
+      rutPendiente: "RUT pendiente",
+      direccionPendiente: "Dirección pendiente",
+      telefonoPendiente: "Teléfono pendiente",
+    },
+    derechos: "Transporte de carga en todo Chile",
+  },
+
+  /* ── Asesor flotante ─────────────────────────────────────────────── */
+  asesor: {
+    cargo: "Atención comercial",
+    mensaje: "👋 ¿Necesita ayuda con su carga o quiere que la cotice?",
+    escribiendo: "Escribiendo",
+    cerrarMensaje: "Cerrar mensaje",
+    tituloPanel: "Contactar a Main Logistics",
+    cerrarPanel: "Cerrar",
+    opciones: {
+      cotizar: {
+        titulo: "Cotizar mi carga",
+        detalle: "Origen, destino y tipo de carga",
+      },
+      contacto: {
+        titulo: "Que me contacten",
+        detalle: "Dejo mis datos y me llaman",
+      },
+      whatsapp: {
+        titulo: "Hablar por WhatsApp",
+        detalle: "Respuesta directa al chat",
+      },
+    },
+    horario: "Respondemos en horario hábil.",
+    abrirAsesor: "Hablar con un asesor",
+    cerrarAsesor: "Cerrar asesor",
+  },
+
+  /* ── Piezas compartidas ──────────────────────────────────────────── */
+  comunes: {
+    fotoPendiente: "Foto pendiente",
+  },
 };
 
 /**

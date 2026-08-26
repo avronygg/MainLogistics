@@ -1,6 +1,7 @@
 import Image from "next/image";
 import s from "./Resenas.module.css";
 import Titulo from "./Titulo";
+import type { Mensajes } from "@/mensajes";
 
 /**
  * Tercera sección: reseñas, en carrusel infinito de dos hileras cruzadas.
@@ -41,50 +42,27 @@ type Resena = {
   foto?: string;
 };
 
-const RESENAS: Resena[] = [
-  {
-    cita: "Acá va una cita concreta: un plazo que se cumplió con la planta parada, no una frase sobre calidad de servicio.",
-    nombre: "Nombre Apellido",
-    cargo: "Jefe de Logística",
-    empresa: "Empresa",
-    industria: "Minería",
-  },
-  {
-    cita: "La segunda conviene que hable de la visibilidad. Qué cambió cuando dejaron de tener que llamar para saber dónde estaba la carga.",
-    nombre: "Nombre Apellido",
-    cargo: "Gerente de Operaciones",
-    empresa: "Empresa",
-    industria: "Agroexportación",
-  },
-  {
-    cita: "Una sobre cumplimiento documental: la auditoría que pasó sin observaciones.",
-    nombre: "Nombre Apellido",
-    cargo: "Jefe de Abastecimiento",
-    empresa: "Empresa",
-    industria: "Retail",
-  },
-  {
-    cita: "Una que muestre que el estándar no cambia según lo que se mueva. Idealmente de quien mueve carga peligrosa.",
-    nombre: "Nombre Apellido",
-    cargo: "Jefe de Planta",
-    empresa: "Empresa",
-    industria: "Industria",
-  },
-  {
-    cita: "Otra sobre qué pasó cuando algo se desvió en ruta y cómo se enteraron antes de tener que preguntar.",
-    nombre: "Nombre Apellido",
-    cargo: "Coordinadora de Transporte",
-    empresa: "Empresa",
-    industria: "Forestal",
-  },
-  {
-    cita: "La última puede ser corta. Qué le diría a un par que está evaluando proveedor.",
-    nombre: "Nombre Apellido",
-    cargo: "Gerente de Supply Chain",
-    empresa: "Empresa",
-    industria: "Farmacéutica",
-  },
-];
+/**
+ * La lista deja de ser una constante y pasa a armarse con el diccionario:
+ * en una reseña todo lo que queda es texto —cita, cargo, industria—, así
+ * que un arreglo de claves y un diccionario aparte serían dos listas que
+ * mantener sincronizadas para nada. Cuando lleguen las reseñas reales, la
+ * foto se agrega acá y el texto sigue viniendo del diccionario:
+ *   { ...t.mineria, foto: "/clientes/loquesea.webp" }
+ *
+ * El orden importa: `abajo` rota la lista desde el índice 3.
+ */
+function resenasDe(m: Mensajes): Resena[] {
+  const t = m.resenas.testimonios;
+  return [
+    t.mineria,
+    t.agroexportacion,
+    t.retail,
+    t.cargaPeligrosa,
+    t.forestal,
+    t.farmaceutica,
+  ];
+}
 
 function Avatar({ resena }: { resena: Resena }) {
   if (resena.foto) {
@@ -179,12 +157,13 @@ function Hilera({
   );
 }
 
-export default function Resenas() {
+export default function Resenas({ m }: { m: Mensajes }) {
   // Cada hilera lleva la lista completa: con menos tarjetas, una copia mide
   // menos que el viewport y el bucle deja un hueco. La de abajo va rotada
   // para que las dos no se lean como la misma cinta.
-  const arriba = RESENAS;
-  const abajo = [...RESENAS.slice(3), ...RESENAS.slice(0, 3)];
+  const todas = resenasDe(m);
+  const arriba = todas;
+  const abajo = [...todas.slice(3), ...todas.slice(0, 3)];
 
   return (
     <section
@@ -202,11 +181,15 @@ export default function Resenas() {
       />
 
       <div className="relative mx-auto mb-[clamp(2.5rem,4vw,3.5rem)] w-full max-w-[var(--ancho-max)] px-[var(--borde-x)]">
-        <Titulo linea1="Lo que dicen" destacado="nuestros clientes" />
+        <Titulo linea1={m.resenas.tituloLinea1} destacado={m.resenas.tituloDestacado} />
+        {/* La bajada va en tres claves porque el realce cae en medio de la
+            frase. Los espacios viven adentro del texto, no en el JSX: así
+            cada idioma decide dónde queda el trozo destacado y si lleva
+            espacio alrededor —el chino no separa con espacios. */}
         <p className="mt-4 max-w-[52ch] text-[clamp(1rem,0.4vw+0.92rem,1.125rem)] leading-[1.6] text-[var(--texto-sec)]">
-          Jefes de logística y abastecimiento que{" "}
-          <span className="realce">responden el teléfono</span> si un colega
-          pregunta por nosotros.
+          {m.resenas.bajadaInicio}
+          <span className="realce">{m.resenas.bajadaRealce}</span>
+          {m.resenas.bajadaFin}
         </p>
       </div>
 

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { Mensajes } from "@/mensajes";
 
 /**
  * Pie de página.
@@ -9,41 +10,62 @@ import Link from "next/link";
  * en inglés y no ancla ni al rubro ni al país. Los datos legales visibles
  * —RUT, dirección, teléfono chileno, dominio .cl— son parte de la defensa.
  *
- * ⚠️ DATOS PENDIENTES. RUT, dirección y teléfono están marcados como
- * vacantes en la constante LEGALES. Un pie con datos inventados es peor que
+ * ⚠️ DATOS PENDIENTES. Razón social, RUT, dirección y teléfono siguen
+ * vacantes y hoy muestran un aviso. Un pie con datos inventados es peor que
  * un pie sin datos: este comprador los verifica.
  */
 
+/**
+ * El único dato legal ya confirmado, y por eso el único que queda acá: una
+ * casilla de correo es una dirección, no texto traducible.
+ *
+ * Los cuatro campos pendientes salen del diccionario porque hoy lo que se
+ * ve es un aviso en español, y un aviso sí se traduce. Cuando el cliente
+ * confirme razón social, RUT, dirección y teléfono, los valores reales
+ * vuelven a esta constante: un RUT chileno se escribe igual en los cuatro
+ * idiomas.
+ */
 const LEGALES = {
-  razonSocial: "Razón social pendiente",
-  rut: "RUT pendiente",
-  direccion: "Dirección pendiente",
-  telefono: "Teléfono pendiente",
   correo: "contacto@mainlogistics.cl",
 };
 
-const NAVEGACION = [
-  {
-    titulo: "Servicios",
-    enlaces: [
-      { href: "#servicios", texto: "Tecnología y monitoreo" },
-      { href: "#cargas", texto: "Qué movemos" },
-      { href: "#cobertura", texto: "Cobertura nacional" },
-      { href: "#cumplimiento", texto: "Cumplimiento" },
-    ],
-  },
-  {
-    titulo: "Empresa",
-    enlaces: [
-      { href: "#como-funciona", texto: "Cómo funciona" },
-      { href: "#clientes", texto: "Clientes" },
-      { href: "#cotizar", texto: "Cotizar" },
-    ],
-  },
-];
+/**
+ * Las columnas se arman con el diccionario en mano en vez de quedar como
+ * constante de módulo. Los `href` no entran al diccionario: el ancla es de
+ * la página, no del idioma, y traducir `#servicios` rompería cada enlace ya
+ * compartido.
+ */
+function columnas(m: Mensajes) {
+  return [
+    {
+      titulo: m.pie.columnaServicios.titulo,
+      enlaces: [
+        { href: "#servicios", texto: m.pie.columnaServicios.tecnologia },
+        { href: "#cargas", texto: m.pie.columnaServicios.queMovemos },
+        { href: "#cobertura", texto: m.pie.columnaServicios.cobertura },
+        { href: "#cumplimiento", texto: m.pie.columnaServicios.cumplimiento },
+      ],
+    },
+    {
+      titulo: m.pie.columnaEmpresa.titulo,
+      enlaces: [
+        { href: "#como-funciona", texto: m.pie.columnaEmpresa.comoFunciona },
+        { href: "#clientes", texto: m.pie.columnaEmpresa.clientes },
+        { href: "#cotizar", texto: m.pie.columnaEmpresa.cotizar },
+      ],
+    },
+  ];
+}
 
-export default function Pie() {
+export default function Pie({ m }: { m: Mensajes }) {
   const año = 2026;
+
+  // La bajada viaja entera en el diccionario y se parte acá por el nombre
+  // del grupo, que no se traduce y aparece igual en los cuatro idiomas. Así
+  // el resaltado sigue al nombre aunque en otra lengua caiga en otro lugar
+  // de la oración, en vez de obligar a cortar la frase en dos claves.
+  const [antesDelGrupo, despuesDelGrupo = ""] =
+    m.pie.descripcion.split("MainBrain");
 
   return (
     <footer
@@ -72,16 +94,16 @@ export default function Pie() {
             />
 
             <p className="mt-5 max-w-[38ch] text-[15px] leading-[1.6] text-[var(--texto-sec)]">
-              Transporte de carga por carretera en todo Chile, de Arica a Punta
-              Arenas. Respaldo del grupo{" "}
-              <span className="text-[var(--texto)]">MainBrain</span>.
+              {antesDelGrupo}
+              <span className="text-[var(--texto)]">MainBrain</span>
+              {despuesDelGrupo}
             </p>
 
             <a
               href="#cotizar"
               className="group mt-6 inline-flex items-center gap-2.5 text-[15px] font-medium text-[var(--morado-texto)]"
             >
-              Cotice su carga
+              {m.pie.ctaCotizar}
               <span className="grid size-7 place-items-center rounded-full border border-[color-mix(in_oklab,var(--morado-ui)_45%,transparent)] transition-transform duration-[var(--dur-estado)] ease-[var(--ease-quart)] group-hover:scale-110 motion-reduce:group-hover:scale-100">
                 <svg viewBox="0 0 16 16" fill="none" className="size-3.5">
                   <path
@@ -97,7 +119,7 @@ export default function Pie() {
           </div>
 
           <div className="grid grid-cols-2 gap-x-10 gap-y-8 sm:grid-cols-3 lg:gap-x-16">
-            {NAVEGACION.map((col) => (
+            {columnas(m).map((col) => (
               <nav key={col.titulo} aria-label={col.titulo}>
                 <h2 className="text-[13px] font-semibold tracking-[-0.01em] text-[var(--texto)]">
                   {col.titulo}
@@ -119,15 +141,15 @@ export default function Pie() {
 
             <div className="col-span-2 sm:col-span-1">
               <h2 className="text-[13px] font-semibold tracking-[-0.01em] text-[var(--texto)]">
-                Contacto
+                {m.pie.contacto.titulo}
               </h2>
               {/* Los datos legales van en mono: se leen como registro
                   verificable, que es exactamente su función acá. */}
               <ul className="vidrio dato mt-4 flex flex-col gap-2.5 rounded-[var(--r-card)] p-4 text-[13px] leading-[1.5] text-[var(--texto-sec)]">
-                <li>{LEGALES.razonSocial}</li>
-                <li>{LEGALES.rut}</li>
-                <li>{LEGALES.direccion}</li>
-                <li>{LEGALES.telefono}</li>
+                <li>{m.pie.contacto.razonSocialPendiente}</li>
+                <li>{m.pie.contacto.rutPendiente}</li>
+                <li>{m.pie.contacto.direccionPendiente}</li>
+                <li>{m.pie.contacto.telefonoPendiente}</li>
                 <li>
                   <a
                     href={`mailto:${LEGALES.correo}`}
@@ -143,8 +165,12 @@ export default function Pie() {
 
         <div className="mt-[clamp(2.5rem,5vw,4rem)] flex flex-col gap-3 border-t border-[color-mix(in_oklab,var(--borde)_50%,transparent)] pt-6 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-[13px] text-[var(--texto-sec)]">
-            © {año} Main Logistics · Transporte de carga en todo Chile
+            © {año} Main Logistics · {m.pie.derechos}
           </p>
+          {/* Dos comunas y una flecha: no hay nada que traducir acá. Arica y
+              Punta Arenas son la dirección real de un lugar y se escriben
+              igual en los cuatro idiomas, así que la línea no va al
+              diccionario. */}
           <p className="dato text-[12px] uppercase tracking-[0.08em] text-[color-mix(in_oklab,var(--texto-sec)_75%,transparent)]">
             Arica → Punta Arenas
           </p>

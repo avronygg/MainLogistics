@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import type { Mensajes } from "@/mensajes";
 
 /**
  * La palabra que cambia, dentro de una cápsula de vidrio.
@@ -13,12 +14,15 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
  *
  * Adentro, las palabras se van pasando en vertical dentro de la ranura
  * recortada.
+ *
+ * Las frases vienen del diccionario (`m.hero.rotador.frases`) como arreglo:
+ * son una secuencia, se recorren y se miden en orden, y el número de frases
+ * puede cambiar de un idioma a otro sin tocar el componente. La versión para
+ * lector de pantalla va como una sola cadena aparte y no se arma uniendo el
+ * arreglo: cada idioma puntúa y coordina la enumeración a su manera — el
+ * chino ni siquiera usa coma con espacio — y armarla con separadores del
+ * diccionario deja código ilegible por un resultado peor.
  */
-
-/* Las tres definidas con el cliente. De 6 a 8 caracteres a propósito: la
-   cápsula mide la más ancha, así que una palabra larga la infla y el titular
-   pierde compacidad. Todas concuerdan en femenino con "carga". */
-const FRASES = ["a tiempo", "segura", "vigilada"] as const;
 
 /**
  * Cortes de escena del video del hero, medidos sobre el archivo original con
@@ -36,7 +40,8 @@ const INTERVALO = 2600;
 const TRANSICION = 0.3; // s. Con cortes de ~1s, mas largo no alcanza a asentar
 const VIAJE = 130; // % del alto de la palabra: supera la ranura, entra y sale limpia
 
-export default function RotadorFrase() {
+export default function RotadorFrase({ m }: { m: Mensajes }) {
+  const frases = m.hero.rotador.frases;
   const reducir = useReducedMotion();
   const [i, setI] = useState(0);
   const [ancho, setAncho] = useState(0);
@@ -59,6 +64,8 @@ export default function RotadorFrase() {
     return () => ro.disconnect();
   }, [medir]);
 
+  const cantidad = frases.length;
+
   useEffect(() => {
     if (reducir) return;
 
@@ -75,7 +82,7 @@ export default function RotadorFrase() {
     const porIntervalo = () => {
       window.clearInterval(intervalo);
       intervalo = window.setInterval(
-        () => setI((n) => (n + 1) % FRASES.length),
+        () => setI((n) => (n + 1) % cantidad),
         INTERVALO,
       );
     };
@@ -110,7 +117,7 @@ export default function RotadorFrase() {
       if (escenaPrevia === -1) escenaPrevia = escena;
       else if (escena !== escenaPrevia) {
         escenaPrevia = escena;
-        setI((n) => (n + 1) % FRASES.length);
+        setI((n) => (n + 1) % cantidad);
       }
 
       raf = requestAnimationFrame(seguir);
@@ -121,7 +128,7 @@ export default function RotadorFrase() {
       cancelAnimationFrame(raf);
       window.clearInterval(intervalo);
     };
-  }, [reducir]);
+  }, [reducir, cantidad]);
 
   return (
     <>
@@ -131,9 +138,9 @@ export default function RotadorFrase() {
         className="pointer-events-none invisible absolute left-0 top-0 block size-0 overflow-hidden"
       >
         <span className="absolute whitespace-nowrap">
-          {FRASES.map((f, n) => (
+          {frases.map((f, n) => (
             <span
-              key={f}
+              key={n}
               ref={(el) => {
                 fantasmas.current[n] = el;
               }}
@@ -145,9 +152,7 @@ export default function RotadorFrase() {
       </span>
 
       {/* El titular completo, una sola vez, para lectores de pantalla. */}
-      <span className="sr-only">
-        {FRASES.slice(0, -1).join(", ")} o {FRASES[FRASES.length - 1]}
-      </span>
+      <span className="sr-only">{m.hero.rotador.alternativas}</span>
 
       <span
         aria-hidden="true"
@@ -155,15 +160,17 @@ export default function RotadorFrase() {
         style={{ width: ancho ? `calc(${ancho}px + 0.92em)` : undefined }}
       >
         <AnimatePresence initial={false}>
+          {/* La clave es el índice y no la palabra: dos idiomas pueden repetir
+              la misma palabra en la lista y ahí la animación no dispararía. */}
           <motion.span
-            key={FRASES[i]}
+            key={i}
             className="absolute inset-0 flex items-center justify-center whitespace-nowrap"
             initial={{ y: reducir ? 0 : `${VIAJE}%`, opacity: reducir ? 1 : 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: reducir ? 0 : `-${VIAJE}%`, opacity: 0 }}
             transition={{ duration: reducir ? 0 : TRANSICION, ease: [0.16, 1, 0.3, 1] }}
           >
-            {FRASES[i]}
+            {frases[i]}
           </motion.span>
         </AnimatePresence>
       </span>

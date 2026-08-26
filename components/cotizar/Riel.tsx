@@ -1,6 +1,8 @@
 "use client";
 
-import { PASOS } from "../datos/formulario";
+import { pasos } from "../datos/formulario";
+import { rellenar } from "./Campos";
+import type { Mensajes } from "@/mensajes";
 
 /**
  * Riel de progreso del formulario.
@@ -15,6 +17,9 @@ import { PASOS } from "../datos/formulario";
  * sitio no publica cifras que no puede sostener (PRODUCT.md, principio 5).
  * Además una barra continua se lee como "cargando".
  *
+ * El contador va en dígitos arábigos en los cuatro idiomas: es dato
+ * auditable, no una palabra.
+ *
  * Nunca `role="progressbar"`: el lector de pantalla lo anuncia como una
  * carga en curso, que es exactamente lo que esto no es.
  *
@@ -28,14 +33,18 @@ export default function Riel({
   completados,
   irA,
   enResumen,
+  m,
 }: {
   actual: number;
   /** Índices de pasos ya completados. Solo esos son navegables. */
   completados: number[];
   irA: (i: number) => void;
   enResumen: boolean;
+  m: Mensajes;
 }) {
+  const PASOS = pasos(m);
   const total = PASOS.length;
+  const t = m.cotizar.riel;
 
   return (
     <div>
@@ -50,6 +59,19 @@ export default function Riel({
             : hecho
               ? "bg-[var(--morado-solido)]"
               : "bg-[var(--borde)]";
+
+          // El anuncio se arma de una plantilla completa y no de trozos: en
+          // otro idioma el número puede no ir primero.
+          const anuncio = rellenar(
+            navegable
+              ? t.pasoNavegable
+              : esActual
+                ? t.pasoActual
+                : hecho
+                  ? t.pasoCompletado
+                  : t.pasoPendiente,
+            { n: i + 1, titulo: p.titulo },
+          );
 
           return (
             <li
@@ -66,9 +88,7 @@ export default function Riel({
                   onClick={() => irA(i)}
                   className="group flex w-full items-center py-[20px] focus:outline-none"
                 >
-                  <span className="sr-only">
-                    Paso {i + 1}, {p.titulo}, completado. Volver a editar.
-                  </span>
+                  <span className="sr-only">{anuncio}</span>
                   <span
                     aria-hidden="true"
                     className={`h-[3px] w-full rounded-full transition-[background-color,height] duration-[300ms] ease-[var(--ease-quart)] group-hover:h-[5px] group-focus-visible:h-[5px] motion-reduce:transition-none ${color}`}
@@ -79,10 +99,7 @@ export default function Riel({
                   aria-disabled={!hecho || undefined}
                   className="flex items-center py-[20px]"
                 >
-                  <span className="sr-only">
-                    Paso {i + 1}, {p.titulo}
-                    {esActual ? ", paso actual" : hecho ? ", completado" : ", pendiente"}
-                  </span>
+                  <span className="sr-only">{anuncio}</span>
                   <span
                     aria-hidden="true"
                     className={`w-full rounded-full transition-[background-color,height] duration-[300ms] ease-[var(--ease-quart)] motion-reduce:transition-none ${color} ${
@@ -102,7 +119,7 @@ export default function Riel({
           {enResumen ? `${total}/${total}` : `${actual + 1}/${total}`}
         </span>
         <span className="text-[16px] font-semibold leading-[1.3] tracking-[-0.02em] text-[var(--texto)]">
-          {enResumen ? "Resumen" : PASOS[actual].titulo}
+          {enResumen ? t.resumen : PASOS[actual].titulo}
         </span>
       </p>
 

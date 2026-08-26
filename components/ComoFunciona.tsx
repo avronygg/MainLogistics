@@ -5,6 +5,7 @@ import { motion, useReducedMotion } from "motion/react";
 import Revelar from "./Revelar";
 import { IconoCotizar, IconoRetiro, IconoEntrega, IconoReloj } from "./Iconos";
 import Titulo from "./Titulo";
+import type { Mensajes } from "@/mensajes";
 
 /**
  * Sexta sección: cómo funciona, en tres hitos.
@@ -20,45 +21,38 @@ import Titulo from "./Titulo";
  * que recorre todo el sitio.
  */
 
-const HITOS = [
-  {
-    n: 1,
-    Icono: IconoCotizar,
-    titulo: "Cotización",
-    detalle:
-      "Usted nos dice qué mueve, desde dónde y hasta dónde. Le devolvemos una evaluación de factibilidad de la ruta, no un precio suelto.",
-    dato: "Respuesta por correo",
-  },
-  {
-    n: 2,
-    Icono: IconoRetiro,
-    titulo: "Retiro",
-    detalle:
-      "Transportista verificado y equipo acorde a la carga. La documentación se emite antes de que el camión salga.",
-    dato: "Guía de despacho electrónica",
-  },
-  {
-    n: 3,
-    Icono: IconoEntrega,
-    titulo: "Entrega",
-    detalle:
-      "Seguimiento durante todo el viaje. Si algo se desvía, lo sabemos antes que usted, y ya lo estamos resolviendo.",
-    dato: "Respaldo de entrega",
-  },
-];
+/**
+ * Los hitos se arman a partir del diccionario.
+ *
+ * Función en vez de arreglo con solo la clave: son tres, fijos, y así el
+ * orden, el número y el icono se siguen leyendo juntos en un lugar. Guardar
+ * únicamente la clave obligaría a saltar al diccionario para saber qué hito
+ * es cada uno.
+ */
+function hitos(m: Mensajes) {
+  return [
+    { n: 1, Icono: IconoCotizar, ...m.comoFunciona.hitos.cotizacion },
+    { n: 2, Icono: IconoRetiro, ...m.comoFunciona.hitos.retiro },
+    { n: 3, Icono: IconoEntrega, ...m.comoFunciona.hitos.entrega },
+  ];
+}
 
-export default function ComoFunciona() {
+export default function ComoFunciona({ m }: { m: Mensajes }) {
   const reducir = useReducedMotion();
+  const HITOS = hitos(m);
 
   return (
     <section id="como-funciona" className="tema-claro scroll-mt-[clamp(6rem,12vw,8.5rem)]">
       <div className="mx-auto w-full max-w-[var(--ancho-max)] px-[var(--borde-x)] py-[var(--seccion-y)]">
         <Revelar className="max-w-[46rem]">
-          <Titulo linea1="Cómo funciona," destacado="en tres pasos" />
+          <Titulo
+            linea1={m.comoFunciona.tituloLinea1}
+            destacado={m.comoFunciona.tituloDestacado}
+          />
           <p className="mt-4 max-w-[52ch] text-[clamp(1rem,0.4vw+0.92rem,1.125rem)] leading-[1.6] text-[var(--texto-sec)]">
-            Desde la cotización hasta la entrega,{" "}
-            <span className="realce">siempre hay alguien con nombre</span> del
-            otro lado.
+            {m.comoFunciona.bajadaInicio}{" "}
+            <span className="realce">{m.comoFunciona.bajadaRealce}</span>{" "}
+            {m.comoFunciona.bajadaFin}
           </p>
         </Revelar>
 
@@ -88,7 +82,7 @@ export default function ComoFunciona() {
                       <Icono className="size-[22px]" />
                     </span>
                     <span className="dato text-[11px] uppercase tracking-[0.12em] text-[var(--texto-sec)]">
-                      Paso {String(n).padStart(2, "0")}
+                      {m.comoFunciona.paso} {String(n).padStart(2, "0")}
                     </span>
                   </div>
 
@@ -113,7 +107,7 @@ export default function ComoFunciona() {
             <article className="sobre-foto group relative isolate flex h-full min-h-[19rem] flex-col justify-end overflow-hidden rounded-[var(--r-img)]">
               <Image
                 src="/fotos/monitoreo-reloj.webp"
-                alt="Reloj con la marca Main Logistics mostrando la hora de entrega"
+                alt={m.comoFunciona.plazosAltFoto}
                 width={1536}
                 height={1024}
                 quality={90}
@@ -125,17 +119,20 @@ export default function ComoFunciona() {
               <span className="absolute left-5 top-5 z-[1] inline-flex items-center gap-1.5 rounded-full bg-[color-mix(in_oklab,var(--sup-1)_70%,transparent)] px-2.5 py-1 backdrop-blur-md">
                 <IconoReloj className="size-3.5 text-[var(--morado-ui)]" />
                 <span className="dato text-[10.5px] uppercase tracking-[0.1em] text-[var(--texto)]">
-                  Plazos
+                  {m.comoFunciona.plazosEtiqueta}
                 </span>
               </span>
 
               <div className="relative p-6">
                 <h3 className="text-[clamp(1.2rem,1vw+0.95rem,1.5rem)] font-semibold leading-[1.18] tracking-[-0.028em] text-[var(--texto)]">
-                  Su carga siempre{" "}
-                  <span className="text-[var(--morado-texto)]">a tiempo</span>.
+                  {m.comoFunciona.plazosTituloInicio}{" "}
+                  <span className="text-[var(--morado-texto)]">
+                    {m.comoFunciona.plazosTituloDestacado}
+                  </span>
+                  {m.comoFunciona.plazosTituloFin}
                 </h3>
                 <p className="mt-2.5 text-[14.5px] leading-[1.5] text-[var(--texto-sec)]">
-                  Sin demoras que haya que explicar en una reunión.
+                  {m.comoFunciona.plazosDetalle}
                 </p>
               </div>
             </article>

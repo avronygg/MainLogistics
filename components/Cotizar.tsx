@@ -6,9 +6,12 @@ import { IconoCarga, IconoReloj, IconoEscudo } from "./Iconos";
 import Riel from "./cotizar/Riel";
 import CuerpoPaso from "./cotizar/Pasos";
 import ResumenPedido from "./cotizar/Resumen";
+import { Plantilla, rellenar } from "./cotizar/Campos";
+import type { Mensajes } from "@/mensajes";
 import {
   COTIZACION_VACIA,
   PASOS,
+  pasos,
   validarPaso,
   pasoCompleto,
   primerPasoIncompleto,
@@ -82,17 +85,31 @@ const WHATSAPP = process.env.NEXT_PUBLIC_WHATSAPP || "";
 
 const LLAVE = "main-logistics:cotizacion";
 
-const GARANTIAS = [
-  { Icono: IconoReloj, texto: "Le respondemos en menos de 24 horas hábiles" },
-  { Icono: IconoEscudo, texto: "Sin compromiso ni registro previo" },
-  { Icono: IconoCarga, texto: "Si su ruta no nos calza, se lo decimos" },
-];
+/* Dirección real de contacto, no texto: va igual en los cuatro idiomas. */
+const CORREO = "contacto@mainlogistics.cl";
+
+/* El ícono es del código y el texto del diccionario: la lista se arma en
+   una función en vez de guardar la clave suelta y buscarla después. */
+function garantias(m: Mensajes) {
+  return [
+    { Icono: IconoReloj, texto: m.cotizar.garantias.respuesta },
+    { Icono: IconoEscudo, texto: m.cotizar.garantias.sinCompromiso },
+    { Icono: IconoCarga, texto: m.cotizar.garantias.rutaHonesta },
+  ];
+}
 
 type Estado = "quieto" | "enviando" | "listo" | "error";
 
 /** El resumen no es un paso más: es la pantalla de revisión. */
 const RESUMEN = PASOS.length;
 
+/**
+ * Respaldo por WhatsApp cuando el envío falla.
+ *
+ * Va SIEMPRE en español y con las listas en español: esto lo lee el equipo de
+ * Main Logistics, no quien cotiza. El idioma del visitante no cambia el
+ * idioma en que la empresa opera.
+ */
 function textoWhatsapp(d: Cotizacion) {
   const origen = [d.origenComuna, d.origenRegion].filter(Boolean).join(", ");
   const destino = [d.destinoComuna, d.destinoRegion].filter(Boolean).join(", ");
@@ -122,7 +139,12 @@ function textoWhatsapp(d: Cotizacion) {
   ].join("\n");
 }
 
-export default function Cotizar() {
+export default function Cotizar({ m }: { m: Mensajes }) {
+  const t = m.cotizar;
+  // `PASOS` son los ids (estructura); `pasosTexto`, los mismos seis con su
+  // título y bajada en el idioma en curso.
+  const pasosTexto = pasos(m);
+
   const [datos, setDatos] = useState<Cotizacion>(COTIZACION_VACIA);
   const [paso, setPaso] = useState(0);
   const [errores, setErrores] = useState<Errores>({});
@@ -240,21 +262,25 @@ export default function Cotizar() {
       // Revalidación en vivo solo si el paso ya se intentó avanzar: así el
       // error desaparece apenas se corrige, sin castigar a quien va por la
       // mitad de escribir.
-      if (intentado.includes(paso)) setErrores(validarPaso(paso, siguiente));
+      if (intentado.includes(paso)) setErrores(validarPaso(paso, siguiente, m));
       return siguiente;
     });
   }
 
   function siguiente(e: React.FormEvent) {
     e.preventDefault();
-    const fallos = validarPaso(paso, datos);
+    const fallos = validarPaso(paso, datos, m);
     setIntentado((prev) => (prev.includes(paso) ? prev : [...prev, paso]));
 
     if (Object.keys(fallos).length) {
       setErrores(fallos);
       const faltan = Object.values(fallos).length;
+      // Singular y plural son dos frases del diccionario, no una armada con
+      // sufijos: en otro idioma el plural no se hace agregando una letra.
       setAviso(
-        `Falta${faltan > 1 ? "n" : ""} ${faltan} dato${faltan > 1 ? "s" : ""} para continuar.`,
+        faltan > 1
+          ? rellenar(t.avisos.faltanDatos, { n: faltan })
+          : t.avisos.faltaUnDato,
       );
       // El foco va al primer campo inválido — única excepción a enfocar el
       // encabezado.
@@ -289,13 +315,13 @@ export default function Cotizar() {
       setIntentado((prev) =>
         prev.includes(incompleto) ? prev : [...prev, incompleto],
       );
-      setAviso("Falta completar un paso antes de enviar.");
+      setAviso(t.avisos.faltaUnPaso);
       irA(incompleto);
       return;
     }
 
     setEstado("enviando");
-    setAviso("Enviando su solicitud.");
+    setAviso(t.avisos.enviando);
     try {
       const r = await fetch("/api/cotizar", {
         method: "POST",
@@ -304,7 +330,7 @@ export default function Cotizar() {
       });
       // Nunca hay éxito optimista: el único camino a "listo" es r.ok.
       setEstado(r.ok ? "listo" : "error");
-      setAviso(r.ok ? "Solicitud recibida." : "No pudimos enviar su solicitud.");
+      setAviso(r.ok ? t.avisos.recibida : t.errorEnvio.titulo);
       if (r.ok) {
         try {
           localStorage.removeItem(LLAVE);
@@ -314,7 +340,7 @@ export default function Cotizar() {
       }
     } catch {
       setEstado("error");
-      setAviso("No pudimos enviar su solicitud.");
+      setAviso(t.errorEnvio.titulo);
     }
   }
 
@@ -343,18 +369,17 @@ export default function Cotizar() {
 
       <div className="relative mx-auto w-full max-w-[var(--ancho-max)] px-[var(--borde-x)] py-[var(--seccion-y)]">
         <div className="max-w-[46rem]">
-          <Titulo linea1="Cotice su carga." destacado="Le respondemos en 24 horas" />
+          <Titulo linea1={t.tituloLinea1} destacado={t.tituloDestacado} />
 
           <p className="mt-4 max-w-[52ch] text-[clamp(1rem,0.4vw+0.92rem,1.125rem)] leading-[1.6] text-[var(--texto-sec)]">
-            Cuéntenos qué mueve y le devolvemos una evaluación de factibilidad
-            de la ruta, no un precio suelto.
+            {t.bajada}
           </p>
         </div>
 
         <div className="mt-[clamp(2.5rem,4vw,3.5rem)] grid gap-[clamp(2rem,4vw,3.5rem)] lg:grid-cols-[minmax(0,20rem)_minmax(0,1fr)]">
           <div className="lg:sticky lg:top-[clamp(7rem,13vw,9rem)] lg:self-start">
             <ul className="flex flex-col gap-3.5 border-t border-[var(--borde)] pt-6 lg:border-t-0 lg:pt-0">
-              {GARANTIAS.map(({ Icono, texto }) => (
+              {garantias(m).map(({ Icono, texto }) => (
                 <li key={texto} className="flex items-start gap-3">
                   <span
                     aria-hidden="true"
@@ -373,9 +398,9 @@ export default function Cotizar() {
                 con el contador. */}
             {estado !== "listo" && (
               <p className="mt-5 text-[13.5px] leading-[1.5] text-[var(--texto-sec)]">
-                Seis pasos cortos.{" "}
+                {t.pasosCortos}{" "}
                 <span className="font-medium text-[var(--texto)]">
-                  Sus datos van al final.
+                  {t.datosAlFinal}
                 </span>
               </p>
             )}
@@ -416,12 +441,10 @@ export default function Cotizar() {
                 </span>
 
                 <h3 className="mt-5 text-[clamp(1.3rem,1.2vw+1rem,1.6rem)] font-semibold tracking-[-0.03em] text-[var(--texto)]">
-                  Recibimos su solicitud.
+                  {t.exito.titulo}
                 </h3>
                 <p className="mt-3 max-w-[40ch] text-[15px] leading-[1.6] text-[var(--texto-sec)]">
-                  Le respondemos en menos de 24 horas hábiles con una
-                  evaluación de factibilidad de la ruta. Si necesita moverlo
-                  antes, escríbanos por WhatsApp.
+                  {t.exito.cuerpo}
                 </p>
 
                 <button
@@ -434,7 +457,7 @@ export default function Cotizar() {
                   }}
                   className="mt-6 min-h-[44px] text-[14.5px] font-medium text-[var(--morado-texto)] underline underline-offset-4"
                 >
-                  Enviar otra solicitud
+                  {t.exito.otraSolicitud}
                 </button>
               </div>
             ) : (
@@ -442,14 +465,14 @@ export default function Cotizar() {
                 {retomado && (
                   <div className="mb-6 flex flex-wrap items-center justify-between gap-3 rounded-[12px] border border-[color-mix(in_oklab,var(--borde)_70%,transparent)] bg-[color-mix(in_oklab,var(--sup-1)_55%,transparent)] px-4 py-3">
                     <p className="text-[14px] leading-[1.4] text-[var(--texto)]">
-                      Retomamos donde quedó.
+                      {t.guardado.retomado}
                     </p>
                     <button
                       type="button"
                       onClick={descartarGuardado}
                       className="min-h-[44px] text-[14px] font-medium text-[var(--morado-texto)] underline underline-offset-4"
                     >
-                      Empezar de nuevo
+                      {t.guardado.empezarDeNuevo}
                     </button>
                   </div>
                 )}
@@ -462,6 +485,7 @@ export default function Cotizar() {
                     irA(i);
                   }}
                   enResumen={enResumen}
+                  m={m}
                 />
 
                 {enResumen ? (
@@ -471,14 +495,14 @@ export default function Cotizar() {
                       tabIndex={-1}
                       className="text-[clamp(1.2rem,1vw+0.95rem,1.45rem)] font-semibold tracking-[-0.03em] text-[var(--texto)] focus:outline-none focus-visible:outline-none"
                     >
-                      Revise antes de enviar
+                      {t.resumen.titulo}
                     </h2>
                     <p className="mt-2 text-[14.5px] leading-[1.55] text-[var(--texto-sec)]">
-                      Si algo no está bien, edítelo y vuelve acá mismo.
+                      {t.resumen.bajada}
                     </p>
 
                     <div className="mt-6">
-                      <ResumenPedido d={datos} editar={editarDesdeResumen} />
+                      <ResumenPedido d={datos} editar={editarDesdeResumen} m={m} />
                     </div>
 
                     {estado === "error" && (
@@ -487,51 +511,52 @@ export default function Cotizar() {
                         className="mt-6 rounded-[12px] border border-[color-mix(in_oklab,var(--error)_40%,var(--borde))] bg-[color-mix(in_oklab,var(--error)_8%,transparent)] p-4"
                       >
                         <p className="text-[14.5px] font-medium text-[var(--texto)]">
-                          No pudimos enviar su solicitud.
+                          {t.errorEnvio.titulo}
                         </p>
+                        {/* La frase lleva los enlaces adentro, así que va como
+                            plantilla con huecos: en otro idioma el enlace no
+                            cae en el mismo lugar de la oración, y partir la
+                            frase en trozos lo volvería imposible. */}
                         <p className="mt-1.5 text-[14px] leading-[1.5] text-[var(--texto-sec)]">
-                          {enlaceWhatsapp ? (
-                            <>
-                              Nada se perdió:{" "}
-                              <a
-                                href={enlaceWhatsapp}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="font-medium text-[var(--morado-texto)] underline underline-offset-4"
-                              >
-                                envíela por WhatsApp
-                              </a>{" "}
-                              con los datos ya escritos, o escriba a{" "}
-                              <a
-                                href="mailto:contacto@mainlogistics.cl"
-                                className="font-medium text-[var(--morado-texto)] underline underline-offset-4"
-                              >
-                                contacto@mainlogistics.cl
-                              </a>
-                              .
-                            </>
-                          ) : (
-                            <>
-                              Escríbanos a{" "}
-                              <a
-                                href="mailto:contacto@mainlogistics.cl"
-                                className="font-medium text-[var(--morado-texto)] underline underline-offset-4"
-                              >
-                                contacto@mainlogistics.cl
-                              </a>{" "}
-                              y le respondemos igual.
-                            </>
-                          )}
+                          <Plantilla
+                            texto={
+                              enlaceWhatsapp
+                                ? t.errorEnvio.conWhatsapp
+                                : t.errorEnvio.sinWhatsapp
+                            }
+                            piezas={{
+                              whatsapp: enlaceWhatsapp ? (
+                                <a
+                                  href={enlaceWhatsapp}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="font-medium text-[var(--morado-texto)] underline underline-offset-4"
+                                >
+                                  {t.errorEnvio.enlaceWhatsapp}
+                                </a>
+                              ) : null,
+                              correo: (
+                                <a
+                                  href={"mailto:" + CORREO}
+                                  className="font-medium text-[var(--morado-texto)] underline underline-offset-4"
+                                >
+                                  {CORREO}
+                                </a>
+                              ),
+                            }}
+                          />
                         </p>
                       </div>
                     )}
 
                     <BarraPaso
                       atras={() => irA(PASOS.length - 1)}
-                      etiquetaAtras="Volver"
+                      etiquetaAtras={t.acciones.volver}
                       principal={enviar}
                       etiquetaPrincipal={
-                        estado === "enviando" ? "Enviando…" : "Enviar solicitud"
+                        estado === "enviando"
+                          ? t.acciones.enviando
+                          : t.acciones.enviar
                       }
                       ocupado={estado === "enviando"}
                     />
@@ -545,7 +570,7 @@ export default function Cotizar() {
                       aria-hidden="true"
                       className="absolute left-[-9999px] top-0 h-0 overflow-hidden"
                     >
-                      <label htmlFor="web">No completar</label>
+                      <label htmlFor="web">{t.campos.trampaBots}</label>
                       <input
                         id="web"
                         name="web"
@@ -564,25 +589,34 @@ export default function Cotizar() {
                         className="text-[clamp(1.2rem,1vw+0.95rem,1.45rem)] font-semibold tracking-[-0.03em] text-[var(--texto)] focus:outline-none focus-visible:outline-none"
                       >
                         <span className="sr-only">
-                          Paso {paso + 1} de {PASOS.length}.{" "}
+                          {rellenar(t.pasoDeTotal, {
+                            n: paso + 1,
+                            total: PASOS.length,
+                          })}{" "}
                         </span>
-                        {PASOS[paso].bajada}
+                        {pasosTexto[paso].bajada}
                       </h2>
 
                       <div className="mt-6">
-                        <CuerpoPaso indice={paso} d={datos} set={set} e={errores} />
+                        <CuerpoPaso
+                          indice={paso}
+                          d={datos}
+                          set={set}
+                          e={errores}
+                          m={m}
+                        />
                       </div>
                     </section>
 
                     <BarraPaso
                       atras={paso > 0 ? () => irA(paso - 1) : undefined}
-                      etiquetaAtras="Atrás"
+                      etiquetaAtras={t.acciones.atras}
                       etiquetaPrincipal={
                         volverAlResumen
-                          ? "Guardar y volver al resumen"
+                          ? t.acciones.guardarYVolver
                           : paso === PASOS.length - 1
-                            ? "Revisar solicitud"
-                            : "Siguiente"
+                            ? t.acciones.revisar
+                            : t.acciones.siguiente
                       }
                     />
                   </form>

@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import s from "./Asesor.module.css";
+import type { Mensajes } from "@/mensajes";
 
 /**
  * Asesor flotante, abajo a la derecha.
@@ -30,16 +31,15 @@ import s from "./Asesor.module.css";
 
 const FOTO_ASESORA = "/asesora.webp";
 
-/** Nombre de pila de quien realmente contesta. Si no hay, queda el equipo. */
+/**
+ * Nombre de pila de quien realmente contesta. Si no hay, queda el equipo.
+ * No entra al diccionario: es un nombre propio, igual en los cuatro idiomas.
+ * El cargo sí, y va en `m.asesor.cargo`.
+ */
 const NOMBRE = "Main Logistics";
-const CARGO = "Atención comercial";
 
 /** Formato internacional sin signos. Se comparte con el formulario. */
 const WHATSAPP = process.env.NEXT_PUBLIC_WHATSAPP || "";
-
-/* En usted, como el resto del sitio. Tu versión decía "necesitas / quieres";
-   el tuteo acá reabriría la mezcla que acabamos de cerrar. */
-const MENSAJE = "👋 ¿Necesita ayuda con su carga o quiere que la cotice?";
 
 const ESPERA_APARECER = 2000;
 const ESPERA_ESCRIBIENDO = 3000;
@@ -129,7 +129,7 @@ function Opcion({
   );
 }
 
-export default function Asesor() {
+export default function Asesor({ m }: { m: Mensajes }) {
   const reducir = useReducedMotion();
   const [fase, setFase] = useState<"oculto" | "escribiendo" | "mensaje">("oculto");
   const [abierto, setAbierto] = useState(false);
@@ -203,7 +203,7 @@ export default function Asesor() {
             <button
               type="button"
               onClick={() => setCerrado(true)}
-              aria-label="Cerrar mensaje"
+              aria-label={m.asesor.cerrarMensaje}
               className="absolute right-2 top-2 grid size-6 place-items-center rounded-full text-[#16212a]/55 transition-colors duration-[var(--dur-hover)] hover:bg-black/[0.07] hover:text-[#16212a]"
             >
               <svg viewBox="0 0 14 14" fill="none" className="size-3">
@@ -212,7 +212,7 @@ export default function Asesor() {
             </button>
 
             {fase === "escribiendo" ? (
-              <span className="flex items-center gap-1.5 py-1" aria-label="Escribiendo">
+              <span className="flex items-center gap-1.5 py-1" aria-label={m.asesor.escribiendo}>
                 <span className={`${s.punto} size-[7px] rounded-full bg-[#16212a]/45`} />
                 <span className={`${s.punto} ${s.punto2} size-[7px] rounded-full bg-[#16212a]/45`} />
                 <span className={`${s.punto} ${s.punto3} size-[7px] rounded-full bg-[#16212a]/45`} />
@@ -223,7 +223,7 @@ export default function Asesor() {
                 onClick={() => setAbierto(true)}
                 className="block text-left text-[14.5px] font-medium leading-[1.45] text-[#16212a]"
               >
-                {MENSAJE}
+                {m.asesor.mensaje}
               </button>
             )}
           </motion.div>
@@ -237,7 +237,7 @@ export default function Asesor() {
             key="panel"
             {...entrada}
             role="dialog"
-            aria-label="Contactar a Main Logistics"
+            aria-label={m.asesor.tituloPanel}
             className="vidrio pointer-events-auto w-[min(21.5rem,calc(100vw-2.5rem))] overflow-hidden rounded-[26px]"
           >
             <div className="flex items-center gap-3 p-4">
@@ -251,14 +251,14 @@ export default function Asesor() {
                   {NOMBRE}
                 </span>
                 <span className="block text-[12.5px] text-[var(--texto-sec)]">
-                  {CARGO}
+                  {m.asesor.cargo}
                 </span>
               </span>
 
               <button
                 type="button"
                 onClick={cerrarPanel}
-                aria-label="Cerrar"
+                aria-label={m.asesor.cerrarPanel}
                 className="grid size-8 shrink-0 place-items-center rounded-full text-[var(--texto-sec)] transition-colors duration-[var(--dur-hover)] hover:bg-white/10 hover:text-[var(--texto)]"
               >
                 <svg viewBox="0 0 16 16" fill="none" className="size-3.5">
@@ -270,7 +270,7 @@ export default function Asesor() {
             {/* Burbuja del mensaje, en el lado de quien habla. */}
             <div className="border-t border-white/10 px-4 pb-3 pt-3.5">
               <p className="burbuja-clara w-fit max-w-full rounded-[18px] rounded-bl-[6px] px-3.5 py-2.5 text-[14px] font-medium leading-[1.5]">
-                {MENSAJE}
+                {m.asesor.mensaje}
               </p>
             </div>
 
@@ -280,8 +280,8 @@ export default function Asesor() {
                 href="#cotizar"
                 onClick={cerrarPanel}
                 tono="morado"
-                titulo="Cotizar mi carga"
-                detalle="Origen, destino y tipo de carga"
+                titulo={m.asesor.opciones.cotizar.titulo}
+                detalle={m.asesor.opciones.cotizar.detalle}
                 icono={
                   <svg viewBox="0 0 20 20" fill="none" className="size-[18px]">
                     <path d="M11.5 2.5H6a1.7 1.7 0 0 0-1.7 1.7v11.6A1.7 1.7 0 0 0 6 17.5h8a1.7 1.7 0 0 0 1.7-1.7V6.7z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
@@ -295,8 +295,8 @@ export default function Asesor() {
               <Opcion
                 href="#cotizar"
                 onClick={cerrarPanel}
-                titulo="Que me contacten"
-                detalle="Dejo mis datos y me llaman"
+                titulo={m.asesor.opciones.contacto.titulo}
+                detalle={m.asesor.opciones.contacto.detalle}
                 icono={
                   <svg viewBox="0 0 20 20" fill="none" className="size-[18px]">
                     <path d="M6.4 3.5 8 6.6 6.5 8.2a9.6 9.6 0 0 0 5.3 5.3l1.6-1.5 3.1 1.6v2.4c0 .6-.5 1.1-1.1 1A13.6 13.6 0 0 1 3 4.6c0-.6.4-1.1 1-1.1z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
@@ -311,8 +311,8 @@ export default function Asesor() {
                     href={`https://wa.me/${WHATSAPP}`}
                     externo
                     tono="verde"
-                    titulo="Hablar por WhatsApp"
-                    detalle="Respuesta directa al chat"
+                    titulo={m.asesor.opciones.whatsapp.titulo}
+                    detalle={m.asesor.opciones.whatsapp.detalle}
                     icono={
                       <svg viewBox="0 0 24 24" fill="currentColor" className="size-[18px]">
                         <path d="M17.5 14.4c-.3-.2-1.7-.9-2-1-.3-.1-.5-.2-.7.1s-.7 1-.9 1.2c-.2.2-.3.2-.6.1-.3-.2-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.5-.5c.1-.2.2-.3.3-.5 0-.2 0-.4 0-.5 0-.2-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.2 5.1 4.4.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.3-.6-.4zM12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3.1.8.8-3-.2-.3A8.2 8.2 0 1 1 12 20.2z" />
@@ -325,7 +325,7 @@ export default function Asesor() {
 
             <p className="border-t border-white/10 px-4 py-2.5 text-center text-[11.5px] leading-[1.4] text-[var(--texto-sec)]">
               {/* Horario real, no una promesa de 24/7 sin confirmar. */}
-              Respondemos en horario hábil.
+              {m.asesor.horario}
             </p>
           </motion.div>
         )}
@@ -339,7 +339,7 @@ export default function Asesor() {
           setCerrado(false);
         }}
         aria-expanded={abierto}
-        aria-label={abierto ? "Cerrar asesor" : "Hablar con un asesor"}
+        aria-label={abierto ? m.asesor.cerrarAsesor : m.asesor.abrirAsesor}
         className="vidrio pointer-events-auto relative grid size-[62px] shrink-0 place-items-center rounded-full p-[3px] transition-transform duration-[var(--dur-estado)] ease-[var(--ease-quart)] hover:scale-[1.05] active:scale-95 motion-reduce:hover:scale-100"
       >
         <span className="relative size-full">
