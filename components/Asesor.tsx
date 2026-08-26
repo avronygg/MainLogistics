@@ -134,6 +134,21 @@ export default function Asesor() {
   const [fase, setFase] = useState<"oculto" | "escribiendo" | "mensaje">("oculto");
   const [abierto, setAbierto] = useState(false);
   const [cerrado, setCerrado] = useState(false);
+  /** El formulario de cotización está en pantalla: hay que apartarse. */
+  const [enCotizar, setEnCotizar] = useState(false);
+
+  useEffect(() => {
+    const seccion = document.getElementById("cotizar");
+    if (!seccion) return;
+    const observador = new IntersectionObserver(
+      ([entrada]) => setEnCotizar(entrada.isIntersecting),
+      // Basta con que asome un cuarto de la sección: para entonces la barra
+      // del formulario ya puede estar en el borde inferior.
+      { threshold: 0.25 },
+    );
+    observador.observe(seccion);
+    return () => observador.disconnect();
+  }, []);
 
   useEffect(() => {
     const a = window.setTimeout(() => setFase("escribiendo"), ESPERA_APARECER);
@@ -166,7 +181,17 @@ export default function Asesor() {
   const cerrarPanel = () => setAbierto(false);
 
   return (
-    <div className="pointer-events-none fixed bottom-0 right-0 z-[var(--z-toast)] flex flex-col items-end gap-3 p-[clamp(1rem,3vw,1.75rem)]">
+    <div
+      // Se aparta mientras el formulario de cotización está en pantalla: el
+      // botón "Siguiente" del formulario vive en una barra pegada al fondo,
+      // y en un teléfono este widget se le para justo encima. Entre tapar el
+      // botón principal de la conversión y esconder el asesor un momento, no
+      // hay discusión.
+      aria-hidden={enCotizar || undefined}
+      className={`pointer-events-none fixed bottom-0 right-0 z-[var(--z-toast)] flex flex-col items-end gap-3 p-[clamp(1rem,3vw,1.75rem)] transition-opacity duration-[var(--dur-estado)] ${
+        enCotizar ? "opacity-0 lg:opacity-100" : "opacity-100"
+      }`}
+    >
       {/* Globo con el mensaje automático. */}
       <AnimatePresence>
         {!abierto && !cerrado && fase !== "oculto" && (

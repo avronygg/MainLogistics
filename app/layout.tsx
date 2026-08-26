@@ -61,6 +61,14 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   themeColor: "#0E1519",
   colorScheme: "dark",
+  /**
+   * Al abrirse el teclado, el viewport de layout se encoge en vez de que el
+   * teclado quede flotando encima. Es lo que mantiene la barra de "Siguiente"
+   * del formulario de cotización SOBRE el teclado y no debajo — en un
+   * formulario por pasos, en un teléfono, es la diferencia entre poder
+   * avanzar y no encontrar el botón.
+   */
+  interactiveWidget: "resizes-content",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

@@ -1,19 +1,68 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Titulo from "./Titulo";
 import { IconoCarga, IconoReloj, IconoEscudo } from "./Iconos";
+import Riel from "./cotizar/Riel";
+import CuerpoPaso from "./cotizar/Pasos";
+import ResumenPedido from "./cotizar/Resumen";
+import {
+  COTIZACION_VACIA,
+  PASOS,
+  validarPaso,
+  pasoCompleto,
+  primerPasoIncompleto,
+  type Cotizacion,
+  type Errores,
+} from "./datos/formulario";
+import {
+  TIPOS_CARGA,
+  EQUIPOS,
+  FECHAS,
+  MODALIDADES,
+  FRECUENCIAS,
+  DURACIONES,
+  REQUISITOS,
+  VALORES,
+  CANALES,
+  etiquetaDe,
+  etiquetasDe,
+} from "./datos/cotizacion";
 
 /**
- * Última sección: cotización.
+ * Última sección: cotización, por pasos.
  *
  * Fondo claro por decisión del doc de marca §8: "la sección de formulario se
  * invierte a claro. Campos oscuros con placeholder gris son incómodos, y es
  * la conversión".
  *
- * Los campos van en dos bloques con encabezado propio — la carga primero, el
- * contacto después. Diez campos en una sola lista se leen como un trámite;
- * partidos en dos, cada bloque se contesta de corrido y se ve cuánto falta.
+ * Es una HOJA DE PEDIDO por pasos, no un wizard de onboarding: sin
+ * celebraciones, sin checkmarks que rebotan, sin "¡buen trabajo!". A un jefe
+ * de logística no se lo felicita por completar un formulario. La emoción
+ * objetivo sigue siendo alivio anticipado.
+ *
+ * Decisiones que parecen detalles y no lo son:
+ *
+ * - **El botón "Siguiente" NUNCA se deshabilita.** A pleno sol, en un
+ *   teléfono, un botón deshabilitado es un botón que se toca y no pasa nada,
+ *   sin explicación. Para lector de pantalla es peor: no hay forma de
+ *   descubrir qué falta. El botón siempre responde; lo que hace al responder
+ *   es decir qué falta y llevar el foco ahí.
+ * - **Se valida al avanzar**, no al tipear. Una vez que un campo está en
+ *   error, se revalida en cada tecla para que el error desaparezca apenas se
+ *   corrige. Premiar temprano, castigar tarde.
+ * - **Los pasos se montan y desmontan**, no se ocultan con CSS. Con campos
+ *   ocultos y `required` nativo el navegador lanza "An invalid form control
+ *   is not focusable" y el envío falla en silencio. Por eso además va
+ *   `noValidate` y la validación en JS es la fuente de verdad.
+ * - **Enter avanza, jamás envía.** Cada paso es su propio formulario y solo
+ *   el resumen hace el POST.
+ * - **Contacto al final.** Pedir los datos primero se lee como recolección
+ *   de datos, no como cotización, y activa justo la desconfianza que el
+ *   sitio entero trata de desactivar.
+ * - **El guardado es local**, en su teléfono, y se le avisa. Nada de guardar
+ *   parciales en el servidor: es quedarse con datos que la persona todavía
+ *   no aceptó entregar.
  *
  * El envío va a `app/api/cotizar/route.ts`, que despacha por Resend. Si esa
  * ruta no está configurada o falla, el formulario NO dice que se envió:
@@ -22,8 +71,7 @@ import { IconoCarga, IconoReloj, IconoEscudo } from "./Iconos";
  *
  * ⚠️ "Le respondemos en 24 horas" es un COMPROMISO, y el doc de marca §11 lo
  * lista como pendiente de definir. Está acá porque el cliente lo definió; si
- * operación no lo puede sostener, hay que bajarlo antes de publicar. Con este
- * comprador, un plazo incumplido pesa más que no ofrecer ninguno.
+ * operación no lo puede sostener, hay que bajarlo antes de publicar.
  *
  * 👉 ANTES DE PUBLICAR: completar `.env.local` con RESEND_API_KEY,
  * COTIZA_DESTINO, COTIZA_REMITENTE y NEXT_PUBLIC_WHATSAPP.
@@ -32,38 +80,7 @@ import { IconoCarga, IconoReloj, IconoEscudo } from "./Iconos";
 /** Formato internacional sin signos: 56 9 XXXX XXXX → "569XXXXXXXX". */
 const WHATSAPP = process.env.NEXT_PUBLIC_WHATSAPP || "";
 
-const TIPOS = [
-  "Carga general",
-  "Minera",
-  "Peligrosa",
-  "Refrigerada",
-  "Forestal",
-  "Contenedores",
-  "Maquinaria",
-  "Sobredimensionada",
-];
-
-const FRECUENCIAS = ["Despacho puntual", "Semanal", "Mensual", "Contrato anual"];
-
-const PLAZOS = ["Esta semana", "Este mes", "Próximo mes", "Aún por definir"];
-
-const CAMPOS_INICIALES = {
-  origen: "",
-  destino: "",
-  tipo: "",
-  volumen: "",
-  frecuencia: "",
-  plazo: "",
-  nombre: "",
-  empresa: "",
-  correo: "",
-  telefono: "",
-  /** Trampa para robots: si viene con algo, no es una persona. */
-  web: "",
-};
-
-type Campos = typeof CAMPOS_INICIALES;
-type Estado = "quieto" | "enviando" | "listo" | "error";
+const LLAVE = "main-logistics:cotizacion";
 
 const GARANTIAS = [
   { Icono: IconoReloj, texto: "Le respondemos en menos de 24 horas hábiles" },
@@ -71,103 +88,242 @@ const GARANTIAS = [
   { Icono: IconoCarga, texto: "Si su ruta no nos calza, se lo decimos" },
 ];
 
-const claseCampo = [
-  "w-full rounded-[12px] border border-[color-mix(in_oklab,var(--borde)_80%,transparent)]",
-  "bg-[color-mix(in_oklab,var(--sup-1)_58%,transparent)] backdrop-blur-sm",
-  "min-h-[48px] px-3.5 text-[15px] text-[var(--texto)]",
-  "placeholder:text-[color-mix(in_oklab,var(--texto-sec)_85%,transparent)]",
-  "transition-[border-color,background-color,box-shadow] duration-[var(--dur-hover)]",
-  "hover:border-[color-mix(in_oklab,var(--morado-ui)_40%,var(--borde))]",
-  "focus:border-[var(--morado-ui)] focus:bg-[color-mix(in_oklab,var(--sup-1)_92%,transparent)]",
-  "focus:shadow-[0_0_0_3px_color-mix(in_oklab,var(--morado-solido)_14%,transparent)]",
-  "focus:outline-none disabled:opacity-60",
-].join(" ");
+type Estado = "quieto" | "enviando" | "listo" | "error";
 
-function Campo({
-  id,
-  etiqueta,
-  children,
-  ancho = "medio",
-}: {
-  id: string;
-  etiqueta: string;
-  children: React.ReactNode;
-  ancho?: "medio" | "completo";
-}) {
-  return (
-    <div className={ancho === "completo" ? "sm:col-span-2" : undefined}>
-      <label
-        htmlFor={id}
-        className="mb-1.5 block text-[12.5px] font-medium tracking-[-0.01em] text-[var(--texto)]"
-      >
-        {etiqueta}
-      </label>
-      {children}
-    </div>
-  );
-}
+/** El resumen no es un paso más: es la pantalla de revisión. */
+const RESUMEN = PASOS.length;
 
-/** Encabezado de bloque, con su número en mono. */
-function Bloque({ n, titulo }: { n: number; titulo: string }) {
-  return (
-    <div className="flex items-center gap-2.5 sm:col-span-2">
-      <span className="dato grid size-6 shrink-0 place-items-center rounded-full bg-[color-mix(in_oklab,var(--morado-solido)_16%,transparent)] text-[10.5px] font-semibold text-[var(--morado-texto)]">
-        {n}
-      </span>
-      <span className="text-[13px] font-semibold tracking-[-0.01em] text-[var(--texto)]">
-        {titulo}
-      </span>
-      <span className="ml-1 h-px flex-1 bg-[color-mix(in_oklab,var(--borde)_70%,transparent)]" />
-    </div>
-  );
-}
-
-function textoWhatsapp(c: Campos) {
+function textoWhatsapp(d: Cotizacion) {
+  const origen = [d.origenComuna, d.origenRegion].filter(Boolean).join(", ");
+  const destino = [d.destinoComuna, d.destinoRegion].filter(Boolean).join(", ");
   return [
     "Solicitud de cotización — Main Logistics",
     "",
-    `Origen: ${c.origen}`,
-    `Destino: ${c.destino}`,
-    `Tipo de carga: ${c.tipo}`,
-    `Peso o volumen: ${c.volumen}`,
-    `Frecuencia: ${c.frecuencia}`,
-    `Cuándo: ${c.plazo}`,
+    `Tipo de carga: ${etiquetaDe(TIPOS_CARGA, d.tipoCarga)}${
+      d.tipoCargaOtra ? ` (${d.tipoCargaOtra})` : ""
+    }`,
+    `Equipo: ${etiquetaDe(EQUIPOS, d.equipo)}`,
+    `Origen: ${origen}${d.origenDireccion ? ` — ${d.origenDireccion}` : ""}`,
+    `Destino: ${destino}${d.destinoDireccion ? ` — ${d.destinoDireccion}` : ""}`,
+    `Cuándo: ${etiquetaDe(FECHAS, d.fecha)}${d.fechaDia ? ` — ${d.fechaDia}` : ""}`,
+    `Modalidad: ${etiquetaDe(MODALIDADES, d.modalidad)}${
+      d.frecuencia ? ` · ${etiquetaDe(FRECUENCIAS, d.frecuencia)}` : ""
+    }${d.duracion ? ` · ${etiquetaDe(DURACIONES, d.duracion)}` : ""}`,
+    `Requisitos: ${etiquetasDe(REQUISITOS, d.requisitos) || "ninguno"}${
+      d.requisitoOtro ? ` (${d.requisitoOtro})` : ""
+    }`,
+    `Valor declarado: ${etiquetaDe(VALORES, d.valor)}`,
     "",
-    `Nombre: ${c.nombre}`,
-    `Empresa: ${c.empresa}`,
-    `Correo: ${c.correo}`,
-    `Teléfono: ${c.telefono}`,
+    `Empresa: ${d.empresa}`,
+    `Contacto: ${d.nombre}`,
+    `Correo: ${d.correo}`,
+    `Teléfono: ${d.telefono}`,
+    `Prefiere: ${etiquetaDe(CANALES, d.canal)}`,
   ].join("\n");
 }
 
 export default function Cotizar() {
-  const [campos, setCampos] = useState<Campos>(CAMPOS_INICIALES);
+  const [datos, setDatos] = useState<Cotizacion>(COTIZACION_VACIA);
+  const [paso, setPaso] = useState(0);
+  const [errores, setErrores] = useState<Errores>({});
+  const [intentado, setIntentado] = useState<number[]>([]);
   const [estado, setEstado] = useState<Estado>("quieto");
+  const [aviso, setAviso] = useState("");
+  const [retomado, setRetomado] = useState(false);
+  /** Al editar desde el resumen se vuelve AL RESUMEN, no al paso siguiente. */
+  const [volverAlResumen, setVolverAlResumen] = useState(false);
 
-  const cambiar =
-    (k: keyof Campos) =>
-    (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) =>
-      setCampos((c) => ({ ...c, [k]: e.target.value }));
+  const encabezado = useRef<HTMLHeadingElement>(null);
+  const panel = useRef<HTMLDivElement>(null);
+  const montado = useRef(false);
+  /** Solo se enfoca cuando la navegación fue pedida, nunca al montar. */
+  const debeEnfocar = useRef(false);
 
-  const enviar = async (e: React.FormEvent) => {
+  /* ── Guardado local ──────────────────────────────────────────────── */
+
+  // La lectura del guardado va en un efecto A PROPÓSITO, y no como estado
+  // inicial perezoso: `localStorage` no existe en el servidor, así que el
+  // HTML servido sale siempre en blanco. Sembrar el estado inicial con lo
+  // guardado produciría un desajuste de hidratación — el servidor pinta
+  // campos vacíos y el cliente campos llenos. Leerlo después de montar es
+  // la forma correcta de resolver un valor que solo existe en el cliente.
+  /* eslint-disable react-hooks/set-state-in-effect */
+  useEffect(() => {
+    try {
+      const crudo = localStorage.getItem(LLAVE);
+      if (!crudo) return;
+      const guardado = JSON.parse(crudo) as Partial<Cotizacion>;
+      // Solo se retoma si hay algo real escrito, no por un roce.
+      if (!guardado.tipoCarga && !guardado.empresa) return;
+      setDatos({ ...COTIZACION_VACIA, ...guardado });
+      setRetomado(true);
+    } catch {
+      /* Almacenamiento bloqueado o JSON corrupto: se sigue en blanco. */
+    }
+  }, []);
+  /* eslint-enable react-hooks/set-state-in-effect */
+
+  useEffect(() => {
+    if (!montado.current) {
+      montado.current = true;
+      return;
+    }
+    try {
+      const { web: _web, ...resto } = datos;
+      void _web;
+      localStorage.setItem(LLAVE, JSON.stringify(resto));
+    } catch {
+      /* Sin almacenamiento no se rompe nada: solo no se puede retomar. */
+    }
+  }, [datos]);
+
+  function descartarGuardado() {
+    setDatos(COTIZACION_VACIA);
+    setErrores({});
+    setIntentado([]);
+    setPaso(0);
+    setRetomado(false);
+    try {
+      localStorage.removeItem(LLAVE);
+    } catch {
+      /* nada que hacer */
+    }
+  }
+
+  /* ── Navegación ──────────────────────────────────────────────────── */
+
+  const irA = useCallback((destino: number, empujar = true) => {
+    debeEnfocar.current = true;
+    setPaso(destino);
+    setErrores({});
+    setAviso("");
+    if (empujar && typeof window !== "undefined") {
+      window.history.pushState({ cotizar: destino }, "");
+    }
+  }, []);
+
+  // El gesto de volver atrás en Android destruiría el formulario completo,
+  // que es el abandono más caro de todos. No se crean rutas por paso: es una
+  // one-page que se abre desde un enlace de WhatsApp.
+  useEffect(() => {
+    function alVolver(e: PopStateEvent) {
+      const p = (e.state as { cotizar?: number } | null)?.cotizar;
+      if (typeof p === "number") {
+        debeEnfocar.current = true;
+        setPaso(p);
+      }
+    }
+    window.addEventListener("popstate", alVolver);
+    return () => window.removeEventListener("popstate", alVolver);
+  }, []);
+
+  // Foco al encabezado del paso, NO al primer campo: enfocar un input abre
+  // el teclado de inmediato y tapa el título, y la persona ve un campo sin
+  // saber qué le están preguntando.
+  //
+  // Se enfoca solo cuando la navegación fue PEDIDA, con una bandera que pone
+  // `irA`. Detectar "el primer render" con un ref no sirve: en desarrollo
+  // React ejecuta los efectos dos veces, la primera pasada consumía la
+  // bandera y la segunda enfocaba igual — la página abría en el formulario,
+  // scrolleada 11.848px, con el foco robado. Nadie que abre el sitio pidió
+  // ir a cotizar.
+  useEffect(() => {
+    if (!debeEnfocar.current) return;
+    debeEnfocar.current = false;
+    encabezado.current?.focus();
+    panel.current?.scrollIntoView({ block: "start", behavior: "smooth" });
+  }, [paso]);
+
+  function set<K extends keyof Cotizacion>(campo: K, valor: Cotizacion[K]) {
+    setDatos((prev) => {
+      const siguiente = { ...prev, [campo]: valor };
+      // Revalidación en vivo solo si el paso ya se intentó avanzar: así el
+      // error desaparece apenas se corrige, sin castigar a quien va por la
+      // mitad de escribir.
+      if (intentado.includes(paso)) setErrores(validarPaso(paso, siguiente));
+      return siguiente;
+    });
+  }
+
+  function siguiente(e: React.FormEvent) {
     e.preventDefault();
-    setEstado("enviando");
+    const fallos = validarPaso(paso, datos);
+    setIntentado((prev) => (prev.includes(paso) ? prev : [...prev, paso]));
 
+    if (Object.keys(fallos).length) {
+      setErrores(fallos);
+      const faltan = Object.values(fallos).length;
+      setAviso(
+        `Falta${faltan > 1 ? "n" : ""} ${faltan} dato${faltan > 1 ? "s" : ""} para continuar.`,
+      );
+      // El foco va al primer campo inválido — única excepción a enfocar el
+      // encabezado.
+      const primero = Object.keys(fallos)[0];
+      requestAnimationFrame(() => {
+        const el = document.querySelector<HTMLElement>(
+          `#${primero}, [name="${primero}"]`,
+        );
+        el?.focus();
+      });
+      return;
+    }
+
+    if (volverAlResumen) {
+      setVolverAlResumen(false);
+      irA(RESUMEN);
+      return;
+    }
+    irA(paso < PASOS.length - 1 ? paso + 1 : RESUMEN);
+  }
+
+  function editarDesdeResumen(i: number) {
+    setVolverAlResumen(true);
+    irA(i);
+  }
+
+  /* ── Envío ───────────────────────────────────────────────────────── */
+
+  async function enviar() {
+    const incompleto = primerPasoIncompleto(datos);
+    if (incompleto !== -1) {
+      setIntentado((prev) =>
+        prev.includes(incompleto) ? prev : [...prev, incompleto],
+      );
+      setAviso("Falta completar un paso antes de enviar.");
+      irA(incompleto);
+      return;
+    }
+
+    setEstado("enviando");
+    setAviso("Enviando su solicitud.");
     try {
       const r = await fetch("/api/cotizar", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(campos),
+        body: JSON.stringify(datos),
       });
+      // Nunca hay éxito optimista: el único camino a "listo" es r.ok.
       setEstado(r.ok ? "listo" : "error");
+      setAviso(r.ok ? "Solicitud recibida." : "No pudimos enviar su solicitud.");
+      if (r.ok) {
+        try {
+          localStorage.removeItem(LLAVE);
+        } catch {
+          /* nada que hacer */
+        }
+      }
     } catch {
       setEstado("error");
+      setAviso("No pudimos enviar su solicitud.");
     }
-  };
+  }
 
   const enlaceWhatsapp = WHATSAPP
-    ? `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(textoWhatsapp(campos))}`
+    ? `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(textoWhatsapp(datos))}`
     : null;
+
+  const completados = PASOS.map((_, i) => i).filter((i) => pasoCompleto(i, datos));
+  const enResumen = paso === RESUMEN;
 
   return (
     <section
@@ -186,9 +342,6 @@ export default function Cotizar() {
       />
 
       <div className="relative mx-auto w-full max-w-[var(--ancho-max)] px-[var(--borde-x)] py-[var(--seccion-y)]">
-        {/* El encabezado va a ancho completo. Dentro de la columna de 23rem,
-            "Le respondemos en 24 horas" se partía en tres líneas irregulares
-            y el título se leía desordenado. */}
         <div className="max-w-[46rem]">
           <Titulo linea1="Cotice su carga." destacado="Le respondemos en 24 horas" />
 
@@ -215,9 +368,33 @@ export default function Cotizar() {
                 </li>
               ))}
             </ul>
+
+            {/* El costo percibido se baja ANTES de que vea el contador, no
+                con el contador. */}
+            {estado !== "listo" && (
+              <p className="mt-5 text-[13.5px] leading-[1.5] text-[var(--texto-sec)]">
+                Seis pasos cortos.{" "}
+                <span className="font-medium text-[var(--texto)]">
+                  Sus datos van al final.
+                </span>
+              </p>
+            )}
           </div>
 
-          <div className="vidrio relative overflow-hidden rounded-[var(--r-img)] p-6 sm:p-8">
+          {/* `overflow-clip` y no `overflow-hidden`: hidden crea un contenedor
+              de scroll y la barra sticky del pie se pegaría a él, que no
+              scrollea. clip recorta igual y no rompe el sticky. */}
+          <div
+            ref={panel}
+            className="vidrio relative overflow-clip rounded-[var(--r-img)] p-6 scroll-mt-[clamp(6rem,12vw,8.5rem)] sm:p-8"
+          >
+            {/* Una sola región viva, para validación y estado de envío.
+                Nunca "assertive": interrumpiría la lectura del campo que la
+                persona está corrigiendo. */}
+            <p aria-live="polite" className="sr-only">
+              {aviso}
+            </p>
+
             {estado === "listo" ? (
               <div
                 role="status"
@@ -250,8 +427,10 @@ export default function Cotizar() {
                 <button
                   type="button"
                   onClick={() => {
-                    setCampos(CAMPOS_INICIALES);
+                    setDatos(COTIZACION_VACIA);
+                    setIntentado([]);
                     setEstado("quieto");
+                    setPaso(0);
                   }}
                   className="mt-6 min-h-[44px] text-[14.5px] font-medium text-[var(--morado-texto)] underline underline-offset-4"
                 >
@@ -259,276 +438,224 @@ export default function Cotizar() {
                 </button>
               </div>
             ) : (
-              <form onSubmit={enviar}>
-                {/* Trampa para robots: fuera de pantalla y fuera del foco. */}
-                <div
-                  aria-hidden="true"
-                  className="absolute left-[-9999px] top-0 h-0 overflow-hidden"
-                >
-                  <label htmlFor="web">No completar</label>
-                  <input
-                    id="web"
-                    name="web"
-                    tabIndex={-1}
-                    autoComplete="off"
-                    value={campos.web}
-                    onChange={cambiar("web")}
-                  />
-                </div>
-
-                <fieldset disabled={estado === "enviando"} className="contents">
-                  <div className="grid gap-x-4 gap-y-4 sm:grid-cols-2">
-                    <Bloque n={1} titulo="Su carga" />
-
-                    <Campo id="origen" etiqueta="Origen">
-                      <input
-                        id="origen"
-                        name="origen"
-                        required
-                        maxLength={120}
-                        autoComplete="off"
-                        placeholder="Comuna o planta"
-                        value={campos.origen}
-                        onChange={cambiar("origen")}
-                        className={claseCampo}
-                      />
-                    </Campo>
-
-                    <Campo id="destino" etiqueta="Destino">
-                      <input
-                        id="destino"
-                        name="destino"
-                        required
-                        maxLength={120}
-                        autoComplete="off"
-                        placeholder="Comuna o faena"
-                        value={campos.destino}
-                        onChange={cambiar("destino")}
-                        className={claseCampo}
-                      />
-                    </Campo>
-
-                    <Campo id="tipo" etiqueta="Tipo de carga">
-                      <select
-                        id="tipo"
-                        name="tipo"
-                        required
-                        value={campos.tipo}
-                        onChange={cambiar("tipo")}
-                        className={claseCampo}
-                      >
-                        <option value="" disabled>
-                          Seleccione
-                        </option>
-                        {TIPOS.map((t) => (
-                          <option key={t} value={t}>
-                            {t}
-                          </option>
-                        ))}
-                      </select>
-                    </Campo>
-
-                    <Campo id="volumen" etiqueta="Peso o volumen">
-                      <input
-                        id="volumen"
-                        name="volumen"
-                        required
-                        maxLength={80}
-                        autoComplete="off"
-                        placeholder="Ej. 24 t · 2 pallets"
-                        value={campos.volumen}
-                        onChange={cambiar("volumen")}
-                        className={claseCampo}
-                      />
-                    </Campo>
-
-                    <Campo id="frecuencia" etiqueta="Frecuencia">
-                      <select
-                        id="frecuencia"
-                        name="frecuencia"
-                        required
-                        value={campos.frecuencia}
-                        onChange={cambiar("frecuencia")}
-                        className={claseCampo}
-                      >
-                        <option value="" disabled>
-                          Seleccione
-                        </option>
-                        {FRECUENCIAS.map((f) => (
-                          <option key={f} value={f}>
-                            {f}
-                          </option>
-                        ))}
-                      </select>
-                    </Campo>
-
-                    <Campo id="plazo" etiqueta="Cuándo la necesita">
-                      <select
-                        id="plazo"
-                        name="plazo"
-                        required
-                        value={campos.plazo}
-                        onChange={cambiar("plazo")}
-                        className={claseCampo}
-                      >
-                        <option value="" disabled>
-                          Seleccione
-                        </option>
-                        {PLAZOS.map((p) => (
-                          <option key={p} value={p}>
-                            {p}
-                          </option>
-                        ))}
-                      </select>
-                    </Campo>
-
-                    <div className="mt-3 sm:col-span-2">
-                      <Bloque n={2} titulo="Sus datos" />
-                    </div>
-
-                    <Campo id="nombre" etiqueta="Nombre">
-                      <input
-                        id="nombre"
-                        name="nombre"
-                        required
-                        maxLength={80}
-                        autoComplete="name"
-                        placeholder="Quién consulta"
-                        value={campos.nombre}
-                        onChange={cambiar("nombre")}
-                        className={claseCampo}
-                      />
-                    </Campo>
-
-                    <Campo id="empresa" etiqueta="Empresa">
-                      <input
-                        id="empresa"
-                        name="empresa"
-                        required
-                        maxLength={100}
-                        autoComplete="organization"
-                        placeholder="Razón social o nombre de fantasía"
-                        value={campos.empresa}
-                        onChange={cambiar("empresa")}
-                        className={claseCampo}
-                      />
-                    </Campo>
-
-                    <Campo id="correo" etiqueta="Correo">
-                      <input
-                        id="correo"
-                        name="correo"
-                        type="email"
-                        required
-                        maxLength={120}
-                        autoComplete="email"
-                        placeholder="nombre@empresa.cl"
-                        value={campos.correo}
-                        onChange={cambiar("correo")}
-                        className={claseCampo}
-                      />
-                    </Campo>
-
-                    <Campo id="telefono" etiqueta="Teléfono">
-                      <input
-                        id="telefono"
-                        name="telefono"
-                        type="tel"
-                        required
-                        maxLength={40}
-                        autoComplete="tel"
-                        placeholder="+56 9 1234 5678"
-                        value={campos.telefono}
-                        onChange={cambiar("telefono")}
-                        className={claseCampo}
-                      />
-                    </Campo>
-                  </div>
-
-                  <button
-                    type="submit"
-                    className={[
-                      "group mt-7 inline-flex min-h-[54px] w-full items-center justify-center gap-3 rounded-full",
-                      "bg-[var(--morado-solido)] py-2 pl-6 pr-2 text-[15px] font-medium tracking-[-0.01em] text-white",
-                      "shadow-[0_8px_22px_-10px_rgb(0_0_0/0.55),inset_0_1px_0_rgb(255_255_255/0.24)]",
-                      "transition-[background-color,box-shadow] duration-[var(--dur-estado)] ease-[var(--ease-quart)]",
-                      "hover:bg-[color-mix(in_oklab,var(--morado-solido)_86%,white)]",
-                      "hover:shadow-[0_14px_30px_-12px_rgb(0_0_0/0.6),inset_0_1px_0_rgb(255_255_255/0.32)]",
-                      "disabled:cursor-progress disabled:opacity-80 sm:w-auto",
-                    ].join(" ")}
-                  >
-                    <span className="inline-flex items-center gap-2.5">
-                      {estado !== "enviando" && (
-                        <span
-                          aria-hidden="true"
-                          className="testigo-etiqueta size-[6px] rounded-full bg-white/70"
-                        />
-                      )}
-                      {estado === "enviando" ? "Enviando…" : "Enviar solicitud"}
-                    </span>
-                    <span className="grid size-9 shrink-0 place-items-center rounded-full bg-white text-[var(--morado-solido)] transition-transform duration-[var(--dur-estado)] ease-[var(--ease-quart)] group-hover:scale-[1.08] motion-reduce:group-hover:scale-100">
-                      <svg viewBox="0 0 16 16" fill="none" className="size-4">
-                        <path
-                          d="M2.5 8h11m0 0L9 3.5M13.5 8L9 12.5"
-                          stroke="currentColor"
-                          strokeWidth="1.8"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    </span>
-                  </button>
-                </fieldset>
-
-                {estado === "error" && (
-                  <div
-                    role="alert"
-                    className="mt-5 rounded-[12px] border border-[color-mix(in_oklab,var(--error)_40%,var(--borde))] bg-[color-mix(in_oklab,var(--error)_8%,transparent)] p-4"
-                  >
-                    <p className="text-[14.5px] font-medium text-[var(--texto)]">
-                      No pudimos enviar su solicitud.
+              <>
+                {retomado && (
+                  <div className="mb-6 flex flex-wrap items-center justify-between gap-3 rounded-[12px] border border-[color-mix(in_oklab,var(--borde)_70%,transparent)] bg-[color-mix(in_oklab,var(--sup-1)_55%,transparent)] px-4 py-3">
+                    <p className="text-[14px] leading-[1.4] text-[var(--texto)]">
+                      Retomamos donde quedó.
                     </p>
-                    <p className="mt-1.5 text-[14px] leading-[1.5] text-[var(--texto-sec)]">
-                      {enlaceWhatsapp ? (
-                        <>
-                          Nada se perdió:{" "}
-                          <a
-                            href={enlaceWhatsapp}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="font-medium text-[var(--morado-texto)] underline underline-offset-4"
-                          >
-                            envíela por WhatsApp
-                          </a>{" "}
-                          con los datos ya escritos, o escriba a{" "}
-                          <a
-                            href="mailto:contacto@mainlogistics.cl"
-                            className="font-medium text-[var(--morado-texto)] underline underline-offset-4"
-                          >
-                            contacto@mainlogistics.cl
-                          </a>
-                          .
-                        </>
-                      ) : (
-                        <>
-                          Escríbanos a{" "}
-                          <a
-                            href="mailto:contacto@mainlogistics.cl"
-                            className="font-medium text-[var(--morado-texto)] underline underline-offset-4"
-                          >
-                            contacto@mainlogistics.cl
-                          </a>{" "}
-                          y le respondemos igual.
-                        </>
-                      )}
-                    </p>
+                    <button
+                      type="button"
+                      onClick={descartarGuardado}
+                      className="min-h-[44px] text-[14px] font-medium text-[var(--morado-texto)] underline underline-offset-4"
+                    >
+                      Empezar de nuevo
+                    </button>
                   </div>
                 )}
-              </form>
+
+                <Riel
+                  actual={Math.min(paso, PASOS.length - 1)}
+                  completados={completados}
+                  irA={(i) => {
+                    setVolverAlResumen(false);
+                    irA(i);
+                  }}
+                  enResumen={enResumen}
+                />
+
+                {enResumen ? (
+                  <div className="mt-7">
+                    <h2
+                      ref={encabezado}
+                      tabIndex={-1}
+                      className="text-[clamp(1.2rem,1vw+0.95rem,1.45rem)] font-semibold tracking-[-0.03em] text-[var(--texto)] focus:outline-none focus-visible:outline-none"
+                    >
+                      Revise antes de enviar
+                    </h2>
+                    <p className="mt-2 text-[14.5px] leading-[1.55] text-[var(--texto-sec)]">
+                      Si algo no está bien, edítelo y vuelve acá mismo.
+                    </p>
+
+                    <div className="mt-6">
+                      <ResumenPedido d={datos} editar={editarDesdeResumen} />
+                    </div>
+
+                    {estado === "error" && (
+                      <div
+                        role="alert"
+                        className="mt-6 rounded-[12px] border border-[color-mix(in_oklab,var(--error)_40%,var(--borde))] bg-[color-mix(in_oklab,var(--error)_8%,transparent)] p-4"
+                      >
+                        <p className="text-[14.5px] font-medium text-[var(--texto)]">
+                          No pudimos enviar su solicitud.
+                        </p>
+                        <p className="mt-1.5 text-[14px] leading-[1.5] text-[var(--texto-sec)]">
+                          {enlaceWhatsapp ? (
+                            <>
+                              Nada se perdió:{" "}
+                              <a
+                                href={enlaceWhatsapp}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="font-medium text-[var(--morado-texto)] underline underline-offset-4"
+                              >
+                                envíela por WhatsApp
+                              </a>{" "}
+                              con los datos ya escritos, o escriba a{" "}
+                              <a
+                                href="mailto:contacto@mainlogistics.cl"
+                                className="font-medium text-[var(--morado-texto)] underline underline-offset-4"
+                              >
+                                contacto@mainlogistics.cl
+                              </a>
+                              .
+                            </>
+                          ) : (
+                            <>
+                              Escríbanos a{" "}
+                              <a
+                                href="mailto:contacto@mainlogistics.cl"
+                                className="font-medium text-[var(--morado-texto)] underline underline-offset-4"
+                              >
+                                contacto@mainlogistics.cl
+                              </a>{" "}
+                              y le respondemos igual.
+                            </>
+                          )}
+                        </p>
+                      </div>
+                    )}
+
+                    <BarraPaso
+                      atras={() => irA(PASOS.length - 1)}
+                      etiquetaAtras="Volver"
+                      principal={enviar}
+                      etiquetaPrincipal={
+                        estado === "enviando" ? "Enviando…" : "Enviar solicitud"
+                      }
+                      ocupado={estado === "enviando"}
+                    />
+                  </div>
+                ) : (
+                  // Cada paso es su propio formulario: Enter avanza, y el
+                  // POST vive únicamente en el resumen.
+                  <form onSubmit={siguiente} noValidate className="mt-7">
+                    {/* Trampa para robots: fuera de pantalla y fuera del foco. */}
+                    <div
+                      aria-hidden="true"
+                      className="absolute left-[-9999px] top-0 h-0 overflow-hidden"
+                    >
+                      <label htmlFor="web">No completar</label>
+                      <input
+                        id="web"
+                        name="web"
+                        tabIndex={-1}
+                        autoComplete="off"
+                        value={datos.web}
+                        onChange={(ev) => set("web", ev.target.value)}
+                      />
+                    </div>
+
+                    <section aria-labelledby="paso-titulo">
+                      <h2
+                        id="paso-titulo"
+                        ref={encabezado}
+                        tabIndex={-1}
+                        className="text-[clamp(1.2rem,1vw+0.95rem,1.45rem)] font-semibold tracking-[-0.03em] text-[var(--texto)] focus:outline-none focus-visible:outline-none"
+                      >
+                        <span className="sr-only">
+                          Paso {paso + 1} de {PASOS.length}.{" "}
+                        </span>
+                        {PASOS[paso].bajada}
+                      </h2>
+
+                      <div className="mt-6">
+                        <CuerpoPaso indice={paso} d={datos} set={set} e={errores} />
+                      </div>
+                    </section>
+
+                    <BarraPaso
+                      atras={paso > 0 ? () => irA(paso - 1) : undefined}
+                      etiquetaAtras="Atrás"
+                      etiquetaPrincipal={
+                        volverAlResumen
+                          ? "Guardar y volver al resumen"
+                          : paso === PASOS.length - 1
+                            ? "Revisar solicitud"
+                            : "Siguiente"
+                      }
+                    />
+                  </form>
+                )}
+              </>
             )}
           </div>
         </div>
       </div>
     </section>
+  );
+}
+
+/**
+ * Barra de paso, pegada al fondo del panel.
+ *
+ * `sticky` y no `fixed`: convive mucho mejor con el teclado abierto en
+ * Android e iOS. El botón principal no se deshabilita nunca salvo mientras
+ * se está enviando, que es el único caso donde tocar dos veces haría daño.
+ */
+function BarraPaso({
+  atras,
+  etiquetaAtras,
+  principal,
+  etiquetaPrincipal,
+  ocupado,
+}: {
+  atras?: () => void;
+  etiquetaAtras: string;
+  principal?: () => void;
+  etiquetaPrincipal: string;
+  ocupado?: boolean;
+}) {
+  return (
+    <div className="sticky bottom-0 -mx-6 mt-8 flex items-center gap-3 border-t border-[color-mix(in_oklab,var(--borde)_60%,transparent)] bg-[color-mix(in_oklab,var(--sup-1)_82%,transparent)] px-6 py-4 backdrop-blur-md sm:-mx-8 sm:px-8">
+      {atras && (
+        <button
+          type="button"
+          onClick={atras}
+          className="inline-flex min-h-[48px] items-center gap-2 rounded-full px-4 text-[15px] font-medium text-[var(--texto)] transition-colors duration-[var(--dur-hover)] hover:bg-[color-mix(in_oklab,var(--sup-2)_70%,transparent)] focus:outline-none focus-visible:shadow-[0_0_0_3px_color-mix(in_oklab,var(--morado-solido)_38%,transparent)]"
+        >
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" className="size-4">
+            <path
+              d="M13.5 8h-11m0 0L7 3.5M2.5 8 7 12.5"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+          {etiquetaAtras}
+        </button>
+      )}
+
+      <button
+        type={principal ? "button" : "submit"}
+        onClick={principal}
+        disabled={ocupado}
+        className="group ml-auto inline-flex min-h-[52px] flex-1 items-center justify-center gap-2.5 rounded-full bg-[var(--morado-solido)] px-6 text-[15px] font-medium text-white transition-[transform,opacity] duration-[var(--dur-estado)] ease-[var(--ease-quart)] hover:-translate-y-0.5 focus:outline-none focus-visible:shadow-[0_0_0_3px_color-mix(in_oklab,var(--morado-solido)_38%,transparent)] disabled:translate-y-0 disabled:opacity-70 motion-reduce:hover:translate-y-0 sm:flex-none"
+      >
+        {etiquetaPrincipal}
+        <span className="grid size-6 place-items-center rounded-full bg-white/22 transition-transform duration-[var(--dur-estado)] ease-[var(--ease-quart)] group-hover:translate-x-0.5 motion-reduce:group-hover:translate-x-0">
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" className="size-3">
+            <path
+              d="M2.5 8h11m0 0L9 3.5M13.5 8L9 12.5"
+              stroke="currentColor"
+              strokeWidth="1.9"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </span>
+      </button>
+    </div>
   );
 }
