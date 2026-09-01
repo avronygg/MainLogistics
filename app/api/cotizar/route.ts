@@ -209,9 +209,9 @@ export async function POST(peticion: Request) {
       ],
     ],
     [
-      "Requisitos",
+      "Requisitos y valor",
       [
-        ["Requisitos", requisitosTexto || "Ninguno indicado"],
+        ["Exigencias especiales", requisitosTexto || "Ninguna indicada"],
         ["Valor declarado", etiquetaDe(VALORES, d.valor)],
       ],
     ],
@@ -261,6 +261,7 @@ export async function POST(peticion: Request) {
       replyTo: d.correo.includes("@") ? d.correo : undefined,
       text: texto,
       html:
+        `<meta charset="utf-8">` +
         `<div style="font-family:system-ui,-apple-system,sans-serif;font-size:15px;line-height:1.5;max-width:560px">` +
         `<h2 style="margin:0;font-size:17px">Nueva solicitud de cotización</h2>` +
         html +
