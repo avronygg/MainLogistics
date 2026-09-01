@@ -8,6 +8,7 @@ import CuerpoPaso from "./cotizar/Pasos";
 import ResumenPedido from "./cotizar/Resumen";
 import { Plantilla, rellenar } from "./cotizar/Campos";
 import type { Mensajes } from "@/mensajes";
+import { CORREO, WHATSAPP } from "./datos/contacto";
 import {
   COTIZACION_VACIA,
   PASOS,
@@ -76,17 +77,12 @@ import {
  * lista como pendiente de definir. Está acá porque el cliente lo definió; si
  * operación no lo puede sostener, hay que bajarlo antes de publicar.
  *
- * 👉 ANTES DE PUBLICAR: completar `.env.local` con RESEND_API_KEY,
- * COTIZA_DESTINO, COTIZA_REMITENTE y NEXT_PUBLIC_WHATSAPP.
+ * 👉 ANTES DE PUBLICAR: completar RESEND_API_KEY, COTIZA_DESTINO y
+ * COTIZA_REMITENTE en Vercel. El correo y el WhatsApp ya están confirmados
+ * y viven en `components/datos/contacto.ts`.
  */
 
-/** Formato internacional sin signos: 56 9 XXXX XXXX → "569XXXXXXXX". */
-const WHATSAPP = process.env.NEXT_PUBLIC_WHATSAPP || "";
-
 const LLAVE = "main-logistics:cotizacion";
-
-/* Dirección real de contacto, no texto: va igual en los cuatro idiomas. */
-const CORREO = "comercial@mainlogistics.cl";
 
 /* El ícono es del código y el texto del diccionario: la lista se arma en
    una función en vez de guardar la clave suelta y buscarla después. */

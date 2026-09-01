@@ -794,10 +794,6 @@ export const es = {
     },
     contacto: {
       titulo: "Contacto",
-      razonSocialPendiente: "Razón social pendiente",
-      rutPendiente: "RUT pendiente",
-      direccionPendiente: "Dirección pendiente",
-      telefonoPendiente: "Teléfono pendiente",
     },
     derechos: "Transporte de carga en todo Chile",
   },

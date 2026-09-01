@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { CORREO, TELEFONO, TELEFONO_ENLACE } from "./datos/contacto";
 import Link from "next/link";
 import type { Mensajes } from "@/mensajes";
 
@@ -19,15 +20,16 @@ import type { Mensajes } from "@/mensajes";
  * El único dato legal ya confirmado, y por eso el único que queda acá: una
  * casilla de correo es una dirección, no texto traducible.
  *
- * Los cuatro campos pendientes salen del diccionario porque hoy lo que se
- * ve es un aviso en español, y un aviso sí se traduce. Cuando el cliente
- * confirme razón social, RUT, dirección y teléfono, los valores reales
- * vuelven a esta constante: un RUT chileno se escribe igual en los cuatro
- * idiomas.
+ * Solo correo y teléfono, por decisión del cliente. Antes había cuatro
+ * líneas que decían "Razón social pendiente", "RUT pendiente" y compañía:
+ * eso era una nota interna publicada en producción, y a un comprador que
+ * está evaluando proveedores le dice que la empresa no está constituida.
+ * Mejor mostrar dos datos ciertos que seis con cuatro avisos.
+ *
+ * No pasan por el diccionario: un número de teléfono chileno y una
+ * dirección de correo se escriben igual en los cuatro idiomas.
  */
-const LEGALES = {
-  correo: "comercial@mainlogistics.cl",
-};
+
 
 /**
  * Las columnas se arman con el diccionario en mano en vez de quedar como
@@ -146,16 +148,20 @@ export default function Pie({ m }: { m: Mensajes }) {
               {/* Los datos legales van en mono: se leen como registro
                   verificable, que es exactamente su función acá. */}
               <ul className="vidrio dato mt-4 flex flex-col gap-2.5 rounded-[var(--r-card)] p-4 text-[13px] leading-[1.5] text-[var(--texto-sec)]">
-                <li>{m.pie.contacto.razonSocialPendiente}</li>
-                <li>{m.pie.contacto.rutPendiente}</li>
-                <li>{m.pie.contacto.direccionPendiente}</li>
-                <li>{m.pie.contacto.telefonoPendiente}</li>
                 <li>
                   <a
-                    href={`mailto:${LEGALES.correo}`}
+                    href={`tel:${TELEFONO_ENLACE}`}
                     className="transition-colors duration-[var(--dur-hover)] hover:text-[var(--texto)]"
                   >
-                    {LEGALES.correo}
+                    {TELEFONO}
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href={`mailto:${CORREO}`}
+                    className="transition-colors duration-[var(--dur-hover)] hover:text-[var(--texto)]"
+                  >
+                    {CORREO}
                   </a>
                 </li>
               </ul>

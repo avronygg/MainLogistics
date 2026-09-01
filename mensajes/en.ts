@@ -771,10 +771,6 @@ export const en: Mensajes = {
     },
     contacto: {
       titulo: "Contact",
-      razonSocialPendiente: "Registered name pending",
-      rutPendiente: "RUT pending",
-      direccionPendiente: "Address pending",
-      telefonoPendiente: "Phone pending",
     },
     derechos: "Road freight transport across Chile",
   },

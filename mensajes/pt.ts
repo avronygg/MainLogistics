@@ -771,10 +771,6 @@ export const pt: Mensajes = {
     },
     contacto: {
       titulo: "Contato",
-      razonSocialPendiente: "Razão social pendente",
-      rutPendiente: "RUT pendente",
-      direccionPendiente: "Endereço pendente",
-      telefonoPendiente: "Telefone pendente",
     },
     derechos: "Transporte de cargas em todo o Chile",
   },

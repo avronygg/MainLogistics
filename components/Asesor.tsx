@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import s from "./Asesor.module.css";
 import type { Mensajes } from "@/mensajes";
+import { WHATSAPP } from "./datos/contacto";
 
 /**
  * Asesor flotante, abajo a la derecha.
@@ -38,8 +39,7 @@ const FOTO_ASESORA = "/asesora.webp";
  */
 const NOMBRE = "Main Logistics";
 
-/** Formato internacional sin signos. Se comparte con el formulario. */
-const WHATSAPP = process.env.NEXT_PUBLIC_WHATSAPP || "";
+
 
 const ESPERA_APARECER = 2000;
 const ESPERA_ESCRIBIENDO = 3000;

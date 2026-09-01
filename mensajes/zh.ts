@@ -800,10 +800,6 @@ export const zh: Mensajes = {
     },
     contacto: {
       titulo: "联系方式",
-      razonSocialPendiente: "公司注册名称待补充",
-      rutPendiente: "RUT 待补充",
-      direccionPendiente: "地址待补充",
-      telefonoPendiente: "电话待补充",
     },
     derechos: "覆盖智利全境的货物运输",
   },
