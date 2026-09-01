@@ -21,6 +21,19 @@
  *   oscuro de algunos clientes invierte lo que quiere y deja texto gris sobre
  *   gris.
  *
+ * ── Por qué las filas van apiladas y no en dos columnas ────────────────
+ *
+ * Etiqueta arriba, valor abajo, a todo el ancho. En dos columnas la etiqueta
+ * se come el espacio en un teléfono de 360px y los valores se parten en
+ * lugares horribles: "Puerto, sitio" y abajo un "3" solo. Apilado nunca
+ * pasa, y en escritorio se lee como una ficha técnica.
+ *
+ * Sin media queries a propósito: Gmail descarta el `<style>` del `<head>` en
+ * varios casos —mensaje recortado, reenvío—, así que una maqueta que dependa
+ * de ellas falla justo en el cliente donde más importa. Esto se ve igual en
+ * todos, y PRODUCT.md es explícito: el móvil es el caso principal, no la
+ * adaptación.
+ *
  * ── Qué se ve primero ──────────────────────────────────────────────────
  *
  * Quien abre esto está en una bandeja con veinte correos y necesita decidir
@@ -60,28 +73,32 @@ function escapar(t: string) {
 /** Fecha y hora de Chile. Es cuándo entró la solicitud, no cuándo se lee. */
 function selloDeTiempo(): string {
   return new Intl.DateTimeFormat("es-CL", {
-    dateStyle: "long",
-    timeStyle: "short",
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
     timeZone: "America/Santiago",
   }).format(new Date());
 }
 
 function filaHtml({ k, v, dato }: Fila): string {
   const valor = dato
-    ? `<span style="font-family:${MONO};font-size:14px;letter-spacing:-0.01em">${escapar(v)}</span>`
+    ? `<span style="font-family:${MONO};font-size:14.5px;letter-spacing:-0.01em">${escapar(v)}</span>`
     : escapar(v);
   return (
-    `<tr>` +
-    `<td width="164" style="width:164px;padding:9px 16px 9px 0;font-size:13px;line-height:1.4;color:${TINTA_SUAVE};vertical-align:top;border-top:1px solid ${BORDE}">${escapar(k)}</td>` +
-    `<td style="padding:9px 0;font-size:14px;line-height:1.45;color:${TINTA};font-weight:600;vertical-align:top;border-top:1px solid ${BORDE}">${valor}</td>` +
-    `</tr>`
+    `<tr><td style="padding:11px 0;border-top:1px solid ${BORDE}">` +
+    `<div style="font-size:12.5px;line-height:1.35;color:${TINTA_SUAVE};padding-bottom:3px">${escapar(k)}</div>` +
+    `<div style="font-size:15px;line-height:1.45;color:${TINTA};font-weight:600">${valor}</div>` +
+    `</td></tr>`
   );
 }
 
 function bloqueHtml({ titulo, filas }: Bloque): string {
   return (
-    `<tr><td style="padding:26px 28px 0">` +
-    `<div style="font-family:${SANS};font-size:11px;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:${MORADO};padding-bottom:2px">${escapar(titulo)}</div>` +
+    `<tr><td style="padding:24px 24px 0">` +
+    `<div style="font-family:${SANS};font-size:11px;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:${MORADO};padding-bottom:4px">${escapar(titulo)}</div>` +
     `<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse;font-family:${SANS}">` +
     filas.map(filaHtml).join("") +
     `</table>` +
@@ -107,7 +124,7 @@ export function construirCorreo(datos: {
   const telLimpio = telefono.replace(/[^\d+]/g, "");
 
   const cabecera =
-    `<tr><td style="background:${OSCURO};padding:20px 28px">` +
+    `<tr><td style="background:${OSCURO};padding:18px 24px">` +
     `<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">` +
     `<tr>` +
     `<td style="font-family:${SANS};font-size:13px;font-weight:700;letter-spacing:0.16em;color:#ffffff">MAIN LOGISTICS</td>` +
@@ -117,7 +134,7 @@ export function construirCorreo(datos: {
   /* La cabecera de identificación: lo que se lee en dos segundos. La ruta va
      en mono porque es el dato que se compara contra una planilla. */
   const identificacion =
-    `<tr><td style="padding:28px 28px 4px;font-family:${SANS}">` +
+    `<tr><td style="padding:24px 24px 4px;font-family:${SANS}">` +
     `<div style="font-size:12px;color:${TINTA_SUAVE};padding-bottom:6px">Nueva solicitud de cotización</div>` +
     `<div style="font-size:21px;line-height:1.25;font-weight:700;color:${TINTA};letter-spacing:-0.02em">${escapar(empresa)}</div>` +
     `<div style="font-family:${MONO};font-size:14px;line-height:1.5;color:${MORADO};padding-top:8px">${escapar(origen)} &rarr; ${escapar(destino)}</div>` +
@@ -127,20 +144,17 @@ export function construirCorreo(datos: {
   /* Contestar no puede requerir copiar y pegar: los dos enlaces son
      pulsables y el canal preferido está a la vista. */
   const acciones =
-    `<tr><td style="padding:24px 28px 0">` +
+    `<tr><td style="padding:22px 24px 0">` +
     `<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:${MORADO_SUAVE};border-radius:10px">` +
     `<tr><td style="padding:16px 18px;font-family:${SANS}">` +
     `<div style="font-size:11px;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:${MORADO};padding-bottom:8px">Responder a ${escapar(nombre)}</div>` +
-    `<div style="font-size:15px;line-height:1.7">` +
-    `<a href="tel:${escapar(telLimpio)}" style="color:${TINTA};font-weight:700;text-decoration:none">${escapar(telefono)}</a>` +
-    `<span style="color:${TINTA_SUAVE}"> &middot; </span>` +
-    `<a href="mailto:${escapar(correo)}" style="color:${TINTA};font-weight:700;text-decoration:none">${escapar(correo)}</a>` +
-    `</div>` +
+    `<div style="font-size:16px;line-height:1.5;padding-bottom:2px"><a href="tel:${escapar(telLimpio)}" style="color:${TINTA};font-weight:700;text-decoration:none">${escapar(telefono)}</a></div>` +
+    `<div style="font-size:15px;line-height:1.5"><a href="mailto:${escapar(correo)}" style="color:${TINTA};font-weight:700;text-decoration:none">${escapar(correo)}</a></div>` +
     `<div style="font-size:12.5px;color:${TINTA_SUAVE};padding-top:4px">Canal preferido: ${escapar(canal)}</div>` +
     `</td></tr></table></td></tr>`;
 
   const pie =
-    `<tr><td style="padding:26px 28px 28px">` +
+    `<tr><td style="padding:24px 24px 24px">` +
     `<div style="border-top:1px solid ${BORDE};padding-top:14px;font-family:${SANS};font-size:11.5px;line-height:1.5;color:${TINTA_SUAVE}">` +
     `Enviado desde el formulario de mainlogistics.cl. ` +
     `Al responder este correo le llega directo a quien cotizó.` +

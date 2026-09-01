@@ -38,9 +38,14 @@ mkdirSync('shots', { recursive: true });
 writeFileSync('shots/correo.txt', `ASUNTO: ${asunto}\n\n${texto}`, 'utf8');
 
 const b = await chromium.launch();
-const p = await (await b.newContext({ viewport: { width: 700, height: 1200 }, deviceScaleFactor: 2 })).newPage();
-await p.setContent(html, { waitUntil: 'load' });
-await p.screenshot({ path: 'shots/correo.png', fullPage: true });
+// Dos anchos: el telefono de la captura y el panel de lectura de escritorio.
+for (const [nombre, ancho] of [['correo-movil', 360], ['correo', 700]]) {
+  const ctx = await b.newContext({ viewport: { width: ancho, height: 1200 }, deviceScaleFactor: 2 });
+  const p = await ctx.newPage();
+  await p.setContent(html, { waitUntil: 'load' });
+  await p.screenshot({ path: `shots/${nombre}.png`, fullPage: true });
+  await ctx.close();
+}
 await b.close();
 
 console.log(`\nASUNTO: ${asunto}`);
