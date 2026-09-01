@@ -152,8 +152,11 @@ export async function POST(peticion: Request) {
 
   const modalidadTexto = [
     etiquetaDe(MODALIDADES, d.modalidad),
+    // Sin "cada": las etiquetas de frecuencia son adjetivos ("Semanal"), no
+    // períodos ("semana"), así que salía "cada semanal". La duración sí es un
+    // período y por eso "por 6 meses" sí funciona.
     d.modalidad === "recurrente" && d.frecuencia
-      ? `cada ${etiquetaDe(FRECUENCIAS, d.frecuencia).toLowerCase()}`
+      ? etiquetaDe(FRECUENCIAS, d.frecuencia)
       : "",
     d.modalidad === "contrato" && d.duracion
       ? `por ${etiquetaDe(DURACIONES, d.duracion).toLowerCase()}`

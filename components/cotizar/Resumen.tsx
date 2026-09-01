@@ -44,8 +44,10 @@ function filasDe(d: Cotizacion, m: Mensajes): Fila[][] {
 
   const modalidad = [
     etiquetaDe(modalidades(m), d.modalidad),
+    // Sin minúscula forzada: en chino no existe y en portugués e inglés la
+    // frecuencia se lee mejor con su capitalización propia.
     d.modalidad === "recurrente" && d.frecuencia
-      ? etiquetaDe(frecuencias(m), d.frecuencia).toLowerCase()
+      ? etiquetaDe(frecuencias(m), d.frecuencia)
       : "",
   ]
     .filter(Boolean)
