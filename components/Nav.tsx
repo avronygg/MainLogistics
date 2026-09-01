@@ -110,7 +110,11 @@ export default function Nav({ m, idioma }: { m: Mensajes; idioma: Idioma }) {
           <Link
             href="#cotizar"
             className={[
-              "group hidden min-h-[40px] items-center gap-2 rounded-full bg-[var(--morado-solido)] py-1.5 pl-4 pr-1.5",
+              // `whitespace-nowrap` no es cosmético: el CTA es la palabra más
+              // variable del nav — "Cotizar" son 7 caracteres y "Get a quote"
+              // son 11 — y sin esto se parte en dos líneas, estira la píldora
+              // y descuadra la barra entera. Que crezca a lo ancho, no a lo alto.
+              "group hidden min-h-[40px] items-center gap-2 whitespace-nowrap rounded-full bg-[var(--morado-solido)] py-1.5 pl-4 pr-1.5",
               "text-[14px] font-medium tracking-[-0.01em] text-white sm:inline-flex",
               "shadow-[0_4px_14px_-6px_rgb(0_0_0/0.8),inset_0_1px_0_rgb(255_255_255/0.24)]",
               "transition-[background-color,box-shadow] duration-[var(--dur-estado)] ease-[var(--ease-quart)]",

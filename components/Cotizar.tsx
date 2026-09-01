@@ -86,7 +86,7 @@ const WHATSAPP = process.env.NEXT_PUBLIC_WHATSAPP || "";
 const LLAVE = "main-logistics:cotizacion";
 
 /* Dirección real de contacto, no texto: va igual en los cuatro idiomas. */
-const CORREO = "contacto@mainlogistics.cl";
+const CORREO = "comercial@mainlogistics.cl";
 
 /* El ícono es del código y el texto del diccionario: la lista se arma en
    una función en vez de guardar la clave suelta y buscarla después. */

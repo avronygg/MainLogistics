@@ -26,7 +26,7 @@ import type { Mensajes } from "@/mensajes";
  * idiomas.
  */
 const LEGALES = {
-  correo: "contacto@mainlogistics.cl",
+  correo: "comercial@mainlogistics.cl",
 };
 
 /**
