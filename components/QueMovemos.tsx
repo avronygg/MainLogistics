@@ -64,10 +64,9 @@ export default function QueMovemos({ m }: { m: Mensajes }) {
           </p>
 
           <MarcoImagen
-            m={m}
             className="mt-8 h-[clamp(12rem,20vw,16rem)] rounded-[var(--r-img)]"
             icono={<IconoCarga className="size-7" />}
-            brief={m.cargas.briefFoto}
+            encargo="cargas"
           />
 
           <p className="dato mt-8 flex items-baseline gap-2.5 leading-none">

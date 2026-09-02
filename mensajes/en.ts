@@ -205,7 +205,6 @@ export const en: Mensajes = {
     tituloDestacado: "We meet them",
     bajada: "Every load has its regulation, its equipment and its documentation.",
     bajadaRealce: "Here is what each one takes.",
-    briefFoto: "Wide shot of the trailer loaded with mixed freight: pallets, a container and machinery in the same yard. This is the photo that proves versatility.",
     etiquetaTipos: "types of freight",
     tipos: {
       general: {
@@ -252,7 +251,6 @@ export const en: Mensajes = {
     etiquetaPestanas: "Regulatory frameworks by industry",
     mineria: {
       nombre: "Mining",
-      briefFoto: "A Main truck entering a mine site: gatehouse, dust, reflective vest and the approved equipment in view.",
       titulo: "Approval is requested before loading.",
       detalle: "Carrier, equipment and driver documentation, checked and current on the day of dispatch. At the gatehouse it is already too late.",
       puntos: {
@@ -263,7 +261,6 @@ export const en: Mensajes = {
     },
     peligrosa: {
       nombre: "Hazardous freight",
-      briefFoto: "Close-up of the hazardous substance placard on the trailer, with the safety data sheet in the foreground.",
       titulo: "What is not placarded does not leave.",
       detalle: "Placarding according to the class of the substance, safety data sheet on board and driver with current certification. The documentation travels with the freight, not afterwards.",
       puntos: {
@@ -274,7 +271,6 @@ export const en: Mensajes = {
     },
     agro: {
       nombre: "Agriculture and salmon farming",
-      briefFoto: "Interior of a refrigerated box trailer with the temperature recorder on screen and the freight stowed.",
       titulo: "The cold chain only breaks once.",
       detalle: "Temperature recorded throughout the trip, not only at loading and unloading. In season, the time window counts as much as the thermometer.",
       puntos: {
@@ -285,7 +281,6 @@ export const en: Mensajes = {
     },
     forestal: {
       nombre: "Forestry",
-      briefFoto: "Logs strapped down on the trailer on a dirt road, with the tensioned sling in the foreground.",
       titulo: "Load securing is checked before departure and at every stop.",
       detalle: "High volume on roads that are not always paved, with site traffic on the same route.",
       puntos: {
@@ -297,7 +292,6 @@ export const en: Mensajes = {
     contenedores: {
       nombre: "Containers",
       marcoPuerto: "Port",
-      briefFoto: "Container leaving the port terminal with the seal visible on the door.",
       titulo: "The pickup window does not wait.",
       detalle: "Coordination with the terminal, verified seal and return within the free time. One day of detention costs more than the freight rate.",
       puntos: {
@@ -316,53 +310,53 @@ export const en: Mensajes = {
     bajadaRealce: "answer the phone",
     bajadaFin: " when a colleague asks about us.",
     testimonios: {
-      mineria: {
+      importacion: {
         cita:
-          "They swapped the unit at eleven at night because the one on its way wouldn't clear the gate over a paperwork issue. Nobody called to ask me what to do — they called to tell me it was already sorted.",
-        nombre: "Rodrigo Ballesteros",
-        cargo: "Logistics Superintendent",
-        empresa: "Antucoya · Antofagasta Minerals",
-        industria: "Mining",
-      },
-      puerto: {
-        cita:
-          "Port pickup is where most carriers fall down. They show up with the paperwork ready and the container leaves. Not much else to say.",
-        nombre: "Patricio Vergara",
-        cargo: "Operations Manager",
-        empresa: "Ultraport",
-        industria: "Port",
-      },
-      industrial: {
-        cita:
-          "I used to spend my mornings calling around to find out where the trucks were. Now I just log in and see it. Sounds minor, but it gave me back almost two hours a day.",
-        nombre: "Carolina Fuenzalida",
-        cargo: "Dispatch Coordinator",
-        empresa: "Lhoist",
-        industria: "Industrial minerals",
-      },
-      forwarder: {
-        cita:
-          "We work with several carriers and we measure them all the same way: window compliance and cargo condition on arrival. Main has been above our average for two years. That's why they're still on the list.",
-        nombre: "Andrés Meneses",
-        cargo: "Operations Director",
-        empresa: "Scan Global Logistics",
-        industria: "Freight forwarding",
-      },
-      cal: {
-        cita:
-          "We had a problem with a delivery in the first month. What convinced me was how they handled it: they called me before I had even noticed.",
-        nombre: "Claudia Arriagada",
-        cargo: "Logistics Manager",
-        empresa: "Caleras San Juan",
-        industria: "Lime and aggregates",
+          "We import by container, and every pickup used to be a different problem. Now I send them the BL and they tell me when it has left the port. I stopped having to chase it.",
+        nombre: "Matías Corvalán",
+        cargo: "Founding Partner",
+        empresa: "The Wallpaper Guys",
+        industria: "Import",
       },
       quimicos: {
         cita:
-          "We move hazardous cargo, and there the paperwork is not negotiable. We have been inspected on the road with them and came out with no findings.",
-        nombre: "Felipe Cornejo",
-        cargo: "HSE Manager",
-        empresa: "Proquimin",
+          "We move chemical products, and there the safety data sheet and the labelling are not optional. We have not had a shipment turned back over paperwork.",
+        nombre: "Óscar Villablanca",
+        cargo: "Warehouse Manager",
+        empresa: "Clean Controls",
         industria: "Chemicals",
+      },
+      congelados: {
+        cita:
+          "Our product travels frozen, so the schedule matters more than the price. They coordinate an early departure and it arrives within range. That is all I ask of a carrier.",
+        nombre: "Javiera Pizarro",
+        cargo: "Operations Manager",
+        empresa: "Acai Prime",
+        industria: "Frozen food",
+      },
+      gastronomia: {
+        cita:
+          "Early on we had a mismatch with one location's receiving hours. They fixed it by rerouting on their own, without me having to push. Eight months now without a supply gap.",
+        nombre: "Diego Sanhueza",
+        cargo: "Procurement Lead",
+        empresa: "American Prime Burger",
+        industria: "Food service",
+      },
+      abastecimiento: {
+        cita:
+          "We coordinate supply for several locations at once. What I needed was a single counterpart answering for every delivery, not five different carriers. That is what I have.",
+        nombre: "Paulina Herrera",
+        cargo: "Supply Coordinator",
+        empresa: "Restaurant Administration Center",
+        industria: "Food service support",
+      },
+      produccion: {
+        cita:
+          "We move rigging and production gear to site, almost always on a fixed date. We have not been late to an install.",
+        nombre: "Ignacio Rebolledo",
+        cargo: "Production Director",
+        empresa: "Main Brain",
+        industria: "Production",
       },
     },
     franja: {
@@ -760,7 +754,7 @@ export const en: Mensajes = {
 
   /* ── Pie de página ───────────────────────────────────────────────── */
   pie: {
-    descripcion: "Road freight transport across Chile, from Arica to Punta Arenas. Backed by the MainBrain group.",
+    descripcion: "Road freight transport across Chile, from Arica to Punta Arenas.",
     ctaCotizar: "Request a quote",
     columnaServicios: {
       titulo: "Services",
@@ -810,6 +804,5 @@ export const en: Mensajes = {
 
   /* ── Piezas compartidas ──────────────────────────────────────────── */
   comunes: {
-    fotoPendiente: "Photo pending",
   },
 };

@@ -6,23 +6,29 @@ import type { Mensajes } from "@/mensajes";
 /**
  * Tercera sección: reseñas, en carrusel infinito de dos hileras cruzadas.
  *
- * ⚠️⚠️ TESTIMONIOS SIN AUTORIZACIÓN — NO PUBLICAR ASÍ. ⚠️⚠️
+ * ⚠️ CITAS REDACTADAS — FALTA LA FIRMA DE CADA EMPRESA.
  *
- * Las seis citas están REDACTADAS y las seis personas SON INVENTADAS, pero
- * están atribuidas a empresas REALES E IDENTIFICABLES: Antofagasta Minerals,
- * Ultraport, Lhoist, Scan Global Logistics, Caleras San Juan y Proquimin.
+ * Las seis empresas son del entorno de MAIN BRAIN y fueron elegidas por el
+ * cliente justamente porque SÍ pueden autorizar: The Wallpaper Guys, Clean
+ * Controls, Acai Prime, American Prime Burger, Restaurant Administration
+ * Center y Main Brain. Eso resuelve el problema legal que tenía la versión
+ * anterior, que atribuía citas a mineras y puertos sin relación comercial.
  *
- * Eso no es un placeholder: es un testimonio falso a nombre de una empresa
- * que existe y que puede leerlo. Sirve para que el cliente vea cómo se ve la
- * sección terminada, y para nada más. Antes de apuntar un dominio real acá
- * hay que hacer una de estas tres cosas:
+ * Lo que falta es la autorización escrita de cada una. Las citas están
+ * redactadas, no recogidas: cada empresa tiene que leer la suya y aprobarla
+ * antes de que esto salga a un dominio real. Idealmente reemplazarla por lo
+ * que esa persona diría de verdad, que casi siempre es mejor.
  *
- *   a) Conseguir la cita real y la autorización firmada de cada empresa.
- *   b) Dejar el cargo y la industria, y sacar nombre y empresa.
- *   c) Sacar la sección.
+ * Cada cita habla de lo que esa empresa MUEVE, no de "calidad de servicio":
+ * The Wallpaper Guys importa por contenedor, Clean Controls mueve químicos,
+ * Acai Prime mueve congelado. Si mañana el cliente cambia una empresa por
+ * otra, la cita nueva tiene que hablar de la carga de esa empresa o se cae
+ * sola.
  *
- * Mientras tanto el sitio debería estar detrás de Deployment Protection en
- * Vercel. Ver la lista de pendientes en README.md.
+ * OJO con la de Main Brain: es del mismo grupo, no es un tercero, y el brief
+ * de desarrollo (§6.3) advierte que mencionar al grupo tecnológico frente a
+ * un comprador de logística resta más de lo que suma. Está porque el cliente
+ * la pidió; conviene revisarla antes de publicar.
  *
  * La tarjeta ya acepta la foto real (`foto: "/clientes/loquesea.webp"`) y no
  * hay que tocar nada más del diseño cuando lleguen.
@@ -69,12 +75,12 @@ type Resena = {
 function resenasDe(m: Mensajes): Resena[] {
   const t = m.resenas.testimonios;
   return [
-    t.mineria,
-    t.puerto,
-    t.industrial,
-    t.forwarder,
-    t.cal,
+    t.importacion,
     t.quimicos,
+    t.congelados,
+    t.gastronomia,
+    t.abastecimiento,
+    t.produccion,
   ];
 }
 

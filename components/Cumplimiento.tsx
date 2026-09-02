@@ -4,6 +4,7 @@ import { useId, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import Titulo from "./Titulo";
 import MarcoImagen from "./MarcoImagen";
+import type { ClaveEncargo } from "./datos/encargos-foto";
 import { IconoEscudo } from "./Iconos";
 import type { Mensajes } from "@/mensajes";
 
@@ -33,8 +34,8 @@ type Industria = {
    * una palabra, y por eso sí viene de `m`, es la de contenedores.
    */
   marco: string[];
-  /** Encargo de la foto que va en esta pestaña. */
-  foto: string;
+  /** Qué foto va en esta pestaña. El texto vive en datos/encargos-foto.ts. */
+  encargo: ClaveEncargo;
   titulo: string;
   detalle: string;
   puntos: string[];
@@ -55,7 +56,7 @@ function industrias(m: Mensajes): Industria[] {
       id: "mineria",
       nombre: c.mineria.nombre,
       marco: ["SICEP"],
-      foto: c.mineria.briefFoto,
+      encargo: "mineria" as const,
       titulo: c.mineria.titulo,
       detalle: c.mineria.detalle,
       puntos: [
@@ -68,7 +69,7 @@ function industrias(m: Mensajes): Industria[] {
       id: "peligrosa",
       nombre: c.peligrosa.nombre,
       marco: ["DS 298", "ASIQUIM"],
-      foto: c.peligrosa.briefFoto,
+      encargo: "peligrosa" as const,
       titulo: c.peligrosa.titulo,
       detalle: c.peligrosa.detalle,
       puntos: [
@@ -81,7 +82,7 @@ function industrias(m: Mensajes): Industria[] {
       id: "agro",
       nombre: c.agro.nombre,
       marco: ["SAG"],
-      foto: c.agro.briefFoto,
+      encargo: "refrigerada" as const,
       titulo: c.agro.titulo,
       detalle: c.agro.detalle,
       puntos: [
@@ -94,7 +95,7 @@ function industrias(m: Mensajes): Industria[] {
       id: "forestal",
       nombre: c.forestal.nombre,
       marco: ["CORMA"],
-      foto: c.forestal.briefFoto,
+      encargo: "forestal" as const,
       titulo: c.forestal.titulo,
       detalle: c.forestal.detalle,
       puntos: [
@@ -109,7 +110,7 @@ function industrias(m: Mensajes): Industria[] {
       // "Puerto" no es una sigla ni el código de una norma: es una palabra
       // que hay que traducir, al revés que los chips de las otras pestañas.
       marco: [c.contenedores.marcoPuerto],
-      foto: c.contenedores.briefFoto,
+      encargo: "contenedores" as const,
       titulo: c.contenedores.titulo,
       detalle: c.contenedores.detalle,
       puntos: [
@@ -259,10 +260,9 @@ export default function Cumplimiento({ m }: { m: Mensajes }) {
               </div>
 
               <MarcoImagen
-                m={m}
                 className="order-first h-[clamp(11rem,18vw,14rem)] rounded-[var(--r-img)] md:order-last md:h-full md:min-h-[15rem]"
                 icono={<IconoEscudo className="size-7" />}
-                brief={ind.foto}
+                encargo={ind.encargo}
               />
             </motion.div>
           </AnimatePresence>

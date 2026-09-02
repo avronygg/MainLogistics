@@ -205,7 +205,6 @@ export const pt: Mensajes = {
     tituloDestacado: "Nós cumprimos",
     bajada: "Cada carga tem sua norma, seu equipamento e sua documentação.",
     bajadaRealce: "Esta é a de cada uma.",
-    briefFoto: "Plano aberto da carreta carregada com mistura de carga: pallets, um contêiner e maquinário no mesmo pátio. É a foto que prova a versatilidade.",
     etiquetaTipos: "tipos de carga",
     tipos: {
       general: {
@@ -252,7 +251,6 @@ export const pt: Mensajes = {
     etiquetaPestanas: "Marcos normativos por setor",
     mineria: {
       nombre: "Mineração",
-      briefFoto: "Caminhão da Main entrando na mina: portaria, poeira, colete refletivo e o equipamento homologado à vista.",
       titulo: "A homologação é exigida antes de carregar.",
       detalle: "Documentação do transportador, do equipamento e do motorista, conferida e vigente no dia do despacho. Na portaria já é tarde.",
       puntos: {
@@ -263,7 +261,6 @@ export const pt: Mensajes = {
     },
     peligrosa: {
       nombre: "Carga perigosa",
-      briefFoto: "Detalhe do rótulo de substância perigosa na carreta, com a ficha de segurança em primeiro plano.",
       titulo: "O que não está rotulado não sai.",
       detalle: "Rotulagem conforme a classe da substância, ficha de segurança a bordo e motorista com curso vigente. A documentação viaja com a carga, não depois.",
       puntos: {
@@ -274,7 +271,6 @@ export const pt: Mensajes = {
     },
     agro: {
       nombre: "Agro e salmonicultura",
-      briefFoto: "Interior de um baú refrigerado com o registrador de temperatura na tela e a carga estivada.",
       titulo: "A cadeia de frio se rompe uma vez.",
       detalle: "Temperatura registrada durante toda a viagem, não só no carregamento e na descarga. Na safra, a janela de horário manda tanto quanto o termômetro.",
       puntos: {
@@ -285,7 +281,6 @@ export const pt: Mensajes = {
     },
     forestal: {
       nombre: "Florestal",
-      briefFoto: "Toras amarradas sobre a carreta em estrada de terra, com a cinta tensionada em primeiro plano.",
       titulo: "A amarração é conferida antes de sair e em cada parada.",
       detalle: "Volume alto em estradas nem sempre pavimentadas, com trânsito de operação na mesma rota.",
       puntos: {
@@ -297,7 +292,6 @@ export const pt: Mensajes = {
     contenedores: {
       nombre: "Contêineres",
       marcoPuerto: "Porto",
-      briefFoto: "Contêiner saindo do terminal portuário com o lacre visível na porta.",
       titulo: "A janela de retirada não espera.",
       detalle: "Coordenação com o terminal, lacre verificado e devolução dentro do prazo livre. Um dia de sobrestadia custa mais que o frete.",
       puntos: {
@@ -316,53 +310,53 @@ export const pt: Mensajes = {
     bajadaRealce: "atendem o telefone",
     bajadaFin: " quando um colega pergunta sobre nós.",
     testimonios: {
-      mineria: {
+      importacion: {
         cita:
-          "Trocaram o equipamento às onze da noite porque o que vinha não passava na portaria por causa da documentação. Ninguém me ligou para perguntar o que fazer: ligaram para avisar que já estava resolvido.",
-        nombre: "Rodrigo Ballesteros",
-        cargo: "Superintendente de Logística",
-        empresa: "Antucoya · Antofagasta Minerals",
-        industria: "Mineração",
-      },
-      puerto: {
-        cita:
-          "A retirada no porto é onde a maioria falha. Eles chegam com a documentação pronta e o contêiner sai. Não tenho muito mais a acrescentar.",
-        nombre: "Patricio Vergara",
-        cargo: "Gerente de Operações",
-        empresa: "Ultraport",
-        industria: "Porto",
-      },
-      industrial: {
-        cita:
-          "Antes eu passava a manhã ligando para saber por onde vinham os caminhões. Agora entro e vejo. Parece pouco, mas são quase duas horas por dia que recuperei.",
-        nombre: "Carolina Fuenzalida",
-        cargo: "Coordenadora de Expedição",
-        empresa: "Lhoist",
-        industria: "Minerais industriais",
-      },
-      forwarder: {
-        cita:
-          "Trabalhamos com vários transportadores e medimos todos igual: cumprimento da janela e estado da carga na chegada. A Main está há dois anos acima da nossa média. Por isso continua na lista.",
-        nombre: "Andrés Meneses",
-        cargo: "Gerente de Operações",
-        empresa: "Scan Global Logistics",
-        industria: "Operador logístico",
-      },
-      cal: {
-        cita:
-          "Tivemos um problema com uma entrega no primeiro mês. O que me convenceu foi como resolveram: me ligaram antes que eu percebesse.",
-        nombre: "Claudia Arriagada",
-        cargo: "Gerente de Logística",
-        empresa: "Caleras San Juan",
-        industria: "Cal e agregados",
+          "Importamos por contêiner e antes cada retirada era um problema diferente. Agora mando o BL e me avisam quando saiu do porto. Deixei de ficar em cima.",
+        nombre: "Matías Corvalán",
+        cargo: "Sócio fundador",
+        empresa: "The Wallpaper Guys",
+        industria: "Importação",
       },
       quimicos: {
         cita:
-          "Movimentamos carga perigosa e aí a documentação não se negocia. Já fomos fiscalizados em rota com eles e saímos sem apontamentos.",
-        nombre: "Felipe Cornejo",
-        cargo: "Gerente de SSMA",
-        empresa: "Proquimin",
-        industria: "Química",
+          "Movimentamos produtos químicos e aí a FISPQ e a rotulagem não são opcionais. Não tivemos nenhuma remessa devolvida por documentação.",
+        nombre: "Óscar Villablanca",
+        cargo: "Encarregado de Almoxarifado",
+        empresa: "Clean Controls",
+        industria: "Químicos",
+      },
+      congelados: {
+        cita:
+          "Nosso produto vai congelado, então o horário pesa mais que o preço. Coordenam a saída cedo e chega na faixa. É tudo o que peço de um transporte.",
+        nombre: "Javiera Pizarro",
+        cargo: "Gerente de Operações",
+        empresa: "Acai Prime",
+        industria: "Alimentos congelados",
+      },
+      gastronomia: {
+        cita:
+          "No começo tivemos um desencontro com o horário de recebimento de uma loja. Resolveram mudando a rota por conta própria, sem eu ter que insistir. São oito meses sem ruptura de abastecimento.",
+        nombre: "Diego Sanhueza",
+        cargo: "Responsável de Suprimentos",
+        empresa: "American Prime Burger",
+        industria: "Gastronomia",
+      },
+      abastecimiento: {
+        cita:
+          "Coordenamos o abastecimento de várias lojas ao mesmo tempo. O que eu precisava era de um único interlocutor respondendo por todas as entregas, não cinco transportadores diferentes. É o que tenho.",
+        nombre: "Paulina Herrera",
+        cargo: "Coordenadora de Suprimentos",
+        empresa: "Restaurant Administration Center",
+        industria: "Serviços para gastronomia",
+      },
+      produccion: {
+        cita:
+          "Movimentamos equipamentos de montagem para campo e quase sempre com data fixa. Não chegamos atrasados a nenhuma instalação.",
+        nombre: "Ignacio Rebolledo",
+        cargo: "Diretor de Produção",
+        empresa: "Main Brain",
+        industria: "Produção",
       },
     },
     franja: {
@@ -760,7 +754,7 @@ export const pt: Mensajes = {
 
   /* ── Pie de página ───────────────────────────────────────────────── */
   pie: {
-    descripcion: "Transporte rodoviário de cargas em todo o Chile, de Arica a Punta Arenas. Respaldo do grupo MainBrain.",
+    descripcion: "Transporte rodoviário de cargas em todo o Chile, de Arica a Punta Arenas.",
     ctaCotizar: "Cote sua carga",
     columnaServicios: {
       titulo: "Serviços",
@@ -810,6 +804,5 @@ export const pt: Mensajes = {
 
   /* ── Piezas compartidas ──────────────────────────────────────────── */
   comunes: {
-    fotoPendiente: "Foto pendente",
   },
 };

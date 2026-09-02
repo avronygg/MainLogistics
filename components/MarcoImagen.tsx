@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import type { Mensajes } from "@/mensajes";
+import { ENCARGOS, ROTULO_ENCARGO, type ClaveEncargo } from "./datos/encargos-foto";
 
 /**
  * Marco para una foto que todavía no existe.
@@ -15,23 +15,19 @@ import type { Mensajes } from "@/mensajes";
  * la misma clase de contenedor y no cambia nada más.
  */
 export default function MarcoImagen({
-  m,
-  brief,
+  encargo,
   icono,
   className = "",
   posicion = "centro",
   comoFondo = false,
   children,
 }: {
-  m: Mensajes;
   /**
-   * Qué hay que fotografiar. Es el encargo, no una descripción.
-   *
-   * Sigue llegando por prop y no por clave: cada brief es de la sección que
-   * lo pide, así que vive en el diccionario de esa sección. Acá solo entra
-   * el rótulo "Foto pendiente", que sí es el mismo en todos los marcos.
+   * Qué foto va acá. Solo la clave: el texto del encargo vive en
+   * `datos/encargos-foto.ts` y no pasa por el diccionario de idiomas, que se
+   * serializa entero al navegador. Ver ese archivo.
    */
-  brief: string;
+  encargo: ClaveEncargo;
   icono?: ReactNode;
   className?: string;
   /**
@@ -51,6 +47,22 @@ export default function MarcoImagen({
   children?: ReactNode;
 }) {
   const enEsquina = posicion === "esquina";
+
+  /**
+   * El encargo se ve mientras se trabaja y NO se publica.
+   *
+   * El brief de desarrollo (§1.3) encontró en producción el texto "Foto
+   * pendiente" seguido de la descripción del encuadre pedido al fotógrafo.
+   * Eso es una nota interna publicada: al visitante le dice que el sitio
+   * está a medio hacer, y no aporta nada.
+   *
+   * Sacarlo del todo habría matado la razón de ser del marco, que es que el
+   * encargo viva en el layout y no en una conversación que se pierde. Así
+   * que vive donde sirve —en `npm run dev`— y desaparece en el build.
+   * Cuando llegue la foto, se reemplaza el marco por un <Image> y este
+   * archivo se borra.
+   */
+  const mostrarEncargo = process.env.NODE_ENV === "development";
 
 
   return (
@@ -83,7 +95,9 @@ export default function MarcoImagen({
         }}
       />
 
-      {/* El encargo, dentro de un recuadro punteado que se lee como reserva. */}
+      {/* El encargo, dentro de un recuadro punteado que se lee como reserva.
+          Solo en desarrollo: ver `mostrarEncargo`. */}
+      {mostrarEncargo && (
       <div
         className={
           enEsquina
@@ -109,7 +123,7 @@ export default function MarcoImagen({
           >
             {icono}
             <span className="dato text-[10px] uppercase tracking-[0.14em]">
-              {m.comunes.fotoPendiente}
+              {ROTULO_ENCARGO}
             </span>
           </span>
           <span
@@ -118,10 +132,11 @@ export default function MarcoImagen({
               enEsquina ? "text-[11.5px]" : "text-[13px] leading-[1.5]",
             ].join(" ")}
           >
-            {brief}
+            {ENCARGOS[encargo]}
           </span>
         </div>
       </div>
+      )}
 
       {children}
     </div>

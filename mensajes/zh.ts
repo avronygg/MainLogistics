@@ -223,8 +223,6 @@ export const zh: Mensajes = {
     tituloDestacado: "我们逐项满足",
     bajada: "每类货物都有对应的规范、车型和单证。",
     bajadaRealce: "以下是每一类的要求。",
-    briefFoto:
-      "全景镜头：同一堆场内，挂车上混装托盘货物、一个集装箱和机械设备。这张照片用来证明承运能力的多样性。",
     etiquetaTipos: "类货物",
     tipos: {
       general: {
@@ -271,7 +269,6 @@ export const zh: Mensajes = {
     etiquetaPestanas: "各行业的规范框架",
     mineria: {
       nombre: "矿业",
-      briefFoto: "Main 的卡车驶入矿区：门禁、扬尘、反光背心，以及通过认证的车辆。",
       titulo: "准入认证要在装货之前完成。",
       detalle:
         "承运人、车辆和驾驶员的单证，在发运当天经过核查且处于有效期内。到了矿区门口再查就晚了。",
@@ -283,7 +280,6 @@ export const zh: Mensajes = {
     },
     peligrosa: {
       nombre: "危险品",
-      briefFoto: "挂车上危险品标识的特写，安全数据表位于前景。",
       titulo: "没有标识的货物，不予发运。",
       detalle:
         "按物质类别张贴标识，车上随带安全数据表，驾驶员持有效资格证。单证随货同行，而不是事后补。",
@@ -295,7 +291,6 @@ export const zh: Mensajes = {
     },
     agro: {
       nombre: "农业与三文鱼养殖",
-      briefFoto: "冷藏厢内部：温度记录仪显示屏与码放整齐的货物。",
       titulo: "冷链一旦中断，就无法挽回。",
       detalle:
         "全程记录温度，而不只是在装货和卸货时记录。在旺季，时间窗与温度计同样重要。",
@@ -307,7 +302,6 @@ export const zh: Mensajes = {
     },
     forestal: {
       nombre: "林业",
-      briefFoto: "土路上挂车装载的原木已绑扎固定，张紧的吊装带位于前景。",
       titulo: "绑扎在出发前和每次停车时都要检查。",
       detalle: "货量大，道路未必都是铺装路面，同一条路线上还有作业车辆通行。",
       puntos: {
@@ -319,7 +313,6 @@ export const zh: Mensajes = {
     contenedores: {
       nombre: "集装箱",
       marcoPuerto: "港口",
-      briefFoto: "集装箱驶出港口码头，箱门铅封清晰可见。",
       titulo: "提柜时间窗不等人。",
       detalle: "与码头协调、核验铅封，并在免箱期内还箱。滞箱一天的费用高于运费。",
       puntos: {
@@ -338,53 +331,53 @@ export const zh: Mensajes = {
     bajadaRealce: "愿意为我们接电话",
     bajadaFin: "的物流与采购负责人。",
     testimonios: {
-      mineria: {
+      importacion: {
         cita:
-          "有一次晚上十一点，原定车辆因证件问题无法通过矿区门岗，他们直接换了车。没人打电话问我怎么办，打来只是告诉我已经处理好了。",
-        nombre: "Rodrigo Ballesteros",
-        cargo: "物流总监",
-        empresa: "Antucoya · Antofagasta Minerals",
-        industria: "矿业",
-      },
-      puerto: {
-        cita:
-          "港口提柜是大多数承运商掉链子的环节。他们到场时单证齐备，柜子就能走。没别的可说。",
-        nombre: "Patricio Vergara",
-        cargo: "运营主管",
-        empresa: "Ultraport",
-        industria: "港口",
-      },
-      industrial: {
-        cita:
-          "以前我整个上午都在打电话确认车到哪了，现在登录系统就能看到。听起来是小事，但每天给我省下近两个小时。",
-        nombre: "Carolina Fuenzalida",
-        cargo: "发运协调员",
-        empresa: "Lhoist",
-        industria: "工业矿产",
-      },
-      forwarder: {
-        cita:
-          "我们合作多家承运商，考核标准一样：时间窗达成率和到货状态。Main 连续两年高于我们的平均值，所以一直在名单上。",
-        nombre: "Andrés Meneses",
-        cargo: "运营总监",
-        empresa: "Scan Global Logistics",
-        industria: "物流服务商",
-      },
-      cal: {
-        cita:
-          "第一个月有一次交付出了问题。真正让我认可的是他们的处理方式：我还没察觉，他们就先打电话来了。",
-        nombre: "Claudia Arriagada",
-        cargo: "物流经理",
-        empresa: "Caleras San Juan",
-        industria: "石灰与骨料",
+          "我们整柜进口，以前每次提柜都是新的麻烦。现在把提单发给他们，柜子出港就会通知我。不用再一直盯着了。",
+        nombre: "Matías Corvalán",
+        cargo: "创始合伙人",
+        empresa: "The Wallpaper Guys",
+        industria: "进口",
       },
       quimicos: {
         cita:
-          "我们运的是危险品，单证这一环没有商量余地。路上被查过，跟他们一起，没有任何问题。",
-        nombre: "Felipe Cornejo",
-        cargo: "安全环保经理",
-        empresa: "Proquimin",
+          "我们运化工产品，安全数据表和标签这两样没有商量余地。到现在没有一票货因为单证被退回。",
+        nombre: "Óscar Villablanca",
+        cargo: "仓储主管",
+        empresa: "Clean Controls",
         industria: "化工",
+      },
+      congelados: {
+        cita:
+          "我们的产品是冷冻的，时间比价格更重要。他们安排一早发车，到货温度在范围内。对承运商我就这一个要求。",
+        nombre: "Javiera Pizarro",
+        cargo: "运营经理",
+        empresa: "Acai Prime",
+        industria: "冷冻食品",
+      },
+      gastronomia: {
+        cita:
+          "刚开始有一家门店的收货时间对不上。他们主动改了路线解决，不用我催。到现在八个月没有断过货。",
+        nombre: "Diego Sanhueza",
+        cargo: "采购负责人",
+        empresa: "American Prime Burger",
+        industria: "餐饮",
+      },
+      abastecimiento: {
+        cita:
+          "我们同时为多家门店做补货。我需要的是一个对接方对所有配送负责，而不是五家不同的承运商。现在有了。",
+        nombre: "Paulina Herrera",
+        cargo: "采购协调员",
+        empresa: "Restaurant Administration Center",
+        industria: "餐饮配套服务",
+      },
+      produccion: {
+        cita:
+          "我们把搭建设备运到现场，基本都是固定日期。没有一次误了安装。",
+        nombre: "Ignacio Rebolledo",
+        cargo: "制作总监",
+        empresa: "Main Brain",
+        industria: "制作",
       },
     },
     franja: {
@@ -787,7 +780,7 @@ export const zh: Mensajes = {
   /* ── Pie de página ───────────────────────────────────────────────── */
   pie: {
     descripcion:
-      "覆盖智利全境的公路货物运输，从阿里卡到蓬塔阿雷纳斯。由 MainBrain 集团提供支持。",
+      "智利全境公路货物运输，覆盖自阿里卡至蓬塔阿雷纳斯。",
     ctaCotizar: "索取运输报价",
     columnaServicios: {
       titulo: "服务",
@@ -837,6 +830,5 @@ export const zh: Mensajes = {
 
   /* ── Piezas compartidas ──────────────────────────────────────────── */
   comunes: {
-    fotoPendiente: "照片待补充",
   },
 };

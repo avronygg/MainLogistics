@@ -228,7 +228,6 @@ export const es = {
     tituloDestacado: "Nosotros lo cumplimos",
     bajada: "Cada carga tiene su norma, su equipo y su documentación.",
     bajadaRealce: "Esta es la de cada una.",
-    briefFoto: "Plano abierto de la rampla cargada con mezcla de carga: pallets, un contenedor y maquinaria en el mismo patio. Es la foto que prueba la versatilidad.",
     etiquetaTipos: "tipos de carga",
     tipos: {
       general: {
@@ -275,7 +274,6 @@ export const es = {
     etiquetaPestanas: "Marcos normativos por industria",
     mineria: {
       nombre: "Minería",
-      briefFoto: "Camión de Main entrando a faena minera: portería, polvo, chaleco reflectante y el equipo homologado a la vista.",
       titulo: "La homologación se pide antes de cargar.",
       detalle: "Documentación del transportista, del equipo y del conductor, revisada y vigente el día del despacho. En la portería ya es tarde.",
       puntos: {
@@ -286,7 +284,6 @@ export const es = {
     },
     peligrosa: {
       nombre: "Carga peligrosa",
-      briefFoto: "Detalle del rótulo de sustancia peligrosa en la rampla, con la hoja de seguridad en primer plano.",
       titulo: "Lo que no está rotulado, no sale.",
       detalle: "Rotulación según la clase de la sustancia, hoja de seguridad a bordo y conductor con curso vigente. La documentación viaja con la carga, no después.",
       puntos: {
@@ -297,7 +294,6 @@ export const es = {
     },
     agro: {
       nombre: "Agro y salmonicultura",
-      briefFoto: "Interior de un furgón refrigerado con el registrador de temperatura en pantalla y la carga estibada.",
       titulo: "La cadena de frío se corta una vez.",
       detalle: "Temperatura registrada durante todo el viaje, no solo al cargar y al descargar. En temporada, la ventana horaria manda tanto como el termómetro.",
       puntos: {
@@ -308,7 +304,6 @@ export const es = {
     },
     forestal: {
       nombre: "Forestal",
-      briefFoto: "Rollizos amarrados sobre la rampla en camino de tierra, con la eslinga tensada en primer plano.",
       titulo: "El amarre se revisa antes de salir y en cada parada.",
       detalle: "Volumen alto sobre caminos que no siempre están pavimentados, con tránsito de faena en la misma ruta.",
       puntos: {
@@ -320,7 +315,6 @@ export const es = {
     contenedores: {
       nombre: "Contenedores",
       marcoPuerto: "Puerto",
-      briefFoto: "Contenedor saliendo del terminal portuario con el sello visible en la puerta.",
       titulo: "La ventana de retiro no espera.",
       detalle: "Coordinación con terminal, sello verificado y devolución dentro del plazo libre. Un día de sobreestadía cuesta más que el flete.",
       puntos: {
@@ -339,53 +333,53 @@ export const es = {
     bajadaRealce: "responden el teléfono",
     bajadaFin: " si un colega pregunta por nosotros.",
     testimonios: {
-      mineria: {
+      importacion: {
         cita:
-          "Nos cambiaron el equipo a las once de la noche porque el que venía no pasaba portería por un tema de documentación. Nadie me llamó para preguntarme qué hacer: me llamaron para avisarme que ya estaba resuelto.",
-        nombre: "Rodrigo Ballesteros",
-        cargo: "Superintendente de Logística",
-        empresa: "Antucoya · Antofagasta Minerals",
-        industria: "Minería",
-      },
-      puerto: {
-        cita:
-          "El retiro en puerto es donde se cae la mayoría. Ellos llegan con los papeles listos y el contenedor sale. No tengo mucho más que agregar.",
-        nombre: "Patricio Vergara",
-        cargo: "Jefe de Operaciones",
-        empresa: "Ultraport",
-        industria: "Puerto",
-      },
-      industrial: {
-        cita:
-          "Antes me pasaba la mañana llamando para saber por dónde venían los camiones. Ahora entro y lo veo. Suena chico, pero son casi dos horas al día que recuperé.",
-        nombre: "Carolina Fuenzalida",
-        cargo: "Coordinadora de Despachos",
-        empresa: "Lhoist",
-        industria: "Minerales industriales",
-      },
-      forwarder: {
-        cita:
-          "Trabajamos con varios transportistas y a todos los medimos igual: cumplimiento de ventana y estado de la carga al llegar. Main lleva dos años sobre nuestro promedio. Por eso sigue en la lista.",
-        nombre: "Andrés Meneses",
-        cargo: "Gerente de Operaciones",
-        empresa: "Scan Global Logistics",
-        industria: "Operador logístico",
-      },
-      cal: {
-        cita:
-          "Tuvimos un problema con una entrega el primer mes. Lo que me terminó de convencer fue cómo lo resolvieron: me llamaron ellos antes de que yo alcanzara a notarlo.",
-        nombre: "Claudia Arriagada",
-        cargo: "Jefa de Logística",
-        empresa: "Caleras San Juan",
-        industria: "Cal y áridos",
+          "Importamos por contenedor y antes cada retiro era un problema distinto. Ahora les mando el BL y me avisan cuando salió del puerto. Dejé de estar pendiente.",
+        nombre: "Matías Corvalán",
+        cargo: "Socio fundador",
+        empresa: "The Wallpaper Guys",
+        industria: "Importación",
       },
       quimicos: {
         cita:
-          "Movemos carga peligrosa y ahí la documentación no se negocia. Nos han fiscalizado en ruta con ellos y salimos sin observaciones.",
-        nombre: "Felipe Cornejo",
-        cargo: "Jefe de Prevención de Riesgos",
-        empresa: "Proquimin",
-        industria: "Química",
+          "Movemos productos químicos y ahí la hoja de seguridad y el rotulado no son opcionales. No hemos tenido que devolver un despacho por documentación.",
+        nombre: "Óscar Villablanca",
+        cargo: "Jefe de Bodega",
+        empresa: "Clean Controls",
+        industria: "Químicos",
+      },
+      congelados: {
+        cita:
+          "Nuestro producto va congelado, así que el horario pesa más que el precio. Coordinan la salida temprano y llega en rango. Es todo lo que le pido a un transporte.",
+        nombre: "Javiera Pizarro",
+        cargo: "Jefa de Operaciones",
+        empresa: "Acai Prime",
+        industria: "Alimentos congelados",
+      },
+      gastronomia: {
+        cita:
+          "Al principio tuvimos un desajuste con el horario de recepción de un local. Lo resolvieron cambiando la ruta ellos, sin que yo tuviera que insistir. Llevamos ocho meses sin un quiebre de abastecimiento.",
+        nombre: "Diego Sanhueza",
+        cargo: "Encargado de Abastecimiento",
+        empresa: "American Prime Burger",
+        industria: "Gastronomía",
+      },
+      abastecimiento: {
+        cita:
+          "Coordinamos el abastecimiento de varios locales a la vez. Lo que necesitaba era una sola contraparte que respondiera por todos los despachos, no cinco transportistas distintos. Eso lo tengo.",
+        nombre: "Paulina Herrera",
+        cargo: "Coordinadora de Abastecimiento",
+        empresa: "Restaurant Administration Center",
+        industria: "Servicios para gastronomía",
+      },
+      produccion: {
+        cita:
+          "Movemos equipos de montaje a terreno y casi siempre con fecha fija. No hemos llegado tarde a una instalación.",
+        nombre: "Ignacio Rebolledo",
+        cargo: "Director de Producción",
+        empresa: "Main Brain",
+        industria: "Producción",
       },
     },
     franja: {
@@ -783,7 +777,7 @@ export const es = {
 
   /* ── Pie de página ───────────────────────────────────────────────── */
   pie: {
-    descripcion: "Transporte de carga por carretera en todo Chile, de Arica a Punta Arenas. Respaldo del grupo MainBrain.",
+    descripcion: "Transporte de carga por carretera en todo Chile, de Arica a Punta Arenas.",
     ctaCotizar: "Cotice su carga",
     columnaServicios: {
       titulo: "Servicios",
@@ -833,7 +827,6 @@ export const es = {
 
   /* ── Piezas compartidas ──────────────────────────────────────────── */
   comunes: {
-    fotoPendiente: "Foto pendiente",
   },
 };
 

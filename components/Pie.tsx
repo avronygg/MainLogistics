@@ -64,10 +64,6 @@ export default function Pie({ m }: { m: Mensajes }) {
 
   // La bajada viaja entera en el diccionario y se parte acá por el nombre
   // del grupo, que no se traduce y aparece igual en los cuatro idiomas. Así
-  // el resaltado sigue al nombre aunque en otra lengua caiga en otro lugar
-  // de la oración, en vez de obligar a cortar la frase en dos claves.
-  const [antesDelGrupo, despuesDelGrupo = ""] =
-    m.pie.descripcion.split("MainBrain");
 
   return (
     <footer
@@ -96,9 +92,7 @@ export default function Pie({ m }: { m: Mensajes }) {
             />
 
             <p className="mt-5 max-w-[38ch] text-[15px] leading-[1.6] text-[var(--texto-sec)]">
-              {antesDelGrupo}
-              <span className="text-[var(--texto)]">MainBrain</span>
-              {despuesDelGrupo}
+              {m.pie.descripcion}
             </p>
 
             <a
