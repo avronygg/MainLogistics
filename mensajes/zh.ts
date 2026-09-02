@@ -815,6 +815,78 @@ export const zh: Mensajes = {
     consentimientoEnlace: "我们如何处理您的资料",
   },
 
+  /* ── Verificador de Resolución 154 ───────────────────────────────────
+     仅为界面。十项要求保留西班牙语，位于
+     `components/datos/resolucion154.ts`。 */
+  verificador: {
+    enlace: "运输单据核查",
+    titulo: "自11月1日起",
+    destacado: "您的运输单据需要补充资料",
+    bajada:
+      "凡在智利境内随货同行的运输单或发票，均须满足十项新要求。在开始罚款之前，先在此核查一遍。",
+    intro:
+      "智利税务局第154号决议自2026年11月1日起施行，改变了随货单据必须载明的内容：实际起运地与目的地、驾驶员身份、车辆牌照，以及真实的起运时间。请填写贵司单据现有的内容，我们会指出缺少哪几项，并附上对应的条款出处。",
+    descargo:
+      "本工具仅供参考，不构成税务咨询。它核对贵司单据是否载有法规要求的数据，不会查询智利税务局，不读取已开具的XML，也不能替代贵司的会计。",
+    fuentes: "官方原文",
+    avisoIdioma:
+      "各项要求保留西班牙语：它们出自智利税法，字段名称是智利税务局电子单据格式的标签，不作翻译。",
+    formulario: {
+      direccion: "详细地址",
+      nombreChofer: "驾驶员全名",
+      rutChofer: "驾驶员身份证号",
+      rutTransportista: "承运企业税号",
+      patente: "牵引车牌照",
+      patenteCarro: "挂车牌照",
+      sinCarro: "本次运输不带挂车",
+      sinPatente: "尚不知道牌照，并已在单据中载明此情况",
+      bienNombre: "货物名称与描述",
+      bienCantidad: "数量",
+      bienUnidad: "计量单位",
+      bienPeso: "重量或体积",
+      bienPrecio: "单价",
+      sinPrecio: "非销售性质，并已载明运输事由",
+      tipoTraslado: "运输类型",
+      elijaTipo: "请选择类型",
+      fechaSalida: "起运日期",
+      horaSalida: "起运时间",
+      unaPorVehiculo: "每次运输、每台车辆各开一份单据",
+      prolongado: "本次运输超过一天",
+      fechaLlegada: "预计送达日期",
+      declaraProlongado: "已在单据明细中载明，并附事由",
+      si: "是",
+      no: "否",
+    },
+    errores: {
+      requerido: "此项尚未填写",
+      rutFormato: "不像智利税号，格式为 12345678-9",
+      rutDigito: "校验位与该号码不符",
+      patenteFormato: "不像智利牌照，格式为 AB1234 或 BBCC12",
+    },
+    acciones: {
+      revisar: "核查我的单据",
+      limpiar: "重新开始",
+      imprimir: "打印或存为PDF",
+    },
+    resultado: {
+      titulo: "核查结果",
+      cumple: "贵司单据已具备法规要求的全部内容",
+      cumpleTexto:
+        "根据您填写的内容，该单据符合第154号决议的要求。请保存本次核查记录；流程变更后建议重新核查。",
+      noCumple: "{total} 项中有 {n} 项未满足",
+      noCumpleTexto:
+        "下方标出的每一项，都是11月1日起单据必须载明的内容。旁边附有对应条款，便于您对照原文核实。",
+      listo: "已具备",
+      pendiente: "缺少",
+      noAplica: "不适用",
+      revisadoEl: "核查日期",
+      ctaTitulo: "Main 自首趟运输起即开具合规单据",
+      ctaTexto:
+        "如果贵司不打算自行处理，我们的单据已按上述字段开具。告诉我们您要运什么，24小时内答复。",
+      ctaBoton: "索取报价",
+    },
+  },
+
   /* ── Asesor flotante ─────────────────────────────────────────────── */
   asesor: {
     whatsappMensaje: "您好，我想咨询货运报价。",

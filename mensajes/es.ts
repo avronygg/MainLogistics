@@ -818,6 +818,79 @@ export const es = {
     consentimientoEnlace: "Qué hacemos con sus datos",
   },
 
+  /* ── Verificador de Resolución 154 ───────────────────────────────────
+     Solo la interfaz. Los diez requisitos y sus referencias viven en
+     `components/datos/resolucion154.ts`, en español: es una norma chilena
+     y sus campos son etiquetas del formato DTE. */
+  verificador: {
+    enlace: "Verificador de guías",
+    titulo: "Desde el 1 de noviembre",
+    destacado: "su guía necesita más datos",
+    bajada:
+      "Diez exigencias nuevas para toda guía de despacho o factura que ampare un traslado. Revise las suyas acá antes de que empiecen a cursar multas.",
+    intro:
+      "La Resolución 154 del SII empieza a regir el 1 de noviembre de 2026. Cambia qué tiene que decir el documento que viaja con la carga: origen y destino efectivos, quién maneja, qué patente lleva y a qué hora salió de verdad. Complete lo que trae su guía y le decimos qué falta, con la referencia al resolutivo que lo exige.",
+    descargo:
+      "Esto orienta, no es asesoría tributaria. Revisa que su documento traiga los datos que la norma pide; no consulta al SII, no revisa el XML emitido y no reemplaza a su contador.",
+    fuentes: "Texto oficial",
+    avisoIdioma:
+      "Los requisitos van en español porque son los de una norma chilena y sus campos son etiquetas del formato DTE del SII, que no se traducen.",
+    formulario: {
+      direccion: "Dirección",
+      nombreChofer: "Nombre completo del chofer",
+      rutChofer: "Cédula del chofer",
+      rutTransportista: "RUT del transportista",
+      patente: "Patente del vehículo",
+      patenteCarro: "Patente del carro",
+      sinCarro: "El traslado va sin carro",
+      sinPatente: "No conozco las patentes y lo declaro en el documento",
+      bienNombre: "Nombre y descripción de los bienes",
+      bienCantidad: "Cantidad",
+      bienUnidad: "Unidad de medida",
+      bienPeso: "Peso o volumen",
+      bienPrecio: "Precio unitario",
+      sinPrecio: "No es venta, y consigno el motivo del traslado",
+      tipoTraslado: "Tipo de traslado",
+      elijaTipo: "Elija el tipo",
+      fechaSalida: "Fecha de inicio del traslado",
+      horaSalida: "Hora de inicio",
+      unaPorVehiculo: "Emito una guía por cada traslado y por cada vehículo",
+      prolongado: "Este traslado dura más de un día",
+      fechaLlegada: "Fecha estimada de entrega",
+      declaraProlongado: "Lo declaro en el detalle de la guía, con el motivo",
+      si: "Sí",
+      no: "No",
+    },
+    errores: {
+      requerido: "Falta este dato",
+      rutFormato: "No parece un RUT. Se escribe 12345678-9",
+      rutDigito: "El dígito verificador no corresponde a ese número",
+      patenteFormato: "No parece una patente chilena. AB1234 o BBCC12",
+    },
+    acciones: {
+      revisar: "Revisar mi guía",
+      limpiar: "Empezar de nuevo",
+      imprimir: "Imprimir o guardar en PDF",
+    },
+    resultado: {
+      titulo: "Resultado",
+      cumple: "Su guía trae todo lo que la norma exige",
+      cumpleTexto:
+        "Con lo que declaró, el documento cumple lo que exige la Resolución 154. Guarde esta revisión y repítala si cambia su proceso.",
+      noCumple: "{n} de {total} sin cumplir",
+      noCumpleTexto:
+        "Cada punto marcado abajo es un dato que la guía tiene que traer desde el 1 de noviembre. Al lado va el resolutivo que lo exige, para que pueda verificarlo en la fuente.",
+      listo: "Está",
+      pendiente: "Falta",
+      noAplica: "No aplica",
+      revisadoEl: "Revisado el",
+      ctaTitulo: "Main emite guías conformes desde el primer viaje",
+      ctaTexto:
+        "Si prefiere no resolver esto por dentro, nosotros ya emitimos con estos campos. Cuéntenos qué mueve y le respondemos en 24 horas.",
+      ctaBoton: "Cotizar mi carga",
+    },
+  },
+
   /* ── Asesor flotante ─────────────────────────────────────────────── */
   asesor: {
     whatsappMensaje: "Hola, quiero cotizar un transporte de carga.",

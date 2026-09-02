@@ -470,3 +470,55 @@ p {
     var(--font-geist-mono), ui-monospace, "PingFang SC", "Microsoft YaHei",
     monospace;
 }
+
+/* ── Impresión ─────────────────────────────────────────────────────────
+   Existe por el verificador de Resolución 154: el brief §8.1 pide poder
+   descargar el resultado en PDF, y el navegador ya sabe hacer un PDF. La
+   alternativa era cargar un generador de PDF de cientos de kilobytes para
+   producir algo peor y sin texto seleccionable.
+
+   Lo que se imprime es el resultado, no la página: fuera el nav flotante,
+   el pie, el asesor y el formulario ya respondido. Y en negro sobre blanco,
+   porque el tema oscuro en papel gasta tinta y se lee peor. */
+@media print {
+  :root {
+    --texto: #000;
+    --texto-sec: #333;
+    --borde: #bbb;
+  }
+
+  header[class*="fixed"],
+  footer,
+  [data-asesor] {
+    display: none !important;
+  }
+
+  body,
+  .tema-claro,
+  main {
+    background: #fff !important;
+    color: #000 !important;
+  }
+
+  main {
+    padding-top: 0 !important;
+  }
+
+  .tema-claro > div {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  /* Ninguna fila del resultado se parte entre dos hojas: una exigencia
+     cortada por la mitad es justo la que después no se lee. */
+  li,
+  dl > div {
+    break-inside: avoid;
+  }
+
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.75em;
+    color: #555;
+  }
+}

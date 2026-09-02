@@ -790,6 +790,78 @@ export const en: Mensajes = {
     consentimientoEnlace: "What we do with your data",
   },
 
+  /* ── Verificador de Resolución 154 ───────────────────────────────────
+     Interface only. The ten requirements stay in Spanish, in
+     `components/datos/resolucion154.ts`. */
+  verificador: {
+    enlace: "Dispatch guide checker",
+    titulo: "From 1 November",
+    destacado: "your dispatch guide needs more",
+    bajada:
+      "Ten new requirements for every dispatch guide or invoice covering a shipment in Chile. Check yours here before the fines start.",
+    intro:
+      "Chile's SII Resolution 154 takes effect on 1 November 2026. It changes what the document travelling with the cargo has to say: the actual origin and destination, who is driving, which plates the truck carries and what time it really left. Fill in what your guide contains and we will tell you what is missing, with the clause that requires it.",
+    descargo:
+      "This is guidance, not tax advice. It checks whether your document carries the data the rule asks for. It does not query the SII, does not read the XML you issued, and does not replace your accountant.",
+    fuentes: "Official text",
+    avisoIdioma:
+      "The requirements stay in Spanish: they belong to a Chilean tax rule and their fields are tags of the SII electronic document format, which are not translated.",
+    formulario: {
+      direccion: "Street address",
+      nombreChofer: "Driver's full name",
+      rutChofer: "Driver's ID number",
+      rutTransportista: "Carrier's tax ID",
+      patente: "Truck plate",
+      patenteCarro: "Trailer plate",
+      sinCarro: "This shipment has no trailer",
+      sinPatente: "I do not know the plates, and I state so in the document",
+      bienNombre: "Name and description of the goods",
+      bienCantidad: "Quantity",
+      bienUnidad: "Unit of measure",
+      bienPeso: "Weight or volume",
+      bienPrecio: "Unit price",
+      sinPrecio: "Not a sale, and I state the reason for the shipment",
+      tipoTraslado: "Type of shipment",
+      elijaTipo: "Select the type",
+      fechaSalida: "Date the shipment starts",
+      horaSalida: "Start time",
+      unaPorVehiculo: "I issue one guide per shipment and per vehicle",
+      prolongado: "This shipment takes more than one day",
+      fechaLlegada: "Estimated delivery date",
+      declaraProlongado: "I state it in the guide's detail, with the reason",
+      si: "Yes",
+      no: "No",
+    },
+    errores: {
+      requerido: "This one is missing",
+      rutFormato: "That does not look like a Chilean ID. It is written 12345678-9",
+      rutDigito: "The check digit does not match that number",
+      patenteFormato: "That does not look like a Chilean plate. AB1234 or BBCC12",
+    },
+    acciones: {
+      revisar: "Check my guide",
+      limpiar: "Start over",
+      imprimir: "Print or save as PDF",
+    },
+    resultado: {
+      titulo: "Result",
+      cumple: "Your guide carries everything the rule requires",
+      cumpleTexto:
+        "Based on what you entered, the document meets what Resolution 154 requires. Keep this check, and run it again if your process changes.",
+      noCumple: "{n} of {total} not met",
+      noCumpleTexto:
+        "Each point marked below is data the guide has to carry from 1 November. Next to it is the clause that requires it, so you can verify it at the source.",
+      listo: "Covered",
+      pendiente: "Missing",
+      noAplica: "Does not apply",
+      revisadoEl: "Checked on",
+      ctaTitulo: "Main issues compliant guides from the first trip",
+      ctaTexto:
+        "If you would rather not solve this in house, we already issue with these fields. Tell us what you move and we answer within 24 hours.",
+      ctaBoton: "Get a quote",
+    },
+  },
+
   /* ── Asesor flotante ─────────────────────────────────────────────── */
   asesor: {
     whatsappMensaje: "Hello, I would like a freight quote.",

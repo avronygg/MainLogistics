@@ -790,6 +790,78 @@ export const pt: Mensajes = {
     consentimientoEnlace: "O que fazemos com seus dados",
   },
 
+  /* ── Verificador de Resolución 154 ───────────────────────────────────
+     Só a interface. Os dez requisitos ficam em espanhol, em
+     `components/datos/resolucion154.ts`. */
+  verificador: {
+    enlace: "Verificador de guias",
+    titulo: "A partir de 1º de novembro",
+    destacado: "sua guia precisa de mais dados",
+    bajada:
+      "Dez exigências novas para toda guia de despacho ou nota fiscal que ampare um transporte no Chile. Confira a sua aqui antes que comecem as multas.",
+    intro:
+      "A Resolução 154 do SII chileno entra em vigor em 1º de novembro de 2026. Ela muda o que o documento que viaja com a carga precisa dizer: origem e destino efetivos, quem dirige, qual placa o caminhão leva e a que horas saiu de verdade. Preencha o que a sua guia traz e dizemos o que falta, com a referência ao dispositivo que exige.",
+    descargo:
+      "Isto orienta, não é assessoria tributária. Confere se o seu documento traz os dados que a norma pede. Não consulta o SII, não lê o XML emitido e não substitui o seu contador.",
+    fuentes: "Texto oficial",
+    avisoIdioma:
+      "Os requisitos ficam em espanhol: são de uma norma tributária chilena e seus campos são etiquetas do formato de documento eletrônico do SII, que não se traduzem.",
+    formulario: {
+      direccion: "Endereço",
+      nombreChofer: "Nome completo do motorista",
+      rutChofer: "Documento de identidade do motorista",
+      rutTransportista: "CNPJ ou RUT da transportadora",
+      patente: "Placa do veículo",
+      patenteCarro: "Placa da carreta",
+      sinCarro: "O transporte vai sem carreta",
+      sinPatente: "Não sei as placas, e declaro isso no documento",
+      bienNombre: "Nome e descrição dos bens",
+      bienCantidad: "Quantidade",
+      bienUnidad: "Unidade de medida",
+      bienPeso: "Peso ou volume",
+      bienPrecio: "Preço unitário",
+      sinPrecio: "Não é venda, e informo o motivo do transporte",
+      tipoTraslado: "Tipo de transporte",
+      elijaTipo: "Escolha o tipo",
+      fechaSalida: "Data de início do transporte",
+      horaSalida: "Hora de início",
+      unaPorVehiculo: "Emito uma guia por transporte e por veículo",
+      prolongado: "Este transporte dura mais de um dia",
+      fechaLlegada: "Data estimada de entrega",
+      declaraProlongado: "Declaro no detalhe da guia, com o motivo",
+      si: "Sim",
+      no: "Não",
+    },
+    errores: {
+      requerido: "Falta este dado",
+      rutFormato: "Não parece um RUT chileno. Escreve-se 12345678-9",
+      rutDigito: "O dígito verificador não corresponde a esse número",
+      patenteFormato: "Não parece uma placa chilena. AB1234 ou BBCC12",
+    },
+    acciones: {
+      revisar: "Conferir minha guia",
+      limpiar: "Começar de novo",
+      imprimir: "Imprimir ou salvar em PDF",
+    },
+    resultado: {
+      titulo: "Resultado",
+      cumple: "Sua guia traz tudo o que a norma exige",
+      cumpleTexto:
+        "Com o que você informou, o documento cumpre o que a Resolução 154 exige. Guarde esta conferência e repita se o seu processo mudar.",
+      noCumple: "{n} de {total} sem cumprir",
+      noCumpleTexto:
+        "Cada ponto marcado abaixo é um dado que a guia precisa trazer a partir de 1º de novembro. Ao lado vai o dispositivo que exige, para você verificar na fonte.",
+      listo: "Tem",
+      pendiente: "Falta",
+      noAplica: "Não se aplica",
+      revisadoEl: "Conferido em",
+      ctaTitulo: "A Main emite guias conformes desde a primeira viagem",
+      ctaTexto:
+        "Se preferir não resolver isso internamente, nós já emitimos com esses campos. Conte o que você move e respondemos em 24 horas.",
+      ctaBoton: "Cotar minha carga",
+    },
+  },
+
   /* ── Asesor flotante ─────────────────────────────────────────────── */
   asesor: {
     whatsappMensaje: "Olá, quero cotar um transporte de carga.",

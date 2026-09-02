@@ -84,6 +84,24 @@ function numeros(s) {
 }
 
 /* Palabras que este sitio no usa en ningún idioma. */
+/**
+ * Las tres claves donde el chino escribe la fecha con el mes en número.
+ *
+ * "1 de noviembre de 2026" se escribe 2026年11月1日: aparece un 11 que en
+ * español es una palabra, y el año va primero. La comparación de cifras lo
+ * lee como una cifra alterada, y no lo es: es la misma fecha.
+ *
+ * La lista va enumerada a mano y no como una regla general de "en chino no
+ * se revisan las cifras". Esa regla apagaría la única prueba que impide que
+ * una traducción prometa un tonelaje o un plazo distinto del español, que es
+ * justamente para lo que existe.
+ */
+const FECHA_EN_CHINO = new Set([
+  'verificador.titulo',
+  'verificador.intro',
+  'verificador.resultado.noCumpleTexto',
+]);
+
 const PROHIBIDAS = {
   en: /\b(world-class|best-in-class|cutting-edge|seamless|unlock|empower\w*|revolutioniz\w+|disrupt\w*|leading provider|industry leader|state-of-the-art)\b/i,
   pt: /\b(líder de mercado|excelência|solu[çc][ãa]o inovadora|revolucion\w+|disrup\w+|classe mundial|parceiro estratégico)\b/i,
@@ -126,6 +144,7 @@ for (const id of IDIOMAS) {
   const cifrasMal = [];
   for (const [k, v] of es) {
     if (!t.has(k)) continue;
+    if (id === 'zh' && FECHA_EN_CHINO.has(k)) continue;
     const a = numeros(v).join('|');
     const b = numeros(t.get(k)).join('|');
     if (a !== b) cifrasMal.push(`${k}: "${a}" → "${b}"`);

@@ -189,6 +189,8 @@ export default function Asesor({ m }: { m: Mensajes }) {
 
   return (
     <div
+      // Marca de impresión: el widget no va en el papel. Ver @media print.
+      data-asesor=""
       // Se aparta mientras el formulario de cotización está en pantalla: el
       // botón "Siguiente" del formulario vive en una barra pegada al fondo,
       // y en un teléfono este widget se le para justo encima. Entre tapar el

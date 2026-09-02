@@ -57,6 +57,11 @@ function columnas(m: Mensajes, idioma: Idioma) {
         { href: `${inicio}#cargas`, texto: m.pie.columnaServicios.queMovemos },
         { href: `${inicio}#cobertura`, texto: m.pie.columnaServicios.cobertura },
         { href: `${inicio}#cumplimiento`, texto: m.pie.columnaServicios.cumplimiento },
+        /* El verificador va acá y no en la columna legal. Esa columna es la
+           letra chica del sitio; esto es una herramienta que Main ofrece, y
+           enterrarla entre la política de privacidad y los términos la
+           esconde de la única persona que la anda buscando. */
+        { href: `${inicio}/verificador-resolucion-154`, texto: m.verificador.enlace },
       ],
     },
     {
