@@ -73,13 +73,11 @@ function columnas(m: Mensajes, idioma: Idioma) {
         { href: `${inicio}/cotizar`, texto: m.pie.columnaEmpresa.cotizar },
       ],
     },
-    {
-      titulo: m.legal.columna,
-      enlaces: [
-        { href: `${inicio}/legal/privacidad`, texto: m.legal.privacidad },
-        { href: `${inicio}/legal/terminos`, texto: m.legal.terminos },
-      ],
-    },
+    /* Las legales NO son una cuarta columna. Lo fueron un rato y rompieron
+       el pie: cuatro columnas junto al bloque de marca no caben entre 640 y
+       1024, la columna de la descripción colapsaba a una palabra por línea
+       y el resto se recortaba contra el `overflow-hidden`. Van en la barra
+       inferior, que además es donde se buscan. */
   ];
 }
 
@@ -104,7 +102,7 @@ export default function Pie({ m, idioma }: { m: Mensajes; idioma: Idioma }) {
         }}
       />
       <div className="relative mx-auto w-full max-w-[var(--ancho-max)] px-[var(--borde-x)] py-[clamp(3rem,6vw,5rem)]">
-        <div className="grid gap-x-10 gap-y-10 md:grid-cols-[minmax(0,1fr)_auto] lg:gap-x-20">
+        <div className="grid gap-x-10 gap-y-10 lg:grid-cols-[minmax(0,19rem)_minmax(0,1fr)] lg:gap-x-14">
           <div className="max-w-[34rem]">
             <Image
               src="/logo-horizontal-blanco.png"
@@ -138,7 +136,7 @@ export default function Pie({ m, idioma }: { m: Mensajes; idioma: Idioma }) {
             </Link>
           </div>
 
-          <div className="grid grid-cols-2 gap-x-10 gap-y-8 lg:grid-cols-4 lg:gap-x-12">
+          <div className="grid grid-cols-2 gap-x-10 gap-y-8 sm:grid-cols-3 lg:gap-x-12">
             {columnas(m, idioma).map((col) => (
               <nav key={col.titulo} aria-label={col.titulo}>
                 <h2 className="text-[13px] font-semibold tracking-[-0.01em] text-[var(--texto)]">
@@ -159,13 +157,13 @@ export default function Pie({ m, idioma }: { m: Mensajes; idioma: Idioma }) {
               </nav>
             ))}
 
-            <div className="col-span-2 lg:col-span-1">
+            <div className="col-span-2 sm:col-span-1">
               <h2 className="text-[13px] font-semibold tracking-[-0.01em] text-[var(--texto)]">
                 {m.pie.contacto.titulo}
               </h2>
               {/* Los datos legales van en mono: se leen como registro
                   verificable, que es exactamente su función acá. */}
-              <ul className="vidrio dato mt-4 flex flex-col gap-2.5 rounded-[var(--r-card)] p-4 text-[13px] leading-[1.5] text-[var(--texto-sec)]">
+              <ul className="vidrio dato mt-4 flex flex-col gap-2.5 rounded-[var(--r-card)] p-4 text-[13px] leading-[1.5] text-[var(--texto-sec)] [overflow-wrap:anywhere]">
                 <li>
                   <a
                     href={`tel:${TELEFONO_ENLACE}`}
@@ -187,10 +185,28 @@ export default function Pie({ m, idioma }: { m: Mensajes; idioma: Idioma }) {
           </div>
         </div>
 
-        <div className="mt-[clamp(2.5rem,5vw,4rem)] flex flex-col gap-3 border-t border-[color-mix(in_oklab,var(--borde)_50%,transparent)] pt-6 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-[clamp(2.5rem,5vw,4rem)] flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-[color-mix(in_oklab,var(--borde)_50%,transparent)] pt-6 sm:justify-between">
           <p className="text-[13px] text-[var(--texto-sec)]">
             © {año} Main Logistics · {m.pie.derechos}
           </p>
+
+          {/* Privacidad y términos acá abajo, que es donde se buscan y donde
+              no compiten por ancho con las columnas de navegación. */}
+          <ul className="flex flex-wrap items-center gap-x-5 gap-y-2">
+            {[
+              { href: `/${idioma}/legal/privacidad`, texto: m.legal.privacidad },
+              { href: `/${idioma}/legal/terminos`, texto: m.legal.terminos },
+            ].map((e) => (
+              <li key={e.href}>
+                <Link
+                  href={e.href}
+                  className="text-[13px] text-[var(--texto-sec)] transition-colors duration-[var(--dur-hover)] hover:text-[var(--texto)]"
+                >
+                  {e.texto}
+                </Link>
+              </li>
+            ))}
+          </ul>
           {/* Dos comunas y una flecha: no hay nada que traducir acá. Arica y
               Punta Arenas son la dirección real de un lugar y se escriben
               igual en los cuatro idiomas, así que la línea no va al
