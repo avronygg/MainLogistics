@@ -175,7 +175,7 @@ export const es = {
         titulo: {
           inicio: "Vea su carga en",
           realce: "tiempo real",
-          fin: ", no espere el llamado.",
+          fin: ", sin tener que llamar para saberlo.",
         },
         detalle: {
           realce: "GPS y monitoreo permanente.",
@@ -398,7 +398,7 @@ export const es = {
     hitos: {
       cotizacion: {
         titulo: "Cotización",
-        detalle: "Usted nos dice qué mueve, desde dónde y hasta dónde. Le devolvemos una evaluación de factibilidad de la ruta, no un precio suelto.",
+        detalle: "Usted nos dice qué mueve, desde dónde y hasta dónde. Le respondemos si podemos tomarla y con qué equipo.",
         dato: "Respuesta por correo",
       },
       retiro: {
@@ -436,7 +436,7 @@ export const es = {
     estandares: {
       papeles: {
         titulo: "Papeles al día, revisados",
-        detalle: "Documentación del transportista, del equipo y del conductor, revisada y vigente el día del despacho.",
+        detalle: "Los papeles se revisan la mañana del despacho, no al firmar el contrato. Un permiso que venció esa semana detiene el camión igual.",
       },
       experiencia: {
         titulo: "Experiencia en la carga que usted mueve",
@@ -468,7 +468,7 @@ export const es = {
   cotizar: {
     tituloLinea1: "Cotice su carga.",
     tituloDestacado: "Le respondemos en 24 horas",
-    bajada: "Cuéntenos qué mueve y le devolvemos una evaluación de factibilidad de la ruta, no un precio suelto.",
+    bajada: "Cuéntenos qué mueve y le decimos si la ruta nos calza, con qué equipo y en qué plazo.",
     garantias: {
       respuesta: "Le respondemos en menos de 24 horas hábiles",
       sinCompromiso: "Sin compromiso ni registro previo",
@@ -682,7 +682,7 @@ export const es = {
         etiqueta: "Hasta 1.000 UF",
       },
       de1000a3000: {
-        etiqueta: "1.000 – 3.000 UF",
+        etiqueta: "1.000 a 3.000 UF",
       },
       masDe3000: {
         etiqueta: "Más de 3.000 UF",
@@ -736,7 +736,7 @@ export const es = {
     },
     resumen: {
       titulo: "Revise antes de enviar",
-      bajada: "Si algo no está bien, edítelo y vuelve acá mismo.",
+      bajada: "Si algo no está bien, edítelo. Vuelve a esta pantalla.",
       editar: "Editar",
       tipoCarga: "Tipo de carga",
       equipo: "Equipo",

@@ -170,7 +170,7 @@ export const zh: Mensajes = {
         titulo: {
           inicio: "您的货物",
           realce: "实时可见",
-          fin: "，不必等电话。",
+          fin: "，不用打电话去问。",
         },
         detalle: {
           realce: "GPS 全程持续监控。",
@@ -270,8 +270,7 @@ export const zh: Mensajes = {
     mineria: {
       nombre: "矿业",
       titulo: "准入认证要在装货之前完成。",
-      detalle:
-        "承运人、车辆和驾驶员的单证，在发运当天经过核查且处于有效期内。到了矿区门口再查就晚了。",
+      detalle: "承运人、车辆和驾驶员的单证，在发运当天经过核查且处于有效期内。到了矿区门口再查就晚了。",
       puntos: {
         homologacion: "承运人与车辆的矿区准入认证",
         fatiga: "在途疲劳驾驶管理与休息安排",
@@ -397,7 +396,7 @@ export const zh: Mensajes = {
       cotizacion: {
         titulo: "报价",
         detalle:
-          "您告诉我们运什么、从哪里到哪里。我们回复的是这条路线的可行性评估，而不是一个孤立的价格。",
+          "您告诉我们运什么、从哪里到哪里。我们答复能不能接这一票，以及用什么车。",
         dato: "邮件回复",
       },
       retiro: {
@@ -435,7 +434,7 @@ export const zh: Mensajes = {
     estandares: {
       papeles: {
         titulo: "单证有效，逐项核查",
-        detalle: "承运人、车辆和驾驶员的单证，在发运当天经过核查且处于有效期内。",
+        detalle: "单证在发运当天上午核查，而不是签合同的时候。哪怕是那一周才过期的许可，车照样出不去。",
       },
       experiencia: {
         titulo: "熟悉您所运输的货物",
@@ -468,7 +467,7 @@ export const zh: Mensajes = {
     tituloLinea1: "为您的货物索取报价。",
     tituloDestacado: "24 小时内回复",
     bajada:
-      "告诉我们您要运什么，我们回复的是这条路线的可行性评估，而不是一个孤立的价格。",
+      "告诉我们您要运什么，我们会答复这条线路能不能接、用什么车、多久能走。",
     garantias: {
       respuesta: "我们在 24 个工作小时内回复",
       sinCompromiso: "无需承诺，也无需事先注册",
@@ -683,7 +682,7 @@ export const zh: Mensajes = {
         etiqueta: "1,000 UF 以内",
       },
       de1000a3000: {
-        etiqueta: "1,000 – 3,000 UF",
+        etiqueta: "1,000 至 3,000 UF",
       },
       masDe3000: {
         etiqueta: "3,000 UF 以上",
@@ -737,7 +736,7 @@ export const zh: Mensajes = {
     },
     resumen: {
       titulo: "提交前请核对",
-      bajada: "如有不对，可以修改，改完会回到这里。",
+      bajada: "如有不对，可以修改。改完会回到这一页。",
       editar: "修改",
       tipoCarga: "货物类型",
       equipo: "车型",

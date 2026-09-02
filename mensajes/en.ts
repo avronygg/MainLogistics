@@ -152,7 +152,7 @@ export const en: Mensajes = {
         titulo: {
           inicio: "See your freight in",
           realce: "real time",
-          fin: ", do not wait for the call.",
+          fin: ", without having to call to find out.",
         },
         detalle: {
           realce: "GPS and permanent monitoring.",
@@ -375,7 +375,7 @@ export const en: Mensajes = {
     hitos: {
       cotizacion: {
         titulo: "Quote",
-        detalle: "You tell us what you are moving, from where and to where. We come back with a feasibility assessment of the route, not a bare price.",
+        detalle: "You tell us what you are moving, from where and to where. We tell you whether we can take it and with what equipment.",
         dato: "Reply by email",
       },
       retiro: {
@@ -413,7 +413,7 @@ export const en: Mensajes = {
     estandares: {
       papeles: {
         titulo: "Paperwork current, and checked",
-        detalle: "Carrier, equipment and driver documentation, checked and current on the day of dispatch.",
+        detalle: "Paperwork gets checked the morning of dispatch, not when the contract is signed. A permit that lapsed that week stops the truck all the same.",
       },
       experiencia: {
         titulo: "Experience with the freight you move",
@@ -445,7 +445,7 @@ export const en: Mensajes = {
   cotizar: {
     tituloLinea1: "Request a quote.",
     tituloDestacado: "We reply in 24 hours",
-    bajada: "Tell us what you are moving and we come back with a feasibility assessment of the route, not a bare price.",
+    bajada: "Tell us what you are moving and we tell you whether the route works for us, with what equipment and on what timeline.",
     garantias: {
       respuesta: "We reply in less than 24 business hours",
       sinCompromiso: "No commitment, no prior registration",
@@ -659,7 +659,7 @@ export const en: Mensajes = {
         etiqueta: "Up to 1,000 UF",
       },
       de1000a3000: {
-        etiqueta: "1,000 – 3,000 UF",
+        etiqueta: "1,000 to 3,000 UF",
       },
       masDe3000: {
         etiqueta: "More than 3,000 UF",
@@ -713,7 +713,7 @@ export const en: Mensajes = {
     },
     resumen: {
       titulo: "Review before sending",
-      bajada: "If something is not right, edit it and you come straight back here.",
+      bajada: "If something is not right, edit it. You come back to this screen.",
       editar: "Edit",
       tipoCarga: "Type of freight",
       equipo: "Equipment",

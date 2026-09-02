@@ -152,7 +152,7 @@ export const pt: Mensajes = {
         titulo: {
           inicio: "Veja sua carga em",
           realce: "tempo real",
-          fin: ", sem esperar a ligação.",
+          fin: ", sem precisar ligar para saber.",
         },
         detalle: {
           realce: "GPS e monitoramento permanente.",
@@ -375,7 +375,7 @@ export const pt: Mensajes = {
     hitos: {
       cotizacion: {
         titulo: "Cotação",
-        detalle: "Você diz o que move, de onde e para onde. Devolvemos uma avaliação de viabilidade da rota, não um preço solto.",
+        detalle: "Você diz o que move, de onde e para onde. Respondemos se podemos assumir e com qual equipamento.",
         dato: "Resposta por e-mail",
       },
       retiro: {
@@ -413,7 +413,7 @@ export const pt: Mensajes = {
     estandares: {
       papeles: {
         titulo: "Documentos em dia, conferidos",
-        detalle: "Documentação do transportador, do equipamento e do motorista, conferida e vigente no dia do despacho.",
+        detalle: "Os documentos são conferidos na manhã do despacho, não na assinatura do contrato. Uma licença vencida naquela semana para o caminhão do mesmo jeito.",
       },
       experiencia: {
         titulo: "Experiência na carga que você move",
@@ -445,7 +445,7 @@ export const pt: Mensajes = {
   cotizar: {
     tituloLinea1: "Cote sua carga.",
     tituloDestacado: "Respondemos em 24 horas",
-    bajada: "Conte o que você move e devolvemos uma avaliação de viabilidade da rota, não um preço solto.",
+    bajada: "Conte o que você move e dizemos se a rota se encaixa, com qual equipamento e em que prazo.",
     garantias: {
       respuesta: "Respondemos em menos de 24 horas úteis",
       sinCompromiso: "Sem compromisso nem cadastro prévio",
@@ -659,7 +659,7 @@ export const pt: Mensajes = {
         etiqueta: "Até 1.000 UF",
       },
       de1000a3000: {
-        etiqueta: "1.000 – 3.000 UF",
+        etiqueta: "1.000 a 3.000 UF",
       },
       masDe3000: {
         etiqueta: "Mais de 3.000 UF",
@@ -713,7 +713,7 @@ export const pt: Mensajes = {
     },
     resumen: {
       titulo: "Revise antes de enviar",
-      bajada: "Se algo não estiver certo, edite e você volta para cá.",
+      bajada: "Se algo não estiver certo, edite. Você volta para esta tela.",
       editar: "Editar",
       tipoCarga: "Tipo de carga",
       equipo: "Equipamento",
