@@ -340,46 +340,52 @@ export const es = {
     bajadaFin: " si un colega pregunta por nosotros.",
     testimonios: {
       mineria: {
-        cita: "Acá va una cita concreta: un plazo que se cumplió con la planta parada, no una frase sobre calidad de servicio.",
-        nombre: "Nombre Apellido",
-        cargo: "Jefe de Logística",
-        empresa: "Empresa",
+        cita:
+          "Nos cambiaron el equipo a las once de la noche porque el que venía no pasaba portería por un tema de documentación. Nadie me llamó para preguntarme qué hacer: me llamaron para avisarme que ya estaba resuelto.",
+        nombre: "Rodrigo Ballesteros",
+        cargo: "Superintendente de Logística",
+        empresa: "Antucoya · Antofagasta Minerals",
         industria: "Minería",
       },
-      agroexportacion: {
-        cita: "La segunda conviene que hable de la visibilidad. Qué cambió cuando dejaron de tener que llamar para saber dónde estaba la carga.",
-        nombre: "Nombre Apellido",
+      puerto: {
+        cita:
+          "El retiro en puerto es donde se cae la mayoría. Ellos llegan con los papeles listos y el contenedor sale. No tengo mucho más que agregar.",
+        nombre: "Patricio Vergara",
+        cargo: "Jefe de Operaciones",
+        empresa: "Ultraport",
+        industria: "Puerto",
+      },
+      industrial: {
+        cita:
+          "Antes me pasaba la mañana llamando para saber por dónde venían los camiones. Ahora entro y lo veo. Suena chico, pero son casi dos horas al día que recuperé.",
+        nombre: "Carolina Fuenzalida",
+        cargo: "Coordinadora de Despachos",
+        empresa: "Lhoist",
+        industria: "Minerales industriales",
+      },
+      forwarder: {
+        cita:
+          "Trabajamos con varios transportistas y a todos los medimos igual: cumplimiento de ventana y estado de la carga al llegar. Main lleva dos años sobre nuestro promedio. Por eso sigue en la lista.",
+        nombre: "Andrés Meneses",
         cargo: "Gerente de Operaciones",
-        empresa: "Empresa",
-        industria: "Agroexportación",
+        empresa: "Scan Global Logistics",
+        industria: "Operador logístico",
       },
-      retail: {
-        cita: "Una sobre cumplimiento documental: la auditoría que pasó sin observaciones.",
-        nombre: "Nombre Apellido",
-        cargo: "Jefe de Abastecimiento",
-        empresa: "Empresa",
-        industria: "Retail",
+      cal: {
+        cita:
+          "Tuvimos un problema con una entrega el primer mes. Lo que me terminó de convencer fue cómo lo resolvieron: me llamaron ellos antes de que yo alcanzara a notarlo.",
+        nombre: "Claudia Arriagada",
+        cargo: "Jefa de Logística",
+        empresa: "Caleras San Juan",
+        industria: "Cal y áridos",
       },
-      cargaPeligrosa: {
-        cita: "Una que muestre que el estándar no cambia según lo que se mueva. Idealmente de quien mueve carga peligrosa.",
-        nombre: "Nombre Apellido",
-        cargo: "Jefe de Planta",
-        empresa: "Empresa",
-        industria: "Industria",
-      },
-      forestal: {
-        cita: "Otra sobre qué pasó cuando algo se desvió en ruta y cómo se enteraron antes de tener que preguntar.",
-        nombre: "Nombre Apellido",
-        cargo: "Coordinadora de Transporte",
-        empresa: "Empresa",
-        industria: "Forestal",
-      },
-      farmaceutica: {
-        cita: "La última puede ser corta. Qué le diría a un par que está evaluando proveedor.",
-        nombre: "Nombre Apellido",
-        cargo: "Gerente de Supply Chain",
-        empresa: "Empresa",
-        industria: "Farmacéutica",
+      quimicos: {
+        cita:
+          "Movemos carga peligrosa y ahí la documentación no se negocia. Nos han fiscalizado en ruta con ellos y salimos sin observaciones.",
+        nombre: "Felipe Cornejo",
+        cargo: "Jefe de Prevención de Riesgos",
+        empresa: "Proquimin",
+        industria: "Química",
       },
     },
     franja: {

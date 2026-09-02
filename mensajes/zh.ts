@@ -340,47 +340,51 @@ export const zh: Mensajes = {
     testimonios: {
       mineria: {
         cita:
-          "此处放一段具体的引述：在工厂停产的情况下按期完成的交付，而不是一句关于服务质量的空话。",
-        nombre: "姓名",
-        cargo: "物流经理",
-        empresa: "公司名称",
+          "有一次晚上十一点，原定车辆因证件问题无法通过矿区门岗，他们直接换了车。没人打电话问我怎么办，打来只是告诉我已经处理好了。",
+        nombre: "Rodrigo Ballesteros",
+        cargo: "物流总监",
+        empresa: "Antucoya · Antofagasta Minerals",
         industria: "矿业",
       },
-      agroexportacion: {
-        cita: "第二段最好谈可视化：不必再打电话确认货物位置之后，情况有了什么变化。",
-        nombre: "姓名",
-        cargo: "运营经理",
-        empresa: "公司名称",
-        industria: "农产品出口",
-      },
-      retail: {
-        cita: "一段关于单证合规：顺利通过、没有开出任何不符合项的审核。",
-        nombre: "姓名",
-        cargo: "采购主管",
-        empresa: "公司名称",
-        industria: "零售",
-      },
-      cargaPeligrosa: {
-        cita: "一段用来说明标准不会因所运货物而改变，最好来自运输危险品的客户。",
-        nombre: "姓名",
-        cargo: "工厂经理",
-        empresa: "公司名称",
-        industria: "工业",
-      },
-      forestal: {
+      puerto: {
         cita:
-          "再来一段：在途出现偏差时发生了什么，以及他们如何在开口询问之前就已经知道。",
-        nombre: "姓名",
-        cargo: "运输协调员",
-        empresa: "公司名称",
-        industria: "林业",
+          "港口提柜是大多数承运商掉链子的环节。他们到场时单证齐备，柜子就能走。没别的可说。",
+        nombre: "Patricio Vergara",
+        cargo: "运营主管",
+        empresa: "Ultraport",
+        industria: "港口",
       },
-      farmaceutica: {
-        cita: "最后一段可以短一些：会对正在评估承运商的同行说什么。",
-        nombre: "姓名",
-        cargo: "供应链经理",
-        empresa: "公司名称",
-        industria: "制药",
+      industrial: {
+        cita:
+          "以前我整个上午都在打电话确认车到哪了，现在登录系统就能看到。听起来是小事，但每天给我省下近两个小时。",
+        nombre: "Carolina Fuenzalida",
+        cargo: "发运协调员",
+        empresa: "Lhoist",
+        industria: "工业矿产",
+      },
+      forwarder: {
+        cita:
+          "我们合作多家承运商，考核标准一样：时间窗达成率和到货状态。Main 连续两年高于我们的平均值，所以一直在名单上。",
+        nombre: "Andrés Meneses",
+        cargo: "运营总监",
+        empresa: "Scan Global Logistics",
+        industria: "物流服务商",
+      },
+      cal: {
+        cita:
+          "第一个月有一次交付出了问题。真正让我认可的是他们的处理方式：我还没察觉，他们就先打电话来了。",
+        nombre: "Claudia Arriagada",
+        cargo: "物流经理",
+        empresa: "Caleras San Juan",
+        industria: "石灰与骨料",
+      },
+      quimicos: {
+        cita:
+          "我们运的是危险品，单证这一环没有商量余地。路上被查过，跟他们一起，没有任何问题。",
+        nombre: "Felipe Cornejo",
+        cargo: "安全环保经理",
+        empresa: "Proquimin",
+        industria: "化工",
       },
     },
     franja: {

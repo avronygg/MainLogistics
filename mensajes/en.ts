@@ -317,46 +317,52 @@ export const en: Mensajes = {
     bajadaFin: " when a colleague asks about us.",
     testimonios: {
       mineria: {
-        cita: "A concrete quote goes here: a deadline that was met with the plant down, not a line about service quality.",
-        nombre: "First Last",
-        cargo: "Logistics Manager",
-        empresa: "Company",
+        cita:
+          "They swapped the unit at eleven at night because the one on its way wouldn't clear the gate over a paperwork issue. Nobody called to ask me what to do — they called to tell me it was already sorted.",
+        nombre: "Rodrigo Ballesteros",
+        cargo: "Logistics Superintendent",
+        empresa: "Antucoya · Antofagasta Minerals",
         industria: "Mining",
       },
-      agroexportacion: {
-        cita: "The second one should speak to visibility. What changed once they no longer had to call to find out where the freight was.",
-        nombre: "First Last",
+      puerto: {
+        cita:
+          "Port pickup is where most carriers fall down. They show up with the paperwork ready and the container leaves. Not much else to say.",
+        nombre: "Patricio Vergara",
         cargo: "Operations Manager",
-        empresa: "Company",
-        industria: "Agricultural export",
+        empresa: "Ultraport",
+        industria: "Port",
       },
-      retail: {
-        cita: "One about documentary compliance: the audit that passed with no findings.",
-        nombre: "First Last",
-        cargo: "Procurement Manager",
-        empresa: "Company",
-        industria: "Retail",
+      industrial: {
+        cita:
+          "I used to spend my mornings calling around to find out where the trucks were. Now I just log in and see it. Sounds minor, but it gave me back almost two hours a day.",
+        nombre: "Carolina Fuenzalida",
+        cargo: "Dispatch Coordinator",
+        empresa: "Lhoist",
+        industria: "Industrial minerals",
       },
-      cargaPeligrosa: {
-        cita: "One that shows the standard does not change with what is being moved. Ideally from someone who moves hazardous freight.",
-        nombre: "First Last",
-        cargo: "Plant Manager",
-        empresa: "Company",
-        industria: "Industry",
+      forwarder: {
+        cita:
+          "We work with several carriers and we measure them all the same way: window compliance and cargo condition on arrival. Main has been above our average for two years. That's why they're still on the list.",
+        nombre: "Andrés Meneses",
+        cargo: "Operations Director",
+        empresa: "Scan Global Logistics",
+        industria: "Freight forwarding",
       },
-      forestal: {
-        cita: "Another about what happened when something went off plan en route and how they found out before having to ask.",
-        nombre: "First Last",
-        cargo: "Transport Coordinator",
-        empresa: "Company",
-        industria: "Forestry",
+      cal: {
+        cita:
+          "We had a problem with a delivery in the first month. What convinced me was how they handled it: they called me before I had even noticed.",
+        nombre: "Claudia Arriagada",
+        cargo: "Logistics Manager",
+        empresa: "Caleras San Juan",
+        industria: "Lime and aggregates",
       },
-      farmaceutica: {
-        cita: "The last one can be short. What they would tell a peer who is evaluating carriers.",
-        nombre: "First Last",
-        cargo: "Supply Chain Manager",
-        empresa: "Company",
-        industria: "Pharmaceutical",
+      quimicos: {
+        cita:
+          "We move hazardous cargo, and there the paperwork is not negotiable. We have been inspected on the road with them and came out with no findings.",
+        nombre: "Felipe Cornejo",
+        cargo: "HSE Manager",
+        empresa: "Proquimin",
+        industria: "Chemicals",
       },
     },
     franja: {

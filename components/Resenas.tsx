@@ -6,12 +6,26 @@ import type { Mensajes } from "@/mensajes";
 /**
  * Tercera sección: reseñas, en carrusel infinito de dos hileras cruzadas.
  *
- * ⚠️ ATRIBUCIÓN VACANTE — NO PUBLICAR ASÍ.
+ * ⚠️⚠️ TESTIMONIOS SIN AUTORIZACIÓN — NO PUBLICAR ASÍ. ⚠️⚠️
  *
- * Las citas son texto de referencia y las personas no existen: dicen
- * "Nombre Apellido · Cargo · Empresa" a propósito. La tarjeta ya acepta la
- * foto real (`foto: "/clientes/loquesea.webp"`) y no hay que tocar nada más
- * del diseño cuando lleguen.
+ * Las seis citas están REDACTADAS y las seis personas SON INVENTADAS, pero
+ * están atribuidas a empresas REALES E IDENTIFICABLES: Antofagasta Minerals,
+ * Ultraport, Lhoist, Scan Global Logistics, Caleras San Juan y Proquimin.
+ *
+ * Eso no es un placeholder: es un testimonio falso a nombre de una empresa
+ * que existe y que puede leerlo. Sirve para que el cliente vea cómo se ve la
+ * sección terminada, y para nada más. Antes de apuntar un dominio real acá
+ * hay que hacer una de estas tres cosas:
+ *
+ *   a) Conseguir la cita real y la autorización firmada de cada empresa.
+ *   b) Dejar el cargo y la industria, y sacar nombre y empresa.
+ *   c) Sacar la sección.
+ *
+ * Mientras tanto el sitio debería estar detrás de Deployment Protection en
+ * Vercel. Ver la lista de pendientes en README.md.
+ *
+ * La tarjeta ya acepta la foto real (`foto: "/clientes/loquesea.webp"`) y no
+ * hay que tocar nada más del diseño cuando lleguen.
  *
  * Lo que no voy a poner es una cara de stock o generada con IA sobre una
  * cita inventada, y hay dos razones:
@@ -56,11 +70,11 @@ function resenasDe(m: Mensajes): Resena[] {
   const t = m.resenas.testimonios;
   return [
     t.mineria,
-    t.agroexportacion,
-    t.retail,
-    t.cargaPeligrosa,
-    t.forestal,
-    t.farmaceutica,
+    t.puerto,
+    t.industrial,
+    t.forwarder,
+    t.cal,
+    t.quimicos,
   ];
 }
 

@@ -317,46 +317,52 @@ export const pt: Mensajes = {
     bajadaFin: " quando um colega pergunta sobre nós.",
     testimonios: {
       mineria: {
-        cita: "Aqui vai uma citação concreta: um prazo que foi cumprido com a planta parada, não uma frase sobre qualidade de serviço.",
-        nombre: "Nome Sobrenome",
-        cargo: "Coordenador de Logística",
-        empresa: "Empresa",
+        cita:
+          "Trocaram o equipamento às onze da noite porque o que vinha não passava na portaria por causa da documentação. Ninguém me ligou para perguntar o que fazer: ligaram para avisar que já estava resolvido.",
+        nombre: "Rodrigo Ballesteros",
+        cargo: "Superintendente de Logística",
+        empresa: "Antucoya · Antofagasta Minerals",
         industria: "Mineração",
       },
-      agroexportacion: {
-        cita: "A segunda convém que fale da visibilidade. O que mudou quando deixaram de ter que ligar para saber onde estava a carga.",
-        nombre: "Nome Sobrenome",
+      puerto: {
+        cita:
+          "A retirada no porto é onde a maioria falha. Eles chegam com a documentação pronta e o contêiner sai. Não tenho muito mais a acrescentar.",
+        nombre: "Patricio Vergara",
         cargo: "Gerente de Operações",
-        empresa: "Empresa",
-        industria: "Agroexportação",
+        empresa: "Ultraport",
+        industria: "Porto",
       },
-      retail: {
-        cita: "Uma sobre conformidade documental: a auditoria que passou sem observações.",
-        nombre: "Nome Sobrenome",
-        cargo: "Coordenador de Suprimentos",
-        empresa: "Empresa",
-        industria: "Varejo",
+      industrial: {
+        cita:
+          "Antes eu passava a manhã ligando para saber por onde vinham os caminhões. Agora entro e vejo. Parece pouco, mas são quase duas horas por dia que recuperei.",
+        nombre: "Carolina Fuenzalida",
+        cargo: "Coordenadora de Expedição",
+        empresa: "Lhoist",
+        industria: "Minerais industriais",
       },
-      cargaPeligrosa: {
-        cita: "Uma que mostre que o padrão não muda conforme o que se move. De preferência de quem move carga perigosa.",
-        nombre: "Nome Sobrenome",
-        cargo: "Gerente de Planta",
-        empresa: "Empresa",
-        industria: "Indústria",
+      forwarder: {
+        cita:
+          "Trabalhamos com vários transportadores e medimos todos igual: cumprimento da janela e estado da carga na chegada. A Main está há dois anos acima da nossa média. Por isso continua na lista.",
+        nombre: "Andrés Meneses",
+        cargo: "Gerente de Operações",
+        empresa: "Scan Global Logistics",
+        industria: "Operador logístico",
       },
-      forestal: {
-        cita: "Outra sobre o que aconteceu quando algo saiu da rota e como souberam antes de ter que perguntar.",
-        nombre: "Nome Sobrenome",
-        cargo: "Coordenadora de Transporte",
-        empresa: "Empresa",
-        industria: "Florestal",
+      cal: {
+        cita:
+          "Tivemos um problema com uma entrega no primeiro mês. O que me convenceu foi como resolveram: me ligaram antes que eu percebesse.",
+        nombre: "Claudia Arriagada",
+        cargo: "Gerente de Logística",
+        empresa: "Caleras San Juan",
+        industria: "Cal e agregados",
       },
-      farmaceutica: {
-        cita: "A última pode ser curta. O que diria a um colega que está avaliando fornecedor.",
-        nombre: "Nome Sobrenome",
-        cargo: "Gerente de Supply Chain",
-        empresa: "Empresa",
-        industria: "Farmacêutica",
+      quimicos: {
+        cita:
+          "Movimentamos carga perigosa e aí a documentação não se negocia. Já fomos fiscalizados em rota com eles e saímos sem apontamentos.",
+        nombre: "Felipe Cornejo",
+        cargo: "Gerente de SSMA",
+        empresa: "Proquimin",
+        industria: "Química",
       },
     },
     franja: {
