@@ -773,6 +773,23 @@ export const pt: Mensajes = {
     derechos: "Transporte de cargas em todo o Chile",
   },
 
+  /* ── Legal ───────────────────────────────────────────────────────────
+     Só os rótulos. O corpo dos dois documentos fica em
+     `components/datos/legal.ts` e é publicado apenas em espanhol. */
+  legal: {
+    columna: "Jurídico",
+    indice: "Nesta página",
+    actualizado: "Atualizado em",
+    volver: "Voltar ao início",
+    avisoIdioma:
+      "Este documento é publicado em espanhol, e a versão em espanhol é a que vale. Se alguma parte não ficar clara, escreva para nós e explicamos em português.",
+    privacidad: "Política de privacidade",
+    terminos: "Termos de uso",
+    consentimiento:
+      "Ao enviar, você aceita que tratemos seus dados para responder a esta solicitação. Nada além disso.",
+    consentimientoEnlace: "O que fazemos com seus dados",
+  },
+
   /* ── Asesor flotante ─────────────────────────────────────────────── */
   asesor: {
     whatsappMensaje: "Olá, quero cotar um transporte de carga.",

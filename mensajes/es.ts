@@ -796,6 +796,28 @@ export const es = {
     derechos: "Transporte de carga en todo Chile",
   },
 
+  /* ── Legal ───────────────────────────────────────────────────────────
+     Solo los rótulos. El cuerpo de los dos documentos vive en
+     `components/datos/legal.ts` y se publica únicamente en español: son
+     cuatro textos que pueden divergir, y divergir acá es prometer cosas
+     distintas según el idioma. La razón está explicada en ese archivo. */
+  legal: {
+    columna: "Legal",
+    indice: "En esta página",
+    actualizado: "Actualizado el",
+    volver: "Volver al inicio",
+    /* En español no se muestra: decirle a quien ya lee en español que la
+       versión en español es la que rige no aporta nada. Existe igual
+       porque el tipo `Mensajes` exige la misma estructura en los cuatro. */
+    avisoIdioma:
+      "Este documento se publica en español, que es la versión que rige.",
+    privacidad: "Política de privacidad",
+    terminos: "Términos de uso",
+    consentimiento:
+      "Al enviar, usted acepta que tratemos sus datos para responder esta solicitud. Para nada más.",
+    consentimientoEnlace: "Qué hacemos con sus datos",
+  },
+
   /* ── Asesor flotante ─────────────────────────────────────────────── */
   asesor: {
     whatsappMensaje: "Hola, quiero cotizar un transporte de carga.",

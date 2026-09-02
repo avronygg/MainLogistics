@@ -71,10 +71,10 @@ export default async function PaginaCotizar({
         {/* El respaldo del Suspense va vacío a propósito: el formulario se
             monta en el mismo cuadro y un esqueleto parpadearía sin aportar. */}
         <Suspense fallback={null}>
-          <Cotizar m={m} />
+          <Cotizar m={m} idioma={idioma} />
         </Suspense>
       </main>
-      <Pie m={m} />
+      <Pie m={m} idioma={idioma} />
       <Asesor m={m} />
     </>
   );

@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import Link from "next/link";
 import { REGIONES } from "./datos/chile";
 import Titulo from "./Titulo";
 import { IconoCarga, IconoReloj, IconoEscudo } from "./Iconos";
@@ -10,6 +11,7 @@ import CuerpoPaso from "./cotizar/Pasos";
 import ResumenPedido from "./cotizar/Resumen";
 import { Plantilla, rellenar } from "./cotizar/Campos";
 import type { Mensajes } from "@/mensajes";
+import type { Idioma } from "@/mensajes/idiomas";
 import { CORREO, WHATSAPP } from "./datos/contacto";
 import {
   COTIZACION_VACIA,
@@ -137,7 +139,13 @@ function textoWhatsapp(d: Cotizacion) {
   ].join("\n");
 }
 
-export default function Cotizar({ m }: { m: Mensajes }) {
+export default function Cotizar({
+  m,
+  idioma,
+}: {
+  m: Mensajes;
+  idioma: Idioma;
+}) {
   /* Lo que llega del cotizador express de la home, por la URL. Se valida
      contra las listas reales: un parámetro escrito a mano no puede meter un
      valor que el formulario no ofrece. */
@@ -567,6 +575,21 @@ export default function Cotizar({ m }: { m: Mensajes }) {
                         </p>
                       </div>
                     )}
+
+                    {/* Consentimiento, justo encima del botón y no en el pie.
+                        Es el último momento en que la persona puede decidir,
+                        y una línea sobre tratamiento de datos escondida a
+                        dos pantallas de distancia no es consentimiento
+                        informado de nada. Brief §10.3. */}
+                    <p className="mt-8 max-w-[62ch] text-[13.5px] leading-[1.6] text-[var(--texto-sec)]">
+                      {m.legal.consentimiento}{" "}
+                      <Link
+                        href={`/${idioma}/legal/privacidad`}
+                        className="font-medium text-[var(--morado-texto)] underline underline-offset-4"
+                      >
+                        {m.legal.consentimientoEnlace}
+                      </Link>
+                    </p>
 
                     <BarraPaso
                       atras={() => irA(PASOS.length - 1)}

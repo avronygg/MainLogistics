@@ -2,6 +2,7 @@ import Image from "next/image";
 import { CORREO, TELEFONO, TELEFONO_ENLACE } from "./datos/contacto";
 import Link from "next/link";
 import type { Mensajes } from "@/mensajes";
+import type { Idioma } from "@/mensajes/idiomas";
 
 /**
  * Pie de página.
@@ -37,29 +38,46 @@ import type { Mensajes } from "@/mensajes";
  * la página, no del idioma, y traducir `#servicios` rompería cada enlace ya
  * compartido.
  */
-function columnas(m: Mensajes) {
+function columnas(m: Mensajes, idioma: Idioma) {
+  /* El ancla lleva la ruta del idioma delante. Suelto, `#servicios` solo
+     funciona estando en la home: desde /cotizar, /transportistas o una
+     página legal el navegador lo busca en la página actual, no lo encuentra
+     y el enlace no hace nada. Es el mismo arreglo que ya se hizo en el nav.
+
+     El fragmento en sí NO se traduce: `#servicios` sigue siendo
+     `#servicios` en chino, porque traducirlo rompería cada enlace que
+     alguien ya compartió. */
+  const inicio = `/${idioma}`;
+
   return [
     {
       titulo: m.pie.columnaServicios.titulo,
       enlaces: [
-        { href: "#servicios", texto: m.pie.columnaServicios.tecnologia },
-        { href: "#cargas", texto: m.pie.columnaServicios.queMovemos },
-        { href: "#cobertura", texto: m.pie.columnaServicios.cobertura },
-        { href: "#cumplimiento", texto: m.pie.columnaServicios.cumplimiento },
+        { href: `${inicio}#servicios`, texto: m.pie.columnaServicios.tecnologia },
+        { href: `${inicio}#cargas`, texto: m.pie.columnaServicios.queMovemos },
+        { href: `${inicio}#cobertura`, texto: m.pie.columnaServicios.cobertura },
+        { href: `${inicio}#cumplimiento`, texto: m.pie.columnaServicios.cumplimiento },
       ],
     },
     {
       titulo: m.pie.columnaEmpresa.titulo,
       enlaces: [
-        { href: "#como-funciona", texto: m.pie.columnaEmpresa.comoFunciona },
-        { href: "#clientes", texto: m.pie.columnaEmpresa.clientes },
-        { href: "#cotizar", texto: m.pie.columnaEmpresa.cotizar },
+        { href: `${inicio}#como-funciona`, texto: m.pie.columnaEmpresa.comoFunciona },
+        { href: `${inicio}#clientes`, texto: m.pie.columnaEmpresa.clientes },
+        { href: `${inicio}/cotizar`, texto: m.pie.columnaEmpresa.cotizar },
+      ],
+    },
+    {
+      titulo: m.legal.columna,
+      enlaces: [
+        { href: `${inicio}/legal/privacidad`, texto: m.legal.privacidad },
+        { href: `${inicio}/legal/terminos`, texto: m.legal.terminos },
       ],
     },
   ];
 }
 
-export default function Pie({ m }: { m: Mensajes }) {
+export default function Pie({ m, idioma }: { m: Mensajes; idioma: Idioma }) {
   const año = 2026;
 
   // La bajada viaja entera en el diccionario y se parte acá por el nombre
@@ -95,8 +113,8 @@ export default function Pie({ m }: { m: Mensajes }) {
               {m.pie.descripcion}
             </p>
 
-            <a
-              href="#cotizar"
+            <Link
+              href={`/${idioma}/cotizar`}
               className="group mt-6 inline-flex items-center gap-2.5 text-[15px] font-medium text-[var(--morado-texto)]"
             >
               {m.pie.ctaCotizar}
@@ -111,11 +129,11 @@ export default function Pie({ m }: { m: Mensajes }) {
                   />
                 </svg>
               </span>
-            </a>
+            </Link>
           </div>
 
-          <div className="grid grid-cols-2 gap-x-10 gap-y-8 sm:grid-cols-3 lg:gap-x-16">
-            {columnas(m).map((col) => (
+          <div className="grid grid-cols-2 gap-x-10 gap-y-8 lg:grid-cols-4 lg:gap-x-12">
+            {columnas(m, idioma).map((col) => (
               <nav key={col.titulo} aria-label={col.titulo}>
                 <h2 className="text-[13px] font-semibold tracking-[-0.01em] text-[var(--texto)]">
                   {col.titulo}
@@ -135,7 +153,7 @@ export default function Pie({ m }: { m: Mensajes }) {
               </nav>
             ))}
 
-            <div className="col-span-2 sm:col-span-1">
+            <div className="col-span-2 lg:col-span-1">
               <h2 className="text-[13px] font-semibold tracking-[-0.01em] text-[var(--texto)]">
                 {m.pie.contacto.titulo}
               </h2>

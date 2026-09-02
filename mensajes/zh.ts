@@ -798,6 +798,23 @@ export const zh: Mensajes = {
     derechos: "覆盖智利全境的货物运输",
   },
 
+  /* ── Legal ───────────────────────────────────────────────────────────
+     仅为标签。两份文件的正文位于 `components/datos/legal.ts`，
+     只以西班牙语发布。 */
+  legal: {
+    columna: "法律条款",
+    indice: "本页内容",
+    actualizado: "更新于",
+    volver: "返回首页",
+    avisoIdioma:
+      "本文件以西班牙语发布，并以西班牙语版本为准。如有任何不清楚之处，请与我们联系，我们会用中文向您说明。",
+    privacidad: "隐私政策",
+    terminos: "使用条款",
+    consentimiento:
+      "提交即表示您同意我们处理您的资料，仅用于回复本次询价，不作其他用途。",
+    consentimientoEnlace: "我们如何处理您的资料",
+  },
+
   /* ── Asesor flotante ─────────────────────────────────────────────── */
   asesor: {
     whatsappMensaje: "您好，我想咨询货运报价。",

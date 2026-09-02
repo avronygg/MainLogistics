@@ -23,6 +23,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { ruta: "", prioridad: 1 },
     { ruta: "/cotizar", prioridad: 0.9 },
     { ruta: "/transportistas", prioridad: 0.9 },
+    /* Las legales entran al sitemap con prioridad baja, pero entran. El
+       brief §10.3 anota que Agunsa y Loginsa tienen estos enlaces muertos
+       en producción: una política que existe y se puede encontrar ya es
+       una diferencia frente al benchmark. */
+    { ruta: "/legal/privacidad", prioridad: 0.4 },
+    { ruta: "/legal/terminos", prioridad: 0.4 },
   ];
 
   return IDIOMAS.flatMap((idioma) =>

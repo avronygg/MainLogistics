@@ -301,7 +301,7 @@ export default async function Transportistas({
         </section>
       </main>
 
-      <Pie m={m} />
+      <Pie m={m} idioma={idioma} />
       <Asesor m={m} />
     </>
   );

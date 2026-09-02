@@ -773,6 +773,23 @@ export const en: Mensajes = {
     derechos: "Road freight transport across Chile",
   },
 
+  /* ── Legal ───────────────────────────────────────────────────────────
+     Labels only. The body of both documents lives in
+     `components/datos/legal.ts` and is published in Spanish alone. */
+  legal: {
+    columna: "Legal",
+    indice: "On this page",
+    actualizado: "Last updated",
+    volver: "Back to the home page",
+    avisoIdioma:
+      "This document is published in Spanish, and the Spanish version is the one that governs. If anything in it is unclear to you, write to us and we will explain it in English.",
+    privacidad: "Privacy policy",
+    terminos: "Terms of use",
+    consentimiento:
+      "By sending this, you agree that we process your data to answer this request. Nothing else.",
+    consentimientoEnlace: "What we do with your data",
+  },
+
   /* ── Asesor flotante ─────────────────────────────────────────────── */
   asesor: {
     whatsappMensaje: "Hello, I would like a freight quote.",
