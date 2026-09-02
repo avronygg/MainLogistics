@@ -790,6 +790,189 @@ export const en: Mensajes = {
     consentimientoEnlace: "What we do with your data",
   },
 
+  /* ── Páginas de servicio ─────────────────────────────────────────────
+     Equipment terms go to the industry term, not the literal one: cama
+     baja is a lowboy, rampla plana is a flatbed. Ver `es.ts`. */
+  paginasServicio: {
+    hub: {
+      titulo: "The detail behind",
+      destacado: "each service",
+      bajada:
+        "Every load asks for its own equipment, its own paperwork and its own way of being secured. Here is what each one takes, and what we move it with.",
+    },
+    volver: "All services",
+    queExige: "What this freight takes",
+    equipoHabitual: "Usual equipment",
+    preguntas: "Common questions",
+    ctaTitulo: "Tell us what you move",
+    ctaTexto:
+      "We answer within 24 hours. If your route does not suit us, we say so: that saves you a week waiting for a quote that was never coming.",
+    ctaBoton: "Quote this freight",
+    paginas: {
+      contenedores: {
+        titulo: "Container pickup",
+        destacado: "and return at the port",
+        bajada:
+          "We move your container between the port and your warehouse, with the equipment and the timing the terminal requires.",
+        intro:
+          "A container does not wait. The terminal charges storage from the day free time expires, and the shipping line charges demurrage for as long as the container stays out. Both clocks run at once, for different reasons. That is why this service is scheduled against the expiry date, not against the pickup date.",
+        exigencias: [
+          {
+            titulo: "Terminal appointment",
+            detalle:
+              "Ports work on assigned windows. Arriving outside yours means coming back another day, and someone pays for that day.",
+          },
+          {
+            titulo: "Equipment with container locks",
+            detalle:
+              "A container chassis, or a trailer with twist locks. A container held down with straps alone on a flat deck does not meet the standard.",
+          },
+          {
+            titulo: "One dispatch guide per movement",
+            detalle:
+              "From 1 November 2026 the guide must carry the actual origin and destination, plates, driver and real departure time. Pickup and return are two movements, so they are two guides.",
+          },
+        ],
+        faq: [
+          {
+            p: "Do you handle pickup and return, or only one leg?",
+            r: "Both. You can hire the pickup alone, the return alone, or the full cycle. On the full cycle we coordinate both terminal appointments so the container is not left waiting in between.",
+          },
+          {
+            p: "What if the container is not ready on the day of the appointment?",
+            r: "You tell us and we reschedule with the terminal. What we do not do is send the truck to wait: a truck standing at the port gate helps nobody and is billed all the same.",
+          },
+          {
+            p: "Do you work with 20 and 40 foot containers?",
+            r: "With both. In the quote you tell us which one it is and how much the cargo weighs: a loaded 20 foot container of dense material can take more equipment than a light 40 foot one.",
+          },
+        ],
+      },
+      cargaGeneral: {
+        titulo: "General",
+        destacado: "and palletized freight",
+        bajada:
+          "What moves on a flatbed or a light truck: cases, pallets, supplies, construction material.",
+        intro:
+          "This is the most requested service and the one where the detail is most often underestimated. What decides the equipment is not the total weight but the ratio between weight and volume: a thousand kilos of dense material fits in a light truck, a thousand kilos of bulky material does not. That is why we ask for both before quoting.",
+        exigencias: [
+          {
+            titulo: "Declared weight and volume",
+            detalle:
+              "A misdeclared tonnage changes the equipment and the price, and at a weighing station it also changes who answers for the fine.",
+          },
+          {
+            titulo: "Securing to match the load",
+            detalle:
+              "Pallets, loose cases and stackable material are not secured the same way. Badly secured freight is the leading cause of damage in transit, and it happens in the yard at origin, not on the road.",
+          },
+          {
+            titulo: "Paperwork for the movement",
+            detalle:
+              "A dispatch guide with a precise description of what is on board: quantity, unit, weight or volume and unit price, unless it is not a sale, and then the reason for the movement.",
+          },
+        ],
+        faq: [
+          {
+            p: "Is there a minimum load?",
+            r: "There is no hard minimum. What changes is the equipment: below a certain volume a light truck makes sense, and above a certain point a full trailer does. You tell us what you move and we propose the right one.",
+          },
+          {
+            p: "Do you consolidate freight from different customers?",
+            r: "It depends on the route and the freight. Where it works, it lowers the cost. Where the load requires exclusivity, we say so in the quote instead of you finding out en route.",
+          },
+          {
+            p: "How do I know which equipment I need?",
+            r: "You do not need to know. The quote form has an option for that, and we work it out from the details of the load.",
+          },
+        ],
+      },
+      insumosMineros: {
+        titulo: "Supplies and materials",
+        destacado: "for mine sites",
+        bajada:
+          "Operating material, spares and consumables to the mine site, with the approval each one requires at its gate.",
+        intro:
+          "In mining, transport does not end on the highway: it ends at the mine gate, and there the freight goes in or does not depending on the truck's and the driver's paperwork. Every company keeps its own approval standard, and meeting the law is not enough: you have to meet what that particular site asks for.",
+        exigencias: [
+          {
+            titulo: "Driver and vehicle approval",
+            detalle:
+              "Each site keeps its own register. A truck that went in last month may not go in today if a document has expired.",
+          },
+          {
+            titulo: "Fatigue control en route",
+            detalle:
+              "Mining routes are long and at altitude. Driving and rest times are not a recommendation: they are a condition of entry.",
+          },
+          {
+            titulo: "A coordinated unloading window",
+            detalle:
+              "The site works in shifts. Arriving outside the window means waiting for the next one, with the truck and the driver standing still.",
+          },
+        ],
+        faq: [
+          {
+            p: "Are you already approved at my site?",
+            r: "It depends which one. Tell us where you unload and we will say plainly whether the network already operates there, or whether the approval has to be done first and how long that takes.",
+          },
+          {
+            p: "Do you go up to high-altitude sites?",
+            r: "Yes, with the equipment and the driver the route requires. Altitude changes the truck's performance and the timings, and that is built into the quote rather than sprung on you later.",
+          },
+          {
+            p: "Can you coordinate directly with our procurement team?",
+            r: "Yes. On recurring operations the normal arrangement is that we coordinate the window straight with the site, and you get the notice when the freight went in.",
+          },
+        ],
+      },
+      bessEnergia: {
+        titulo: "BESS batteries",
+        destacado: "and energy equipment",
+        bajada:
+          "Storage containers, transformers and structural steel for generation projects, handled the way equipment that must not be knocked has to be handled.",
+        intro:
+          "A battery energy storage system arrives in Chile in containers weighing tens of tonnes, that cannot be tilted, cannot be knocked, and often exceed standard dimensions. The equipment costs several times the freight, so the criterion here is not moving fast: it is damaging nothing and arriving when the site is ready to receive.",
+        exigencias: [
+          {
+            titulo: "Equipment for oversized loads",
+            detalle:
+              "A lowboy or an extendable trailer, depending on the height and width of the unit. Total height decides the route, because it decides what structures you can pass under.",
+          },
+          {
+            titulo: "Oversize movement permit",
+            detalle:
+              "When the unit exceeds maximum dimensions, the movement needs a permit and an authorized route. It is filed beforehand, and the time that takes is part of the delivery time.",
+          },
+          {
+            titulo: "Securing and impact control",
+            detalle:
+              "A battery is not secured like a machine. The securing spreads the force over the points the manufacturer defines, not over the container structure.",
+          },
+          {
+            titulo: "Coordination with the site",
+            detalle:
+              "On a park under construction the access changes week to week. The delivery date is set against the real state of the road and of the unloading point.",
+          },
+        ],
+        faq: [
+          {
+            p: "How heavy a load can you move?",
+            r: "Give us the weight, the dimensions and the height of the unit and we will come back with the equipment it takes and whether it needs a permit. Without those three, any answer would be made up.",
+          },
+          {
+            p: "Do you file the oversize permit yourselves?",
+            r: "Yes, where the load requires it. It goes in the quote as a separate line with its own lead time, because the filing takes time that is not ours to control.",
+          },
+          {
+            p: "Can you move the whole project, not just the batteries?",
+            r: "Yes. A park has battery containers, transformers, structural steel and construction material, and each one takes different equipment. Coordinating that through one point of contact is exactly the point.",
+          },
+        ],
+      },
+    },
+  },
+
   /* ── Verificador de Resolución 154 ───────────────────────────────────
      Interface only. The ten requirements stay in Spanish, in
      `components/datos/resolucion154.ts`. */

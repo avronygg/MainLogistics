@@ -28,6 +28,13 @@ function leer(id) {
   const cuerpo = fuente.slice(fuente.indexOf('= {') + 2);
   const pares = new Map();
   const pila = [];
+  /* Arreglos abiertos, con su contador de elementos. Sin esto, un arreglo
+     de objetos en varias líneas —como las exigencias y las preguntas de
+     cada página de servicio— rompe el recorrido entero: el `}` de cada
+     elemento desapila un nivel que nadie apiló, y de ahí en adelante TODAS
+     las rutas quedan mal. No es que fallen las comprobaciones: es que se
+     aplican a la clave equivocada, que es peor porque no se nota. */
+  const arreglos = [];
   let pendiente = null;
   for (const linea of cuerpo.split('\n')) {
     const t = linea.trim();
@@ -35,6 +42,20 @@ function leer(id) {
 
     const abre = t.match(/^([a-zA-Z0-9_]+):\s*\{$/);
     if (abre) { pila.push(abre[1]); continue; }
+
+    const abreArreglo = t.match(/^([a-zA-Z0-9_]+):\s*\[$/);
+    if (abreArreglo) {
+      pila.push(abreArreglo[1]);
+      arreglos.push({ profundidad: pila.length, n: 0 });
+      continue;
+    }
+    if (t === '{') {
+      const actual = arreglos[arreglos.length - 1];
+      if (actual && actual.profundidad === pila.length) pila.push(String(actual.n++));
+      continue;
+    }
+    if (t === '],' || t === ']') { arreglos.pop(); pila.pop(); continue; }
+
     if (t === '},' || t === '}' || t === '};') { pila.pop(); continue; }
 
     const par = t.match(/^([a-zA-Z0-9_]+):\s*"(.*)",?$/);
@@ -100,6 +121,7 @@ const FECHA_EN_CHINO = new Set([
   'verificador.titulo',
   'verificador.intro',
   'verificador.resultado.noCumpleTexto',
+  'paginasServicio.paginas.contenedores.exigencias.2.detalle',
 ]);
 
 const PROHIBIDAS = {

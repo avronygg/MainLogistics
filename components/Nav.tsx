@@ -39,7 +39,7 @@ export default function Nav({ m, idioma }: { m: Mensajes; idioma: Idioma }) {
   // El fragmento NO se traduce: `#servicios` sigue siendo `#servicios` en
   // chino. Traducirlo rompería cada enlace que alguien ya compartió.
   const enlaces = [
-    { href: `/${idioma}#servicios`, texto: m.nav.servicios },
+    { href: `/${idioma}/transporte-de-carga`, texto: m.nav.servicios },
     { href: `/${idioma}#cargas`, texto: m.nav.queMovemos },
     { href: `/${idioma}#cobertura`, texto: m.nav.cobertura },
     // Página propia, no ancla. Va en el menú principal y no en el pie: en un

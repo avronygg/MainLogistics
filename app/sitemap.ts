@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { IDIOMAS, NOMBRES } from "@/mensajes/idiomas";
 import { BASE } from "./robots";
+import { PAGINAS_SERVICIO } from "@/components/datos/paginas-servicio";
 
 /**
  * sitemap.xml
@@ -23,6 +24,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { ruta: "", prioridad: 1 },
     { ruta: "/cotizar", prioridad: 0.9 },
     { ruta: "/transportistas", prioridad: 0.9 },
+    /* El hub y las cuatro páginas de servicio. Son las URL que hoy no
+       existen y por las que todo el long tail de búsqueda queda fuera de
+       alcance (brief §5.1). */
+    { ruta: "/transporte-de-carga", prioridad: 0.9 },
+    ...PAGINAS_SERVICIO.map((p) => ({
+      ruta: `/transporte-de-carga/${p.slug}`,
+      prioridad: 0.8,
+    })),
     /* La herramienta del brief §8.1. Prioridad alta: no es una página de
        apoyo, es la puerta de entrada de quien busca "resolución 154" entre
        hoy y el 1 de noviembre. */

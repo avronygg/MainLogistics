@@ -790,6 +790,189 @@ export const pt: Mensajes = {
     consentimientoEnlace: "O que fazemos com seus dados",
   },
 
+  /* ── Páginas de servicio ─────────────────────────────────────────────
+     Os termos de equipamento vão para o termo do setor: cama baja é
+     prancha baixa, rampla plana é carreta plataforma. Ver `es.ts`. */
+  paginasServicio: {
+    hub: {
+      titulo: "O detalhe de",
+      destacado: "cada serviço",
+      bajada:
+        "Cada carga pede um equipamento, uma documentação e um jeito de amarrar. Aqui está o que cada uma exige e com o que a movemos.",
+    },
+    volver: "Todos os serviços",
+    queExige: "O que esta carga exige",
+    equipoHabitual: "Equipamento habitual",
+    preguntas: "Perguntas frequentes",
+    ctaTitulo: "Conte o que você move",
+    ctaTexto:
+      "Respondemos em 24 horas. Se a sua rota não se encaixa, dizemos na hora: isso poupa uma semana esperando uma cotação que não viria.",
+    ctaBoton: "Cotar esta carga",
+    paginas: {
+      contenedores: {
+        titulo: "Retirada e devolução",
+        destacado: "de contêineres no porto",
+        bajada:
+          "Movemos seu contêiner entre o porto e o seu armazém, com o equipamento e os prazos que o terminal exige.",
+        intro:
+          "Contêiner não espera. O terminal cobra armazenagem a partir do dia em que vence o período livre, e o armador cobra demurrage enquanto o contêiner estiver fora. Os dois relógios correm ao mesmo tempo e por motivos diferentes. Por isso este serviço é coordenado contra a data de vencimento, e não contra a data de retirada.",
+        exigencias: [
+          {
+            titulo: "Agendamento no terminal",
+            detalle:
+              "Os portos operam com janela atribuída. Chegar fora dela significa voltar outro dia, e esse dia alguém paga.",
+          },
+          {
+            titulo: "Equipamento com travas de contêiner",
+            detalle:
+              "Chassi porta-contêiner ou carreta com twist locks. Um contêiner preso só com cintas sobre plataforma plana não atende.",
+          },
+          {
+            titulo: "Uma guia de despacho por transporte",
+            detalle:
+              "A partir de 1º de novembro de 2026 a guia precisa trazer origem e destino efetivos, placa, motorista e hora real de saída. Retirada e devolução são dois transportes, portanto duas guias.",
+          },
+        ],
+        faq: [
+          {
+            p: "Vocês fazem retirada e devolução, ou só uma ponta?",
+            r: "As duas. Dá para contratar só a retirada, só a devolução ou o ciclo completo. No ciclo completo coordenamos os dois agendamentos com o terminal para o contêiner não ficar esperando no meio.",
+          },
+          {
+            p: "E se o contêiner não estiver pronto no dia do agendamento?",
+            r: "Você avisa e reprogramamos com o terminal. O que não fazemos é mandar o caminhão esperar: caminhão parado no portão do porto não serve a ninguém e é cobrado do mesmo jeito.",
+          },
+          {
+            p: "Trabalham com contêineres de 20 e 40 pés?",
+            r: "Com os dois. Na cotação você diz qual é e quanto pesa a carga: um 20 pés carregado de material denso pode exigir mais equipamento que um 40 pés leve.",
+          },
+        ],
+      },
+      cargaGeneral: {
+        titulo: "Carga geral",
+        destacado: "e paletizada",
+        bajada:
+          "O que anda em carreta plataforma ou caminhão leve: volumes, paletes, insumos, material de obra.",
+        intro:
+          "É o serviço mais pedido e onde mais se subestima o detalhe. O que define o equipamento não é o peso total, e sim a relação entre peso e volume: mil quilos de material denso cabem num caminhão leve, mil quilos de material volumoso não. Por isso perguntamos as duas coisas antes de cotar.",
+        exigencias: [
+          {
+            titulo: "Peso e volume declarados",
+            detalle:
+              "Uma tonelagem mal declarada muda o equipamento e o preço, e numa balança muda também quem responde pela multa.",
+          },
+          {
+            titulo: "Amarração conforme a carga",
+            detalle:
+              "Paletes, volumes soltos e material empilhável não se amarram do mesmo jeito. Carga mal presa é a primeira causa de avaria em trânsito, e acontece no pátio de origem, não na estrada.",
+          },
+          {
+            titulo: "Documentação do transporte",
+            detalle:
+              "Guia de despacho com a descrição precisa do que vai em cima: quantidade, unidade, peso ou volume e preço unitário, salvo se não for venda, e aí vai o motivo.",
+          },
+        ],
+        faq: [
+          {
+            p: "Existe carga mínima?",
+            r: "Não há mínimo rígido. O que muda é o equipamento: abaixo de certo volume compensa um caminhão leve, e acima de certo ponto compensa uma carreta inteira. Você diz o que move e propomos o que corresponde.",
+          },
+          {
+            p: "Vocês consolidam carga de clientes diferentes?",
+            r: "Depende da rota e da carga. Quando dá, baixa o custo. Quando a carga exige exclusividade, dizemos na cotação em vez de você descobrir no caminho.",
+          },
+          {
+            p: "Como sei qual equipamento preciso?",
+            r: "Você não precisa saber. No formulário de cotação existe uma opção para isso e resolvemos com os dados da carga.",
+          },
+        ],
+      },
+      insumosMineros: {
+        titulo: "Insumos e materiais",
+        destacado: "para mineração",
+        bajada:
+          "Material de operação, peças e consumíveis até a mina, com a credencial que cada uma exige na portaria.",
+        intro:
+          "Na mineração o transporte não termina na estrada: termina na portaria da mina, e ali a carga entra ou não conforme os documentos do caminhão e do motorista. Cada companhia mantém o seu padrão de credenciamento, e não basta cumprir a lei: é preciso cumprir o que aquela mina em particular pede.",
+        exigencias: [
+          {
+            titulo: "Credenciamento do motorista e do veículo",
+            detalle:
+              "Cada mina mantém o seu próprio registro. Um caminhão que entrou mês passado pode não entrar hoje se um documento venceu.",
+          },
+          {
+            titulo: "Controle de fadiga em rota",
+            detalle:
+              "As rotas de mineração são longas e em altitude. Os tempos de condução e descanso não são recomendação: são condição de entrada.",
+          },
+          {
+            titulo: "Janela de descarga coordenada",
+            detalle:
+              "A mina opera por turnos. Chegar fora da janela significa esperar o turno seguinte, com caminhão e motorista parados.",
+          },
+        ],
+        faq: [
+          {
+            p: "Vocês já estão credenciados na minha mina?",
+            r: "Depende de qual. Diga onde você descarrega e falamos com franqueza se a rede já opera ali ou se é preciso fazer o credenciamento antes, com o prazo que isso leva.",
+          },
+          {
+            p: "Sobem a minas em altitude?",
+            r: "Sim, com o equipamento e o motorista que a rota exige. A altitude muda o rendimento do caminhão e os tempos, e isso já entra na cotação, não como surpresa depois.",
+          },
+          {
+            p: "Podem coordenar direto com a área de suprimentos?",
+            r: "Sim. Em operações recorrentes o normal é coordenarmos a janela direto com a mina, e você receber o aviso quando a carga entrou.",
+          },
+        ],
+      },
+      bessEnergia: {
+        titulo: "Baterias BESS",
+        destacado: "e equipamentos de energia",
+        bajada:
+          "Contêineres de armazenamento, transformadores e estrutura para projetos de geração, com o manuseio que exige um equipamento que não pode levar pancada.",
+        intro:
+          "Um sistema de armazenamento em baterias chega ao Chile em contêineres que pesam dezenas de toneladas, não podem ser inclinados, não podem levar pancada e muitas vezes excedem as medidas padrão. O equipamento custa várias vezes o frete, então aqui o critério não é mover rápido: é não danificar nada e chegar quando o local estiver pronto para receber.",
+        exigencias: [
+          {
+            titulo: "Equipamento para superdimensionado",
+            detalle:
+              "Prancha baixa ou extensível conforme a altura e a largura do volume. A altura total define a rota, porque define por baixo de que estruturas dá para passar.",
+          },
+          {
+            titulo: "Autorização especial de trânsito",
+            detalle:
+              "Quando o volume excede as medidas máximas, o transporte precisa de autorização e rota aprovada. Se protocola antes, e o prazo do trâmite faz parte do prazo de entrega.",
+          },
+          {
+            titulo: "Amarração e controle de impacto",
+            detalle:
+              "Bateria não se amarra como máquina. A amarração distribui a força sobre os pontos que o fabricante define, e não sobre a estrutura do contêiner.",
+          },
+          {
+            titulo: "Coordenação com a obra",
+            detalle:
+              "Num parque em construção o acesso muda de semana para semana. A data de entrega é fixada contra o estado real da estrada e do ponto de descarga.",
+          },
+        ],
+        faq: [
+          {
+            p: "Quanto pesa o que vocês conseguem mover?",
+            r: "Diga o peso, as medidas e a altura do volume e respondemos com o equipamento que corresponde e se precisa de autorização. Sem esses três dados, qualquer resposta seria inventada.",
+          },
+          {
+            p: "A autorização de superdimensionado é vocês que providenciam?",
+            r: "Sim, quando a carga exige. Vai na cotação como item à parte e com o seu prazo, porque o trâmite tem um tempo próprio que não depende de nós.",
+          },
+          {
+            p: "Podem mover o projeto inteiro, e não só as baterias?",
+            r: "Sim. Num parque há contêineres de baterias, transformadores, estrutura e material de obra, e cada um pede equipamento diferente. Coordenar isso com um só interlocutor é justamente o ponto.",
+          },
+        ],
+      },
+    },
+  },
+
   /* ── Verificador de Resolución 154 ───────────────────────────────────
      Só a interface. Os dez requisitos ficam em espanhol, em
      `components/datos/resolucion154.ts`. */

@@ -53,6 +53,7 @@ function columnas(m: Mensajes, idioma: Idioma) {
     {
       titulo: m.pie.columnaServicios.titulo,
       enlaces: [
+        { href: `${inicio}/transporte-de-carga`, texto: m.paginasServicio.volver },
         { href: `${inicio}#servicios`, texto: m.pie.columnaServicios.tecnologia },
         { href: `${inicio}#cargas`, texto: m.pie.columnaServicios.queMovemos },
         { href: `${inicio}#cobertura`, texto: m.pie.columnaServicios.cobertura },

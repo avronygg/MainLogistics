@@ -818,6 +818,196 @@ export const es = {
     consentimientoEnlace: "Qué hacemos con sus datos",
   },
 
+  /* ── Páginas de servicio ─────────────────────────────────────────────
+     Una URL indexable por servicio, que es lo que hoy no existe: el brief
+     §5.1 detecta que sin ellas todo el long tail de búsqueda queda fuera
+     de alcance, y en Chile ese long tail está prácticamente libre.
+
+     Nada de lo escrito acá promete una cifra, un plazo ni una
+     certificación. Se describe lo que el servicio ES y lo que la norma
+     EXIGE, que es verificable, y no lo que Main tiene, que todavía no
+     está confirmado. Ver la lista de pendientes en
+     `brand/main-logistics-marca.md` §11. */
+  paginasServicio: {
+    hub: {
+      titulo: "El detalle de",
+      destacado: "cada servicio",
+      bajada:
+        "Cada carga pide un equipo, una documentación y una forma de amarrar. Acá está lo que exige cada una y con qué la movemos.",
+    },
+    volver: "Todos los servicios",
+    queExige: "Qué exige esta carga",
+    equipoHabitual: "Equipo habitual",
+    preguntas: "Preguntas frecuentes",
+    ctaTitulo: "Cuéntenos qué mueve",
+    ctaTexto:
+      "Le respondemos en 24 horas. Si su ruta no nos calza, se lo decimos: le ahorra la semana de esperar una cotización que no iba a llegar.",
+    ctaBoton: "Cotizar esta carga",
+    paginas: {
+      contenedores: {
+        titulo: "Retiro y devolución",
+        destacado: "de contenedores en puerto",
+        bajada:
+          "Movemos su contenedor entre el puerto y su bodega, con el equipo y los tiempos que el terminal exige.",
+        intro:
+          "Un contenedor no espera. El terminal cobra almacenaje desde el día que vence el libre, y la naviera cobra demurrage mientras el contenedor siga fuera. Los dos relojes corren al mismo tiempo y por conceptos distintos. Por eso este servicio se coordina contra la fecha de vencimiento, no contra la fecha de retiro.",
+        exigencias: [
+          {
+            titulo: "Cita en el terminal",
+            detalle:
+              "Los puertos operan con ventana asignada. Llegar fuera de ella significa volver otro día, y ese día lo paga alguien.",
+          },
+          {
+            titulo: "Equipo con seguros de contenedor",
+            detalle:
+              "Chasis portacontenedor o rampla con twist locks. Un contenedor amarrado solo con eslingas sobre plataforma plana no cumple.",
+          },
+          {
+            titulo: "Guía de despacho por cada traslado",
+            detalle:
+              "Desde el 1 de noviembre de 2026 la guía debe traer origen y destino efectivos, patente, chofer y hora real de salida. Retiro y devolución son dos traslados, así que son dos guías.",
+          },
+        ],
+        faq: [
+          {
+            p: "¿Retiran y devuelven, o solo una punta?",
+            r: "Las dos. Se puede contratar solo el retiro, solo la devolución o el ciclo completo. En el ciclo completo coordinamos las dos citas con el terminal para que el contenedor no quede esperando entre medio.",
+          },
+          {
+            p: "¿Qué pasa si el contenedor no está listo el día de la cita?",
+            r: "Nos avisa y reprogramamos con el terminal. Lo que no hacemos es mandar el camión a esperar: un camión detenido en la puerta del puerto no le sirve a nadie y se cobra igual.",
+          },
+          {
+            p: "¿Trabajan con contenedores de 20 y 40 pies?",
+            r: "Con los dos. En la cotización nos dice cuál es y cuánto pesa la carga: un 20 pies cargado con material denso puede exigir más equipo que un 40 pies liviano.",
+          },
+        ],
+      },
+      cargaGeneral: {
+        titulo: "Carga general",
+        destacado: "y paletizada",
+        bajada:
+          "Lo que se mueve en rampla plana o camión menor: bultos, pallets, insumos, material de obra.",
+        intro:
+          "Es el servicio más pedido y donde más se subestima el detalle. Lo que decide el equipo no es el peso total sino la relación entre peso y volumen: mil kilos de material denso caben en un camión pequeño, mil kilos de material voluminoso no. Por eso preguntamos las dos cosas antes de cotizar.",
+        exigencias: [
+          {
+            titulo: "Peso y volumen declarados",
+            detalle:
+              "Un tonelaje mal declarado cambia el equipo y el precio, y en un control de pesaje cambia también quién responde por la multa.",
+          },
+            {
+            titulo: "Amarre según la carga",
+            detalle:
+              "Pallets, bultos sueltos y material apilable no se amarran igual. La carga mal asegurada es la primera causa de daño en ruta, y ocurre en el patio de origen, no en la carretera.",
+          },
+          {
+            titulo: "Documentación del traslado",
+            detalle:
+              "Guía de despacho con la descripción precisa de lo que va arriba: cantidad, unidad, peso o volumen y precio unitario, salvo que no sea venta, y ahí va el motivo.",
+          },
+        ],
+        faq: [
+          {
+            p: "¿Hay un mínimo de carga?",
+            r: "No hay un mínimo rígido. Lo que cambia es el equipo: bajo cierto volumen conviene un camión menor, y sobre cierto punto conviene una rampla completa. Nos dice qué mueve y le proponemos el que corresponde.",
+          },
+          {
+            p: "¿Consolidan carga de distintos clientes?",
+            r: "Depende de la ruta y de la carga. Cuando se puede, baja el costo. Cuando la carga exige exclusividad, se lo decimos en la cotización en vez de descubrirlo en el camino.",
+          },
+          {
+            p: "¿Cómo sé qué equipo necesito?",
+            r: "No necesita saberlo. En el cotizador hay una opción para eso y lo resolvemos nosotros con los datos de la carga.",
+          },
+        ],
+      },
+      insumosMineros: {
+        titulo: "Insumos y materiales",
+        destacado: "para faena minera",
+        bajada:
+          "Material de operación, repuestos y consumibles hasta la faena, con la acreditación que cada una exige en su portería.",
+        intro:
+          "En minería el transporte no termina en la carretera: termina en la portería de la faena, y ahí la carga entra o no entra según los papeles del camión y del chofer. Cada compañía tiene su propio estándar de acreditación, y no basta con cumplir la ley: hay que cumplir lo que pide esa faena en particular.",
+        exigencias: [
+          {
+            titulo: "Acreditación del chofer y del vehículo",
+            detalle:
+              "Cada faena mantiene su propio registro. Un camión que entró el mes pasado puede no entrar hoy si venció un documento.",
+          },
+          {
+            titulo: "Control de fatiga en ruta",
+            detalle:
+              "Las rutas mineras son largas y en altura. Los tiempos de conducción y descanso no son una recomendación: son una condición para entrar.",
+          },
+          {
+            titulo: "Ventana de descarga coordinada",
+            detalle:
+              "La faena opera con turnos. Llegar fuera de ventana significa esperar el turno siguiente, con el camión y el chofer detenidos.",
+          },
+        ],
+        faq: [
+          {
+            p: "¿Ya están acreditados en mi faena?",
+            r: "Depende de cuál. Cuéntenos en qué faena descarga y le decimos con franqueza si la red ya opera ahí o si hay que hacer la acreditación primero, con el plazo que eso toma.",
+          },
+          {
+            p: "¿Suben a faenas en altura?",
+            r: "Sí, con el equipo y el chofer que la ruta exige. La altura cambia el rendimiento del camión y los tiempos, y eso va contemplado en la cotización, no como sorpresa después.",
+          },
+          {
+            p: "¿Pueden coordinar directamente con el área de abastecimiento?",
+            r: "Sí. En operaciones recurrentes lo normal es que coordinemos la ventana directo con la faena, y usted reciba el aviso cuando la carga entró.",
+          },
+        ],
+      },
+      bessEnergia: {
+        titulo: "Baterías BESS",
+        destacado: "y equipos de energía",
+        bajada:
+          "Contenedores de almacenamiento, transformadores y estructura para proyectos de generación, con el manejo que exige un equipo que no se puede golpear.",
+        intro:
+          "Un sistema de almacenamiento en baterías llega a Chile en contenedores que pesan decenas de toneladas, no se pueden inclinar, no se pueden golpear y muchas veces exceden las medidas estándar. El costo del equipo es varias veces el del flete, así que acá el criterio no es mover rápido: es no dañar nada y llegar cuando el sitio está listo para recibir.",
+        exigencias: [
+          {
+            titulo: "Equipo para sobredimensión",
+            detalle:
+              "Cama baja o extensible según la altura y el ancho del bulto. La altura total decide la ruta, porque decide por debajo de qué estructuras se puede pasar.",
+          },
+          {
+            titulo: "Permiso de circulación por sobredimensión",
+            detalle:
+              "Cuando el bulto excede las medidas máximas, el traslado necesita permiso y ruta autorizada. Se tramita antes, y el plazo del trámite es parte del plazo de entrega.",
+          },
+          {
+            titulo: "Amarre y control de golpe",
+            detalle:
+              "Una batería no se amarra como una máquina. El amarre reparte la fuerza sobre los puntos que el fabricante define, y no sobre la estructura del contenedor.",
+          },
+          {
+            titulo: "Coordinación con la obra",
+            detalle:
+              "En un parque en construcción el acceso cambia semana a semana. La fecha de entrega se fija contra el estado real del camino y del punto de descarga.",
+          },
+        ],
+        faq: [
+          {
+            p: "¿Cuánto pesa lo que pueden mover?",
+            r: "Nos dice el peso, las medidas y la altura del bulto y le respondemos con el equipo que corresponde y si necesita permiso. Sin esos tres datos, cualquier respuesta sería inventada.",
+          },
+          {
+            p: "¿El permiso de sobredimensión lo tramitan ustedes?",
+            r: "Sí, cuando la carga lo requiere. Va en la cotización como un ítem aparte y con su plazo, porque el trámite tiene un tiempo propio que no depende de nosotros.",
+          },
+          {
+            p: "¿Pueden mover el proyecto completo, no solo las baterías?",
+            r: "Sí. En un parque hay contenedores de baterías, transformadores, estructura y material de obra, y cada uno pide equipo distinto. Coordinarlo con un solo interlocutor es justamente el punto.",
+          },
+        ],
+      },
+    },
+  },
+
   /* ── Verificador de Resolución 154 ───────────────────────────────────
      Solo la interfaz. Los diez requisitos y sus referencias viven en
      `components/datos/resolucion154.ts`, en español: es una norma chilena
