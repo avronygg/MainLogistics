@@ -854,4 +854,18 @@ export const pt: Mensajes = {
       "Escreva com o nome da sua empresa, quantos equipamentos tem e em quais rotas opera. Respondemos com os passos e a lista de documentos.",
     volver: "Voltar ao início",
   },
+
+  /* ── Cotizador express · la puerta fría ─────────────────────────── */
+  express: {
+    titulo: "Comece pelo básico",
+    bajada:
+      "Três campos, e seguimos com o resto na página seguinte. Seus dados de contato ficam para o final, como sempre.",
+    origen: "De",
+    destino: "Para",
+    carga: "O que você movimenta",
+    vacioRegion: "Selecione a região",
+    vacioCarga: "Selecione o tipo de carga",
+    continuar: "Continuar",
+    completo: "Ou abra o formulário completo",
+  },
 };

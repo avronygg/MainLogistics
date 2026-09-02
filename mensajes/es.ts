@@ -876,6 +876,20 @@ export const es = {
       "Escríbanos con el nombre de su empresa, cuántos equipos tiene y en qué rutas opera. Le respondemos con los pasos y la lista de documentos.",
     volver: "Volver al inicio",
   },
+
+  /* ── Cotizador express · la puerta fría ─────────────────────────── */
+  express: {
+    titulo: "Empiece por lo básico",
+    bajada:
+      "Tres datos y seguimos con el resto en la página siguiente. Sus datos de contacto van al final, como siempre.",
+    origen: "Desde",
+    destino: "Hasta",
+    carga: "Qué mueve",
+    vacioRegion: "Seleccione región",
+    vacioCarga: "Seleccione tipo de carga",
+    continuar: "Continuar",
+    completo: "O abra el formulario completo",
+  },
 };
 
 /**

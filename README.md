@@ -71,6 +71,7 @@ node scripts/alternancia.mjs        # bandas claro/oscuro sin dos iguales seguid
 node scripts/nitidez.mjs            # ninguna foto se amplía
 node scripts/auditoria-movil.mjs    # hero en cuatro equipos reales
 node scripts/asesor.mjs             # secuencia del asesor flotante
+node scripts/logo.mjs               # el logo no se deforma en ningun idioma ni ancho
 node scripts/prueba-formulario.mjs  # el formulario nunca dice que envió si falló
 node scripts/todas.mjs              # todas las secciones renderizan
 ```

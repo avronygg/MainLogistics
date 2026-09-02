@@ -872,4 +872,17 @@ export const zh: Mensajes = {
     contactoDetalle: "请告知公司名称、车辆数量以及您经营的线路。我们会回复具体步骤和所需证件清单。",
     volver: "返回首页",
   },
+
+  /* ── Cotizador express · la puerta fría ─────────────────────────── */
+  express: {
+    titulo: "先填三项",
+    bajada: "填这三项，其余在下一页继续。您的联系方式一如既往放在最后。",
+    origen: "起运地",
+    destino: "目的地",
+    carga: "运什么",
+    vacioRegion: "请选择大区",
+    vacioCarga: "请选择货物类型",
+    continuar: "继续",
+    completo: "或直接打开完整表单",
+  },
 };

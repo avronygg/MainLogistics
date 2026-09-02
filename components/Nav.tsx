@@ -23,7 +23,7 @@ function Isotipo({ className = "" }: { className?: string }) {
       width={1541}
       height={343}
       priority
-      className={`w-auto ${className}`}
+      className={`w-auto max-w-none shrink-0 ${className}`}
     />
   );
 }
@@ -85,14 +85,19 @@ export default function Nav({ m, idioma }: { m: Mensajes; idioma: Idioma }) {
           "vidrio-nav mx-auto grid grid-cols-[1fr_auto_1fr] items-center gap-4",
           "rounded-full",
           "transition-[max-width,padding] duration-[var(--dur-estado)] ease-[var(--ease-quint)]",
-          "max-w-[900px] p-1.5 sm:p-2",
-          "data-[compacto=true]:max-w-[820px]",
+          // El ancho sube porque el menú pasó de cuatro enlaces a cinco.
+          // No son valores de gusto: medidos, el contenido necesita 834px en
+          // estado compacto, y con 820 el logo se aplastaba un 47% para
+          // caber. Se deja holgura para que un idioma con etiquetas más
+          // largas no vuelva a apretarlo.
+          "max-w-[1000px] p-1.5 sm:p-2",
+          "data-[compacto=true]:max-w-[920px]",
         ].join(" ")}
       >
         <Link
           href={`/${idioma}`}
           aria-label={m.nav.inicio}
-          className="col-start-1 flex w-fit items-center rounded-full px-2.5 py-1"
+          className="col-start-1 flex w-fit shrink-0 items-center rounded-full px-2.5 py-1"
           onClick={() => setAbierto(false)}
         >
           <Isotipo className="h-[22px] sm:h-[25px]" />

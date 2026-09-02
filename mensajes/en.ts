@@ -853,4 +853,18 @@ export const en: Mensajes = {
       "Write to us with your company name, how many units you run and which routes you cover. We reply with the steps and the document list.",
     volver: "Back to home",
   },
+
+  /* ── Cotizador express · la puerta fría ─────────────────────────── */
+  express: {
+    titulo: "Start with the basics",
+    bajada:
+      "Three fields, and we carry on with the rest on the next page. Your contact details come last, as always.",
+    origen: "From",
+    destino: "To",
+    carga: "What you are moving",
+    vacioRegion: "Select region",
+    vacioCarga: "Select cargo type",
+    continuar: "Continue",
+    completo: "Or open the full form",
+  },
 };
