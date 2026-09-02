@@ -16,6 +16,7 @@ export const pt: Mensajes = {
     queMovemos: "O que movemos",
     cobertura: "Cobertura",
     contacto: "Contato",
+    transportistas: "Transportadores",
     cotizar: "Cotação",
     cotizarMovil: "Cotar minha operação",
     principal: "Principal",
@@ -803,5 +804,54 @@ export const pt: Mensajes = {
 
   /* ── Piezas compartidas ──────────────────────────────────────────── */
   comunes: {
+  },
+
+  /* ── Transportistas · el segundo embudo ──────────────────────────── */
+  transportistas: {
+    meta: {
+      titulo: "Transportadores: some seu equipamento à rede | Main Logistics",
+      descripcion:
+        "A Main Logistics trabalha com transportadores que têm equipamento próprio, em carga recorrente por rotas definidas dentro do Chile. Sem custo de cadastro. Veja os documentos exigidos antes de se cadastrar.",
+    },
+    tituloLinea1: "Carga recorrente para",
+    tituloDestacado: "o seu equipamento",
+    bajada:
+      "Trabalhamos com transportadores que têm equipamento próprio e buscam volume estável em rotas definidas. O cadastro não custa nada.",
+    ctaPrincipal: "Quero participar",
+    ctaSecundario: "Ver o que é exigido",
+    pagoEtiqueta: "Prazo de pagamento",
+    pagoTitulo: "Pagamos em {dias} dias a partir do POD.",
+    pagoDetalle: "Sem esperar que o cliente nos pague primeiro.",
+    ofreceTitulo: "O que nós colocamos",
+    ofreceRecurrenteTitulo: "Carga que se repete",
+    ofreceRecurrenteDetalle:
+      "Rotas definidas com volume sustentado, não uma viagem avulsa de vez em quando.",
+    ofreceSinCostoTitulo: "Sem custo de cadastro",
+    ofreceSinCostoDetalle:
+      "Entrar na rede não é cobrado e não obriga a aceitar nenhuma carga.",
+    ofrecePapelesTitulo: "A papelada da viagem, coordenada",
+    ofrecePapelesDetalle:
+      "O documento de transporte e a documentação do deslocamento ficam por nossa conta.",
+    ofreceContraparteTitulo: "Um interlocutor, não uma central",
+    ofreceContraparteDetalle:
+      "Alguém com nome que responde no mesmo dia quando algo muda na estrada.",
+    exigeTitulo: "O que pedimos",
+    exigeBajada:
+      "A lista completa, antes do cadastro. Se faltar alguma coisa, é melhor saber agora do que depois de enviar os dados.",
+    exigeVigencia: "Certidão de regularidade da sociedade e CNPJ ou RUT",
+    exigeTributaria: "Situação tributária com atividade de transporte de carga",
+    exigeF30: "F30-1 mensal, de obrigações trabalhistas e previdenciárias",
+    exigePolizas: "Apólice de responsabilidade civil e seguro de carga vigentes",
+    exigePadron: "Documento do veículo, licenciamento e inspeção técnica",
+    exigeSoap: "SOAP vigente (seguro obrigatório de acidentes)",
+    exigeLicencia: "Motorista com habilitação classe A vigente",
+    exigeGps: "GPS ativo, com acesso compartilhado durante a viagem",
+    relacionTitulo: "Como é a relação",
+    relacionDetalle:
+      "Você opera seu equipamento e dirige a sua equipe. A Main Logistics coordena a carga e responde ao cliente pelo serviço. Não somos seu empregador nem intermediamos sua relação de trabalho.",
+    contactoTitulo: "Para participar",
+    contactoDetalle:
+      "Escreva com o nome da sua empresa, quantos equipamentos tem e em quais rotas opera. Respondemos com os passos e a lista de documentos.",
+    volver: "Voltar ao início",
   },
 };

@@ -33,6 +33,7 @@ export const zh: Mensajes = {
     queMovemos: "承运货类",
     cobertura: "覆盖范围",
     contacto: "联系我们",
+    transportistas: "承运商加盟",
     cotizar: "报价",
     cotizarMovil: "索取运输报价",
     principal: "主导航",
@@ -828,5 +829,47 @@ export const zh: Mensajes = {
 
   /* ── Piezas compartidas ──────────────────────────────────────────── */
   comunes: {
+  },
+
+  /* ── Transportistas · el segundo embudo ──────────────────────────── */
+  transportistas: {
+    meta: {
+      titulo: "承运商加盟：把您的车辆加入网络 | Main Logistics",
+      descripcion:
+        "Main Logistics 与拥有自有车辆的承运商合作，在智利境内的固定线路上提供稳定回头货。加盟不收费。注册前请先查看所需证件清单。",
+    },
+    tituloLinea1: "稳定回头货，",
+    tituloDestacado: "给您的车",
+    bajada: "我们与拥有自有车辆、希望在固定线路上获得稳定货量的承运商合作。加盟不收取任何费用。",
+    ctaPrincipal: "我要加盟",
+    ctaSecundario: "查看要求",
+    pagoEtiqueta: "付款账期",
+    pagoTitulo: "签收凭证后 {dias} 天付款。",
+    pagoDetalle: "不必等客户先付给我们。",
+    ofreceTitulo: "我们提供什么",
+    ofreceRecurrenteTitulo: "可重复的货量",
+    ofreceRecurrenteDetalle: "固定线路、持续货量，而不是偶尔一票散货。",
+    ofreceSinCostoTitulo: "加盟不收费",
+    ofreceSinCostoDetalle: "进入网络不收取费用，也不强制接受任何一票货。",
+    ofrecePapelesTitulo: "单证由我们协调",
+    ofrecePapelesDetalle: "运输单据和此次运输的相关单证由我们负责协调。",
+    ofreceContraparteTitulo: "一个对接人，不是客服中心",
+    ofreceContraparteDetalle: "路上有变动时，有一个具名的人当天回复您。",
+    exigeTitulo: "我们要求什么",
+    exigeBajada: "完整清单，在您注册之前就公开。如果缺少某项，早知道比提交资料之后才知道要好。",
+    exigeVigencia: "公司存续证明及纳税识别号",
+    exigeTributaria: "税务登记的经营范围须包含货物运输",
+    exigeF30: "每月 F30-1，劳工与社保义务证明",
+    exigePolizas: "有效的第三者责任险与货物运输险保单",
+    exigePadron: "车辆登记证、行驶许可与技术年检",
+    exigeSoap: "有效的 SOAP（强制事故险）",
+    exigeLicencia: "驾驶员持有效 A 类驾照",
+    exigeGps: "GPS 处于启用状态，运输期间共享查看权限",
+    relacionTitulo: "合作关系说明",
+    relacionDetalle:
+      "您自行运营车辆并管理自己的人员。Main Logistics 负责协调货源，并就服务向客户负责。我们不是您的雇主，也不介入您的劳动关系。",
+    contactoTitulo: "如何加盟",
+    contactoDetalle: "请告知公司名称、车辆数量以及您经营的线路。我们会回复具体步骤和所需证件清单。",
+    volver: "返回首页",
   },
 };

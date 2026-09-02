@@ -16,6 +16,7 @@ export const en: Mensajes = {
     queMovemos: "What we move",
     cobertura: "Coverage",
     contacto: "Contact",
+    transportistas: "Carriers",
     cotizar: "Get a quote",
     cotizarMovil: "Quote my operation",
     principal: "Main content",
@@ -803,5 +804,53 @@ export const en: Mensajes = {
 
   /* ── Piezas compartidas ──────────────────────────────────────────── */
   comunes: {
+  },
+
+  /* ── Transportistas · el segundo embudo ──────────────────────────── */
+  transportistas: {
+    meta: {
+      titulo: "Carriers: add your equipment to the network | Main Logistics",
+      descripcion:
+        "Main Logistics works with carriers that own their equipment, on recurring freight along defined routes within Chile. No registration fee. See the documents required before you sign up.",
+    },
+    tituloLinea1: "Recurring freight for",
+    tituloDestacado: "your equipment",
+    bajada:
+      "We work with carriers that own their equipment and want steady volume on defined routes. Signing up costs nothing.",
+    ctaPrincipal: "I want to join",
+    ctaSecundario: "See what is required",
+    pagoEtiqueta: "Payment terms",
+    pagoTitulo: "We pay you {dias} days from POD.",
+    pagoDetalle: "Without waiting for the client to pay us first.",
+    ofreceTitulo: "What we bring",
+    ofreceRecurrenteTitulo: "Freight that repeats",
+    ofreceRecurrenteDetalle: "Defined routes with sustained volume, not the odd one-off run.",
+    ofreceSinCostoTitulo: "No registration fee",
+    ofreceSinCostoDetalle: "Joining the network costs nothing and commits you to no load.",
+    ofrecePapelesTitulo: "Trip paperwork, handled",
+    ofrecePapelesDetalle:
+      "We coordinate the dispatch note and the documentation for the movement.",
+    ofreceContraparteTitulo: "One counterpart, not a call centre",
+    ofreceContraparteDetalle:
+      "Someone with a name who answers the same day when something shifts on the road.",
+    exigeTitulo: "What we ask for",
+    exigeBajada:
+      "The full list, before you sign up. If something is missing, better you know now than after sending your details.",
+    exigeVigencia: "Certificate of good standing and company tax ID",
+    exigeTributaria: "Tax status registered under road freight transport",
+    exigeF30: "Monthly F30-1, covering labour and social security obligations",
+    exigePolizas: "Current third-party liability and cargo insurance policies",
+    exigePadron:
+      "Vehicle registration, circulation permit and technical inspection",
+    exigeSoap: "Current SOAP (mandatory accident insurance)",
+    exigeLicencia: "Driver with a valid class A licence",
+    exigeGps: "Active GPS, with access shared during the trip",
+    relacionTitulo: "How the relationship works",
+    relacionDetalle:
+      "You operate your equipment and direct your own staff. Main Logistics coordinates the freight and answers to the client for the service. We are not your employer and we do not intermediate your labour relationship.",
+    contactoTitulo: "To join",
+    contactoDetalle:
+      "Write to us with your company name, how many units you run and which routes you cover. We reply with the steps and the document list.",
+    volver: "Back to home",
   },
 };

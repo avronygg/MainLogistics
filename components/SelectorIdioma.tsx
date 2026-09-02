@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { IDIOMAS, NOMBRES, type Idioma } from "@/mensajes/idiomas";
 import { BANDERAS } from "./Banderas";
 
@@ -47,6 +47,7 @@ export default function SelectorIdioma({
   const [abierto, setAbierto] = useState(false);
   const contenedor = useRef<HTMLDivElement>(null);
   const router = useRouter();
+  const ruta = usePathname();
 
   useEffect(() => {
     if (!abierto) return;
@@ -67,9 +68,15 @@ export default function SelectorIdioma({
   function elegir(idioma: Idioma) {
     recordarPreferencia(idioma);
     setAbierto(false);
-    // `replace` y no `push`: el idioma anterior no es un paso atrás que
-    // alguien quiera deshacer, y ensuciaría el historial del formulario.
-    router.replace(`/${idioma}`);
+    /* Se cambia SOLO el primer tramo. Con `/${idioma}` a secas, alguien que
+       estuviera en /es/transportistas y eligiera inglés terminaba en la
+       home: cambiar de idioma no debería costarte la página en la que
+       estás.
+
+       `replace` y no `push`: el idioma anterior no es un paso atrás que
+       alguien quiera deshacer, y ensuciaría el historial del formulario. */
+    const resto = ruta.split("/").slice(2).join("/");
+    router.replace(`/${idioma}${resto ? "/" + resto : ""}`);
   }
 
   const BanderaActual = BANDERAS[actual];

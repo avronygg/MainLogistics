@@ -29,14 +29,23 @@ function Isotipo({ className = "" }: { className?: string }) {
 }
 
 export default function Nav({ m, idioma }: { m: Mensajes; idioma: Idioma }) {
-  // Los anclas son de la página, no del idioma: `#servicios` sigue siendo
-  // `#servicios` en chino. Traducir el fragmento rompería cada enlace que
-  // alguien ya compartió.
+  // Los anclas van con la ruta del idioma delante, no sueltas.
+  //
+  // `#servicios` a secas solo funciona estando en la home: desde
+  // /transportistas el navegador busca ese ancla en la página actual, no la
+  // encuentra y el enlace no hace nada. Con `/es#servicios` navega a la home
+  // y baja a la sección, desde donde sea.
+  //
+  // El fragmento NO se traduce: `#servicios` sigue siendo `#servicios` en
+  // chino. Traducirlo rompería cada enlace que alguien ya compartió.
   const enlaces = [
-    { href: "#servicios", texto: m.nav.servicios },
-    { href: "#cargas", texto: m.nav.queMovemos },
-    { href: "#cobertura", texto: m.nav.cobertura },
-    { href: "#contacto", texto: m.nav.contacto },
+    { href: `/${idioma}#servicios`, texto: m.nav.servicios },
+    { href: `/${idioma}#cargas`, texto: m.nav.queMovemos },
+    { href: `/${idioma}#cobertura`, texto: m.nav.cobertura },
+    // Página propia, no ancla. Va en el menú principal y no en el pie: en un
+    // modelo que subcontrata capacidad, este embudo es la mitad del negocio.
+    { href: `/${idioma}/transportistas`, texto: m.nav.transportistas },
+    { href: `/${idioma}#contacto`, texto: m.nav.contacto },
   ];
 
   const [compacto, setCompacto] = useState(false);
@@ -81,7 +90,7 @@ export default function Nav({ m, idioma }: { m: Mensajes; idioma: Idioma }) {
         ].join(" ")}
       >
         <Link
-          href="#inicio"
+          href={`/${idioma}`}
           aria-label={m.nav.inicio}
           className="col-start-1 flex w-fit items-center rounded-full px-2.5 py-1"
           onClick={() => setAbierto(false)}
@@ -108,7 +117,7 @@ export default function Nav({ m, idioma }: { m: Mensajes; idioma: Idioma }) {
 
         <div className="col-start-3 flex items-center justify-end gap-2">
           <Link
-            href="#cotizar"
+            href={`/${idioma}#cotizar`}
             className={[
               // `whitespace-nowrap` no es cosmético: el CTA es la palabra más
               // variable del nav — "Cotizar" son 7 caracteres y "Get a quote"
@@ -205,7 +214,7 @@ export default function Nav({ m, idioma }: { m: Mensajes; idioma: Idioma }) {
             </ul>
 
             <Link
-              href="#cotizar"
+              href={`/${idioma}#cotizar`}
               onClick={() => setAbierto(false)}
               className="mt-2 flex min-h-[52px] items-center justify-center rounded-[14px] bg-[var(--morado-solido)] px-4 text-[16px] font-medium text-white sm:hidden"
             >
