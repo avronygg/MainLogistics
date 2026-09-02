@@ -774,6 +774,8 @@ export const pt: Mensajes = {
 
   /* ── Asesor flotante ─────────────────────────────────────────────── */
   asesor: {
+    whatsappMensaje: "Olá, quero cotar um transporte de carga.",
+    whatsappDirecto: "Falar pelo WhatsApp",
     cargo: "Atendimento comercial",
     mensaje: "👋 Precisa de ajuda com sua carga ou quer uma cotação?",
     escribiendo: "Escrevendo",

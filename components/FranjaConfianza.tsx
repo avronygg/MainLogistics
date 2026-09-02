@@ -1,6 +1,5 @@
 import Image from "next/image";
 import s from "./FranjaConfianza.module.css";
-import type { Mensajes } from "@/mensajes";
 
 /**
  * ⚠️ COMPONENTE APARCADO — NO SE RENDERIZA EN NINGUNA PARTE.
@@ -87,13 +86,14 @@ function Logo({ marca }: { marca: Marca }) {
   );
 }
 
-export default function FranjaConfianza({ m }: { m: Mensajes }) {
+export default function FranjaConfianza() {
   return (
     <div className="flex flex-col items-center gap-3 sm:gap-6">
       <p className="hidden px-[var(--borde-x)] text-[12.5px] tracking-[-0.005em] text-[var(--texto-sec)] sm:block">
-        {/* Alternativa honesta si Main participó junto al socio y no como
-            proveedor titular: "Operaciones atendidas junto a Logística Yireh" */}
-        "Confían en nosotros"
+        {/* Encabezado literal: al aparcar el componente su clave salió del
+            diccionario, que se serializa entero al navegador y no tiene por
+            qué cargar texto que nadie renderiza. */}
+        {"Confían en nosotros"}
       </p>
 
       <div className={`${s.ventana} w-full`}>

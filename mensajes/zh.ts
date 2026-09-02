@@ -799,6 +799,8 @@ export const zh: Mensajes = {
 
   /* ── Asesor flotante ─────────────────────────────────────────────── */
   asesor: {
+    whatsappMensaje: "您好，我想咨询货运报价。",
+    whatsappDirecto: "通过 WhatsApp 联系",
     cargo: "商务咨询",
     mensaje: "👋 需要协助安排货物运输，还是想让我们报价？",
     escribiendo: "正在输入",
