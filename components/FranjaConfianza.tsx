@@ -3,6 +3,25 @@ import s from "./FranjaConfianza.module.css";
 import type { Mensajes } from "@/mensajes";
 
 /**
+ * ⚠️ COMPONENTE APARCADO — NO SE RENDERIZA EN NINGUNA PARTE.
+ *
+ * Era la cinta de logos del hero, bajo "Confían en nosotros". Se retiró del
+ * Hero por el §1.2 del brief de desarrollo: ninguna de las trece empresas es
+ * cliente facturado de Main Logistics, así que el encabezado afirmaba una
+ * relación comercial inexistente, y usar marcas registradas de terceros para
+ * sugerirla es exposición legal.
+ *
+ * No se borra porque el componente está bien resuelto —la cinta infinita, el
+ * cálculo de las dos copias, los anchos fijos por logo— y sirve tal cual el
+ * día que haya clientes reales con autorización de uso de marca. Para
+ * volver a usarlo basta con reemplazar la lista de `MARCAS` y montarlo de
+ * nuevo en el Hero.
+ *
+ * Mientras tanto, lo que va en su lugar es la alianza operacional declarada
+ * con nombre y RUT (§6.2 del brief), que el comprador verifica en el SII.
+ */
+
+/**
  * Cinta de clientes.
  *
  * Los logos son los archivos reales, tomados del sitio del socio
@@ -74,7 +93,7 @@ export default function FranjaConfianza({ m }: { m: Mensajes }) {
       <p className="hidden px-[var(--borde-x)] text-[12.5px] tracking-[-0.005em] text-[var(--texto-sec)] sm:block">
         {/* Alternativa honesta si Main participó junto al socio y no como
             proveedor titular: "Operaciones atendidas junto a Logística Yireh" */}
-        {m.resenas.franja.encabezado}
+        "Confían en nosotros"
       </p>
 
       <div className={`${s.ventana} w-full`}>

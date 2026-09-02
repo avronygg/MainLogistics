@@ -379,9 +379,6 @@ export const zh: Mensajes = {
         industria: "制作",
       },
     },
-    franja: {
-      encabezado: "他们信任我们",
-    },
   },
 
   /* ── Cómo funciona · el timeline ─────────────────────────────────── */

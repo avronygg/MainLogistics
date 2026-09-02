@@ -2,7 +2,6 @@ import HeroBackdrop from "./HeroBackdrop";
 import RotadorFrase from "./RotadorFrase";
 import BotonPill from "./ui/BotonPill";
 import TarjetasFlotantes from "./TarjetasFlotantes";
-import FranjaConfianza from "./FranjaConfianza";
 import type { Mensajes } from "@/mensajes";
 
 export default function Hero({ m }: { m: Mensajes }) {
@@ -55,11 +54,19 @@ export default function Hero({ m }: { m: Mensajes }) {
           </BotonPill>
         </div>
 
-        {/* La cinta de logos cierra el hero sobre el propio video, sin banda
-            sólida de por medio: después de esto entra directo el fondo claro. */}
-        <div className="mt-[clamp(2.25rem,4.5vw,3.5rem)] w-full">
-          <FranjaConfianza m={m} />
-        </div>
+        {/* Acá iba la cinta de trece logos de clientes bajo "Confían en
+            nosotros". Se retiró: ninguna de esas empresas es cliente
+            facturado de Main Logistics, así que el encabezado afirmaba una
+            relación comercial que no existe. Ver el brief de desarrollo,
+            §1.2 — en un mercado donde los jefes de logística se consultan
+            entre ellos, eso se descubre en la primera reunión, y además usar
+            marcas registradas de terceros para sugerir una relación que no
+            existe es exposición legal.
+
+            Lo que va en su lugar está en el §6.2 del brief: declarar la
+            alianza operacional con nombre y RUT, que el comprador verifica
+            en el SII en treinta segundos. Necesita la autorización escrita
+            de la empresa aliada antes de publicarse. */}
       </div>
 
     </section>

@@ -359,9 +359,6 @@ export const pt: Mensajes = {
         industria: "Produção",
       },
     },
-    franja: {
-      encabezado: "Confiam em nós",
-    },
   },
 
   /* ── Cómo funciona · el timeline ─────────────────────────────────── */

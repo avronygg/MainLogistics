@@ -382,9 +382,6 @@ export const es = {
         industria: "Producción",
       },
     },
-    franja: {
-      encabezado: "Confían en nosotros",
-    },
   },
 
   /* ── Cómo funciona · el timeline ─────────────────────────────────── */
