@@ -25,7 +25,7 @@ p.on('console', (m) => {
   if (m.type() === 'error' && !esperado(m.text())) errores.push(m.text());
 });
 
-await p.goto('http://localhost:3000', { waitUntil: 'networkidle' });
+await p.goto('http://localhost:3000/es/cotizar', { waitUntil: 'networkidle' });
 await p.locator('#cotizar').scrollIntoViewIfNeeded();
 await p.waitForTimeout(400);
 

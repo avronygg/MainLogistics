@@ -21,6 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
      suma acá y el sitemap la recoge en los cuatro idiomas. */
   const PAGINAS = [
     { ruta: "", prioridad: 1 },
+    { ruta: "/cotizar", prioridad: 0.9 },
     { ruta: "/transportistas", prioridad: 0.9 },
   ];
 

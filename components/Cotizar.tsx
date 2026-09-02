@@ -1,6 +1,8 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { REGIONES } from "./datos/chile";
 import Titulo from "./Titulo";
 import { IconoCarga, IconoReloj, IconoEscudo } from "./Iconos";
 import Riel from "./cotizar/Riel";
@@ -136,12 +138,29 @@ function textoWhatsapp(d: Cotizacion) {
 }
 
 export default function Cotizar({ m }: { m: Mensajes }) {
+  /* Lo que llega del cotizador express de la home, por la URL. Se valida
+     contra las listas reales: un parámetro escrito a mano no puede meter un
+     valor que el formulario no ofrece. */
+  const parametros = useSearchParams();
+  const desdeUrl = (() => {
+    const region = (v: string | null) =>
+      v && REGIONES.some((r) => r.region === v) ? v : "";
+    const carga = parametros.get("tipoCarga") ?? parametros.get("carga");
+    return {
+      origenRegion: region(parametros.get("origen")),
+      destinoRegion: region(parametros.get("destino")),
+      tipoCarga: carga && TIPOS_CARGA.some((o) => o.valor === carga) ? carga : "",
+    };
+  })();
+  const vieneDeExpress =
+    Boolean(desdeUrl.origenRegion || desdeUrl.destinoRegion || desdeUrl.tipoCarga);
+
   const t = m.cotizar;
   // `PASOS` son los ids (estructura); `pasosTexto`, los mismos seis con su
   // título y bajada en el idioma en curso.
   const pasosTexto = pasos(m);
 
-  const [datos, setDatos] = useState<Cotizacion>(COTIZACION_VACIA);
+  const [datos, setDatos] = useState<Cotizacion>({ ...COTIZACION_VACIA, ...desdeUrl });
   const [paso, setPaso] = useState(0);
   const [errores, setErrores] = useState<Errores>({});
   const [intentado, setIntentado] = useState<number[]>([]);
@@ -173,7 +192,11 @@ export default function Cotizar({ m }: { m: Mensajes }) {
       const guardado = JSON.parse(crudo) as Partial<Cotizacion>;
       // Solo se retoma si hay algo real escrito, no por un roce.
       if (!guardado.tipoCarga && !guardado.empresa) return;
-      setDatos({ ...COTIZACION_VACIA, ...guardado });
+      /* Lo que viene del express PISA al borrador guardado: son campos que
+         la persona acaba de elegir hace dos segundos, y respetar un borrador
+         de la semana pasada por encima de eso se siente como que el sitio no
+         escuchó. El resto del borrador se conserva. */
+      setDatos({ ...COTIZACION_VACIA, ...guardado, ...(vieneDeExpress ? desdeUrl : {}) });
       setRetomado(true);
     } catch {
       /* Almacenamiento bloqueado o JSON corrupto: se sigue en blanco. */

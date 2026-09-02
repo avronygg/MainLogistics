@@ -122,7 +122,7 @@ export default function Nav({ m, idioma }: { m: Mensajes; idioma: Idioma }) {
 
         <div className="col-start-3 flex items-center justify-end gap-2">
           <Link
-            href={`/${idioma}#cotizar`}
+            href={`/${idioma}/cotizar`}
             className={[
               // `whitespace-nowrap` no es cosmético: el CTA es la palabra más
               // variable del nav — "Cotizar" son 7 caracteres y "Get a quote"
@@ -219,7 +219,7 @@ export default function Nav({ m, idioma }: { m: Mensajes; idioma: Idioma }) {
             </ul>
 
             <Link
-              href={`/${idioma}#cotizar`}
+              href={`/${idioma}/cotizar`}
               onClick={() => setAbierto(false)}
               className="mt-2 flex min-h-[52px] items-center justify-center rounded-[14px] bg-[var(--morado-solido)] px-4 text-[16px] font-medium text-white sm:hidden"
             >

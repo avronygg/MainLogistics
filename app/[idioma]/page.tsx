@@ -8,7 +8,7 @@ import Cumplimiento from "@/components/Cumplimiento";
 import Resenas from "@/components/Resenas";
 import ComoFunciona from "@/components/ComoFunciona";
 import Equipo from "@/components/Equipo";
-import Cotizar from "@/components/Cotizar";
+import CotizarExpress from "@/components/CotizarExpress";
 import Pie from "@/components/Pie";
 import Asesor from "@/components/Asesor";
 
@@ -43,7 +43,7 @@ export default async function Home({
         <Resenas m={m} />
         <ComoFunciona m={m} />
         <Equipo m={m} />
-        <Cotizar m={m} />
+        <CotizarExpress m={m} idioma={idioma} />
       </main>
       <Pie m={m} />
       <Asesor m={m} />
