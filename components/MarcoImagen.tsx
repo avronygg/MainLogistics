@@ -1,5 +1,10 @@
 import type { ReactNode } from "react";
-import { ENCARGOS, ROTULO_ENCARGO, type ClaveEncargo } from "./datos/encargos-foto";
+import {
+  ENCARGOS,
+  MARCO_VISIBLE,
+  ROTULO_ENCARGO,
+  type ClaveEncargo,
+} from "./datos/encargos-foto";
 
 /**
  * Marco para una foto que todavía no existe.
@@ -46,24 +51,15 @@ export default function MarcoImagen({
   /** Contenido que va encima del marco, si la tarjeta lo necesita. */
   children?: ReactNode;
 }) {
+  /* Segunda barrera, además de la que ponen los dos llamadores.
+     Ellos deciden el LAYOUT —si la grilla reserva una columna o no— y eso
+     no se puede resolver desde acá. Pero que el rectángulo no se dibuje en
+     producción sí, y conviene que sea imposible: durante un tiempo se
+     ocultó solo el texto del encargo y quedó la caja, que en pantalla se
+     lee como una foto que no cargó. */
+  if (!MARCO_VISIBLE) return null;
+
   const enEsquina = posicion === "esquina";
-
-  /**
-   * El encargo se ve mientras se trabaja y NO se publica.
-   *
-   * El brief de desarrollo (§1.3) encontró en producción el texto "Foto
-   * pendiente" seguido de la descripción del encuadre pedido al fotógrafo.
-   * Eso es una nota interna publicada: al visitante le dice que el sitio
-   * está a medio hacer, y no aporta nada.
-   *
-   * Sacarlo del todo habría matado la razón de ser del marco, que es que el
-   * encargo viva en el layout y no en una conversación que se pierde. Así
-   * que vive donde sirve —en `npm run dev`— y desaparece en el build.
-   * Cuando llegue la foto, se reemplaza el marco por un <Image> y este
-   * archivo se borra.
-   */
-  const mostrarEncargo = process.env.NODE_ENV === "development";
-
 
   return (
     <div
@@ -96,8 +92,8 @@ export default function MarcoImagen({
       />
 
       {/* El encargo, dentro de un recuadro punteado que se lee como reserva.
-          Solo en desarrollo: ver `mostrarEncargo`. */}
-      {mostrarEncargo && (
+          Llegar hasta acá ya implica estar en desarrollo: la salida
+          temprana de arriba se encarga del resto. */}
       <div
         className={
           enEsquina
@@ -136,7 +132,6 @@ export default function MarcoImagen({
           </span>
         </div>
       </div>
-      )}
 
       {children}
     </div>

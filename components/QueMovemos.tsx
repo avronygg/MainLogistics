@@ -1,5 +1,6 @@
 import Titulo from "./Titulo";
 import MarcoImagen from "./MarcoImagen";
+import { MARCO_VISIBLE } from "./datos/encargos-foto";
 import { IconoCarga } from "./Iconos";
 import type { Mensajes } from "@/mensajes";
 /**
@@ -63,11 +64,13 @@ export default function QueMovemos({ m }: { m: Mensajes }) {
             </span>
           </p>
 
-          <MarcoImagen
-            className="mt-8 h-[clamp(12rem,20vw,16rem)] rounded-[var(--r-img)]"
-            icono={<IconoCarga className="size-7" />}
-            encargo="cargas"
-          />
+          {MARCO_VISIBLE && (
+            <MarcoImagen
+              className="mt-8 h-[clamp(12rem,20vw,16rem)] rounded-[var(--r-img)]"
+              icono={<IconoCarga className="size-7" />}
+              encargo="cargas"
+            />
+          )}
 
           <p className="dato mt-8 flex items-baseline gap-2.5 leading-none">
             {/* La cifra no sale del diccionario: es el largo de CARGAS, no

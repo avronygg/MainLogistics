@@ -4,6 +4,7 @@ import { useId, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import Titulo from "./Titulo";
 import MarcoImagen from "./MarcoImagen";
+import { MARCO_VISIBLE } from "./datos/encargos-foto";
 import type { ClaveEncargo } from "./datos/encargos-foto";
 import { IconoEscudo } from "./Iconos";
 import type { Mensajes } from "@/mensajes";
@@ -212,9 +213,23 @@ export default function Cumplimiento({ m }: { m: Mensajes }) {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: reducir ? 0 : -10 }}
               transition={{ duration: reducir ? 0 : 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="grid items-stretch gap-x-10 gap-y-6 md:grid-cols-[minmax(0,1fr)_minmax(0,19rem)]"
+              className={[
+                "grid items-stretch gap-x-10 gap-y-6",
+                MARCO_VISIBLE ? "md:grid-cols-[minmax(0,1fr)_minmax(0,19rem)]" : "",
+              ].join(" ")}
             >
-              <div>
+              {/* Sin la foto, todo el contenido quedaba pegado a la
+                  izquierda y media tarjeta en blanco. La lista de chequeo
+                  se pasa a ese lado: llena el espacio con contenido real,
+                  que es distinto de rellenarlo. */}
+              <div
+                className={
+                  MARCO_VISIBLE
+                    ? ""
+                    : "md:grid md:grid-cols-[minmax(0,1fr)_minmax(0,24rem)] md:items-start md:gap-x-12"
+                }
+              >
+                <div>
                 <ul className="flex flex-wrap gap-1.5">
                   {/* `codigo` y no `m`: acá `m` es el diccionario. */}
                   {ind.marco.map((codigo) => (
@@ -234,7 +249,14 @@ export default function Cumplimiento({ m }: { m: Mensajes }) {
                   {ind.detalle}
                 </p>
 
-                <ul className="mt-6 flex flex-col gap-3">
+                </div>
+
+                <ul
+                  className={[
+                    "flex flex-col gap-3",
+                    MARCO_VISIBLE ? "mt-6" : "mt-6 md:mt-0",
+                  ].join(" ")}
+                >
                   {ind.puntos.map((p) => (
                     <li key={p} className="flex items-start gap-3">
                       <span
@@ -259,11 +281,13 @@ export default function Cumplimiento({ m }: { m: Mensajes }) {
                 </ul>
               </div>
 
-              <MarcoImagen
-                className="order-first h-[clamp(11rem,18vw,14rem)] rounded-[var(--r-img)] md:order-last md:h-full md:min-h-[15rem]"
-                icono={<IconoEscudo className="size-7" />}
-                encargo={ind.encargo}
-              />
+              {MARCO_VISIBLE && (
+                <MarcoImagen
+                  className="order-first h-[clamp(11rem,18vw,14rem)] rounded-[var(--r-img)] md:order-last md:h-full md:min-h-[15rem]"
+                  icono={<IconoEscudo className="size-7" />}
+                  encargo={ind.encargo}
+                />
+              )}
             </motion.div>
           </AnimatePresence>
         </div>
