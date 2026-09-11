@@ -19,36 +19,48 @@ import { PAGINAS_SERVICIO } from "@/components/datos/paginas-servicio";
  */
 export default function sitemap(): MetadataRoute.Sitemap {
   /* Una entrada por página y por idioma. Al agregar una página nueva se
-     suma acá y el sitemap la recoge en los cuatro idiomas. */
+     suma acá y el sitemap la recoge en los cuatro idiomas.
+
+     `actualizada` es la fecha del último cambio de CONTENIDO de esa página,
+     escrita a mano. Antes era `new Date()`, que marcaba las 44 URL como
+     modificadas en cada despliegue aunque no hubiera cambiado una coma, y
+     Google deja de creerle al `lastmod` de un sitio que hace eso. No sale de
+     git porque el texto de todas las páginas vive junto en `mensajes/`, y
+     porque el clon con que se compila en Vercel no garantiza traer la
+     historia completa.
+
+     👉 Al cambiar el texto, la estructura o los datos de una página, se
+     actualiza su fecha acá. Un arreglo de estilo o de código que no cambia
+     lo que la página dice no cuenta. */
   const PAGINAS = [
-    { ruta: "", prioridad: 1 },
-    { ruta: "/cotizar", prioridad: 0.9 },
-    { ruta: "/transportistas", prioridad: 0.9 },
+    { ruta: "", prioridad: 1, actualizada: "2026-09-11" },
+    { ruta: "/cotizar", prioridad: 0.9, actualizada: "2026-09-11" },
+    { ruta: "/transportistas", prioridad: 0.9, actualizada: "2026-09-02" },
     /* El hub y las cuatro páginas de servicio. Son las URL que hoy no
        existen y por las que todo el long tail de búsqueda queda fuera de
        alcance (brief §5.1). */
-    { ruta: "/transporte-de-carga", prioridad: 0.9 },
+    { ruta: "/transporte-de-carga", prioridad: 0.9, actualizada: "2026-09-11" },
     ...PAGINAS_SERVICIO.map((p) => ({
       ruta: `/transporte-de-carga/${p.slug}`,
       prioridad: 0.8,
+      actualizada: "2026-09-02",
     })),
     /* La herramienta del brief §8.1. Prioridad alta: no es una página de
        apoyo, es la puerta de entrada de quien busca "resolución 154" entre
        hoy y el 1 de noviembre. */
-    { ruta: "/verificador-resolucion-154", prioridad: 0.9 },
+    { ruta: "/verificador-resolucion-154", prioridad: 0.9, actualizada: "2026-09-02" },
     /* Las legales entran al sitemap con prioridad baja, pero entran. El
        brief §10.3 anota que Agunsa y Loginsa tienen estos enlaces muertos
        en producción: una política que existe y se puede encontrar ya es
        una diferencia frente al benchmark. */
-    { ruta: "/legal/privacidad", prioridad: 0.4 },
-    { ruta: "/legal/terminos", prioridad: 0.4 },
+    { ruta: "/legal/privacidad", prioridad: 0.4, actualizada: "2026-09-02" },
+    { ruta: "/legal/terminos", prioridad: 0.4, actualizada: "2026-09-02" },
   ];
 
   return IDIOMAS.flatMap((idioma) =>
     PAGINAS.map((pagina) => ({
     url: `${BASE}/${idioma}${pagina.ruta}`,
-    // Una sola página por ahora, así que todas cambian a la vez.
-    lastModified: new Date(),
+    lastModified: pagina.actualizada,
     changeFrequency: "monthly" as const,
     // El español es la versión principal: es el idioma del mercado.
     priority: idioma === "es" ? pagina.prioridad : pagina.prioridad - 0.2,

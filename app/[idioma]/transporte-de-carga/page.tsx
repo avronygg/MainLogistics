@@ -34,8 +34,8 @@ export async function generateMetadata({
   const t = m.paginasServicio.hub;
 
   return {
-    title: `${t.titulo} ${t.destacado} | Main Logistics`,
-    description: t.bajada,
+    title: t.metaTitulo,
+    description: t.metaDescripcion,
     alternates: {
       canonical: `/${idioma}/transporte-de-carga`,
       languages: Object.fromEntries(
@@ -69,6 +69,16 @@ export default async function HubServicios({
               <p className="mt-5 max-w-[56ch] text-[clamp(1rem,0.4vw+0.92rem,1.15rem)] leading-[1.6] text-[var(--texto-sec)]">
                 {t.hub.bajada}
               </p>
+              {/* Arriba y no solo al final de la lista: en el teléfono el
+                  primer pantallazo del hub era título y bajada, sin ninguna
+                  acción. Quien llega acá ya sabe qué mueve y quiere precio,
+                  y bajo 640px el Cotizar del nav queda dentro del menú. */}
+              <Link
+                href={`/${idioma}/cotizar`}
+                className="mt-7 inline-flex min-h-[52px] items-center justify-center rounded-full bg-[var(--morado-solido)] px-7 text-[15px] font-medium text-white transition-transform duration-[var(--dur-estado)] ease-[var(--ease-quart)] hover:-translate-y-0.5 motion-reduce:hover:translate-y-0"
+              >
+                {m.hero.ctaPrincipal}
+              </Link>
             </header>
 
             {/* Filete y no tarjetas. PRODUCT.md lo tiene como anti-referencia

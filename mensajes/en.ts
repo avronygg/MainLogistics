@@ -795,8 +795,11 @@ export const en: Mensajes = {
      baja is a lowboy, rampla plana is a flatbed. Ver `es.ts`. */
   paginasServicio: {
     hub: {
-      titulo: "The detail behind",
-      destacado: "each service",
+      metaTitulo: "Freight transport and logistics services in Chile | Main Logistics",
+      metaDescripcion:
+        "Container pickup at the port, general freight, mining supplies and BESS batteries: what each load requires, what equipment moves it and how to get a quote.",
+      titulo: "Freight transport,",
+      destacado: "service by service",
       bajada:
         "Every load asks for its own equipment, its own paperwork and its own way of being secured. Here is what each one takes, and what we move it with.",
     },

@@ -795,8 +795,11 @@ export const pt: Mensajes = {
      prancha baixa, rampla plana é carreta plataforma. Ver `es.ts`. */
   paginasServicio: {
     hub: {
-      titulo: "O detalhe de",
-      destacado: "cada serviço",
+      metaTitulo: "Serviços de transporte de cargas e logística no Chile | Main Logistics",
+      metaDescripcion:
+        "Retirada de contêineres no porto, carga geral, insumos de mineração e baterias BESS: o que cada carga exige, com que equipamento a movemos e como cotar o transporte.",
+      titulo: "Transporte de cargas,",
+      destacado: "serviço por serviço",
       bajada:
         "Cada carga pede um equipamento, uma documentação e um jeito de amarrar. Aqui está o que cada uma exige e com o que a movemos.",
     },

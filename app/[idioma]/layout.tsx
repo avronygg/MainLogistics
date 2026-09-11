@@ -35,7 +35,10 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { notFound } from "next/navigation";
-import { IDIOMAS, NOMBRES, cargar, esIdioma } from "@/mensajes";
+import { IDIOMAS, NOMBRES, cargar, esIdioma, type Mensajes } from "@/mensajes";
+import type { Idioma } from "@/mensajes/idiomas";
+import { CORREO, TELEFONO_ENLACE } from "@/components/datos/contacto";
+import { BASE } from "../robots";
 import "../globals.css";
 
 const geistSans = Geist({
@@ -98,6 +101,59 @@ export const viewport: Viewport = {
   interactiveWidget: "resizes-content",
 };
 
+/**
+ * Organization y WebSite de Schema.org, en todas las páginas.
+ *
+ * Es la entidad a la que un buscador ancla la marca. Sin ella, "Main
+ * Logistics" es un nombre que comparten una empresa en Reino Unido, otra en
+ * Kenia y otra en Estados Unidos, y nada le dice cuál es esta.
+ *
+ * Lleva SOLO lo que el sitio ya publica: nombre, correo, teléfono, logo y
+ * cobertura nacional. Razón social, RUT, domicilio y perfiles sociales
+ * (`legalName`, `taxID`, `address`, `sameAs`) quedan fuera hasta que el
+ * cliente los confirme; ver `components/datos/legal.ts`. Un dato estructurado
+ * que afirma algo que la página no muestra es peor que no tenerlo.
+ */
+function datosEstructurados(idioma: Idioma, m: Mensajes) {
+  const organizacion = `${BASE}/#organizacion`;
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": organizacion,
+        name: "Main Logistics",
+        url: `${BASE}/`,
+        logo: {
+          "@type": "ImageObject",
+          url: `${BASE}/logo-main-logistics.png`,
+          width: 1254,
+          height: 1254,
+        },
+        description: m.meta.descripcion,
+        email: CORREO,
+        telephone: TELEFONO_ENLACE,
+        areaServed: { "@type": "Country", name: "Chile" },
+        contactPoint: {
+          "@type": "ContactPoint",
+          contactType: "sales",
+          email: CORREO,
+          telephone: TELEFONO_ENLACE,
+          areaServed: "CL",
+        },
+      },
+      {
+        "@type": "WebSite",
+        "@id": `${BASE}/#sitio`,
+        name: "Main Logistics",
+        url: `${BASE}/`,
+        inLanguage: NOMBRES[idioma].html,
+        publisher: { "@id": organizacion },
+      },
+    ],
+  };
+}
+
 export default async function RootLayout({
   children,
   params,
@@ -107,6 +163,7 @@ export default async function RootLayout({
 }) {
   const { idioma } = await params;
   if (!esIdioma(idioma)) notFound();
+  const m = await cargar(idioma);
 
   return (
     <html
@@ -120,7 +177,17 @@ export default async function RootLayout({
       data-cjk={idioma === "zh" ? "" : undefined}
       className={`${geistSans.variable} ${geistMono.variable} antialiased`}
     >
-      <body>{children}</body>
+      <body>
+        {/* `<` escapado como indica la guía de JSON-LD de Next: el texto
+            viene del diccionario y no debe poder cerrar la etiqueta. */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(datosEstructurados(idioma, m)).replace(/</g, "\\u003c"),
+          }}
+        />
+        {children}
+      </body>
     </html>
   );
 }

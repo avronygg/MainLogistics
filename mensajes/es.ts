@@ -27,9 +27,14 @@
 export const es = {
   meta: {
     // §9 del doc de marca: nunca el nombre solo en el title tag.
-    titulo: "Transporte de carga en todo Chile | Main Logistics",
+    // "Transporte de carga" va primero porque es lo que Main vende (brief
+    // §3.2); "logística" recoge "empresa de logística en Chile" y
+    // "logística y transporte", que son las búsquedas con más volumen del
+    // rubro. Sin "bodegaje" ni "operador logístico": no hay página que lo
+    // respalde.
+    titulo: "Transporte de carga y logística en todo Chile | Main Logistics",
     descripcion:
-      "Main Logistics mueve carga general, minera, peligrosa, refrigerada, forestal, contenedores, maquinaria y sobredimensionada de Arica a Punta Arenas, con monitoreo permanente y el estándar que exige cada industria.",
+      "Empresa de transporte y logística de carga en Chile. Carga general, minera, peligrosa, refrigerada, forestal, contenedores, maquinaria y sobredimensionada, de Arica a Punta Arenas.",
     ogDescripcion:
       "Cualquier carga. Cualquier destino de Chile. Con visibilidad total y cero sorpresas.",
   },
@@ -830,8 +835,15 @@ export const es = {
      `brand/main-logistics-marca.md` §11. */
   paginasServicio: {
     hub: {
-      titulo: "El detalle de",
-      destacado: "cada servicio",
+      /* El title y la descripción del hub eran su h1 ("El detalle de cada
+         servicio"), que no dice de qué trata la página a quien la ve en
+         Google. Van aparte para poder nombrar el servicio sin cambiar el
+         tono del titular. */
+      metaTitulo: "Servicios de transporte de carga y logística | Main Logistics",
+      metaDescripcion:
+        "Retiro de contenedores en puerto, carga general, insumos mineros y baterías BESS: qué exige cada carga, con qué equipo la movemos y cómo cotizar su transporte.",
+      titulo: "Transporte de carga,",
+      destacado: "servicio por servicio",
       bajada:
         "Cada carga pide un equipo, una documentación y una forma de amarrar. Acá está lo que exige cada una y con qué la movemos.",
     },

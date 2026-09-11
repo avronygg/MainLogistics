@@ -820,8 +820,11 @@ export const zh: Mensajes = {
      参见 `es.ts`。 */
   paginasServicio: {
     hub: {
-      titulo: "每项服务的",
-      destacado: "具体说明",
+      metaTitulo: "智利货物运输与物流服务 | Main Logistics",
+      metaDescripcion:
+        "港口集装箱提箱与还箱、普通货物、矿山物资与BESS储能电池：每类货物的要求、所用设备，以及如何询价。",
+      titulo: "货物运输，",
+      destacado: "逐项说明",
       bajada:
         "每一类货物都有各自的设备、单据和固定方式。这里写明每一类的要求，以及我们用什么承运。",
     },

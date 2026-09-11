@@ -5,7 +5,7 @@ import { IDIOMAS, NOMBRES, cargar, esIdioma } from "@/mensajes";
 import Nav from "@/components/Nav";
 import Pie from "@/components/Pie";
 import Asesor from "@/components/Asesor";
-import Cotizar from "@/components/Cotizar";
+import Cotizar, { CotizarDesdeUrl } from "@/components/Cotizar";
 
 /**
  * El cotizador completo, con URL propia.
@@ -68,10 +68,13 @@ export default async function PaginaCotizar({
     <>
       <Nav m={m} idioma={idioma} />
       <main className="pt-[clamp(5rem,10vw,7rem)]">
-        {/* El respaldo del Suspense va vacío a propósito: el formulario se
-            monta en el mismo cuadro y un esqueleto parpadearía sin aportar. */}
-        <Suspense fallback={null}>
-          <Cotizar m={m} idioma={idioma} />
+        {/* El respaldo del Suspense es el mismo formulario, sin lo que trae
+            la URL. Es lo que queda en el HTML prerenderizado: con `null` la
+            página se servía sin h1 ni texto, y un buscador que no ejecuta JS
+            veía una página vacía. Al cargar, `CotizarDesdeUrl` lo reemplaza
+            con los campos del cotizador express ya puestos. */}
+        <Suspense fallback={<Cotizar m={m} idioma={idioma} />}>
+          <CotizarDesdeUrl m={m} idioma={idioma} />
         </Suspense>
       </main>
       <Pie m={m} idioma={idioma} />

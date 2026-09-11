@@ -139,27 +139,45 @@ function textoWhatsapp(d: Cotizacion) {
   ].join("\n");
 }
 
+type DesdeUrl = Pick<Cotizacion, "origenRegion" | "destinoRegion" | "tipoCarga">;
+
+const SIN_PARAMETROS: DesdeUrl = { origenRegion: "", destinoRegion: "", tipoCarga: "" };
+
+/**
+ * El cotizador con lo que llega del cotizador express de la home, por la URL.
+ *
+ * La lectura de la URL vive acá y no dentro de `Cotizar` porque
+ * `useSearchParams` hace que Next renderice solo en el cliente todo lo que
+ * queda bajo el `Suspense` más cercano. Con el hook adentro, el HTML servido
+ * de /cotizar salía con el `<main>` vacío: sin h1, sin garantías, sin
+ * formulario. Ahora la página prerenderiza `Cotizar` sin parámetros como
+ * respaldo, y este componente lo reemplaza apenas carga.
+ *
+ * Se valida contra las listas reales: un parámetro escrito a mano no puede
+ * meter un valor que el formulario no ofrece.
+ */
+export function CotizarDesdeUrl({ m, idioma }: { m: Mensajes; idioma: Idioma }) {
+  const parametros = useSearchParams();
+  const region = (v: string | null) =>
+    v && REGIONES.some((r) => r.region === v) ? v : "";
+  const carga = parametros.get("tipoCarga") ?? parametros.get("carga");
+  const desdeUrl: DesdeUrl = {
+    origenRegion: region(parametros.get("origen")),
+    destinoRegion: region(parametros.get("destino")),
+    tipoCarga: carga && TIPOS_CARGA.some((o) => o.valor === carga) ? carga : "",
+  };
+  return <Cotizar m={m} idioma={idioma} desdeUrl={desdeUrl} />;
+}
+
 export default function Cotizar({
   m,
   idioma,
+  desdeUrl = SIN_PARAMETROS,
 }: {
   m: Mensajes;
   idioma: Idioma;
+  desdeUrl?: DesdeUrl;
 }) {
-  /* Lo que llega del cotizador express de la home, por la URL. Se valida
-     contra las listas reales: un parámetro escrito a mano no puede meter un
-     valor que el formulario no ofrece. */
-  const parametros = useSearchParams();
-  const desdeUrl = (() => {
-    const region = (v: string | null) =>
-      v && REGIONES.some((r) => r.region === v) ? v : "";
-    const carga = parametros.get("tipoCarga") ?? parametros.get("carga");
-    return {
-      origenRegion: region(parametros.get("origen")),
-      destinoRegion: region(parametros.get("destino")),
-      tipoCarga: carga && TIPOS_CARGA.some((o) => o.valor === carga) ? carga : "",
-    };
-  })();
   const vieneDeExpress =
     Boolean(desdeUrl.origenRegion || desdeUrl.destinoRegion || desdeUrl.tipoCarga);
 
@@ -396,7 +414,7 @@ export default function Cotizar({
 
       <div className="relative mx-auto w-full max-w-[var(--ancho-max)] px-[var(--borde-x)] py-[var(--seccion-y)]">
         <div className="max-w-[46rem]">
-          <Titulo linea1={t.tituloLinea1} destacado={t.tituloDestacado} />
+          <Titulo nivel="h1" linea1={t.tituloLinea1} destacado={t.tituloDestacado} />
 
           <p className="mt-4 max-w-[52ch] text-[clamp(1rem,0.4vw+0.92rem,1.125rem)] leading-[1.6] text-[var(--texto-sec)]">
             {t.bajada}

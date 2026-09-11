@@ -45,10 +45,28 @@ transportista y del conductor, y el seguimiento del viaje.
 
 Todo Chile, de Arica a Punta Arenas.
 
+## Páginas
+
+- Servicios de transporte de carga: https://mainlogistics.cl/es/transporte-de-carga
+- Retiro y devolución de contenedores en puerto: https://mainlogistics.cl/es/transporte-de-carga/contenedores
+- Carga general y paletizada: https://mainlogistics.cl/es/transporte-de-carga/carga-general
+- Insumos y materiales para faena minera: https://mainlogistics.cl/es/transporte-de-carga/insumos-mineros
+- Baterías BESS y equipos de energía: https://mainlogistics.cl/es/transporte-de-carga/bess-y-energia
+- Verificador de guías de despacho según la Resolución Exenta SII N°154
+  (vigente desde el 1 de noviembre de 2026): https://mainlogistics.cl/es/verificador-resolucion-154
+- Transportistas con equipo propio que quieren sumarse a la red: https://mainlogistics.cl/es/transportistas
+- Cotizar: https://mainlogistics.cl/es/cotizar
+- Política de privacidad: https://mainlogistics.cl/es/legal/privacidad
+- Términos de uso: https://mainlogistics.cl/es/legal/terminos
+
+Cada página existe también en inglés (/en), portugués (/pt) y chino (/zh),
+con la misma ruta.
+
 ## Cómo cotizar
 
-Formulario de seis pasos en https://mainlogistics.cl/es#cotizar. Pide tipo de
-carga y equipo, origen y destino por región y comuna, fecha, modalidad
+Formulario de seis pasos: https://mainlogistics.cl/es/cotizar
+
+Pide tipo de carga y equipo, origen y destino por región y comuna, fecha, modalidad
 (puntual, recurrente o contrato), requisitos especiales y valor declarado.
 Los datos de contacto se piden al final.
 

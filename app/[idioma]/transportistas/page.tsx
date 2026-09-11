@@ -121,7 +121,7 @@ export default async function Transportistas({
 
           <div className="relative mx-auto w-full max-w-[var(--ancho-max)] px-[var(--borde-x)]">
             <div className="max-w-[46rem]">
-              <Titulo linea1={t.tituloLinea1} destacado={t.tituloDestacado} />
+              <Titulo nivel="h1" linea1={t.tituloLinea1} destacado={t.tituloDestacado} />
               <p className="mt-4 max-w-[54ch] text-[clamp(1rem,0.4vw+0.92rem,1.125rem)] leading-[1.6] text-[var(--texto-sec)]">
                 {t.bajada}
               </p>

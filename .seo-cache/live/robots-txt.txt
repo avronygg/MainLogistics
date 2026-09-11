@@ -1,0 +1,6 @@
+User-Agent: *
+Allow: /
+Disallow: /api/
+
+Host: https://mainlogistics.cl
+Sitemap: https://mainlogistics.cl/sitemap.xml

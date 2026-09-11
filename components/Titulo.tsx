@@ -20,18 +20,26 @@ export default function Titulo({
   destacado,
   className = "",
   tamano = "seccion",
+  nivel = "h2",
 }: {
   linea1: string;
   destacado: string;
   className?: string;
   /** `seccion` para h2; `tarjeta` para h3 dentro de una card. */
   tamano?: "seccion" | "tarjeta";
+  /**
+   * `h1` cuando el título abre una página propia (/cotizar, /transportistas).
+   * Se ve igual: lo que cambia es la jerarquía que leen el buscador y el
+   * lector de pantalla, y una página sin h1 no dice de qué trata.
+   */
+  nivel?: "h1" | "h2";
 }) {
   const reducir = useReducedMotion();
   const esSeccion = tamano === "seccion";
+  const Etiqueta = nivel;
 
   return (
-    <h2
+    <Etiqueta
       className={[
         "font-semibold tracking-[-0.035em] text-[var(--texto)]",
         esSeccion
@@ -57,6 +65,6 @@ export default function Titulo({
           }}
         />
       </span>
-    </h2>
+    </Etiqueta>
   );
 }
