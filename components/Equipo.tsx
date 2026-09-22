@@ -169,13 +169,18 @@ export default function Equipo({ m }: { m: Mensajes }) {
           <Revelar className="md:col-span-4" retraso={0.26}>
             <article className="sobre-foto group relative isolate flex h-full min-h-[clamp(16rem,22vw,19rem)] flex-col justify-end overflow-hidden rounded-[var(--r-img)]">
               <Image
-                src="/fotos/portal-tablet.webp"
+                /* La misma foto que el pilar de tecnología, por decisión del
+                   cliente: es la única con una pantalla de la marca, y
+                   repetirla es mejor que dejar acá el logo anterior.
+                   El encuadre sí cambia —allá va centrada, acá cerrada sobre
+                   la pantalla— para que no se lea como un copiar y pegar. */
+                src="/fotos/cabina-pantalla.png"
                 alt={m.equipo.portal.altFoto}
-                width={916}
-                height={1717}
+                width={1254}
+                height={1254}
                 quality={90}
                 sizes="(min-width: 768px) 42vw, 100vw"
-                className="absolute inset-0 size-full object-cover object-[50%_35%] transition-transform duration-[900ms] ease-[var(--ease-expo)] group-hover:scale-[1.04] motion-reduce:group-hover:scale-100"
+                className="absolute inset-0 size-full scale-[1.25] object-cover object-[58%_46%] transition-transform duration-[900ms] ease-[var(--ease-expo)] group-hover:scale-[1.04] motion-reduce:group-hover:scale-100"
               />
               <div className="absolute inset-x-0 bottom-0 h-[62%] bg-gradient-to-t from-[var(--velo-foto)] via-[color-mix(in_oklab,var(--velo-foto)_58%,transparent)] to-transparent" />
 

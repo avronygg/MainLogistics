@@ -461,7 +461,7 @@ export const es = {
       tituloFin: ".",
     },
     portal: {
-      altFoto: "Tablet en cabina mostrando la ruta activa en el portal de Logística Trade",
+      altFoto: "Pantalla de la cabina mostrando la ruta activa, con la marca Logística Trade",
       estado: "En desarrollo",
       titulo: "El portal para seguir su carga.",
     },

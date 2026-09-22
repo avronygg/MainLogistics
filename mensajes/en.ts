@@ -433,7 +433,7 @@ export const en: Mensajes = {
       tituloFin: ".",
     },
     portal: {
-      altFoto: "Tablet in the cab showing the active route on the Logística Trade portal",
+      altFoto: "In-cab screen showing the active route, branded Logística Trade",
       estado: "In development",
       titulo: "The portal to follow your freight.",
     },

@@ -454,7 +454,7 @@ export const zh: Mensajes = {
       tituloFin: "。",
     },
     portal: {
-      altFoto: "驾驶室内的平板电脑，显示 Logística Trade 门户中的在途路线",
+      altFoto: "驾驶室屏幕显示在途路线，并带有 Logística Trade 标识",
       estado: "开发中",
       titulo: "用于跟踪货物的客户门户。",
     },

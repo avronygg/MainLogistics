@@ -9,12 +9,16 @@ import type { Mensajes } from "@/mensajes";
 import type { Idioma } from "@/mensajes/idiomas";
 
 /**
- * El lockup horizontal de Logística Trade, 3:1.
+ * El lockup horizontal de Logística Trade en blanco, 3:1.
  *
  * Es el que sirve en una barra. Durante un rato acá hubo un arreglo
  * interino —el símbolo recortado más el nombre en texto— porque el único
  * logo disponible era cuadrado y a 22px de alto el nombre quedaba en cuatro
  * píxeles. Con el horizontal entregado, vuelve a ser una sola imagen.
+ *
+ * En blanco y no en la versión cromada: la barra es de vidrio y deja pasar
+ * el video del hero, donde el cromado se confunde con el fondo. El blanco
+ * plano se lee sobre cualquier fotograma.
  *
  * `max-w-none shrink-0` no es adorno: el reset global pone `max-width:100%`
  * a las imágenes, y sin esto la columna del logo cede antes que el menú y
@@ -25,7 +29,7 @@ import type { Idioma } from "@/mensajes/idiomas";
 function Isotipo({ className = "" }: { className?: string }) {
   return (
     <Image
-      src="/logo-horizontal-trade.png"
+      src="/logo-horizontal-trade-blanco.png"
       alt="Logística Trade"
       width={2172}
       height={724}
@@ -108,7 +112,7 @@ export default function Nav({ m, idioma }: { m: Mensajes; idioma: Idioma }) {
           className="col-start-1 flex w-fit shrink-0 items-center rounded-full px-2.5 py-1"
           onClick={() => setAbierto(false)}
         >
-          <Isotipo className="h-[26px] sm:h-[30px]" />
+          <Isotipo className="h-[30px] sm:h-[38px]" />
         </Link>
 
         <ul className="col-start-2 hidden items-center gap-1 lg:flex">

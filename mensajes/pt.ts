@@ -433,7 +433,7 @@ export const pt: Mensajes = {
       tituloFin: ".",
     },
     portal: {
-      altFoto: "Tablet na cabine mostrando a rota ativa no portal da Logística Trade",
+      altFoto: "Tela da cabine mostrando a rota ativa, com a marca Logística Trade",
       estado: "Em desenvolvimento",
       titulo: "O portal para acompanhar sua carga.",
     },
