@@ -448,7 +448,7 @@ export const zh: Mensajes = {
       titulo: "无论由谁驾驶，标准都是同一套。",
     },
     bodega: {
-      altFoto: "Logística Trade 的作业人员用平板电脑在仓库核对托盘货物",
+      altFoto: "身穿 Logística Trade 反光背心的作业人员，在装卸月台用手动液压车搬运托盘",
       tituloInicio: "仓储与卸货，采用",
       tituloDestacado: "同样的管控",
       tituloFin: "。",

@@ -35,10 +35,6 @@
  * producción no se dibuja. Los dos llamadores además cierran su grilla
  * cuando esto es `false`, para que no quede la columna reservada vacía.
  *
- * Hay dos fotos en `public/fotos/` que nadie usa, `cobertura-chile.webp` y
- * `tecnologia-gps.webp`, y NO sirven para tapar estos huecos: son renders
- * de neón con halo, que DESIGN.md prohíbe, y la segunda trae un borde
- * blanco difuminado que no calza sobre ningún fondo del sistema.
  */
 export const MARCO_VISIBLE = process.env.NODE_ENV === "development";
 

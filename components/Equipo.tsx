@@ -143,10 +143,10 @@ export default function Equipo({ m }: { m: Mensajes }) {
           <Revelar className="md:col-span-4" retraso={0.18}>
             <article className="sobre-foto group relative isolate flex h-full min-h-[clamp(16rem,22vw,19rem)] flex-col justify-end overflow-hidden rounded-[var(--r-img)]">
               <Image
-                src="/fotos/equipo-bodega.webp"
+                src="/fotos/bodega-operario.png"
                 alt={m.equipo.bodega.altFoto}
-                width={1092}
-                height={1440}
+                width={1086}
+                height={1448}
                 quality={90}
                 sizes="(min-width: 768px) 34vw, 100vw"
                 className="absolute inset-0 size-full object-cover object-[55%_35%] transition-transform duration-[900ms] ease-[var(--ease-expo)] group-hover:scale-[1.04] motion-reduce:group-hover:scale-100"

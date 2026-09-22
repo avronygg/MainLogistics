@@ -16,14 +16,11 @@ import { chromium } from 'playwright';
  */
 
 /**
- * El símbolo LT recortado del lockup de Logística Trade, que es lo que hoy
- * va en la barra junto al nombre en texto. Antes acá iba 1541/343, el lockup
- * horizontal de la marca anterior.
- *
- * Cuando llegue el lockup horizontal nuevo, este número cambia con él: es el
- * natural del archivo, no una preferencia.
+ * El natural del lockup horizontal de Logística Trade. No es una
+ * preferencia: es la proporción del archivo, y si cambia el archivo cambia
+ * este número.
  */
-const NATURAL = 987 / 700; // logo-isotipo-trade.png
+const NATURAL = 2172 / 724; // logo-horizontal-trade.png
 const TOLERANCIA = 0.02;
 const IDIOMAS = ['es', 'en', 'pt', 'zh'];
 const ANCHOS = [320, 390, 768, 1024, 1280, 1440, 1920];

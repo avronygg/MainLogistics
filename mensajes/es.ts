@@ -455,7 +455,7 @@ export const es = {
       titulo: "El estándar es el mismo, lo maneje quien lo maneje.",
     },
     bodega: {
-      altFoto: "Operario de Logística Trade revisando pallets en bodega con una tablet",
+      altFoto: "Operario con chaleco de Logística Trade moviendo pallets con transpaleta en el andén de carga",
       tituloInicio: "Bodega y descarga, con el",
       tituloDestacado: "mismo control",
       tituloFin: ".",

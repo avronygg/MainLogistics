@@ -9,48 +9,29 @@ import type { Mensajes } from "@/mensajes";
 import type { Idioma } from "@/mensajes/idiomas";
 
 /**
- * Lockup horizontal en blanco sobre transparencia, sin caja ni fondo.
- * Se genera con `node scripts/logo-horizontal.mjs`, que le quita el negro
- * al original y lo recorta a su contenido. El horizontal es el que sirve en
- * una barra: el isotipo solo deja la marca sin nombre, y el vertical se
- * vuelve ilegible a la altura de un nav.
+ * El lockup horizontal de Logística Trade, 3:1.
+ *
+ * Es el que sirve en una barra. Durante un rato acá hubo un arreglo
+ * interino —el símbolo recortado más el nombre en texto— porque el único
+ * logo disponible era cuadrado y a 22px de alto el nombre quedaba en cuatro
+ * píxeles. Con el horizontal entregado, vuelve a ser una sola imagen.
+ *
+ * `max-w-none shrink-0` no es adorno: el reset global pone `max-width:100%`
+ * a las imágenes, y sin esto la columna del logo cede antes que el menú y
+ * la imagen se aplasta en vez de desbordar. Ya pasó una vez, con un 47% de
+ * deformación que solo se veía con la barra compacta. Lo cuida
+ * `scripts/logo.mjs`.
  */
 function Isotipo({ className = "" }: { className?: string }) {
   return (
-    <span className="flex items-center gap-2.5">
-      <Image
-        src="/logo-isotipo-trade.png"
-        alt=""
-        width={987}
-        height={700}
-        priority
-        className={`w-auto max-w-none shrink-0 ${className}`}
-      />
-      {/* El nombre en la tipografía del sitio, al lado del símbolo.
-          INTERINO: el logo que entregó el cliente es cuadrado, con el
-          nombre debajo del símbolo, y a 22px de alto ese nombre queda en
-          cuatro píxeles. Un lockup horizontal de verdad —unos 4,5:1,
-          blanco sobre transparencia— reemplaza estas dos piezas por un
-          solo <Image> y esta función vuelve a tener cuatro líneas.
-
-          Va como texto y no como imagen a propósito: así se lee en
-          cualquier tamaño, pesa cero y un lector de pantalla lo anuncia.
-          Por eso el símbolo lleva `alt=""`, para no repetirlo. */}
-      {/* El nombre aparece donde cabe, y en dos tramos hay que sacarlo.
-          Los dos están medidos, no supuestos:
-
-          - Bajo 360px la barra se desbordaba 40px en un teléfono de 320.
-          - Entre 1024 y 1279 aparecen los cinco enlaces del menú y todavía
-            no hay ancho para los tres: en portugués, el idioma más largo,
-            la barra se desbordaba a 1024.
-
-          Donde no está, el nombre se lee igual en la tarjeta del hero y en
-          el pie, y el `aria-label` del enlace lo anuncia, así que para un
-          lector de pantalla no cambia nada. */}
-      <span className="hidden whitespace-nowrap text-[15px] font-semibold tracking-[-0.01em] text-[var(--texto)] min-[360px]:inline sm:text-[16px] lg:hidden xl:inline">
-        Logística Trade
-      </span>
-    </span>
+    <Image
+      src="/logo-horizontal-trade.png"
+      alt="Logística Trade"
+      width={2172}
+      height={724}
+      priority
+      className={`w-auto max-w-none shrink-0 ${className}`}
+    />
   );
 }
 
@@ -111,15 +92,14 @@ export default function Nav({ m, idioma }: { m: Mensajes; idioma: Idioma }) {
           "vidrio-nav mx-auto grid grid-cols-[1fr_auto_1fr] items-center gap-4",
           "rounded-full",
           "transition-[max-width,padding] duration-[var(--dur-estado)] ease-[var(--ease-quint)]",
-          // Valores medidos, no de gusto. Con el nombre de la marca al lado
-          // del símbolo, en estado compacto el contenido necesita 939px en
-          // portugués, que es el idioma más largo; con 920 se desbordaba y
-          // "Qué movemos" se partía en dos líneas. Antes, con 820, lo que
-          // pasaba era que el logo se aplastaba un 47% para caber. Se deja
-          // holgura para que un idioma con etiquetas más largas no vuelva a
-          // apretarlo.
-          "max-w-[1060px] p-1.5 sm:p-2",
-          "data-[compacto=true]:max-w-[980px]",
+          // Valores medidos, no de gusto. En estado compacto el contenido
+          // necesita 872px en portugués, que es el idioma de etiquetas más
+          // largas. Con 820 el logo se aplastaba un 47% para caber, porque
+          // la columna del logo cede antes que el menú. La holgura que
+          // queda es para que un idioma más largo no vuelva a apretarlo, y
+          // la cuida `scripts/logo.mjs`.
+          "max-w-[1000px] p-1.5 sm:p-2",
+          "data-[compacto=true]:max-w-[920px]",
         ].join(" ")}
       >
         <Link
@@ -128,7 +108,7 @@ export default function Nav({ m, idioma }: { m: Mensajes; idioma: Idioma }) {
           className="col-start-1 flex w-fit shrink-0 items-center rounded-full px-2.5 py-1"
           onClick={() => setAbierto(false)}
         >
-          <Isotipo className="h-[22px] sm:h-[25px]" />
+          <Isotipo className="h-[26px] sm:h-[30px]" />
         </Link>
 
         <ul className="col-start-2 hidden items-center gap-1 lg:flex">

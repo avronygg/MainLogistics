@@ -136,14 +136,14 @@ export default function TarjetasFlotantes({ m }: { m: Mensajes }) {
         }}
         data-barrido="tarde"
       >
-        {/* El lockup de Logística Trade, que es cuadrado (1254×1254) y por
-            eso calza acá y no en la barra: el nav necesita una versión
-            horizontal, de unos 4,5:1, que todavía no existe. */}
+        {/* El lockup vertical de Logística Trade. Acá hay altura de sobra
+            y el nombre se lee; la barra usa el horizontal, que es otro
+            archivo. */}
         <Image
           src="/logo-logistica-trade.png"
           alt=""
-          width={1254}
-          height={1254}
+          width={1496}
+          height={1051}
           className="mx-auto h-[52px] w-auto sm:h-[68px] lg:h-[86px]"
         />
 

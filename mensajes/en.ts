@@ -427,7 +427,7 @@ export const en: Mensajes = {
       titulo: "The standard is the same, whoever is driving.",
     },
     bodega: {
-      altFoto: "Logística Trade operator checking pallets in the warehouse with a tablet",
+      altFoto: "Worker in a Logística Trade vest moving pallets with a pallet jack at the loading dock",
       tituloInicio: "Warehousing and unloading, under the",
       tituloDestacado: "same control",
       tituloFin: ".",

@@ -427,7 +427,7 @@ export const pt: Mensajes = {
       titulo: "O padrão é o mesmo, quem quer que dirija.",
     },
     bodega: {
-      altFoto: "Operador da Logística Trade conferindo pallets no armazém com um tablet",
+      altFoto: "Operador com colete da Logística Trade movendo pallets com paleteira na doca de carga",
       tituloInicio: "Armazém e descarga, com o",
       tituloDestacado: "mesmo controle",
       tituloFin: ".",

@@ -110,8 +110,8 @@ export default function Pie({ m, idioma }: { m: Mensajes; idioma: Idioma }) {
             <Image
               src="/logo-logistica-trade.png"
               alt="Logística Trade"
-              width={1254}
-              height={1254}
+              width={1496}
+              height={1051}
               quality={90}
               className="h-[72px] w-auto"
             />

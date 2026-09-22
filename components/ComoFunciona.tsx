@@ -106,10 +106,10 @@ export default function ComoFunciona({ m }: { m: Mensajes }) {
           <Revelar retraso={0.3}>
             <article className="sobre-foto group relative isolate flex h-full min-h-[19rem] flex-col justify-end overflow-hidden rounded-[var(--r-img)]">
               <Image
-                src="/fotos/monitoreo-reloj.webp"
+                src="/fotos/monitoreo-reloj-trade.png"
                 alt={m.comoFunciona.plazosAltFoto}
-                width={1536}
-                height={1024}
+                width={1254}
+                height={1254}
                 quality={90}
                 sizes="(min-width: 1024px) 22vw, 100vw"
                 className="absolute inset-0 size-full object-cover transition-transform duration-[900ms] ease-[var(--ease-expo)] group-hover:scale-[1.04] motion-reduce:group-hover:scale-100"
