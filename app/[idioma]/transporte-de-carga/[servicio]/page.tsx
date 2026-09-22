@@ -41,7 +41,7 @@ export async function generateMetadata({
   const titulo = `${pagina.titulo} ${pagina.destacado}`;
 
   return {
-    title: `${titulo} | Main Logistics`,
+    title: `${titulo} | Logística Trade`,
     description: pagina.bajada,
     alternates: {
       canonical: `/${idioma}/transporte-de-carga/${servicio}`,
@@ -50,7 +50,7 @@ export async function generateMetadata({
       ),
     },
     openGraph: {
-      title: `${titulo} | Main Logistics`,
+      title: `${titulo} | Logística Trade`,
       description: pagina.bajada,
       locale: NOMBRES[idioma].html.replace("-", "_"),
       type: "website",

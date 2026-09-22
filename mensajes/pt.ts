@@ -4,9 +4,9 @@ import type { Mensajes } from "./es";
 export const pt: Mensajes = {
   meta: {
     // §9 del doc de marca: nunca el nombre solo en el title tag.
-    titulo: "Transporte de cargas em todo o Chile | Main Logistics",
+    titulo: "Transporte de cargas em todo o Chile | Logística Trade",
     descripcion:
-      "A Main Logistics move carga geral, de mineração, perigosa, refrigerada, florestal, contêineres, maquinário e superdimensionada de Arica a Punta Arenas, com monitoramento permanente e o padrão que cada setor exige.",
+      "A Logística Trade move carga geral, de mineração, perigosa, refrigerada, florestal, contêineres, maquinário e superdimensionada de Arica a Punta Arenas, com monitoramento permanente e o padrão que cada setor exige.",
     ogDescripcion:
       "Qualquer carga. Qualquer destino do Chile. Com visibilidade total e zero surpresas.",
   },
@@ -20,7 +20,7 @@ export const pt: Mensajes = {
     cotizar: "Cotação",
     cotizarMovil: "Cotar minha operação",
     principal: "Principal",
-    inicio: "Main Logistics, início",
+    inicio: "Logística Trade, início",
     abrirMenu: "Abrir menu",
     cerrarMenu: "Fechar menu",
     idioma: "Idioma",
@@ -29,7 +29,7 @@ export const pt: Mensajes = {
 
   /* ── Hero · portada ──────────────────────────────────────────────── */
   hero: {
-    tituloLinea1: "Com a Main, a carga",
+    tituloLinea1: "A carga com a Trade",
     tituloLinea2: "Sempre",
     bajadaLinea1: "Levamos sua carga a qualquer destino do Chile.",
     bajadaLinea2: "Você sabe a todo momento onde ela está e quando chega.",
@@ -135,7 +135,7 @@ export const pt: Mensajes = {
     },
     pilares: {
       titulo: {
-        inicio: "Com a MAIN, sua carga sempre",
+        inicio: "Com a TRADE, sua carga sempre",
         realce: "sob controle",
         fin: ".",
       },
@@ -148,7 +148,7 @@ export const pt: Mensajes = {
         finHora: "combinada.",
       },
       tecnologia: {
-        altFoto: "Equipamento de monitoramento com a marca Main Logistics, com o conector de dados à vista",
+        altFoto: "Equipamento de monitoramento com a marca Logística Trade, com o conector de dados à vista",
         etiqueta: "GPS em rota",
         titulo: {
           inicio: "Veja sua carga em",
@@ -387,7 +387,7 @@ export const pt: Mensajes = {
         dato: "Comprovante de entrega",
       },
     },
-    plazosAltFoto: "Relógio com a marca Main Logistics mostrando o horário de entrega",
+    plazosAltFoto: "Relógio com a marca Logística Trade mostrando o horário de entrega",
     plazosEtiqueta: "Prazos",
     plazosTituloInicio: "Sua carga sempre",
     plazosTituloDestacado: "no prazo",
@@ -403,7 +403,7 @@ export const pt: Mensajes = {
     bajadaRealce: "Todos passam pelo mesmo padrão antes de tocar sua carga",
     bajadaFin: ", não importa de que setor ela venha.",
     conductor: {
-      altFoto: "Motorista da Main Logistics na cabine, com boné da marca",
+      altFoto: "Motorista da Logística Trade na cabine, com boné da marca",
       tituloInicio: "Transportadores",
       tituloDestacado: "verificados",
       tituloFin: "antes de carregar.",
@@ -423,17 +423,17 @@ export const pt: Mensajes = {
       },
     },
     flota: {
-      altFoto: "Porta de caminhão com a marca Main Logistics",
+      altFoto: "Porta de caminhão com a marca Logística Trade",
       titulo: "O padrão é o mesmo, quem quer que dirija.",
     },
     bodega: {
-      altFoto: "Operador da Main Logistics conferindo pallets no armazém com um tablet",
+      altFoto: "Operador da Logística Trade conferindo pallets no armazém com um tablet",
       tituloInicio: "Armazém e descarga, com o",
       tituloDestacado: "mesmo controle",
       tituloFin: ".",
     },
     portal: {
-      altFoto: "Tablet na cabine mostrando a rota ativa no portal da Main Logistics",
+      altFoto: "Tablet na cabine mostrando a rota ativa no portal da Logística Trade",
       estado: "Em desenvolvimento",
       titulo: "O portal para acompanhar sua carga.",
     },
@@ -795,7 +795,7 @@ export const pt: Mensajes = {
      prancha baixa, rampla plana é carreta plataforma. Ver `es.ts`. */
   paginasServicio: {
     hub: {
-      metaTitulo: "Serviços de transporte de cargas e logística no Chile | Main Logistics",
+      metaTitulo: "Serviços de transporte de cargas e logística no Chile | Logística Trade",
       metaDescripcion:
         "Retirada de contêineres no porto, carga geral, insumos de mineração e baterias BESS: o que cada carga exige, com que equipamento a movemos e como cotar o transporte.",
       titulo: "Transporte de cargas,",
@@ -1041,7 +1041,7 @@ export const pt: Mensajes = {
       pendiente: "Falta",
       noAplica: "Não se aplica",
       revisadoEl: "Conferido em",
-      ctaTitulo: "A Main emite guias conformes desde a primeira viagem",
+      ctaTitulo: "A Trade emite guias conformes desde a primeira viagem",
       ctaTexto:
         "Se preferir não resolver isso internamente, nós já emitimos com esses campos. Conte o que você move e respondemos em 24 horas.",
       ctaBoton: "Cotar minha carga",
@@ -1056,7 +1056,7 @@ export const pt: Mensajes = {
     mensaje: "👋 Precisa de ajuda com sua carga ou quer uma cotação?",
     escribiendo: "Escrevendo",
     cerrarMensaje: "Fechar mensagem",
-    tituloPanel: "Falar com a Main Logistics",
+    tituloPanel: "Falar com a Logística Trade",
     cerrarPanel: "Fechar",
     opciones: {
       cotizar: {
@@ -1084,9 +1084,9 @@ export const pt: Mensajes = {
   /* ── Transportistas · el segundo embudo ──────────────────────────── */
   transportistas: {
     meta: {
-      titulo: "Transportadores: some seu equipamento à rede | Main Logistics",
+      titulo: "Transportadores: some seu equipamento à rede | Logística Trade",
       descripcion:
-        "A Main Logistics trabalha com transportadores que têm equipamento próprio, em carga recorrente por rotas definidas dentro do Chile. Sem custo de cadastro. Veja os documentos exigidos antes de se cadastrar.",
+        "A Logística Trade trabalha com transportadores que têm equipamento próprio, em carga recorrente por rotas definidas dentro do Chile. Sem custo de cadastro. Veja os documentos exigidos antes de se cadastrar.",
     },
     tituloLinea1: "Carga recorrente para",
     tituloDestacado: "o seu equipamento",
@@ -1123,7 +1123,7 @@ export const pt: Mensajes = {
     exigeGps: "GPS ativo, com acesso compartilhado durante a viagem",
     relacionTitulo: "Como é a relação",
     relacionDetalle:
-      "Você opera seu equipamento e dirige a sua equipe. A Main Logistics coordena a carga e responde ao cliente pelo serviço. Não somos seu empregador nem intermediamos sua relação de trabalho.",
+      "Você opera seu equipamento e dirige a sua equipe. A Logística Trade coordena a carga e responde ao cliente pelo serviço. Não somos seu empregador nem intermediamos sua relação de trabalho.",
     contactoTitulo: "Para participar",
     contactoDetalle:
       "Escreva com o nome da sua empresa, quantos equipamentos tem e em quais rotas opera. Respondemos com os passos e a lista de documentos.",

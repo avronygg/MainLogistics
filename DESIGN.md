@@ -1,6 +1,6 @@
 # Design
 
-Sistema visual de Main Logistics. Deriva de `brand/main-logistics-marca.md` §8; donde este documento se aparta del original, la razón está anotada.
+Sistema visual de Logística Trade. Deriva de `brand/logistica-trade-marca.md` §8; donde este documento se aparta del original, la razón está anotada.
 
 ## Aesthetic lane
 
@@ -176,7 +176,7 @@ Quedan anotadas acá para que nadie las "corrija" después sin saber por qué.
 
 | Decisión | Qué dice el doc original | Por qué se cambió | Cómo revertir |
 |---|---|---|---|
-| **Titular en tuteo** — "Con Main, tu carga" | §6: "Se le habla de usted" | Decisión del cliente. El resto del sitio sigue en usted, así que hoy conviven los dos tratos | Cambiar dos palabras en `Hero.tsx` |
+| **Titular en tuteo** — "Con Trade, tu carga" | §6: "Se le habla de usted" | Decisión del cliente. El resto del sitio sigue en usted, así que hoy conviven los dos tratos | Cambiar dos palabras en `Hero.tsx` |
 | **Titular en versales** | No estaba definido | Wireframe del cliente. Caps solo en el titular; el cuerpo nunca | Quitar `uppercase` del `h1` |
 | **Pesos 300 / 800** | §8: "Títulos: 600–700" | Contraste tipográfico pedido por el cliente. Geist es variable, sale del mismo archivo | `font-light` / `font-extrabold` en `Hero.tsx` |
 | **Degradado en la línea 1** | §8: "cero degradados" | Referencia Premier Cargo, pedido explícito. Acotado: la parada más oscura no baja de `--texto-sec` (7.5:1) | Quitar la clase `.titulo-degradado` |

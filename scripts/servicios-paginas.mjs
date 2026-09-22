@@ -89,9 +89,20 @@ if (titulos.size === 16) ok('las 16 páginas tienen title propio, description y 
 console.log('\nstructured data');
 await p.goto(`${BASE}/es/transporte-de-carga/bess-y-energia`, { waitUntil: 'domcontentloaded' });
 
-const json = JSON.parse(
-  await p.locator('script[type="application/ld+json"]').first().textContent(),
-);
+// El FAQPage por su tipo, no por ser el primero: el layout inyecta además
+// un `Organization` y cuál va antes en el DOM no es algo que esta prueba
+// deba dar por sentado.
+const bloques = await p
+  .locator('script[type="application/ld+json"]')
+  .evaluateAll((ss) => ss.map((s) => s.textContent));
+const json = bloques.map((t) => JSON.parse(t)).find((j) => j['@type'] === 'FAQPage');
+
+if (!json) {
+  mal('no hay ningún bloque FAQPage en la página');
+  await b.close();
+  process.exit(1);
+}
+
 const preguntasJson = json.mainEntity.map((q) => q.name);
 const preguntasVisibles = await p
   .locator('main dl dt')

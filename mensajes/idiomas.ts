@@ -2,7 +2,7 @@
  * Idiomas del sitio.
  *
  * Español es el principal. Inglés, portugués y chino existen porque la carga
- * que mueve Main Logistics llega y sale por puertos, y del otro lado del
+ * que mueve Logística Trade llega y sale por puertos, y del otro lado del
  * correo hay operadores que no hablan español.
  *
  * Sin librería de i18n a propósito. Para copy estático en cuatro idiomas, sin

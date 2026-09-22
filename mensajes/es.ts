@@ -13,7 +13,7 @@
  * - **Prohibido el lenguaje startup** — "revolucionamos", "disrupción",
  *   "partner estratégico" — y los superlativos vacíos: "líderes", "los
  *   mejores", "excelencia". Vale para los cuatro idiomas.
- * - **Los nombres propios no se traducen.** Main Logistics, MainBrain, y los
+ * - **Los nombres propios no se traducen.** Logística Trade, MainBrain, y los
  *   nombres de comuna y región de Chile van tal cual en todos los idiomas:
  *   son la dirección real de un lugar.
  * - **Los términos de equipo se traducen al término del rubro**, no al
@@ -27,12 +27,12 @@
 export const es = {
   meta: {
     // §9 del doc de marca: nunca el nombre solo en el title tag.
-    // "Transporte de carga" va primero porque es lo que Main vende (brief
+    // "Transporte de carga" va primero porque es lo que Trade vende (brief
     // §3.2); "logística" recoge "empresa de logística en Chile" y
     // "logística y transporte", que son las búsquedas con más volumen del
     // rubro. Sin "bodegaje" ni "operador logístico": no hay página que lo
     // respalde.
-    titulo: "Transporte de carga y logística en todo Chile | Main Logistics",
+    titulo: "Transporte de carga y logística en todo Chile | Logística Trade",
     descripcion:
       "Empresa de transporte y logística de carga en Chile. Carga general, minera, peligrosa, refrigerada, forestal, contenedores, maquinaria y sobredimensionada, de Arica a Punta Arenas.",
     ogDescripcion:
@@ -48,7 +48,7 @@ export const es = {
     cotizar: "Cotizar",
     cotizarMovil: "Cotizar mi operación",
     principal: "Principal",
-    inicio: "Main Logistics, inicio",
+    inicio: "Logística Trade, inicio",
     abrirMenu: "Abrir menú",
     cerrarMenu: "Cerrar menú",
     idioma: "Idioma",
@@ -57,7 +57,7 @@ export const es = {
 
   /* ── Hero · portada ──────────────────────────────────────────────── */
   hero: {
-    tituloLinea1: "Con Main, su carga.",
+    tituloLinea1: "Con Trade, su carga",
     tituloLinea2: "Siempre",
     bajadaLinea1: "Llevamos su carga a cualquier destino de Chile.",
     bajadaLinea2: "Sabe en todo momento dónde va y a qué hora llega.",
@@ -163,7 +163,7 @@ export const es = {
     },
     pilares: {
       titulo: {
-        inicio: "Con MAIN, su carga siempre",
+        inicio: "Con TRADE, su carga siempre",
         realce: "bajo control",
         fin: ".",
       },
@@ -176,7 +176,7 @@ export const es = {
         finHora: "acordada.",
       },
       tecnologia: {
-        altFoto: "Equipo de monitoreo con la marca Main Logistics, con el conector de datos a la vista",
+        altFoto: "Equipo de monitoreo con la marca Logística Trade, con el conector de datos a la vista",
         etiqueta: "GPS en ruta",
         titulo: {
           inicio: "Vea su carga en",
@@ -415,7 +415,7 @@ export const es = {
         dato: "Respaldo de entrega",
       },
     },
-    plazosAltFoto: "Reloj con la marca Main Logistics mostrando la hora de entrega",
+    plazosAltFoto: "Reloj con la marca Logística Trade mostrando la hora de entrega",
     plazosEtiqueta: "Plazos",
     plazosTituloInicio: "Su carga siempre",
     plazosTituloDestacado: "a tiempo",
@@ -431,7 +431,7 @@ export const es = {
     bajadaRealce: "Todos pasan el mismo estándar antes de tocar su carga",
     bajadaFin: ", sin importar de qué industria venga.",
     conductor: {
-      altFoto: "Conductor de Main Logistics en la cabina, con gorra de la marca",
+      altFoto: "Conductor de Logística Trade en la cabina, con gorra de la marca",
       tituloInicio: "Transportistas",
       tituloDestacado: "verificados",
       tituloFin: "antes de cargar.",
@@ -451,17 +451,17 @@ export const es = {
       },
     },
     flota: {
-      altFoto: "Puerta de camión con la marca Main Logistics",
+      altFoto: "Puerta de camión con la marca Logística Trade",
       titulo: "El estándar es el mismo, lo maneje quien lo maneje.",
     },
     bodega: {
-      altFoto: "Operario de Main Logistics revisando pallets en bodega con una tablet",
+      altFoto: "Operario de Logística Trade revisando pallets en bodega con una tablet",
       tituloInicio: "Bodega y descarga, con el",
       tituloDestacado: "mismo control",
       tituloFin: ".",
     },
     portal: {
-      altFoto: "Tablet en cabina mostrando la ruta activa en el portal de Main Logistics",
+      altFoto: "Tablet en cabina mostrando la ruta activa en el portal de Logística Trade",
       estado: "En desarrollo",
       titulo: "El portal para seguir su carga.",
     },
@@ -830,16 +830,16 @@ export const es = {
 
      Nada de lo escrito acá promete una cifra, un plazo ni una
      certificación. Se describe lo que el servicio ES y lo que la norma
-     EXIGE, que es verificable, y no lo que Main tiene, que todavía no
+     EXIGE, que es verificable, y no lo que Trade tiene, que todavía no
      está confirmado. Ver la lista de pendientes en
-     `brand/main-logistics-marca.md` §11. */
+     `brand/logistica-trade-marca.md` §11. */
   paginasServicio: {
     hub: {
       /* El title y la descripción del hub eran su h1 ("El detalle de cada
          servicio"), que no dice de qué trata la página a quien la ve en
          Google. Van aparte para poder nombrar el servicio sin cambiar el
          tono del titular. */
-      metaTitulo: "Servicios de transporte de carga y logística | Main Logistics",
+      metaTitulo: "Servicios de transporte de carga y logística | Logística Trade",
       metaDescripcion:
         "Retiro de contenedores en puerto, carga general, insumos mineros y baterías BESS: qué exige cada carga, con qué equipo la movemos y cómo cotizar su transporte.",
       titulo: "Transporte de carga,",
@@ -1086,7 +1086,7 @@ export const es = {
       pendiente: "Falta",
       noAplica: "No aplica",
       revisadoEl: "Revisado el",
-      ctaTitulo: "Main emite guías conformes desde el primer viaje",
+      ctaTitulo: "Trade emite guías conformes desde el primer viaje",
       ctaTexto:
         "Si prefiere no resolver esto por dentro, nosotros ya emitimos con estos campos. Cuéntenos qué mueve y le respondemos en 24 horas.",
       ctaBoton: "Cotizar mi carga",
@@ -1101,7 +1101,7 @@ export const es = {
     mensaje: "👋 ¿Necesita ayuda con su carga o quiere que la cotice?",
     escribiendo: "Escribiendo",
     cerrarMensaje: "Cerrar mensaje",
-    tituloPanel: "Contactar a Main Logistics",
+    tituloPanel: "Contactar a Logística Trade",
     cerrarPanel: "Cerrar",
     opciones: {
       cotizar: {
@@ -1129,9 +1129,9 @@ export const es = {
   /* ── Transportistas · el segundo embudo ──────────────────────────── */
   transportistas: {
     meta: {
-      titulo: "Transportistas: sume su equipo a la red | Main Logistics",
+      titulo: "Transportistas: sume su equipo a la red | Logística Trade",
       descripcion:
-        "Main Logistics busca transportistas con equipo propio para carga recurrente en rutas definidas dentro de Chile. Sin costo de registro. Vea los documentos que se piden antes de registrarse.",
+        "Logística Trade busca transportistas con equipo propio para carga recurrente en rutas definidas dentro de Chile. Sin costo de registro. Vea los documentos que se piden antes de registrarse.",
     },
     tituloLinea1: "Carga recurrente para",
     tituloDestacado: "su equipo",
@@ -1167,7 +1167,7 @@ export const es = {
     exigeGps: "GPS activo, con acceso compartido durante el viaje",
     relacionTitulo: "Cómo es la relación",
     relacionDetalle:
-      "Usted opera su equipo y dirige a su personal. Main Logistics coordina la carga y responde ante el cliente por el servicio. No somos su empleador ni intermediamos su relación laboral.",
+      "Usted opera su equipo y dirige a su personal. Logística Trade coordina la carga y responde ante el cliente por el servicio. No somos su empleador ni intermediamos su relación laboral.",
     contactoTitulo: "Para sumarse",
     contactoDetalle:
       "Escríbanos con el nombre de su empresa, cuántos equipos tiene y en qué rutas opera. Le respondemos con los pasos y la lista de documentos.",

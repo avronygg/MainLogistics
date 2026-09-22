@@ -29,7 +29,7 @@ import { DIAS_DE_PAGO, REQUISITOS_RED } from "@/components/datos/transportistas"
  * 2. EL BLOQUE "CÓMO ES LA RELACIÓN" NO ES RELLENO. El artículo 183-A inciso
  *    2 de la Ley 20.123 establece que si el servicio se limita a intermediar
  *    trabajadores, el empleador pasa a ser el dueño de la faena. El lenguaje
- *    del sitio no puede sugerir que Main dirige el trabajo del conductor, y
+ *    del sitio no puede sugerir que Trade dirige el trabajo del conductor, y
  *    este bloque lo dice explícito.
  *
  * ⚠️ ANTES DE PUBLICAR: el brief (§7.4) pide que un abogado laboral revise
@@ -173,7 +173,7 @@ export default async function Transportistas({
           </div>
         </section>
 
-        {/* ── Qué ofrece Main. Banda clara. ──────────────────────────── */}
+        {/* ── Qué ofrece Trade. Banda clara. ──────────────────────────── */}
         <section className="tema-claro">
           <div className="mx-auto w-full max-w-[var(--ancho-max)] px-[var(--borde-x)] py-[var(--seccion-y)]">
             <h2 className="text-[clamp(1.5rem,1.8vw+1.05rem,2.15rem)] font-semibold leading-[1.12] tracking-[-0.032em] text-[var(--texto)]">

@@ -46,7 +46,7 @@ export const ENCARGOS = {
   cargas:
     "Plano abierto de la rampla cargada con mezcla de carga: pallets, un contenedor y maquinaria en el mismo patio. Es la foto que prueba la versatilidad.",
   mineria:
-    "Camión de Main entrando a faena minera: portería, polvo, chaleco reflectante y el equipo homologado a la vista.",
+    "Camión de Trade entrando a faena minera: portería, polvo, chaleco reflectante y el equipo homologado a la vista.",
   peligrosa:
     "Detalle del rótulo de sustancia peligrosa en la rampla, con la hoja de seguridad en primer plano.",
   refrigerada:

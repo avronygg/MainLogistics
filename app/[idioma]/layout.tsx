@@ -1,6 +1,6 @@
 /**
  * ════════════════════════════════════════════════════════════════════════
- *  MAIN LOGISTICS · Sitio corporativo
+ *  LOGÍSTICA TRADE · Sitio corporativo
  *
  *  Diseñado y desarrollado por Aaron Tardón
  *  Marketing Manager · MAIN BRAIN
@@ -15,7 +15,7 @@
  *  Antes de tocar cualquier interfaz, leer en este orden:
  *    1. PRODUCT.md   — registro, audiencia, anti-referencias, principios
  *    2. DESIGN.md    — paleta verificada, tipografía, vidrio, motion
- *    3. brand/main-logistics-marca.md — documento de marca del cliente
+ *    3. brand/logistica-trade-marca.md — documento de marca del cliente
  *
  *  Verificación antes de publicar:
  *    node scripts/pruebas.mjs          desbordes, menú móvil, reduced-motion
@@ -70,7 +70,7 @@ export async function generateMetadata({
   return {
     title: m.meta.titulo,
     description: m.meta.descripcion,
-    metadataBase: new URL("https://mainlogistics.cl"),
+    metadataBase: new URL("https://logisticatrade.cl"),
     // Cada idioma declara dónde viven los otros tres. Sin esto, un buscador
     // trata las cuatro versiones como páginas distintas que compiten entre sí.
     alternates: {
@@ -104,7 +104,7 @@ export const viewport: Viewport = {
 /**
  * Organization y WebSite de Schema.org, en todas las páginas.
  *
- * Es la entidad a la que un buscador ancla la marca. Sin ella, "Main
+ * Es la entidad a la que un buscador ancla la marca. Sin ella, "Trade
  * Logistics" es un nombre que comparten una empresa en Reino Unido, otra en
  * Kenia y otra en Estados Unidos, y nada le dice cuál es esta.
  *
@@ -122,11 +122,11 @@ function datosEstructurados(idioma: Idioma, m: Mensajes) {
       {
         "@type": "Organization",
         "@id": organizacion,
-        name: "Main Logistics",
+        name: "Logística Trade",
         url: `${BASE}/`,
         logo: {
           "@type": "ImageObject",
-          url: `${BASE}/logo-main-logistics.png`,
+          url: `${BASE}/logo-logistica-trade.png`,
           width: 1254,
           height: 1254,
         },
@@ -145,7 +145,7 @@ function datosEstructurados(idioma: Idioma, m: Mensajes) {
       {
         "@type": "WebSite",
         "@id": `${BASE}/#sitio`,
-        name: "Main Logistics",
+        name: "Logística Trade",
         url: `${BASE}/`,
         inLanguage: NOMBRES[idioma].html,
         publisher: { "@id": organizacion },

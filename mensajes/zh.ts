@@ -6,7 +6,7 @@ import type { Mensajes } from "./es";
  * Notas propias del chino:
  *
  * - Puntuación china (、。，？：……), nunca la latina. Los nombres que quedan en
- *   alfabeto latino —Main Logistics, MainBrain, GPS, WhatsApp, BESS, UF, RUT—
+ *   alfabeto latino —Logística Trade, MainBrain, GPS, WhatsApp, BESS, UF, RUT—
  *   se separan del texto chino con un espacio, que es la convención corriente.
  * - Varios pares `inicio`/`realce`/`fin` se unen en el JSX con un `{" "}`
  *   fijo. En chino ese espacio se ve, así que el tramo que precede a una
@@ -22,9 +22,9 @@ import type { Mensajes } from "./es";
 export const zh: Mensajes = {
   meta: {
     // §9 del doc de marca: nunca el nombre solo en el title tag.
-    titulo: "智利全境公路货物运输 | Main Logistics",
+    titulo: "智利全境公路货物运输 | Logística Trade",
     descripcion:
-      "Main Logistics 承运普通货物、矿业物资、危险品、冷藏货物、林业物资、集装箱、机械设备与超限货物，覆盖从阿里卡到蓬塔阿雷纳斯的智利全境，全程持续监控，满足各行业要求的标准。",
+      "Logística Trade 承运普通货物、矿业物资、危险品、冷藏货物、林业物资、集装箱、机械设备与超限货物，覆盖从阿里卡到蓬塔阿雷纳斯的智利全境，全程持续监控，满足各行业要求的标准。",
     ogDescripcion: "任何货物。智利任何目的地。全程可视，没有意外。",
   },
 
@@ -37,7 +37,7 @@ export const zh: Mensajes = {
     cotizar: "报价",
     cotizarMovil: "索取运输报价",
     principal: "主导航",
-    inicio: "Main Logistics，首页",
+    inicio: "Logística Trade，首页",
     abrirMenu: "打开菜单",
     cerrarMenu: "关闭菜单",
     idioma: "语言",
@@ -46,7 +46,7 @@ export const zh: Mensajes = {
 
   /* ── Hero · portada ──────────────────────────────────────────────── */
   hero: {
-    tituloLinea1: "选择 Main，您的货物",
+    tituloLinea1: "Trade，您的货物",
     tituloLinea2: "始终",
     bajadaLinea1: "我们把您的货物送到智利的任何目的地。",
     bajadaLinea2: "您随时知道它在哪里、几点到达。",
@@ -153,7 +153,7 @@ export const zh: Mensajes = {
     },
     pilares: {
       titulo: {
-        inicio: "有 MAIN，您的货物",
+        inicio: "有 TRADE，您的货物",
         realce: "始终尽在掌控",
         fin: "。",
       },
@@ -166,7 +166,7 @@ export const zh: Mensajes = {
         finHora: "准时抵达。",
       },
       tecnologia: {
-        altFoto: "带 Main Logistics 标识的监控设备，数据接口清晰可见",
+        altFoto: "带 Logística Trade 标识的监控设备，数据接口清晰可见",
         etiqueta: "在途 GPS",
         titulo: {
           inicio: "您的货物",
@@ -408,7 +408,7 @@ export const zh: Mensajes = {
         dato: "交付凭证",
       },
     },
-    plazosAltFoto: "带 Main Logistics 标识的时钟，显示交付时间",
+    plazosAltFoto: "带 Logística Trade 标识的时钟，显示交付时间",
     plazosEtiqueta: "时效",
     plazosTituloInicio: "您的货物，",
     plazosTituloDestacado: "始终准时",
@@ -424,7 +424,7 @@ export const zh: Mensajes = {
     bajadaRealce: "在接触您的货物之前，所有人都要通过同一套标准",
     bajadaFin: "，无论货物来自哪个行业。",
     conductor: {
-      altFoto: "Main Logistics 的驾驶员坐在驾驶室内，戴着品牌帽子",
+      altFoto: "Logística Trade 的驾驶员坐在驾驶室内，戴着品牌帽子",
       tituloInicio: "承运人",
       tituloDestacado: "经过核验",
       tituloFin: "才装货。",
@@ -444,17 +444,17 @@ export const zh: Mensajes = {
       },
     },
     flota: {
-      altFoto: "带 Main Logistics 标识的卡车车门",
+      altFoto: "带 Logística Trade 标识的卡车车门",
       titulo: "无论由谁驾驶，标准都是同一套。",
     },
     bodega: {
-      altFoto: "Main Logistics 的作业人员用平板电脑在仓库核对托盘货物",
+      altFoto: "Logística Trade 的作业人员用平板电脑在仓库核对托盘货物",
       tituloInicio: "仓储与卸货，采用",
       tituloDestacado: "同样的管控",
       tituloFin: "。",
     },
     portal: {
-      altFoto: "驾驶室内的平板电脑，显示 Main Logistics 门户中的在途路线",
+      altFoto: "驾驶室内的平板电脑，显示 Logística Trade 门户中的在途路线",
       estado: "开发中",
       titulo: "用于跟踪货物的客户门户。",
     },
@@ -820,7 +820,7 @@ export const zh: Mensajes = {
      参见 `es.ts`。 */
   paginasServicio: {
     hub: {
-      metaTitulo: "智利货物运输与物流服务 | Main Logistics",
+      metaTitulo: "智利货物运输与物流服务 | Logística Trade",
       metaDescripcion:
         "港口集装箱提箱与还箱、普通货物、矿山物资与BESS储能电池：每类货物的要求、所用设备，以及如何询价。",
       titulo: "货物运输，",
@@ -1066,7 +1066,7 @@ export const zh: Mensajes = {
       pendiente: "缺少",
       noAplica: "不适用",
       revisadoEl: "核查日期",
-      ctaTitulo: "Main 自首趟运输起即开具合规单据",
+      ctaTitulo: "Trade 自首趟运输起即开具合规单据",
       ctaTexto:
         "如果贵司不打算自行处理，我们的单据已按上述字段开具。告诉我们您要运什么，24小时内答复。",
       ctaBoton: "索取报价",
@@ -1081,7 +1081,7 @@ export const zh: Mensajes = {
     mensaje: "👋 需要协助安排货物运输，还是想让我们报价？",
     escribiendo: "正在输入",
     cerrarMensaje: "关闭消息",
-    tituloPanel: "联系 Main Logistics",
+    tituloPanel: "联系 Logística Trade",
     cerrarPanel: "关闭",
     opciones: {
       cotizar: {
@@ -1109,9 +1109,9 @@ export const zh: Mensajes = {
   /* ── Transportistas · el segundo embudo ──────────────────────────── */
   transportistas: {
     meta: {
-      titulo: "承运商加盟：把您的车辆加入网络 | Main Logistics",
+      titulo: "承运商加盟：把您的车辆加入网络 | Logística Trade",
       descripcion:
-        "Main Logistics 与拥有自有车辆的承运商合作，在智利境内的固定线路上提供稳定回头货。加盟不收费。注册前请先查看所需证件清单。",
+        "Logística Trade 与拥有自有车辆的承运商合作，在智利境内的固定线路上提供稳定回头货。加盟不收费。注册前请先查看所需证件清单。",
     },
     tituloLinea1: "稳定回头货，",
     tituloDestacado: "给您的车",
@@ -1142,7 +1142,7 @@ export const zh: Mensajes = {
     exigeGps: "GPS 处于启用状态，运输期间共享查看权限",
     relacionTitulo: "合作关系说明",
     relacionDetalle:
-      "您自行运营车辆并管理自己的人员。Main Logistics 负责协调货源，并就服务向客户负责。我们不是您的雇主，也不介入您的劳动关系。",
+      "您自行运营车辆并管理自己的人员。Logística Trade 负责协调货源，并就服务向客户负责。我们不是您的雇主，也不介入您的劳动关系。",
     contactoTitulo: "如何加盟",
     contactoDetalle: "请告知公司名称、车辆数量以及您经营的线路。我们会回复具体步骤和所需证件清单。",
     volver: "返回首页",

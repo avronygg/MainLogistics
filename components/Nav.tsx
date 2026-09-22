@@ -19,7 +19,7 @@ function Isotipo({ className = "" }: { className?: string }) {
   return (
     <Image
       src="/logo-horizontal-blanco.png"
-      alt="Main Logistics"
+      alt="Logística Trade"
       width={1541}
       height={343}
       priority

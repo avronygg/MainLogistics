@@ -38,7 +38,7 @@ type Props = {
 };
 
 /* Los nombres de región son la dirección real de un lugar de Chile: van
-   iguales en los cuatro idiomas, igual que "Main Logistics". */
+   iguales en los cuatro idiomas, igual que "Logística Trade". */
 const REGIONES_OPCIONES = REGIONES.map((r) => ({
   valor: r.region,
   etiqueta: r.region,

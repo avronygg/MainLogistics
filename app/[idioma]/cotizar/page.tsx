@@ -38,7 +38,7 @@ export async function generateMetadata({
   const titulo = `${m.cotizar.tituloLinea1} ${m.cotizar.tituloDestacado}`.trim();
 
   return {
-    title: `${titulo} | Main Logistics`,
+    title: `${titulo} | Logística Trade`,
     description: m.cotizar.bajada,
     alternates: {
       canonical: `/${idioma}/cotizar`,
@@ -47,7 +47,7 @@ export async function generateMetadata({
       ),
     },
     openGraph: {
-      title: `${titulo} | Main Logistics`,
+      title: `${titulo} | Logística Trade`,
       description: m.cotizar.bajada,
       locale: NOMBRES[idioma].html.replace("-", "_"),
       type: "website",

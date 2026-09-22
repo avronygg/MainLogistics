@@ -1,5 +1,5 @@
 {
-  "name": "main-logistics",
+  "name": "logistica-trade",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -28,7 +28,7 @@
     "typescript": "^5"
   },
   "author": "Aaron Tardón <comercial@mainbrain.cl> (Marketing Manager, MAIN BRAIN)",
-  "description": "Sitio corporativo de Main Logistics. Diseñado y desarrollado por MAIN BRAIN.",
+  "description": "Sitio corporativo de Logística Trade. Diseñado y desarrollado por MAIN BRAIN.",
   "engines": {
     "node": ">=20.9.0"
   }

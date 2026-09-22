@@ -86,7 +86,7 @@ import {
  * y viven en `components/datos/contacto.ts`.
  */
 
-const LLAVE = "main-logistics:cotizacion";
+const LLAVE = "logistica-trade:cotizacion";
 
 /* El ícono es del código y el texto del diccionario: la lista se arma en
    una función en vez de guardar la clave suelta y buscarla después. */
@@ -107,14 +107,14 @@ const RESUMEN = PASOS.length;
  * Respaldo por WhatsApp cuando el envío falla.
  *
  * Va SIEMPRE en español y con las listas en español: esto lo lee el equipo de
- * Main Logistics, no quien cotiza. El idioma del visitante no cambia el
+ * Logística Trade, no quien cotiza. El idioma del visitante no cambia el
  * idioma en que la empresa opera.
  */
 function textoWhatsapp(d: Cotizacion) {
   const origen = [d.origenComuna, d.origenRegion].filter(Boolean).join(", ");
   const destino = [d.destinoComuna, d.destinoRegion].filter(Boolean).join(", ");
   return [
-    "Solicitud de cotización — Main Logistics",
+    "Solicitud de cotización — Logística Trade",
     "",
     `Tipo de carga: ${etiquetaDe(TIPOS_CARGA, d.tipoCarga)}${
       d.tipoCargaOtra ? ` (${d.tipoCargaOtra})` : ""

@@ -16,14 +16,14 @@ import type { Idioma } from "@/mensajes/idiomas";
  * 1. Qué es el servicio, en prosa. Sin viñetas: la primera pantalla tiene
  *    que sonar a alguien que conoce el negocio, no a una ficha.
  * 2. Qué exige la carga. Es la parte que ningún competidor chileno escribe
- *    y la que demuestra competencia sin afirmar nada sobre Main.
+ *    y la que demuestra competencia sin afirmar nada sobre Trade.
  * 3. Equipo habitual, tomado de la misma lista que usa el cotizador.
  * 4. Preguntas frecuentes, con `FAQPage` de Schema.org.
  * 5. El CTA, al final, con el tipo de carga ya elegido.
  *
  * Nada de esto promete una cifra, un plazo ni una certificación. Describe
  * lo que el servicio ES y lo que la norma EXIGE, que se puede verificar, y
- * no lo que Main tiene, que sigue pendiente de confirmación del cliente.
+ * no lo que Trade tiene, que sigue pendiente de confirmación del cliente.
  */
 export default function PaginaServicio({
   datos,

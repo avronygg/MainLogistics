@@ -12,7 +12,7 @@ import type { MetadataRoute } from "next";
  * rastreo y deja ruido en los registros.
  */
 
-export const BASE = "https://mainlogistics.cl";
+export const BASE = "https://logisticatrade.cl";
 
 export default function robots(): MetadataRoute.Robots {
   return {

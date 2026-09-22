@@ -12,7 +12,7 @@ import { TERMINOS } from "@/components/datos/legal";
  * La distinción importa y por eso está en la bajada: lo que se contrata se
  * rige por el contrato y la carta de porte. Un término de uso que pretenda
  * regular el flete termina contradiciendo al contrato, y ahí el que pierde
- * es Main.
+ * es Trade.
  */
 
 export function generateStaticParams() {
@@ -29,7 +29,7 @@ export async function generateMetadata({
   const m = await cargar(idioma);
 
   return {
-    title: `${m.legal.terminos} | Main Logistics`,
+    title: `${m.legal.terminos} | Logística Trade`,
     description: TERMINOS.bajada,
     alternates: {
       canonical: `/${idioma}/legal/terminos`,

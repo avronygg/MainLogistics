@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 /* ============================================================
-   Main Logistics — tokens
-   Fuente: brand/main-logistics-marca.md §8 + DESIGN.md
+   Logística Trade — tokens
+   Fuente: brand/logistica-trade-marca.md §8 + DESIGN.md
    ============================================================ */
 
 :root {
@@ -452,7 +452,7 @@ p {
    pesa varios megabytes, y el equipo de quien lee en chino ya trae una CJK
    mejor que cualquiera que le mandemos por la red.
 
-   Geist va PRIMERO igual: resuelve los latinos (Main Logistics, las patentes,
+   Geist va PRIMERO igual: resuelve los latinos (Logística Trade, las patentes,
    los nombres de comuna) y deja los ideogramas a la del sistema. */
 :root[data-cjk] body,
 :root[data-cjk] .dato {

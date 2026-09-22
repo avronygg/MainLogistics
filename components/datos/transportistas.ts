@@ -10,13 +10,13 @@
  * hábiles, Loadsmart publica su factoring al 2,5%.
  *
  * Por eso el plazo tiene que ir en el titular de la página. Pero es una
- * decisión comercial de Main Logistics, no un dato de diseño, y publicar un
+ * decisión comercial de Logística Trade, no un dato de diseño, y publicar un
  * número inventado es exactamente lo que PRODUCT.md prohíbe en su principio
  * 5: una promesa que no se sostiene con este interlocutor no genera un
  * reclamo, genera que dejen de contestar el teléfono.
  *
  * Mientras sea `null`, la página no muestra el bloque de pago y el titular
- * usa el gancho de respaldo (carga recurrente). En cuanto Main defina el
+ * usa el gancho de respaldo (carga recurrente). En cuanto Trade defina el
  * plazo, se escribe acá y el bloque aparece solo, en su lugar correcto.
  */
 

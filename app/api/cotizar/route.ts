@@ -36,7 +36,7 @@ import { construirCorreo, type Bloque } from "./correo";
  * silencio es peor que un error visible.
  *
  * El correo va SIEMPRE en español, sea cual sea el idioma en que se cotizó:
- * lo lee el equipo de Main Logistics. Un chino cotizando no cambia el idioma
+ * lo lee el equipo de Logística Trade. Un chino cotizando no cambia el idioma
  * en que opera la empresa.
  */
 

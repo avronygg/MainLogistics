@@ -14,7 +14,7 @@ Sectores: minería (homologación de faena, control de fatiga, continuidad de ab
 
 ## Product Purpose
 
-One-page de Fase 1 para Main Logistics, empresa de transporte de carga por carretera en Chile con cobertura de Arica a Punta Arenas y respaldo del grupo MainBrain. Mueve carga general, minera, peligrosa, refrigerada, forestal, contenedores, maquinaria y sobredimensionada.
+One-page de Fase 1 para Logística Trade, empresa de transporte de carga por carretera en Chile con cobertura de Arica a Punta Arenas y respaldo del grupo MainBrain. Mueve carga general, minera, peligrosa, refrigerada, forestal, contenedores, maquinaria y sobredimensionada.
 
 No es un sitio para ser encontrado: en Fase 1 se comparte por WhatsApp, correo y reuniones. Es la pieza que se abre después de una conversación, y su trabajo es que la conversación siga. Cada sección se escribe como el resumen de lo que en Fase 2 se convierte en su propia URL, sin rediseñar nada.
 

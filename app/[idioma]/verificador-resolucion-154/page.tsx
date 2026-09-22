@@ -34,7 +34,7 @@ export async function generateMetadata({
   const titulo = `${m.verificador.titulo} ${m.verificador.destacado}`;
 
   return {
-    title: `${titulo} | Main Logistics`,
+    title: `${titulo} | Logística Trade`,
     description: m.verificador.bajada,
     alternates: {
       canonical: `/${idioma}/verificador-resolucion-154`,
@@ -43,7 +43,7 @@ export async function generateMetadata({
       ),
     },
     openGraph: {
-      title: `${titulo} | Main Logistics`,
+      title: `${titulo} | Logística Trade`,
       description: m.verificador.bajada,
       locale: NOMBRES[idioma].html.replace("-", "_"),
       type: "website",

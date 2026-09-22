@@ -37,7 +37,7 @@ const FOTO_ASESORA = "/asesora.webp";
  * No entra al diccionario: es un nombre propio, igual en los cuatro idiomas.
  * El cargo sí, y va en `m.asesor.cargo`.
  */
-const NOMBRE = "Main Logistics";
+const NOMBRE = "Logística Trade";
 
 
 

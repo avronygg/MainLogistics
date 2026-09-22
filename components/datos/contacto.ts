@@ -1,5 +1,5 @@
 /**
- * Datos de contacto de Main Logistics. Fuente única.
+ * Datos de contacto de Logística Trade. Fuente única.
  *
  * No pasan por el diccionario de idiomas: un número de teléfono chileno y una
  * dirección de correo se escriben igual en español, inglés, portugués y
@@ -17,7 +17,7 @@
  */
 
 /** Correo comercial. Recibe también las cotizaciones del formulario. */
-export const CORREO = "comercial@mainlogistics.cl";
+export const CORREO = "comercial@logisticatrade.cl";
 
 /** Teléfono, como se lee. */
 export const TELEFONO = "+56 9 9277 8013";

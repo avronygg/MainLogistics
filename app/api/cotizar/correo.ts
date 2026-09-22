@@ -127,7 +127,7 @@ export function construirCorreo(datos: {
     `<tr><td style="background:${OSCURO};padding:18px 24px">` +
     `<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">` +
     `<tr>` +
-    `<td style="font-family:${SANS};font-size:13px;font-weight:700;letter-spacing:0.16em;color:#ffffff">MAIN LOGISTICS</td>` +
+    `<td style="font-family:${SANS};font-size:13px;font-weight:700;letter-spacing:0.16em;color:#ffffff">LOGÍSTICA TRADE</td>` +
     `<td align="right" style="font-family:${MONO};font-size:11px;letter-spacing:0.06em;color:#9ca3af">${escapar(selloDeTiempo())}</td>` +
     `</tr></table></td></tr>`;
 
@@ -156,7 +156,7 @@ export function construirCorreo(datos: {
   const pie =
     `<tr><td style="padding:24px 24px 24px">` +
     `<div style="border-top:1px solid ${BORDE};padding-top:14px;font-family:${SANS};font-size:11.5px;line-height:1.5;color:${TINTA_SUAVE}">` +
-    `Enviado desde el formulario de mainlogistics.cl. ` +
+    `Enviado desde el formulario de logisticatrade.cl. ` +
     `Al responder este correo le llega directo a quien cotizó.` +
     `</div></td></tr>`;
 
@@ -173,7 +173,7 @@ export function construirCorreo(datos: {
     `<body style="margin:0;padding:0;background:${FONDO};-webkit-font-smoothing:antialiased">` +
     // Preencabezado: la línea que la bandeja muestra junto al asunto. Se
     // oculta en el cuerpo; sin ella, el cliente muestra el primer texto que
-    // encuentre, que sería "MAIN LOGISTICS" repetido.
+    // encuentre, que sería "LOGÍSTICA TRADE" repetido.
     `<div style="display:none;max-height:0;overflow:hidden;opacity:0">${escapar(`${carga} · ${origen} → ${destino}`)}</div>` +
     `<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:${FONDO}">` +
     `<tr><td align="center" style="padding:24px 12px">` +
@@ -204,7 +204,7 @@ export function construirCorreo(datos: {
       ...filas.map(({ k, v }) => `  ${k}: ${v}`),
       ``,
     ]),
-    `Enviado desde el formulario de mainlogistics.cl`,
+    `Enviado desde el formulario de logisticatrade.cl`,
   ].join("\n");
 
   /* El asunto solo con comuna, sin región, y sin el tipo de carga: Gmail

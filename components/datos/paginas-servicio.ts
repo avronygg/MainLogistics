@@ -8,7 +8,7 @@ import type { Mensajes } from "@/mensajes";
  * El sitemap del brief (§5.2) fasea estas páginas: contenedores, carga
  * general, insumos mineros y BESS en Fase 1; maquinaria y cama baja más
  * graneles en Fase 2; carga peligrosa en Fase 3, y esa última solo con
- * homologación acreditada, que Main todavía no tiene.
+ * homologación acreditada, que Trade todavía no tiene.
  *
  * Eso NO es recortar la oferta. Los ocho servicios siguen en la home por
  * decisión del cliente: lo que se fasea es cuáles tienen página propia

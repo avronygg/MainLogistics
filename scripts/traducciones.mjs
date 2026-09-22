@@ -86,7 +86,7 @@ console.log(`español: ${es.size} textos\n`);
 /* ── 1 · Lo que no se traduce ─────────────────────────────────────────── */
 
 const INTACTOS = [
-  { que: 'Main Logistics', re: /Main Logistics/ },
+  { que: 'Logística Trade', re: /Logística Trade/ },
   { que: 'MainBrain', re: /MainBrain/ },
   { que: 'DS 298', re: /DS ?298/ },
   { que: 'SICEP', re: /SICEP/ },
@@ -199,7 +199,7 @@ for (const id of IDIOMAS) {
   // Textos que quedaron idénticos al español: o no se tradujeron, o son
   // nombres propios. Se avisa, no se falla.
   const iguales = [...t.entries()].filter(
-    ([k, v]) => es.get(k) === v && v.length > 12 && !/Main Logistics|MainBrain|WhatsApp|BESS|GPS/.test(v),
+    ([k, v]) => es.get(k) === v && v.length > 12 && !/Logística Trade|MainBrain|WhatsApp|BESS|GPS/.test(v),
   );
   if (!iguales.length) ok('sin textos largos idénticos al español');
   else {

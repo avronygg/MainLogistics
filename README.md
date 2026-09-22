@@ -1,4 +1,4 @@
-# Main Logistics — sitio corporativo
+# Logística Trade — sitio corporativo
 
 Next.js 16 · React 19 · Tailwind 4 · Motion
 
@@ -40,7 +40,7 @@ ahí y varias se ven arbitrarias sin ese contexto.
 
 1. **`PRODUCT.md`** — a quién le habla, personalidad, anti-referencias, los 5 principios
 2. **`DESIGN.md`** — paleta con contrastes verificados, tipografía, vidrio, motion
-3. **`brand/main-logistics-marca.md`** — documento de marca del cliente
+3. **`brand/logistica-trade-marca.md`** — documento de marca del cliente
 
 Reglas que se rompen seguido y no hay que romper:
 
@@ -53,7 +53,7 @@ Reglas que se rompen seguido y no hay que romper:
 - **Geist Mono solo para dato auditable** — patentes, folios, tonelajes,
   normativas. Es regla semántica, no decorativa.
 - **Ninguna cifra ni certificación entra sin confirmación del cliente.**
-  Lista de pendientes en `brand/main-logistics-marca.md` §11.
+  Lista de pendientes en `brand/logistica-trade-marca.md` §11.
 
 ---
 

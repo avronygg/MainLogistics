@@ -6,7 +6,7 @@ import s from "./FranjaConfianza.module.css";
  *
  * Era la cinta de logos del hero, bajo "Confían en nosotros". Se retiró del
  * Hero por el §1.2 del brief de desarrollo: ninguna de las trece empresas es
- * cliente facturado de Main Logistics, así que el encabezado afirmaba una
+ * cliente facturado de Logística Trade, así que el encabezado afirmaba una
  * relación comercial inexistente, y usar marcas registradas de terceros para
  * sugerirla es exposición legal.
  *
@@ -35,7 +35,7 @@ import s from "./FranjaConfianza.module.css";
  *
  * ⚠️ PENDIENTE COMERCIAL, no de diseño: usar la marca de un cliente en
  * material propio necesita su visto bueno, aunque la relación sea real. Es
- * el riesgo del doc de marca §9 — este comprador verifica. Y si Main
+ * el riesgo del doc de marca §9 — este comprador verifica. Y si Trade
  * participó junto al socio y no como proveedor titular, el encabezado
  * honesto es el que está comentado más abajo.
  */

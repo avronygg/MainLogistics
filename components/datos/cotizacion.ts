@@ -18,7 +18,7 @@ import type { Mensajes } from "@/mensajes";
  * las usa para dos cosas que no dependen del idioma del visitante:
  *
  * 1. Validar que el `valor` recibido sea uno de los que el formulario ofrece.
- * 2. Escribir el correo que lee el equipo de Main Logistics, que trabaja en
+ * 2. Escribir el correo que lee el equipo de Logística Trade, que trabaja en
  *    español. Un chino cotizando no cambia el idioma en que opera la empresa.
  *
  * Lo mismo vale para el texto de respaldo de WhatsApp en `Cotizar.tsx`.

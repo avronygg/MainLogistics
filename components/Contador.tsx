@@ -11,7 +11,7 @@ import { useInView, useReducedMotion } from "motion/react";
  * Antes arrancaba en `useState(0)`, así que el HTML que sirve el servidor
  * decía `0` y el número real solo aparecía después de que el navegador
  * ejecutara la animación. Google y los asistentes de IA no la ejecutan: para
- * ellos la cobertura de Main Logistics eran cero kilómetros.
+ * ellos la cobertura de Logística Trade eran cero kilómetros.
  *
  * No es una hipótesis. El brief de desarrollo (§6.5) lo detectó también en
  * Sotraser, Nazar y Agunsa: sus contadores animados devuelven `0` en el HTML

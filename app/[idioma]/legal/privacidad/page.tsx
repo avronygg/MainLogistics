@@ -35,7 +35,7 @@ export async function generateMetadata({
   return {
     // El rótulo va traducido aunque el cuerpo esté en español: es lo que se
     // ve en la pestaña y en el buscador, y es lo que la persona busca.
-    title: `${m.legal.privacidad} | Main Logistics`,
+    title: `${m.legal.privacidad} | Logística Trade`,
     description: PRIVACIDAD.bajada,
     alternates: {
       canonical: `/${idioma}/legal/privacidad`,

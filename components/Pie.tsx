@@ -59,7 +59,7 @@ function columnas(m: Mensajes, idioma: Idioma) {
         { href: `${inicio}#cobertura`, texto: m.pie.columnaServicios.cobertura },
         { href: `${inicio}#cumplimiento`, texto: m.pie.columnaServicios.cumplimiento },
         /* El verificador va acá y no en la columna legal. Esa columna es la
-           letra chica del sitio; esto es una herramienta que Main ofrece, y
+           letra chica del sitio; esto es una herramienta que Trade ofrece, y
            enterrarla entre la política de privacidad y los términos la
            esconde de la única persona que la anda buscando. */
         { href: `${inicio}/verificador-resolucion-154`, texto: m.verificador.enlace },
@@ -106,7 +106,7 @@ export default function Pie({ m, idioma }: { m: Mensajes; idioma: Idioma }) {
           <div className="max-w-[34rem]">
             <Image
               src="/logo-horizontal-blanco.png"
-              alt="Main Logistics"
+              alt="Logística Trade"
               width={1541}
               height={343}
               quality={90}
@@ -187,7 +187,7 @@ export default function Pie({ m, idioma }: { m: Mensajes; idioma: Idioma }) {
 
         <div className="mt-[clamp(2.5rem,5vw,4rem)] flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-[color-mix(in_oklab,var(--borde)_50%,transparent)] pt-6 sm:justify-between">
           <p className="text-[13px] text-[var(--texto-sec)]">
-            © {año} Main Logistics · {m.pie.derechos}
+            © {año} Logística Trade · {m.pie.derechos}
           </p>
 
           {/* Privacidad y términos acá abajo, que es donde se buscan y donde

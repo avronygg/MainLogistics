@@ -17,7 +17,7 @@ for (const w of anchos) {
 
   const max = await p.evaluate(() => {
     const h1 = document.querySelector('h1');
-    const linea1 = h1.children[0];   // "CON MAIN, TU CARGA."
+    const linea1 = h1.children[0];   // "CON TRADE, TU CARGA."
     const linea2 = h1.children[1];   // "SIEMPRE" + cápsula
     const previo = h1.style.fontSize;
 

@@ -1,6 +1,6 @@
 # Créditos
 
-**Main Logistics · Sitio corporativo**
+**Logística Trade · Sitio corporativo**
 
 Diseñado y desarrollado por **Aaron Tardón**
 Marketing Manager · **MAIN BRAIN**
@@ -30,7 +30,7 @@ que pasar en verde.
 ## Y qué NO se hizo, a propósito
 
 - **Ninguna cifra ni certificación sin confirmar.** Los pendientes están en
-  `brand/main-logistics-marca.md` §11.
+  `brand/logistica-trade-marca.md` §11.
 - **Ninguna reseña inventada con rostro.** La atribución está vacante hasta
   que existan citas reales autorizadas.
 - **Ningún logo de cliente sin autorización de uso de marca.** Los archivos

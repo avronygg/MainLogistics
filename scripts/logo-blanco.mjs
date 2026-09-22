@@ -19,7 +19,7 @@ const p = await b.newPage();
 // Se pasa como data URL: una pagina about:blank no puede cargar file:// por CORS.
 const origen =
   'data:image/png;base64,' +
-  fs.readFileSync(path.resolve('brand/Main Logistics Logo.png')).toString('base64');
+  fs.readFileSync(path.resolve('brand/Logística Trade Logo.png')).toString('base64');
 
 const salida = await p.evaluate(async (src) => {
   const img = new Image();

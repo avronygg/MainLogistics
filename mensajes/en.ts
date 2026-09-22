@@ -4,9 +4,9 @@ import type { Mensajes } from "./es";
 export const en: Mensajes = {
   meta: {
     // §9 del doc de marca: nunca el nombre solo en el title tag.
-    titulo: "Road freight across Chile | Main Logistics",
+    titulo: "Road freight across Chile | Logística Trade",
     descripcion:
-      "Main Logistics moves general, mining, hazardous, refrigerated, forestry, container, machinery and oversized freight from Arica to Punta Arenas, with permanent monitoring and the standard each industry requires.",
+      "Logística Trade moves general, mining, hazardous, refrigerated, forestry, container, machinery and oversized freight from Arica to Punta Arenas, with permanent monitoring and the standard each industry requires.",
     ogDescripcion:
       "Any freight. Any destination in Chile. Full visibility and no surprises.",
   },
@@ -20,7 +20,7 @@ export const en: Mensajes = {
     cotizar: "Get a quote",
     cotizarMovil: "Quote my operation",
     principal: "Main content",
-    inicio: "Main Logistics, home",
+    inicio: "Logística Trade, home",
     abrirMenu: "Open menu",
     cerrarMenu: "Close menu",
     idioma: "Language",
@@ -29,7 +29,7 @@ export const en: Mensajes = {
 
   /* ── Hero · portada ──────────────────────────────────────────────── */
   hero: {
-    tituloLinea1: "With Main, cargo is",
+    tituloLinea1: "Cargo with Trade is",
     tituloLinea2: "Always",
     bajadaLinea1: "We move your freight to any destination in Chile.",
     bajadaLinea2: "You know where it is and what time it arrives, at all times.",
@@ -135,7 +135,7 @@ export const en: Mensajes = {
     },
     pilares: {
       titulo: {
-        inicio: "With MAIN, your freight is always",
+        inicio: "With TRADE, your freight is always",
         realce: "under control",
         fin: ".",
       },
@@ -148,7 +148,7 @@ export const en: Mensajes = {
         finHora: "agreed.",
       },
       tecnologia: {
-        altFoto: "Monitoring unit branded Main Logistics, with the data connector in view",
+        altFoto: "Monitoring unit branded Logística Trade, with the data connector in view",
         etiqueta: "GPS en route",
         titulo: {
           inicio: "See your freight in",
@@ -387,7 +387,7 @@ export const en: Mensajes = {
         dato: "Proof of delivery",
       },
     },
-    plazosAltFoto: "Clock branded Main Logistics showing the delivery time",
+    plazosAltFoto: "Clock branded Logística Trade showing the delivery time",
     plazosEtiqueta: "Transit times",
     plazosTituloInicio: "Your freight, always",
     plazosTituloDestacado: "on time",
@@ -403,7 +403,7 @@ export const en: Mensajes = {
     bajadaRealce: "Everyone meets the same standard before touching your freight",
     bajadaFin: ", whatever industry it comes from.",
     conductor: {
-      altFoto: "Main Logistics driver in the cab, wearing a branded cap",
+      altFoto: "Logística Trade driver in the cab, wearing a branded cap",
       tituloInicio: "Carriers",
       tituloDestacado: "verified",
       tituloFin: "before loading.",
@@ -423,17 +423,17 @@ export const en: Mensajes = {
       },
     },
     flota: {
-      altFoto: "Truck door with the Main Logistics brand",
+      altFoto: "Truck door with the Logística Trade brand",
       titulo: "The standard is the same, whoever is driving.",
     },
     bodega: {
-      altFoto: "Main Logistics operator checking pallets in the warehouse with a tablet",
+      altFoto: "Logística Trade operator checking pallets in the warehouse with a tablet",
       tituloInicio: "Warehousing and unloading, under the",
       tituloDestacado: "same control",
       tituloFin: ".",
     },
     portal: {
-      altFoto: "Tablet in the cab showing the active route on the Main Logistics portal",
+      altFoto: "Tablet in the cab showing the active route on the Logística Trade portal",
       estado: "In development",
       titulo: "The portal to follow your freight.",
     },
@@ -795,7 +795,7 @@ export const en: Mensajes = {
      baja is a lowboy, rampla plana is a flatbed. Ver `es.ts`. */
   paginasServicio: {
     hub: {
-      metaTitulo: "Freight transport and logistics services in Chile | Main Logistics",
+      metaTitulo: "Freight transport and logistics services in Chile | Logística Trade",
       metaDescripcion:
         "Container pickup at the port, general freight, mining supplies and BESS batteries: what each load requires, what equipment moves it and how to get a quote.",
       titulo: "Freight transport,",
@@ -1041,7 +1041,7 @@ export const en: Mensajes = {
       pendiente: "Missing",
       noAplica: "Does not apply",
       revisadoEl: "Checked on",
-      ctaTitulo: "Main issues compliant guides from the first trip",
+      ctaTitulo: "Trade issues compliant guides from the first trip",
       ctaTexto:
         "If you would rather not solve this in house, we already issue with these fields. Tell us what you move and we answer within 24 hours.",
       ctaBoton: "Get a quote",
@@ -1056,7 +1056,7 @@ export const en: Mensajes = {
     mensaje: "👋 Do you need help with your freight, or would you like it quoted?",
     escribiendo: "Typing",
     cerrarMensaje: "Close message",
-    tituloPanel: "Contact Main Logistics",
+    tituloPanel: "Contact Logística Trade",
     cerrarPanel: "Close",
     opciones: {
       cotizar: {
@@ -1084,9 +1084,9 @@ export const en: Mensajes = {
   /* ── Transportistas · el segundo embudo ──────────────────────────── */
   transportistas: {
     meta: {
-      titulo: "Carriers: add your equipment to the network | Main Logistics",
+      titulo: "Carriers: add your equipment to the network | Logística Trade",
       descripcion:
-        "Main Logistics works with carriers that own their equipment, on recurring freight along defined routes within Chile. No registration fee. See the documents required before you sign up.",
+        "Logística Trade works with carriers that own their equipment, on recurring freight along defined routes within Chile. No registration fee. See the documents required before you sign up.",
     },
     tituloLinea1: "Recurring freight for",
     tituloDestacado: "your equipment",
@@ -1122,7 +1122,7 @@ export const en: Mensajes = {
     exigeGps: "Active GPS, with access shared during the trip",
     relacionTitulo: "How the relationship works",
     relacionDetalle:
-      "You operate your equipment and direct your own staff. Main Logistics coordinates the freight and answers to the client for the service. We are not your employer and we do not intermediate your labour relationship.",
+      "You operate your equipment and direct your own staff. Logística Trade coordinates the freight and answers to the client for the service. We are not your employer and we do not intermediate your labour relationship.",
     contactoTitulo: "To join",
     contactoDetalle:
       "Write to us with your company name, how many units you run and which routes you cover. We reply with the steps and the document list.",

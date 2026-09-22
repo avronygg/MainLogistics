@@ -31,7 +31,7 @@ import { CORREO, TELEFONO } from "./contacto";
  * Tampoco hay canal de denuncias de Ley 20.393, que el brief §10.3 pide.
  * Un canal de denuncias que desemboca en la casilla comercial es peor que
  * no tenerlo: quien denuncia necesita saber que no lo lee el área
- * involucrada. Requiere que Main designe quién lo recibe.
+ * involucrada. Requiere que Trade designe quién lo recibe.
  */
 
 export type Bloque =
@@ -68,7 +68,7 @@ export const PRIVACIDAD: DocumentoLegal = {
       bloques: [
         {
           tipo: "parrafo",
-          texto: `Main Logistics, empresa de transporte terrestre de carga con operación en Chile, es responsable del tratamiento de los datos personales que usted entregue en este sitio. Para cualquier asunto relacionado con esta política puede escribir a ${CORREO} o llamar al ${TELEFONO}.`,
+          texto: `Logística Trade, empresa de transporte terrestre de carga con operación en Chile, es responsable del tratamiento de los datos personales que usted entregue en este sitio. Para cualquier asunto relacionado con esta política puede escribir a ${CORREO} o llamar al ${TELEFONO}.`,
         },
         {
           tipo: "parrafo",
@@ -158,7 +158,7 @@ export const PRIVACIDAD: DocumentoLegal = {
         {
           tipo: "parrafo",
           texto:
-            "Fuera de eso, sus datos los ve el equipo comercial de Main Logistics y nadie más. Los entregaríamos a una autoridad solo si una ley o una resolución judicial nos obliga.",
+            "Fuera de eso, sus datos los ve el equipo comercial de Logística Trade y nadie más. Los entregaríamos a una autoridad solo si una ley o una resolución judicial nos obliga.",
         },
       ],
     },
@@ -292,7 +292,7 @@ export const TERMINOS: DocumentoLegal = {
         {
           tipo: "parrafo",
           texto:
-            "Un sitio informativo de Main Logistics. Describe lo que hacemos y ofrece dos formularios: uno para pedir una cotización y otro para transportistas que quieran trabajar con nosotros. Usarlo implica aceptar estos términos.",
+            "Un sitio informativo de Logística Trade. Describe lo que hacemos y ofrece dos formularios: uno para pedir una cotización y otro para transportistas que quieran trabajar con nosotros. Usarlo implica aceptar estos términos.",
         },
       ],
     },
@@ -337,7 +337,7 @@ export const TERMINOS: DocumentoLegal = {
         {
           tipo: "parrafo",
           texto:
-            "Los textos, el diseño, las fotografías y la marca Main Logistics son de la empresa o se usan con licencia. Puede citar y enlazar el contenido indicando la fuente. No puede copiarlo para un sitio competidor, ni usar la marca de un modo que sugiera una relación comercial que no existe.",
+            "Los textos, el diseño, las fotografías y la marca Logística Trade son de la empresa o se usan con licencia. Puede citar y enlazar el contenido indicando la fuente. No puede copiarlo para un sitio competidor, ni usar la marca de un modo que sugiera una relación comercial que no existe.",
         },
       ],
     },

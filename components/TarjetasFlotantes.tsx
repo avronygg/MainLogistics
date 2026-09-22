@@ -136,12 +136,15 @@ export default function TarjetasFlotantes({ m }: { m: Mensajes }) {
         }}
         data-barrido="tarde"
       >
+        {/* El lockup de Logística Trade, que es cuadrado (1254×1254) y por
+            eso calza acá y no en la barra: el nav necesita una versión
+            horizontal, de unos 4,5:1, que todavía no existe. */}
         <Image
-          src="/logo-lockup-blanco.png"
+          src="/logo-logistica-trade.png"
           alt=""
-          width={1048}
-          height={954}
-          className="mx-auto h-[42px] w-auto sm:h-[58px] lg:h-[74px]"
+          width={1254}
+          height={1254}
+          className="mx-auto h-[52px] w-auto sm:h-[68px] lg:h-[86px]"
         />
 
         <div className={`${s.rutaMini} mt-2 sm:mt-3.5`} aria-hidden="true">

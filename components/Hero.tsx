@@ -56,7 +56,7 @@ export default function Hero({ m }: { m: Mensajes }) {
 
         {/* Acá iba la cinta de trece logos de clientes bajo "Confían en
             nosotros". Se retiró: ninguna de esas empresas es cliente
-            facturado de Main Logistics, así que el encabezado afirmaba una
+            facturado de Logística Trade, así que el encabezado afirmaba una
             relación comercial que no existe. Ver el brief de desarrollo,
             §1.2 — en un mercado donde los jefes de logística se consultan
             entre ellos, eso se descubre en la primera reunión, y además usar
