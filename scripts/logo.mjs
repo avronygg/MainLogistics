@@ -15,7 +15,15 @@ import { chromium } from 'playwright';
  * etiquetas del menú miden distinto), ancho, y los dos estados de la barra.
  */
 
-const NATURAL = 1541 / 343; // logo-horizontal-blanco.png
+/**
+ * El símbolo LT recortado del lockup de Logística Trade, que es lo que hoy
+ * va en la barra junto al nombre en texto. Antes acá iba 1541/343, el lockup
+ * horizontal de la marca anterior.
+ *
+ * Cuando llegue el lockup horizontal nuevo, este número cambia con él: es el
+ * natural del archivo, no una preferencia.
+ */
+const NATURAL = 987 / 700; // logo-isotipo-trade.png
 const TOLERANCIA = 0.02;
 const IDIOMAS = ['es', 'en', 'pt', 'zh'];
 const ANCHOS = [320, 390, 768, 1024, 1280, 1440, 1920];

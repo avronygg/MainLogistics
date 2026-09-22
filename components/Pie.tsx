@@ -104,13 +104,16 @@ export default function Pie({ m, idioma }: { m: Mensajes; idioma: Idioma }) {
       <div className="relative mx-auto w-full max-w-[var(--ancho-max)] px-[var(--borde-x)] py-[clamp(3rem,6vw,5rem)]">
         <div className="grid gap-x-10 gap-y-10 lg:grid-cols-[minmax(0,19rem)_minmax(0,1fr)] lg:gap-x-14">
           <div className="max-w-[34rem]">
+            {/* Acá sí cabe el lockup completo del cliente: el pie tiene
+                altura de sobra y el nombre se lee. Es el nav el que necesita
+                una versión horizontal. */}
             <Image
-              src="/logo-horizontal-blanco.png"
+              src="/logo-logistica-trade.png"
               alt="Logística Trade"
-              width={1541}
-              height={343}
+              width={1254}
+              height={1254}
               quality={90}
-              className="h-[26px] w-auto"
+              className="h-[72px] w-auto"
             />
 
             <p className="mt-5 max-w-[38ch] text-[15px] leading-[1.6] text-[var(--texto-sec)]">

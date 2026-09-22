@@ -17,14 +17,40 @@ import type { Idioma } from "@/mensajes/idiomas";
  */
 function Isotipo({ className = "" }: { className?: string }) {
   return (
-    <Image
-      src="/logo-horizontal-blanco.png"
-      alt="Logística Trade"
-      width={1541}
-      height={343}
-      priority
-      className={`w-auto max-w-none shrink-0 ${className}`}
-    />
+    <span className="flex items-center gap-2.5">
+      <Image
+        src="/logo-isotipo-trade.png"
+        alt=""
+        width={987}
+        height={700}
+        priority
+        className={`w-auto max-w-none shrink-0 ${className}`}
+      />
+      {/* El nombre en la tipografía del sitio, al lado del símbolo.
+          INTERINO: el logo que entregó el cliente es cuadrado, con el
+          nombre debajo del símbolo, y a 22px de alto ese nombre queda en
+          cuatro píxeles. Un lockup horizontal de verdad —unos 4,5:1,
+          blanco sobre transparencia— reemplaza estas dos piezas por un
+          solo <Image> y esta función vuelve a tener cuatro líneas.
+
+          Va como texto y no como imagen a propósito: así se lee en
+          cualquier tamaño, pesa cero y un lector de pantalla lo anuncia.
+          Por eso el símbolo lleva `alt=""`, para no repetirlo. */}
+      {/* El nombre aparece donde cabe, y en dos tramos hay que sacarlo.
+          Los dos están medidos, no supuestos:
+
+          - Bajo 360px la barra se desbordaba 40px en un teléfono de 320.
+          - Entre 1024 y 1279 aparecen los cinco enlaces del menú y todavía
+            no hay ancho para los tres: en portugués, el idioma más largo,
+            la barra se desbordaba a 1024.
+
+          Donde no está, el nombre se lee igual en la tarjeta del hero y en
+          el pie, y el `aria-label` del enlace lo anuncia, así que para un
+          lector de pantalla no cambia nada. */}
+      <span className="hidden whitespace-nowrap text-[15px] font-semibold tracking-[-0.01em] text-[var(--texto)] min-[360px]:inline sm:text-[16px] lg:hidden xl:inline">
+        Logística Trade
+      </span>
+    </span>
   );
 }
 
@@ -85,13 +111,15 @@ export default function Nav({ m, idioma }: { m: Mensajes; idioma: Idioma }) {
           "vidrio-nav mx-auto grid grid-cols-[1fr_auto_1fr] items-center gap-4",
           "rounded-full",
           "transition-[max-width,padding] duration-[var(--dur-estado)] ease-[var(--ease-quint)]",
-          // El ancho sube porque el menú pasó de cuatro enlaces a cinco.
-          // No son valores de gusto: medidos, el contenido necesita 834px en
-          // estado compacto, y con 820 el logo se aplastaba un 47% para
-          // caber. Se deja holgura para que un idioma con etiquetas más
-          // largas no vuelva a apretarlo.
-          "max-w-[1000px] p-1.5 sm:p-2",
-          "data-[compacto=true]:max-w-[920px]",
+          // Valores medidos, no de gusto. Con el nombre de la marca al lado
+          // del símbolo, en estado compacto el contenido necesita 939px en
+          // portugués, que es el idioma más largo; con 920 se desbordaba y
+          // "Qué movemos" se partía en dos líneas. Antes, con 820, lo que
+          // pasaba era que el logo se aplastaba un 47% para caber. Se deja
+          // holgura para que un idioma con etiquetas más largas no vuelva a
+          // apretarlo.
+          "max-w-[1060px] p-1.5 sm:p-2",
+          "data-[compacto=true]:max-w-[980px]",
         ].join(" ")}
       >
         <Link
@@ -109,7 +137,9 @@ export default function Nav({ m, idioma }: { m: Mensajes; idioma: Idioma }) {
               <Link
                 href={e.href}
                 className={[
-                  "relative block rounded-full px-3.5 py-1.5 text-[14px] tracking-[-0.01em]",
+                  // Los enlaces NUNCA envuelven: uno partido en dos líneas
+                  // estira la barra a lo alto y descuadra todo lo demás.
+                  "relative block whitespace-nowrap rounded-full px-3.5 py-1.5 text-[14px] tracking-[-0.01em]",
                   "text-[var(--texto)] transition-colors duration-[var(--dur-hover)]",
                   "hover:bg-white/[0.1]",
                 ].join(" ")}
