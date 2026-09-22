@@ -148,7 +148,7 @@ export const en: Mensajes = {
         finHora: "agreed.",
       },
       tecnologia: {
-        altFoto: "Monitoring unit branded Logística Trade, with the data connector in view",
+        altFoto: "In-cab navigation screen branded Logística Trade, with the route in view",
         etiqueta: "GPS en route",
         titulo: {
           inicio: "See your freight in",
@@ -403,7 +403,7 @@ export const en: Mensajes = {
     bajadaRealce: "Everyone meets the same standard before touching your freight",
     bajadaFin: ", whatever industry it comes from.",
     conductor: {
-      altFoto: "Logística Trade driver in the cab, wearing a branded cap",
+      altFoto: "Driver wearing a Logística Trade cap, in front of a fleet truck",
       tituloInicio: "Carriers",
       tituloDestacado: "verified",
       tituloFin: "before loading.",

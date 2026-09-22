@@ -74,10 +74,10 @@ export default function Equipo({ m }: { m: Mensajes }) {
           <Revelar className="md:col-span-5" retraso={0.1}>
             <article className="sobre-foto group relative isolate flex h-full min-h-[clamp(24rem,38vw,31rem)] flex-col justify-end overflow-hidden rounded-[var(--r-img)]">
               <Image
-                src="/fotos/equipo-conductor.webp"
+                src="/fotos/chofer-jockey.png"
                 alt={m.equipo.conductor.altFoto}
-                width={1122}
-                height={1402}
+                width={1254}
+                height={1254}
                 quality={90}
                 sizes="(min-width: 768px) 42vw, 100vw"
                 className="absolute inset-0 size-full object-cover object-[50%_38%] transition-transform duration-[900ms] ease-[var(--ease-expo)] group-hover:scale-[1.04] motion-reduce:group-hover:scale-100"
@@ -121,10 +121,10 @@ export default function Equipo({ m }: { m: Mensajes }) {
           <Revelar className="md:col-span-4" retraso={0.14}>
             <article className="sobre-foto group relative isolate flex h-full min-h-[clamp(16rem,22vw,19rem)] flex-col justify-end overflow-hidden rounded-[var(--r-img)]">
               <Image
-                src="/fotos/flota-puerta.webp"
+                src="/fotos/flota-marca.png"
                 alt={m.equipo.flota.altFoto}
-                width={1122}
-                height={1402}
+                width={1086}
+                height={1448}
                 quality={90}
                 sizes="(min-width: 768px) 34vw, 100vw"
                 className="absolute inset-0 size-full object-cover object-[60%_40%] transition-transform duration-[900ms] ease-[var(--ease-expo)] group-hover:scale-[1.04] motion-reduce:group-hover:scale-100"

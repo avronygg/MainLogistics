@@ -176,7 +176,7 @@ export const es = {
         finHora: "acordada.",
       },
       tecnologia: {
-        altFoto: "Equipo de monitoreo con la marca Logística Trade, con el conector de datos a la vista",
+        altFoto: "Pantalla de navegación en la cabina de un camión, con la marca Logística Trade y la ruta a la vista",
         etiqueta: "GPS en ruta",
         titulo: {
           inicio: "Vea su carga en",
@@ -431,7 +431,7 @@ export const es = {
     bajadaRealce: "Todos pasan el mismo estándar antes de tocar su carga",
     bajadaFin: ", sin importar de qué industria venga.",
     conductor: {
-      altFoto: "Conductor de Logística Trade en la cabina, con gorra de la marca",
+      altFoto: "Conductor con gorra de Logística Trade, frente a un camión de la flota",
       tituloInicio: "Transportistas",
       tituloDestacado: "verificados",
       tituloFin: "antes de cargar.",

@@ -55,10 +55,10 @@ export default function Pilares({ m }: { m: Mensajes }) {
           {/* Tecnología — card alta de imagen. */}
           <article className="group sobre-foto relative isolate overflow-hidden rounded-[var(--r-img)] md:col-span-5">
             <Image
-              src="/fotos/tecnologia-equipo.webp"
+              src="/fotos/cabina-pantalla.png"
               alt={textos.tecnologia.altFoto}
-              width={1536}
-              height={1024}
+              width={1254}
+              height={1254}
               quality={90}
               sizes="(min-width: 768px) 44vw, 100vw"
               className="absolute inset-0 size-full object-cover transition-transform duration-[900ms] ease-[var(--ease-expo)] group-hover:scale-[1.04] motion-reduce:group-hover:scale-100"

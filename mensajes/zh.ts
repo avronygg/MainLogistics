@@ -166,7 +166,7 @@ export const zh: Mensajes = {
         finHora: "准时抵达。",
       },
       tecnologia: {
-        altFoto: "带 Logística Trade 标识的监控设备，数据接口清晰可见",
+        altFoto: "卡车驾驶室内的导航屏幕，显示 Logística Trade 标识与行驶路线",
         etiqueta: "在途 GPS",
         titulo: {
           inicio: "您的货物",
@@ -424,7 +424,7 @@ export const zh: Mensajes = {
     bajadaRealce: "在接触您的货物之前，所有人都要通过同一套标准",
     bajadaFin: "，无论货物来自哪个行业。",
     conductor: {
-      altFoto: "Logística Trade 的驾驶员坐在驾驶室内，戴着品牌帽子",
+      altFoto: "戴着 Logística Trade 帽子的驾驶员，站在车队卡车前",
       tituloInicio: "承运人",
       tituloDestacado: "经过核验",
       tituloFin: "才装货。",

@@ -148,7 +148,7 @@ export const pt: Mensajes = {
         finHora: "combinada.",
       },
       tecnologia: {
-        altFoto: "Equipamento de monitoramento com a marca Logística Trade, com o conector de dados à vista",
+        altFoto: "Tela de navegação na cabine de um caminhão, com a marca Logística Trade e a rota à vista",
         etiqueta: "GPS em rota",
         titulo: {
           inicio: "Veja sua carga em",
@@ -403,7 +403,7 @@ export const pt: Mensajes = {
     bajadaRealce: "Todos passam pelo mesmo padrão antes de tocar sua carga",
     bajadaFin: ", não importa de que setor ela venha.",
     conductor: {
-      altFoto: "Motorista da Logística Trade na cabine, com boné da marca",
+      altFoto: "Motorista com boné da Logística Trade, em frente a um caminhão da frota",
       tituloInicio: "Transportadores",
       tituloDestacado: "verificados",
       tituloFin: "antes de carregar.",
