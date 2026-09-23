@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
+import { CORREO } from "@/components/datos/contacto";
 import {
   TIPOS_CARGA,
   EQUIPOS,
@@ -28,7 +29,6 @@ import { construirCorreo, type Bloque } from "./correo";
  *
  * Variables de entorno (ver .env.example):
  *   RESEND_API_KEY   clave de Resend
- *   COTIZA_DESTINO   correo que recibe las solicitudes
  *   COTIZA_REMITENTE remitente verificado en Resend
  *
  * Sin RESEND_API_KEY la ruta responde 503 y el formulario ofrece WhatsApp.
@@ -97,7 +97,7 @@ function limpiar(valor: unknown, max: number): string {
 
 export async function POST(peticion: Request) {
   const clave = process.env.RESEND_API_KEY;
-  const destino = process.env.COTIZA_DESTINO;
+  const destino = CORREO;
   const remitente = process.env.COTIZA_REMITENTE;
 
   if (!clave || !destino || !remitente) {

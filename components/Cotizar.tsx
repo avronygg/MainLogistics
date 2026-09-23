@@ -81,7 +81,7 @@ import {
  * lista como pendiente de definir. Está acá porque el cliente lo definió; si
  * operación no lo puede sostener, hay que bajarlo antes de publicar.
  *
- * 👉 ANTES DE PUBLICAR: completar RESEND_API_KEY, COTIZA_DESTINO y
+ * 👉 ANTES DE PUBLICAR: completar RESEND_API_KEY y
  * COTIZA_REMITENTE en Vercel. El correo y el WhatsApp ya están confirmados
  * y viven en `components/datos/contacto.ts`.
  */
