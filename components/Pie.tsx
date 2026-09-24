@@ -84,6 +84,11 @@ function columnas(m: Mensajes, idioma: Idioma) {
 export default function Pie({ m, idioma }: { m: Mensajes; idioma: Idioma }) {
   const año = 2026;
 
+  /* El correo, en sus dos mitades, para poder ofrecer el corte en el
+     arroba. Con el dominio nuevo ya no cabe en una línea dentro de la caja
+     de contacto en ningún ancho de escritorio. */
+  const [usuario, dominio] = CORREO.split("@");
+
   // La bajada viaja entera en el diccionario y se parte acá por el nombre
   // del grupo, que no se traduce y aparece igual en los cuatro idiomas. Así
 
@@ -102,7 +107,7 @@ export default function Pie({ m, idioma }: { m: Mensajes; idioma: Idioma }) {
         }}
       />
       <div className="relative mx-auto w-full max-w-[var(--ancho-max)] px-[var(--borde-x)] py-[clamp(3rem,6vw,5rem)]">
-        <div className="grid gap-x-10 gap-y-10 lg:grid-cols-[minmax(0,19rem)_minmax(0,1fr)] lg:gap-x-14">
+        <div className="grid gap-x-10 gap-y-10 lg:grid-cols-[minmax(0,17rem)_minmax(0,1fr)] lg:gap-x-14">
           <div className="max-w-[34rem]">
             {/* Acá sí cabe el lockup completo del cliente: el pie tiene
                 altura de sobra y el nombre se lee. Es el nav el que necesita
@@ -166,7 +171,12 @@ export default function Pie({ m, idioma }: { m: Mensajes; idioma: Idioma }) {
               </h2>
               {/* Los datos legales van en mono: se leen como registro
                   verificable, que es exactamente su función acá. */}
-              <ul className="vidrio dato mt-4 flex flex-col gap-2.5 rounded-[var(--r-card)] p-4 text-[13px] leading-[1.5] text-[var(--texto-sec)] [overflow-wrap:anywhere]">
+              {/* `break-word` y no `anywhere`: con `anywhere` el correo se
+                  partía por donde cayera y dejaba ".cl" solo en la segunda
+                  línea. Ahora el único corte que se ofrece es el <wbr/> del
+                  arroba, y el resto solo se parte si de verdad no cabe, que
+                  es lo que evita el recorte contra el `overflow-hidden`. */}
+              <ul className="vidrio dato mt-4 flex flex-col gap-2.5 rounded-[var(--r-card)] p-4 text-[13px] leading-[1.5] text-[var(--texto-sec)] [overflow-wrap:break-word]">
                 <li>
                   <a
                     href={`tel:${TELEFONO_ENLACE}`}
@@ -180,7 +190,10 @@ export default function Pie({ m, idioma }: { m: Mensajes; idioma: Idioma }) {
                     href={`mailto:${CORREO}`}
                     className="transition-colors duration-[var(--dur-hover)] hover:text-[var(--texto)]"
                   >
-                    {CORREO}
+                    {/* Se parte en el arroba, que es donde un lector espera
+                        que se parta una dirección de correo. */}
+                    {usuario}@<wbr />
+                    {dominio}
                   </a>
                 </li>
               </ul>
