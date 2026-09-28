@@ -540,6 +540,10 @@ export const en: Mensajes = {
         etiqueta: "Bulk",
         detalle: "Aggregates, silo, liquids",
       },
+      dimensionada: {
+        etiqueta: "Quoted by dimensions",
+        detalle: "Declared measurements, within legal limits",
+      },
       sobredimension: {
         etiqueta: "Oversized",
         detalle: "Exceeds standard dimensions",

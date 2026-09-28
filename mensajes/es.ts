@@ -568,6 +568,10 @@ export const es = {
         etiqueta: "Graneles",
         detalle: "Áridos, silos, líquidos",
       },
+      dimensionada: {
+        etiqueta: "Dimensionada",
+        detalle: "Se cotiza por medidas, dentro de norma",
+      },
       sobredimension: {
         etiqueta: "Sobredimensionada",
         detalle: "Excede medidas estándar",

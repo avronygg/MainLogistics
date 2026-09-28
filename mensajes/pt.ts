@@ -540,6 +540,10 @@ export const pt: Mensajes = {
         etiqueta: "Granéis",
         detalle: "Agregados, silos, líquidos",
       },
+      dimensionada: {
+        etiqueta: "Dimensionada",
+        detalle: "Cotada por medidas, dentro da norma",
+      },
       sobredimension: {
         etiqueta: "Superdimensionada",
         detalle: "Excede medidas padrão",

@@ -563,6 +563,10 @@ export const zh: Mensajes = {
         etiqueta: "散装货物",
         detalle: "砂石、罐装、液体",
       },
+      dimensionada: {
+        etiqueta: "按尺寸计价货物",
+        detalle: "申报尺寸，未超出法定限值",
+      },
       sobredimension: {
         etiqueta: "超限货物",
         detalle: "超出标准尺寸",

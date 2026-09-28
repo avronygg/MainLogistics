@@ -46,6 +46,11 @@ export const TIPOS_CARGA: Opcion[] = [
   { valor: "contenedor", clave: "contenedor", etiqueta: "Contenedor 20′ / 40′", detalle: "Carga en contenedor" },
   { valor: "suelta", clave: "suelta", etiqueta: "Carga suelta o paletizada", detalle: "General o pallets" },
   { valor: "granel", clave: "granel", etiqueta: "Graneles", detalle: "Áridos, silos, líquidos" },
+  // Va antes de la sobredimensionada porque es el escalón previo: se
+  // cotiza por medidas igual, pero sin pasarse de la norma, así que no
+  // necesita permiso de circulación ni escolta. Con las dos juntas en la
+  // lista, quien cotiza elige sabiendo cuál es cuál.
+  { valor: "dimensionada", clave: "dimensionada", etiqueta: "Dimensionada", detalle: "Se cotiza por medidas, dentro de norma" },
   { valor: "sobredimension", clave: "sobredimension", etiqueta: "Sobredimensionada", detalle: "Excede medidas estándar" },
   { valor: "peligrosa", clave: "peligrosa", etiqueta: "Peligrosa o especializada", detalle: "Requiere manejo especial" },
   { valor: "otra", clave: "otra", etiqueta: "Otra", detalle: "Cuéntenos cuál" },
