@@ -66,6 +66,8 @@ export type Solicitud = {
   /* Cliente */
   razonSocial: string;
   rut: string;
+  /** Cliente sin RUT chileno: el RUT deja de ser obligatorio. */
+  extranjero: boolean;
   contacto: string;
   cargo: string;
   correo: string;
@@ -94,6 +96,7 @@ export const LINEA_VACIA: Linea = { descripcion: "", equipo: "", cantidad: "" };
 export const SOLICITUD_VACIA: Solicitud = {
   razonSocial: "",
   rut: "",
+  extranjero: false,
   contacto: "",
   cargo: "",
   correo: "",
@@ -112,10 +115,14 @@ export const SOLICITUD_VACIA: Solicitud = {
 /** Lo que no puede faltar para que la solicitud sirva de algo. */
 export const OBLIGATORIOS: Record<string, string> = {
   razonSocial: "Razón social",
+  rut: "RUT",
   contacto: "Nombre de contacto",
   correo: "Correo",
   telefono: "Teléfono",
   tipoCarga: "Tipo de carga",
+  equipo: "Equipo",
+  modalidad: "Modalidad",
+  fechaEstimada: "Fecha estimada",
   origen: "Origen",
   destino: "Destino",
 };
@@ -155,11 +162,41 @@ export function correoValido(valor: string) {
 }
 
 /**
- * RUT chileno, si viene. Es opcional en una solicitud —un cliente nuevo
- * puede no tenerlo a mano— pero si lo escribe, se comprueba el dígito
- * verificador y no solo la forma: un RUT bien escrito e inexistente pasa
- * cualquier expresión regular.
+ * RUT chileno. Es obligatorio en la solicitud: sin él no se puede emitir la
+ * cotización. Se comprueba el dígito verificador y no solo la forma: un RUT
+ * bien escrito e inexistente pasa cualquier expresión regular.
  */
+export function formatearRut(valor: string) {
+  const limpio = valor
+    .replace(/[^\dkK]/g, "")
+    .toUpperCase()
+    .replace(/K(?=.)/g, "")
+    .slice(0, 9);
+  if (limpio.length < 2) return limpio;
+  const cuerpo = limpio.slice(0, -1).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  return `${cuerpo}-${limpio.slice(-1)}`;
+}
+
+/** Teléfono con forma plausible: entre 8 y 15 dígitos, con + y separadores. */
+export function telefonoValido(valor: string) {
+  if (!/^[\d\s+()-]+$/.test(valor.trim())) return false;
+  const digitos = valor.replace(/\D/g, "").length;
+  return digitos >= 8 && digitos <= 15;
+}
+
+/** Fecha AAAA-MM-DD que existe en el calendario. */
+export function fechaValida(valor: string) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(valor)) return false;
+  const f = new Date(`${valor}T00:00:00Z`);
+  return !Number.isNaN(f.getTime()) && f.toISOString().slice(0, 10) === valor;
+}
+
+/** Cantidad de una línea: número mayor que cero, con coma o punto decimal. */
+export function cantidadValida(valor: string) {
+  const n = Number(valor.trim().replace(",", "."));
+  return /^\d+([.,]\d+)?$/.test(valor.trim()) && n > 0;
+}
+
 export function rutValido(valor: string) {
   const limpio = valor.replace(/[.\s]/g, "").toUpperCase();
   const partes = /^(\d{7,8})-?([\dK])$/.exec(limpio);

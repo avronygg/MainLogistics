@@ -13,8 +13,12 @@ import {
   OBLIGATORIOS,
   SOLICITUD_VACIA,
   TIPOS_CARGA,
+  cantidadValida,
   correoValido,
+  fechaValida,
+  formatearRut,
   rutValido,
+  telefonoValido,
   type Linea,
   type Solicitud,
 } from "./datos/solicitud";
@@ -42,6 +46,13 @@ import type { Idioma } from "@/mensajes/idiomas";
  */
 
 const LLAVE = "lt-solicitud";
+
+/** Hoy, en hora local, como AAAA-MM-DD: el mínimo del selector de fecha. */
+function hoy() {
+  const f = new Date();
+  const dos = (n: number) => String(n).padStart(2, "0");
+  return `${f.getFullYear()}-${dos(f.getMonth() + 1)}-${dos(f.getDate())}`;
+}
 
 type Estado = "escribiendo" | "enviando" | "enviado" | "error";
 
@@ -103,6 +114,8 @@ export default function SolicitudCotizacion({
   /* ── La hoja, escalada al ancho que haya ─────────────────────────── */
   const marco = useRef<HTMLDivElement>(null);
   const [escalaAjuste, setEscalaAjuste] = useState(0.5);
+  const hoja = useRef<HTMLDivElement>(null);
+  const [altoHoja, setAltoHoja] = useState(HOJA_ALTO);
   const [zoom, setZoom] = useState<"ajustar" | "cerca">("ajustar");
   const primeraMedida = useRef(true);
   const acuse = useRef<HTMLHeadingElement>(null);
@@ -111,7 +124,7 @@ export default function SolicitudCotizacion({
     const el = marco.current;
     if (!el) return;
     const medir = () => {
-      const ajuste = el.clientWidth / HOJA_ANCHO;
+      const ajuste = Math.min(1, el.clientWidth / HOJA_ANCHO);
       setEscalaAjuste(ajuste);
 
       /* En una pantalla donde la hoja tendría que achicarse a menos de la
@@ -129,7 +142,17 @@ export default function SolicitudCotizacion({
     medir();
     const observador = new ResizeObserver(medir);
     observador.observe(el);
-    return () => observador.disconnect();
+
+    /* La hoja crece si el contenido lo pide: el marco sigue su alto real. */
+    const interior = hoja.current;
+    const midiendo = new ResizeObserver(() => {
+      if (interior) setAltoHoja(Math.max(HOJA_ALTO, interior.scrollHeight));
+    });
+    if (interior) midiendo.observe(interior);
+    return () => {
+      observador.disconnect();
+      midiendo.disconnect();
+    };
   }, []);
 
   const escala = zoom === "ajustar" ? escalaAjuste : 1;
@@ -138,12 +161,38 @@ export default function SolicitudCotizacion({
   const revisar = useCallback((d: Solicitud) => {
     const fallos: Record<string, string> = {};
     for (const campo of Object.keys(OBLIGATORIOS)) {
+      if (campo === "rut" && d.extranjero) continue;
       if (!String(d[campo as keyof Solicitud] ?? "").trim()) {
         fallos[campo] = t.errores.requerido;
       }
     }
     if (d.correo.trim() && !correoValido(d.correo)) fallos.correo = t.errores.correo;
-    if (d.rut.trim() && !rutValido(d.rut)) fallos.rut = t.errores.rut;
+
+    if (!d.extranjero && d.rut.trim()) {
+      const digitos = d.rut.replace(/[^\dK]/gi, "").length;
+      if (digitos < 8) fallos.rut = t.errores.rutFormato;
+      else if (!rutValido(d.rut)) fallos.rut = t.errores.rut;
+    }
+
+    if (d.telefono.trim() && !telefonoValido(d.telefono)) {
+      fallos.telefono = t.errores.telefono;
+    }
+
+    if (d.fechaEstimada && (!fechaValida(d.fechaEstimada) || d.fechaEstimada < hoy())) {
+      fallos.fechaEstimada = t.errores.fechaPasada;
+    }
+
+    /* La primera línea es el corazón de la solicitud y no puede ir vacía.
+       Las que se agregan después se revisan solo si se empezaron a llenar:
+       una línea en blanco que nadie tocó no es un error. */
+    d.lineas.forEach((l, i) => {
+      const empezada = l.descripcion.trim() || l.cantidad.trim() || l.equipo;
+      if (i > 0 && !empezada) return;
+      if (!l.descripcion.trim()) fallos[`linea-${i}-descripcion`] = t.errores.requerido;
+      if (!l.cantidad.trim()) fallos[`linea-${i}-cantidad`] = t.errores.requerido;
+      else if (!cantidadValida(l.cantidad)) fallos[`linea-${i}-cantidad`] = t.errores.cantidad;
+    });
+
     return fallos;
   }, [t.errores]);
 
@@ -161,7 +210,16 @@ export default function SolicitudCotizacion({
     setIntentado(true);
     if (Object.keys(fallos).length > 0) {
       setVista("datos");
-      document.getElementById("solicitud-form")?.scrollIntoView({ block: "start" });
+      /* Al primer dato que falta, no al comienzo del formulario: en un
+         teléfono el formulario mide varias pantallas y "falta algo más
+         arriba" obliga a buscar qué. */
+      requestAnimationFrame(() => {
+        const primero = document.querySelector<HTMLElement>(
+          '#solicitud-form [aria-invalid="true"]',
+        );
+        primero?.scrollIntoView({ block: "center", behavior: "smooth" });
+        primero?.focus({ preventScroll: true });
+      });
       return;
     }
 
@@ -250,18 +308,32 @@ export default function SolicitudCotizacion({
   const campo = (
     id: keyof Solicitud,
     etiqueta: string,
-    extra?: { opcional?: boolean; tipo?: "text" | "email" | "tel" | "date"; ejemplo?: string },
+    extra?: {
+      opcional?: boolean;
+      tipo?: "text" | "email" | "tel" | "date";
+      ejemplo?: string;
+      ayuda?: string;
+      formatear?: (v: string) => string;
+      autoComplete?: string;
+      inputMode?: "text" | "numeric" | "tel" | "email";
+      min?: string;
+    },
   ) => (
     <CampoTexto
       id={`sol-${String(id)}`}
       etiqueta={etiqueta}
       valor={String(datos[id] ?? "")}
-      alCambiar={(v) => set(id, v as Solicitud[typeof id])}
+      alCambiar={(v) =>
+        set(id, (extra?.formatear ? extra.formatear(v) : v) as Solicitud[typeof id])
+      }
       error={errores[String(id)]}
+      ayuda={extra?.ayuda}
       opcional={extra?.opcional ? t.campos.opcional : undefined}
       tipo={extra?.tipo}
       placeholder={extra?.ejemplo}
-      autoComplete="off"
+      autoComplete={extra?.autoComplete ?? "off"}
+      inputMode={extra?.inputMode}
+      min={extra?.min}
     />
   );
 
@@ -312,7 +384,7 @@ export default function SolicitudCotizacion({
           eso la columna implícita es `auto` y crece hasta los 794px de la
           hoja. En un teléfono eso desbordaba la página 424px y dejaba la
           escala en 1, con el documento sin achicar. */}
-      <div className="mt-8 grid grid-cols-[minmax(0,1fr)] gap-10 lg:grid-cols-[minmax(0,26rem)_minmax(0,1fr)] lg:gap-14">
+      <div className="mt-8 grid grid-cols-[minmax(0,1fr)] gap-10 lg:grid-cols-[minmax(0,22rem)_minmax(0,1fr)] lg:gap-10 xl:grid-cols-[minmax(0,26rem)_minmax(0,1fr)] xl:gap-14">
         {/* ── Formulario ─────────────────────────────────────────────── */}
         <form
           id="solicitud-form"
@@ -339,16 +411,59 @@ export default function SolicitudCotizacion({
             />
           </div>
 
+          <p className="text-[14px] leading-[1.5] text-[var(--texto-sec)]">{t.leyenda}</p>
+
           <fieldset className="flex flex-col gap-5">
             <legend className="mb-1 text-[13px] font-semibold uppercase tracking-[0.08em] text-[var(--morado-texto)]">
               {t.secciones.cliente}
             </legend>
             {campo("razonSocial", t.campos.razonSocial, { ejemplo: t.ejemplos.razonSocial })}
-            {campo("rut", t.campos.rut, { opcional: true, ejemplo: t.ejemplos.rut })}
-            {campo("contacto", t.campos.contacto, { ejemplo: t.ejemplos.contacto })}
+            {datos.extranjero
+              ? campo("rut", t.campos.rutExtranjero, {
+                  opcional: true,
+                  ayuda: t.ayudas.rutExtranjero,
+                })
+              : campo("rut", t.campos.rut, {
+                  ejemplo: t.ejemplos.rut,
+                  ayuda: t.ayudas.rut,
+                  formatear: formatearRut,
+                  inputMode: "text",
+                })}
+            <label className="-mt-2 flex min-h-[44px] cursor-pointer items-center gap-3 text-[14.5px] text-[var(--texto)]">
+              <input
+                type="checkbox"
+                checked={datos.extranjero}
+                onChange={(e) => {
+                  const marcado = e.target.checked;
+                  setDatos((d) => ({
+                    ...d,
+                    extranjero: marcado,
+                    /* Un RUT a medio escribir no sirve como identificación
+                       extranjera: se limpia al pasar de uno a otro. */
+                    rut: marcado && !rutValido(d.rut) ? "" : d.rut,
+                  }));
+                }}
+                className="size-5 shrink-0 accent-[var(--morado-solido)]"
+              />
+              {t.campos.sinRut}
+            </label>
+            {campo("contacto", t.campos.contacto, {
+              ejemplo: t.ejemplos.contacto,
+              ayuda: t.ayudas.contacto,
+            })}
             {campo("cargo", t.campos.cargo, { opcional: true, ejemplo: t.ejemplos.cargo })}
-            {campo("correo", t.campos.correo, { tipo: "email" })}
-            {campo("telefono", t.campos.telefono, { tipo: "tel" })}
+            {campo("correo", t.campos.correo, {
+              tipo: "email",
+              ayuda: t.ayudas.correo,
+              autoComplete: "email",
+              inputMode: "email",
+            })}
+            {campo("telefono", t.campos.telefono, {
+              tipo: "tel",
+              ayuda: t.ayudas.telefono,
+              autoComplete: "tel",
+              inputMode: "tel",
+            })}
           </fieldset>
 
           <fieldset className="flex flex-col gap-5">
@@ -362,6 +477,7 @@ export default function SolicitudCotizacion({
               alCambiar={(v) => set("tipoCarga", v)}
               opciones={lista(TIPOS_CARGA)}
               vacio={t.campos.elija}
+              ayuda={t.ayudas.tipoCarga}
               error={errores.tipoCarga}
             />
             <Selector
@@ -371,6 +487,8 @@ export default function SolicitudCotizacion({
               alCambiar={(v) => set("equipo", v)}
               opciones={lista(EQUIPOS)}
               vacio={t.campos.elija}
+              ayuda={t.ayudas.equipo}
+              error={errores.equipo}
             />
             <Selector
               id="sol-modalidad"
@@ -379,16 +497,28 @@ export default function SolicitudCotizacion({
               alCambiar={(v) => set("modalidad", v)}
               opciones={lista(MODALIDADES)}
               vacio={t.campos.elija}
+              ayuda={t.ayudas.modalidad}
+              error={errores.modalidad}
             />
-            {campo("fechaEstimada", t.campos.fechaEstimada, { opcional: true, tipo: "date" })}
+            {campo("fechaEstimada", t.campos.fechaEstimada, {
+              tipo: "date",
+              ayuda: t.ayudas.fechaEstimada,
+              min: hoy(),
+            })}
           </fieldset>
 
           <fieldset className="flex flex-col gap-5">
             <legend className="mb-1 text-[13px] font-semibold uppercase tracking-[0.08em] text-[var(--morado-texto)]">
               {t.secciones.ruta}
             </legend>
-            {campo("origen", t.campos.origen, { ejemplo: t.ejemplos.origen })}
-            {campo("destino", t.campos.destino, { ejemplo: t.ejemplos.destino })}
+            {campo("origen", t.campos.origen, {
+              ejemplo: t.ejemplos.origen,
+              ayuda: t.ayudas.origen,
+            })}
+            {campo("destino", t.campos.destino, {
+              ejemplo: t.ejemplos.destino,
+              ayuda: t.ayudas.destino,
+            })}
           </fieldset>
 
           <fieldset className="flex flex-col gap-4">
@@ -405,6 +535,8 @@ export default function SolicitudCotizacion({
                   etiqueta={t.campos.descripcion}
                   valor={l.descripcion}
                   alCambiar={(v) => setLinea(i, "descripcion", v)}
+                  error={errores[`linea-${i}-descripcion`]}
+                  ayuda={t.ayudas.descripcion}
                   placeholder={t.ejemplos.descripcion}
                   autoComplete="off"
                 />
@@ -422,6 +554,8 @@ export default function SolicitudCotizacion({
                     etiqueta={t.campos.cantidad}
                     valor={l.cantidad}
                     alCambiar={(v) => setLinea(i, "cantidad", v)}
+                    error={errores[`linea-${i}-cantidad`]}
+                    ayuda={t.ayudas.cantidad}
                     placeholder={t.ejemplos.cantidad}
                     inputMode="decimal"
                     autoComplete="off"
@@ -466,6 +600,9 @@ export default function SolicitudCotizacion({
                 className="block text-[14px] font-medium tracking-[-0.01em] text-[var(--texto)]"
               >
                 {t.campos.observaciones}
+                <span className="ml-1.5 font-normal text-[var(--texto-sec)]">
+                  {t.campos.opcional}
+                </span>
               </label>
               <textarea
                 id="sol-observaciones"
@@ -561,15 +698,18 @@ export default function SolicitudCotizacion({
 
         {/* ── La hoja ────────────────────────────────────────────────── */}
         <div
+          style={{ maxWidth: HOJA_ANCHO }}
           className={[
-            "lg:sticky lg:top-[7rem] lg:self-start",
+            "mx-auto w-full lg:sticky lg:top-[7rem] lg:self-start",
             vista === "hoja" ? "" : "hidden lg:block",
           ].join(" ")}
         >
           {/* El zoom no es un adorno: una hoja A4 a ancho de teléfono deja
               el texto en cinco píxeles. Dos estados, no un gesto de pellizco:
               dos botones se descubren solos y funcionan con teclado. */}
-          <div className="mb-3 flex items-center justify-end gap-1.5">
+          <div
+            className={["mb-3 items-center justify-end gap-1.5", escalaAjuste >= 1 ? "hidden" : "flex"].join(" ")}
+          >
             {(["ajustar", "cerca"] as const).map((z) => (
               <button
                 key={z}
@@ -605,17 +745,18 @@ export default function SolicitudCotizacion({
                  nada más. El desplazamiento vertical sigue siendo el de la
                  página, que es como se lee en un teléfono; un visor con
                  desplazamiento propio deja el dedo atrapado en la hoja. */
-              height: HOJA_ALTO * escala,
+              height: altoHoja * escala,
               overflowX: zoom === "ajustar" ? "hidden" : "auto",
               overflowY: "hidden",
               overscrollBehavior: "contain",
             }}
           >
             <div
+              ref={hoja}
               aria-live="polite"
               style={{
                 width: HOJA_ANCHO,
-                height: HOJA_ALTO,
+                minHeight: HOJA_ALTO,
                 transform: `scale(${escala})`,
                 transformOrigin: "top left",
               }}

@@ -9,8 +9,12 @@ import {
   MODALIDADES,
   OBLIGATORIOS,
   TIPOS_CARGA,
+  cantidadValida,
   correoValido,
+  fechaValida,
+  formatearRut,
   rutValido,
+  telefonoValido,
 } from "@/components/datos/solicitud";
 
 /**
@@ -131,6 +135,8 @@ export async function POST(peticion: Request) {
     return NextResponse.json({ ok: true });
   }
 
+  const extranjero = datos.extranjero === true;
+
   const d: Record<string, string> = {};
   for (const [campo, max] of Object.entries(LARGOS)) {
     d[campo] = campo === "observaciones"
@@ -158,15 +164,23 @@ export async function POST(peticion: Request) {
     .filter((l) => l.descripcion || l.equipo || l.cantidad);
 
   const faltan = Object.entries(OBLIGATORIOS)
-    .filter(([campo]) => !d[campo])
+    .filter(([campo]) => !d[campo] && !(campo === "rut" && extranjero))
     .map(([, etiqueta]) => etiqueta);
 
   if (d.correo && !correoValido(d.correo)) faltan.push("Correo con formato válido");
-  if (d.rut && !rutValido(d.rut)) faltan.push("RUT con dígito verificador correcto");
+  if (!extranjero && d.rut && !rutValido(d.rut)) faltan.push("RUT con dígito verificador correcto");
+  if (d.telefono && !telefonoValido(d.telefono)) faltan.push("Teléfono con al menos 8 dígitos");
+  if (d.fechaEstimada && !fechaValida(d.fechaEstimada)) faltan.push("Fecha estimada válida");
+  if (!lineas.some((l) => l.descripcion && cantidadValida(l.cantidad))) {
+    faltan.push("Detalle del servicio: descripción y cantidad");
+  }
 
   if (faltan.length) {
     return NextResponse.json({ ok: false, motivo: "faltan-campos", faltan }, { status: 400 });
   }
+
+  /* Un solo formato en el correo y en el cotizador, escriban como escriban. */
+  if (!extranjero) d.rut = formatearRut(d.rut);
 
   /* El correo va por bloques, no como una lista de veinte filas: quien lo
      abre busca "quién", "qué mueve" y "por dónde", y una lista corrida lo
@@ -177,7 +191,11 @@ export async function POST(peticion: Request) {
       titulo: "El cliente",
       filas: [
         { k: "Razón social", v: d.razonSocial },
-        ...(d.rut ? [{ k: "RUT", v: d.rut }] : []),
+        ...(extranjero
+          ? [{ k: "Identificación tributaria (cliente extranjero)", v: d.rut || "No indicó" }]
+          : d.rut
+            ? [{ k: "RUT", v: d.rut }]
+            : []),
         ...(d.cargo ? [{ k: "Cargo", v: d.cargo }] : []),
       ],
     },

@@ -17,6 +17,7 @@ const BASE = 'http://localhost:3000';
 const RUTA = '/es/solicitud-de-cotizacion';
 
 const fallos = [];
+const manana = new Date(Date.now() + 2 * 86400000).toISOString().slice(0, 10);
 const ok = (m) => console.log(`  ok    ${m}`);
 const mal = (m) => { fallos.push(m); console.log(`  FALLA ${m}`); };
 
@@ -72,8 +73,14 @@ for (const [id, v] of Object.entries(texto)) await p.locator('#' + id).fill(v);
 await p.locator('#sol-tipoCarga').selectOption('Carga dimensionada');
 await p.locator('#sol-equipo').selectOption('Rampla plana');
 await p.locator('#sol-modalidad').selectOption('Viaje completo · ida');
+await p.locator('#sol-fechaEstimada').fill(manana);
 await p.locator('#sol-linea-0-equipo').selectOption('Rampla plana');
 await p.waitForTimeout(700);
+
+// El RUT se ordena solo: sin importar cómo lo escriban, sale igual.
+const rutEscrito = await p.locator('#sol-rut').inputValue();
+if (rutEscrito === '76.123.456-0') ok('el RUT escrito sin puntos queda 76.123.456-0');
+else mal(`el RUT quedó "${rutEscrito}"`);
 
 const hoja = (await p.locator('article[aria-label]').innerText()).toLowerCase();
 const faltantes = [
@@ -101,9 +108,11 @@ else mal('el título de la hoja no dice que es una solicitud');
 // ── 4. Validación ──────────────────────────────────────────────────────
 console.log('\nvalidación');
 const base = {
-  razonSocial: 'Prueba', contacto: 'Prueba', correo: 'a@b.cl',
+  razonSocial: 'Prueba', rut: '76123456-0', contacto: 'Prueba', correo: 'a@b.cl',
   telefono: '+56911112222', tipoCarga: 'Carga dimensionada',
-  origen: 'Santiago', destino: 'Calama', lineas: [], web: '',
+  equipo: 'Rampla plana', modalidad: 'Viaje completo · ida', fechaEstimada: manana,
+  origen: 'Santiago', destino: 'Calama',
+  lineas: [{ descripcion: 'Flete', equipo: 'Rampla plana', cantidad: '1' }], web: '',
 };
 const enviar = (extra) =>
   p.request.post(`${BASE}/api/solicitud`, { data: { ...base, ...extra } });
@@ -119,9 +128,77 @@ if (completa.status() === 503) {
   const inventado = await enviar({ tipoCarga: '<script>alert(1)</script>' });
   if (inventado.status() === 400) ok('rechaza un tipo de carga inventado');
   else mal(`aceptó un tipo de carga inventado (${inventado.status()})`);
+
+  // Lo importante para cotizar no es opcional: sin esto, 400.
+  for (const [campo, vacio] of [
+    ['rut', { rut: '' }], ['rut con dígito malo', { rut: '76123456-1' }],
+    ['equipo', { equipo: '' }], ['modalidad', { modalidad: '' }],
+    ['fecha', { fechaEstimada: '' }], ['teléfono corto', { telefono: '123' }],
+    ['detalle', { lineas: [] }], ['cantidad', { lineas: [{ descripcion: 'x', cantidad: '0' }] }],
+  ]) {
+    const r = await enviar(vacio);
+    if (r.status() === 400) ok(`rechaza sin ${campo}`);
+    else mal(`aceptó una solicitud sin ${campo} (${r.status()})`);
+  }
 } else {
   mal(`una solicitud completa respondió ${completa.status()}`);
 }
+
+// En el formulario: enviar vacío marca lo que falta, lleva el foco al primero
+// y el RUT se formatea mientras se escribe.
+console.log('\nobligatorios en pantalla');
+await p.goto(BASE + RUTA, { waitUntil: 'networkidle' });
+await p.evaluate(() => localStorage.clear());
+await p.reload({ waitUntil: 'networkidle' });
+await p.waitForTimeout(400);
+await p.getByRole('button', { name: 'Enviar solicitud' }).click();
+await p.waitForTimeout(700);
+const invalidos = await p.locator('#solicitud-form [aria-invalid="true"]').evaluateAll(
+  (els) => els.map((e) => e.id),
+);
+const esperados = ['sol-razonSocial', 'sol-rut', 'sol-contacto', 'sol-correo', 'sol-telefono',
+  'sol-tipoCarga', 'sol-equipo', 'sol-modalidad', 'sol-fechaEstimada', 'sol-origen',
+  'sol-destino', 'sol-linea-0-descripcion', 'sol-linea-0-cantidad'];
+const sinMarcar = esperados.filter((id) => !invalidos.includes(id));
+if (sinMarcar.length === 0) ok('un formulario vacío marca los 13 datos que hacen falta');
+else mal(`no marcó como obligatorios: ${sinMarcar.join(', ')}`);
+if (invalidos.includes('sol-cargo') || invalidos.includes('sol-observaciones'))
+  mal('marcó como obligatorio el cargo o las observaciones');
+else ok('el cargo y las observaciones siguen siendo opcionales');
+const foco = await p.evaluate(() => document.activeElement?.id);
+if (foco === 'sol-razonSocial') ok('el foco va al primer dato que falta');
+else mal(`el foco quedó en "${foco}"`);
+
+for (const [escrito, esperado] of [
+  ['761234560', '76.123.456-0'], ['76.123.456-0', '76.123.456-0'],
+  ['12345678k', '12.345.678-K'], ['9876543-2', '9.876.543-2'],
+  ['12 345 678 - 5', '12.345.678-5'],
+]) {
+  await p.locator('#sol-rut').fill('');
+  await p.locator('#sol-rut').pressSequentially(escrito);
+  const v = await p.locator('#sol-rut').inputValue();
+  if (v === esperado) ok(`RUT "${escrito}" → ${v}`);
+  else mal(`RUT "${escrito}" quedó "${v}", esperaba ${esperado}`);
+}
+await p.locator('#sol-rut').fill('');
+await p.locator('#sol-rut').pressSequentially('761234561');
+const errRut = (await p.locator('#sol-rut-error').textContent().catch(() => '')) ?? '';
+if (/verificador/.test(errRut)) ok('un dígito verificador malo se explica');
+else mal(`sin mensaje de dígito verificador: "${errRut}"`);
+
+// Sin RUT chileno: la casilla lo vuelve opcional y no molesta con validaciones.
+await p.getByLabel('No tengo RUT chileno').check();
+await p.getByRole('button', { name: 'Enviar solicitud' }).click();
+await p.waitForTimeout(500);
+const rutMarcado = await p.locator('#sol-rut').getAttribute('aria-invalid');
+const rutRestos = await p.locator('#sol-rut').inputValue();
+if (rutMarcado === null && rutRestos === '') ok('marcando "No tengo RUT chileno" el RUT deja de ser obligatorio');
+else mal(`con la casilla marcada el RUT sigue exigido (aria-invalid=${rutMarcado}, valor "${rutRestos}")`);
+await p.locator('#sol-rut').pressSequentially('DE 123456789');
+const libre = await p.locator('#sol-rut').inputValue();
+if (libre === 'DE 123456789') ok('como extranjero el campo es libre, sin formato chileno');
+else mal(`el campo extranjero se reformateó: "${libre}"`);
+await p.getByLabel('No tengo RUT chileno').uncheck();
 
 // La trampa de robots se descarta en silencio, nunca con un error.
 const bot = await enviar({ web: 'soy-un-bot' });
