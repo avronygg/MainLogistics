@@ -74,7 +74,6 @@ await p.locator('#sol-tipoCarga').selectOption('Carga dimensionada');
 await p.locator('#sol-equipo').selectOption('Rampla plana');
 await p.locator('#sol-modalidad').selectOption('Viaje completo · ida');
 await p.locator('#sol-fechaEstimada').fill(manana);
-await p.locator('#sol-linea-0-equipo').selectOption('Rampla plana');
 await p.waitForTimeout(700);
 
 // El RUT se ordena solo: sin importar cómo lo escriban, sale igual.
@@ -112,7 +111,7 @@ const base = {
   telefono: '+56911112222', tipoCarga: 'Carga dimensionada',
   equipo: 'Rampla plana', modalidad: 'Viaje completo · ida', fechaEstimada: manana,
   origen: 'Santiago', destino: 'Calama',
-  lineas: [{ descripcion: 'Flete', equipo: 'Rampla plana', cantidad: '1' }], web: '',
+  lineas: [{ descripcion: 'Flete', equipo: '', cantidad: '1' }], web: '',
 };
 const enviar = (extra) =>
   p.request.post(`${BASE}/api/solicitud`, { data: { ...base, ...extra } });

@@ -1144,8 +1144,6 @@ export const es = {
       origen: "Origen",
       destino: "Destino",
       descripcion: "¿Qué carga es?",
-      equipoLinea: "Equipo para esta carga",
-      mismoEquipo: "El mismo de arriba",
       cantidad: "Cantidad",
       observaciones: "Algo que debamos saber",
       opcional: "opcional",

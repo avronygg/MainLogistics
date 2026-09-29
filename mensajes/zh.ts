@@ -1121,8 +1121,6 @@ export const zh: Mensajes = {
       origen: "起运地",
       destino: "目的地",
       descripcion: "是什么货物？",
-      equipoLinea: "此货物所用设备",
-      mismoEquipo: "与上方相同",
       cantidad: "数量",
       observaciones: "还有需要我们了解的吗",
       opcional: "选填",

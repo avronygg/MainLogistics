@@ -1096,8 +1096,6 @@ export const pt: Mensajes = {
       origen: "Origem",
       destino: "Destino",
       descripcion: "Que carga é?",
-      equipoLinea: "Equipamento para esta carga",
-      mismoEquipo: "O mesmo de cima",
       cantidad: "Quantidade",
       observaciones: "Algo mais que devamos saber",
       opcional: "opcional",

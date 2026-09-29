@@ -101,7 +101,7 @@ function enlaceCotizador(
        mandarlo vacío desde acá deja claro que nadie lo decidió todavía. */
     items: lineas.map((l) => ({
       desc: l.descripcion,
-      equipo: l.equipo,
+      equipo: l.equipo || d.equipo,
       cant: l.cantidad,
       unit: "",
       incl: false,

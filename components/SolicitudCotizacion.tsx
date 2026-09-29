@@ -186,7 +186,7 @@ export default function SolicitudCotizacion({
        Las que se agregan después se revisan solo si se empezaron a llenar:
        una línea en blanco que nadie tocó no es un error. */
     d.lineas.forEach((l, i) => {
-      const empezada = l.descripcion.trim() || l.cantidad.trim() || l.equipo;
+      const empezada = l.descripcion.trim() || l.cantidad.trim();
       if (i > 0 && !empezada) return;
       if (!l.descripcion.trim()) fallos[`linea-${i}-descripcion`] = t.errores.requerido;
       if (!l.cantidad.trim()) fallos[`linea-${i}-cantidad`] = t.errores.requerido;
@@ -543,15 +543,7 @@ export default function SolicitudCotizacion({
                   placeholder={t.ejemplos.descripcion}
                   autoComplete="off"
                 />
-                <div className="grid gap-4 sm:grid-cols-[1fr_7rem]">
-                  <Selector
-                    id={`sol-linea-${i}-equipo`}
-                    etiqueta={t.campos.equipoLinea}
-                    valor={l.equipo}
-                    alCambiar={(v) => setLinea(i, "equipo", v)}
-                    opciones={lista(EQUIPOS)}
-                    vacio={t.campos.mismoEquipo}
-                  />
+                <div className="max-w-[12rem]">
                   <CampoTexto
                     id={`sol-linea-${i}-cantidad`}
                     etiqueta={t.campos.cantidad}

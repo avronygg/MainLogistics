@@ -212,12 +212,6 @@ export default function Hoja({ datos, m }: { datos: Solicitud; m: Mensajes }) {
                   {t.colDetalle}
                 </th>
                 <th
-                  className="w-[150px] border-b px-[10px] py-[7px] text-[12px] font-medium"
-                  style={{ color: APAGADO, borderColor: FILETE }}
-                >
-                  {t.colEquipo}
-                </th>
-                <th
                   className="w-[56px] border-b py-[7px] pl-[10px] text-right text-[12px] font-medium"
                   style={{ color: APAGADO, borderColor: FILETE }}
                 >
@@ -233,12 +227,6 @@ export default function Hoja({ datos, m }: { datos: Solicitud; m: Mensajes }) {
                     style={{ borderColor: FILETE }}
                   >
                     {l.descripcion}
-                  </td>
-                  <td
-                    className="break-words border-b px-[10px] py-[9px] align-top text-[15px] leading-[1.35]"
-                    style={{ borderColor: FILETE }}
-                  >
-                    {l.equipo || datos.equipo}
                   </td>
                   <td
                     className="dato border-b py-[9px] pl-[10px] text-right align-top text-[15px] leading-[1.35]"

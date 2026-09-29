@@ -1096,8 +1096,6 @@ export const en: Mensajes = {
       origen: "Origin",
       destino: "Destination",
       descripcion: "What is the cargo?",
-      equipoLinea: "Equipment for this cargo",
-      mismoEquipo: "Same as above",
       cantidad: "Quantity",
       observaciones: "Anything else we should know",
       opcional: "optional",
