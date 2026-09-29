@@ -1097,6 +1097,100 @@ export const es = {
     },
   },
 
+  /* ── Solicitud de cotización ─────────────────────────────────────────
+     El formulario que se arma a la vista. Los nombres de los tipos de
+     carga, equipos y modalidades NO están acá: viven en
+     `components/datos/solicitud.ts` y van en español en los cuatro
+     idiomas, porque son los mismos términos con que el equipo comercial
+     emite la cotización. Traducirlos obligaría a traducirlos de vuelta al
+     recibir el correo. */
+  solicitud: {
+    enlace: "Solicitar cotización",
+    titulo: "Arme su solicitud",
+    destacado: "y véala tomar forma",
+    bajada:
+      "Complete lo que sepa de su carga. A medida que escribe, la solicitud se va armando al lado. Cuando esté lista, la envía.",
+    avisoSinPrecios:
+      "Acá no se ponen precios. Con estos datos preparamos la cotización con valores y se la enviamos por correo.",
+    pestanaDatos: "Datos",
+    pestanaVista: "Vista previa",
+    secciones: {
+      cliente: "Cliente",
+      servicio: "Servicio",
+      ruta: "Ruta",
+      detalle: "Detalle del servicio",
+      observaciones: "Observaciones",
+    },
+    campos: {
+      razonSocial: "Razón social",
+      rut: "RUT",
+      contacto: "Nombre de contacto",
+      cargo: "Cargo",
+      correo: "Correo",
+      telefono: "Teléfono",
+      tipoCarga: "Tipo de carga",
+      equipo: "Equipo",
+      modalidad: "Modalidad",
+      fechaEstimada: "Fecha estimada",
+      origen: "Origen",
+      destino: "Destino",
+      descripcion: "Descripción",
+      cantidad: "Cantidad",
+      observaciones: "Lo que debamos saber",
+      opcional: "opcional",
+      elija: "Elija una opción",
+      trampaBots: "No complete este campo",
+    },
+    ejemplos: {
+      razonSocial: "Minera Los Andes SpA",
+      rut: "76.123.456-0",
+      contacto: "Nombre y apellido",
+      cargo: "Jefe de abastecimiento",
+      origen: "Santiago",
+      destino: "Antofagasta",
+      descripcion: "Flete Santiago – Antofagasta, carga paletizada",
+      cantidad: "2",
+      observaciones: "Ingreso a faena, horario de descarga, algo que condicione el viaje.",
+    },
+    acciones: {
+      agregar: "Agregar línea",
+      quitar: "Quitar",
+      enviar: "Enviar solicitud",
+      enviando: "Enviando…",
+      limpiar: "Empezar de nuevo",
+    },
+    documento: {
+      titulo: "Solicitud de cotización",
+      bajada: "Transporte de carga en todo Chile",
+      fecha: "Fecha",
+      preparadaPor: "Preparada por",
+      colDetalle: "Detalle del servicio",
+      colEquipo: "Equipo",
+      colCantidad: "Cant.",
+      nota: "Documento sin valores. La cotización con precios la emite Logística Trade.",
+      vacio: "Los datos que complete aparecerán acá.",
+    },
+    errores: {
+      requerido: "Falta este dato",
+      correo: "Revise el correo: se escribe nombre@empresa.cl",
+      rut: "El dígito verificador no corresponde a ese número",
+      faltan: "Falta completar lo marcado más arriba.",
+    },
+    exito: {
+      titulo: "Recibimos su solicitud.",
+      detalle:
+        "Le respondemos en 24 horas hábiles con la cotización y sus valores. Si necesita algo antes, escríbanos por WhatsApp.",
+      otra: "Hacer otra solicitud",
+    },
+    errorEnvio: {
+      titulo: "No pudimos enviarla.",
+      detalle:
+        "Sus datos siguen acá, no se perdió nada. Puede reintentar, o escribirnos por {whatsapp} o a {correo}.",
+      enlaceWhatsapp: "WhatsApp",
+      reintentar: "Reintentar",
+    },
+  },
+
   /* ── Asesor flotante ─────────────────────────────────────────────── */
   asesor: {
     whatsappMensaje: "Hola, quiero cotizar un transporte de carga.",

@@ -1052,6 +1052,97 @@ export const en: Mensajes = {
     },
   },
 
+  /* ── Solicitud de cotización ─────────────────────────────────────────
+     Cargo types, equipment and modes stay in Spanish, in
+     `components/datos/solicitud.ts`: they are the same terms the
+     commercial team issues the quote with. */
+  solicitud: {
+    enlace: "Request a quote",
+    titulo: "Build your request",
+    destacado: "and watch it take shape",
+    bajada:
+      "Fill in what you know about your freight. As you type, the request takes shape beside you. When it looks right, send it.",
+    avisoSinPrecios:
+      "No prices here. With these details we prepare the priced quote and email it to you.",
+    pestanaDatos: "Details",
+    pestanaVista: "Preview",
+    secciones: {
+      cliente: "Client",
+      servicio: "Service",
+      ruta: "Route",
+      detalle: "Service detail",
+      observaciones: "Notes",
+    },
+    campos: {
+      razonSocial: "Company name",
+      rut: "Tax ID",
+      contacto: "Contact name",
+      cargo: "Role",
+      correo: "Email",
+      telefono: "Phone",
+      tipoCarga: "Type of freight",
+      equipo: "Equipment",
+      modalidad: "Mode",
+      fechaEstimada: "Estimated date",
+      origen: "Origin",
+      destino: "Destination",
+      descripcion: "Description",
+      cantidad: "Quantity",
+      observaciones: "Anything we should know",
+      opcional: "optional",
+      elija: "Choose an option",
+      trampaBots: "Leave this field empty",
+    },
+    ejemplos: {
+      razonSocial: "Minera Los Andes SpA",
+      rut: "76.123.456-0",
+      contacto: "First and last name",
+      cargo: "Procurement manager",
+      origen: "Santiago",
+      destino: "Antofagasta",
+      descripcion: "Santiago – Antofagasta haul, palletized freight",
+      cantidad: "2",
+      observaciones: "Mine site entry, unloading window, anything that shapes the trip.",
+    },
+    acciones: {
+      agregar: "Add a line",
+      quitar: "Remove",
+      enviar: "Send request",
+      enviando: "Sending…",
+      limpiar: "Start over",
+    },
+    documento: {
+      titulo: "Quote request",
+      bajada: "Road freight across Chile",
+      fecha: "Date",
+      preparadaPor: "Prepared by",
+      colDetalle: "Service detail",
+      colEquipo: "Equipment",
+      colCantidad: "Qty",
+      nota: "Document without values. The priced quote is issued by Logística Trade.",
+      vacio: "What you fill in will appear here.",
+    },
+    errores: {
+      requerido: "This one is missing",
+      correo: "Check the email: it is written name@company.cl",
+      rut: "The check digit does not match that number",
+      faltan: "Some fields above are still missing.",
+    },
+    exito: {
+      titulo: "We have your request.",
+      detalle:
+        "We will come back within 24 working hours with the quote and its figures. If you need something sooner, write to us on WhatsApp.",
+      otra: "Send another request",
+    },
+    errorEnvio: {
+      titulo: "We could not send it.",
+      detalle:
+        "Your details are still here, nothing was lost. You can try again, or write to us on {whatsapp} or at {correo}.",
+      enlaceWhatsapp: "WhatsApp",
+      reintentar: "Try again",
+    },
+  },
+
   /* ── Asesor flotante ─────────────────────────────────────────────── */
   asesor: {
     whatsappMensaje: "Hello, I would like a freight quote.",

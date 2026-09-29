@@ -36,6 +36,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { ruta: "", prioridad: 1, actualizada: "2026-09-11" },
     { ruta: "/cotizar", prioridad: 0.9, actualizada: "2026-09-11" },
     { ruta: "/transportistas", prioridad: 0.9, actualizada: "2026-09-02" },
+    /* El enlace que el comercial manda a una empresa para que arme su
+       solicitud. Entra al sitemap porque es una página pública de verdad,
+       no una URL escondida. */
+    { ruta: "/solicitud-de-cotizacion", prioridad: 0.9, actualizada: "2026-09-28" },
     /* El hub y las cuatro páginas de servicio. Son las URL que hoy no
        existen y por las que todo el long tail de búsqueda queda fuera de
        alcance (brief §5.1). */

@@ -1077,6 +1077,97 @@ export const zh: Mensajes = {
     },
   },
 
+  /* ── Solicitud de cotización ─────────────────────────────────────────
+     货类、车型与运输方式保留西班牙语，位于
+     `components/datos/solicitud.ts`：这些是商务团队开具报价时使用的
+     同一套术语。 */
+  solicitud: {
+    enlace: "索取报价",
+    titulo: "填写您的询价单",
+    destacado: "并即时看到它成形",
+    bajada:
+      "把您已知的货物信息填进来。您每输入一项，右侧的询价单就同步成形。确认无误后发送即可。",
+    avisoSinPrecios:
+      "此处不填写价格。我们会根据这些资料制作含报价的正式文件，并以邮件发送给您。",
+    pestanaDatos: "填写资料",
+    pestanaVista: "预览",
+    secciones: {
+      cliente: "客户",
+      servicio: "服务",
+      ruta: "线路",
+      detalle: "服务明细",
+      observaciones: "备注",
+    },
+    campos: {
+      razonSocial: "公司名称",
+      rut: "税号",
+      contacto: "联系人姓名",
+      cargo: "职务",
+      correo: "电子邮箱",
+      telefono: "电话",
+      tipoCarga: "货物类型",
+      equipo: "车型",
+      modalidad: "运输方式",
+      fechaEstimada: "预计日期",
+      origen: "起运地",
+      destino: "目的地",
+      descripcion: "说明",
+      cantidad: "数量",
+      observaciones: "需要我们了解的情况",
+      opcional: "选填",
+      elija: "请选择",
+      trampaBots: "请勿填写此栏",
+    },
+    ejemplos: {
+      razonSocial: "Minera Los Andes SpA",
+      rut: "76.123.456-0",
+      contacto: "姓名",
+      cargo: "采购主管",
+      origen: "圣地亚哥",
+      destino: "安托法加斯塔",
+      descripcion: "圣地亚哥至安托法加斯塔运输，托盘货物",
+      cantidad: "2",
+      observaciones: "矿区入场、卸货时段，或其他影响本次运输的情况。",
+    },
+    acciones: {
+      agregar: "添加一行",
+      quitar: "删除",
+      enviar: "发送询价单",
+      enviando: "发送中…",
+      limpiar: "重新开始",
+    },
+    documento: {
+      titulo: "询价单",
+      bajada: "覆盖智利全境的货物运输",
+      fecha: "日期",
+      preparadaPor: "提交方",
+      colDetalle: "服务明细",
+      colEquipo: "车型",
+      colCantidad: "数量",
+      nota: "本文件不含价格。含报价的正式文件由 Logística Trade 出具。",
+      vacio: "您填写的内容会显示在这里。",
+    },
+    errores: {
+      requerido: "此项尚未填写",
+      correo: "请检查邮箱格式，应为 name@company.cl",
+      rut: "校验位与该号码不符",
+      faltan: "上方仍有未填写的内容。",
+    },
+    exito: {
+      titulo: "我们已收到您的询价单。",
+      detalle:
+        "我们会在24个工作小时内回复含报价的文件。如需更快联系，请通过 WhatsApp 与我们联系。",
+      otra: "再提交一份",
+    },
+    errorEnvio: {
+      titulo: "发送未成功。",
+      detalle:
+        "您填写的内容仍在，没有丢失。可以重试，或通过 {whatsapp} 或发送邮件至 {correo} 与我们联系。",
+      enlaceWhatsapp: "WhatsApp",
+      reintentar: "重试",
+    },
+  },
+
   /* ── Asesor flotante ─────────────────────────────────────────────── */
   asesor: {
     whatsappMensaje: "您好，我想咨询货运报价。",

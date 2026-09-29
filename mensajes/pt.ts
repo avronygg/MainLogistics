@@ -1052,6 +1052,97 @@ export const pt: Mensajes = {
     },
   },
 
+  /* ── Solicitud de cotización ─────────────────────────────────────────
+     Tipos de carga, equipamentos e modalidades ficam em espanhol, em
+     `components/datos/solicitud.ts`: são os mesmos termos com que a
+     equipe comercial emite a cotação. */
+  solicitud: {
+    enlace: "Solicitar cotação",
+    titulo: "Monte sua solicitação",
+    destacado: "e veja ela tomar forma",
+    bajada:
+      "Preencha o que souber da sua carga. Conforme você escreve, a solicitação vai se montando ao lado. Quando estiver certa, é só enviar.",
+    avisoSinPrecios:
+      "Aqui não se colocam preços. Com estes dados preparamos a cotação com valores e enviamos por e-mail.",
+    pestanaDatos: "Dados",
+    pestanaVista: "Prévia",
+    secciones: {
+      cliente: "Cliente",
+      servicio: "Serviço",
+      ruta: "Rota",
+      detalle: "Detalhe do serviço",
+      observaciones: "Observações",
+    },
+    campos: {
+      razonSocial: "Razão social",
+      rut: "CNPJ ou RUT",
+      contacto: "Nome do contato",
+      cargo: "Cargo",
+      correo: "E-mail",
+      telefono: "Telefone",
+      tipoCarga: "Tipo de carga",
+      equipo: "Equipamento",
+      modalidad: "Modalidade",
+      fechaEstimada: "Data estimada",
+      origen: "Origem",
+      destino: "Destino",
+      descripcion: "Descrição",
+      cantidad: "Quantidade",
+      observaciones: "O que devemos saber",
+      opcional: "opcional",
+      elija: "Escolha uma opção",
+      trampaBots: "Não preencha este campo",
+    },
+    ejemplos: {
+      razonSocial: "Minera Los Andes SpA",
+      rut: "76.123.456-0",
+      contacto: "Nome e sobrenome",
+      cargo: "Gerente de suprimentos",
+      origen: "Santiago",
+      destino: "Antofagasta",
+      descripcion: "Frete Santiago – Antofagasta, carga paletizada",
+      cantidad: "2",
+      observaciones: "Entrada na mina, janela de descarga, algo que condicione a viagem.",
+    },
+    acciones: {
+      agregar: "Adicionar linha",
+      quitar: "Remover",
+      enviar: "Enviar solicitação",
+      enviando: "Enviando…",
+      limpiar: "Começar de novo",
+    },
+    documento: {
+      titulo: "Solicitação de cotação",
+      bajada: "Transporte de cargas em todo o Chile",
+      fecha: "Data",
+      preparadaPor: "Preparada por",
+      colDetalle: "Detalhe do serviço",
+      colEquipo: "Equipamento",
+      colCantidad: "Qtd.",
+      nota: "Documento sem valores. A cotação com preços é emitida pela Logística Trade.",
+      vacio: "O que você preencher aparece aqui.",
+    },
+    errores: {
+      requerido: "Falta este dado",
+      correo: "Confira o e-mail: escreve-se nome@empresa.cl",
+      rut: "O dígito verificador não corresponde a esse número",
+      faltan: "Falta preencher o que está marcado acima.",
+    },
+    exito: {
+      titulo: "Recebemos sua solicitação.",
+      detalle:
+        "Respondemos em 24 horas úteis com a cotação e seus valores. Se precisar de algo antes, escreva pelo WhatsApp.",
+      otra: "Fazer outra solicitação",
+    },
+    errorEnvio: {
+      titulo: "Não conseguimos enviar.",
+      detalle:
+        "Seus dados continuam aqui, nada se perdeu. Você pode tentar de novo, ou escrever pelo {whatsapp} ou para {correo}.",
+      enlaceWhatsapp: "WhatsApp",
+      reintentar: "Tentar de novo",
+    },
+  },
+
   /* ── Asesor flotante ─────────────────────────────────────────────── */
   asesor: {
     whatsappMensaje: "Olá, quero cotar um transporte de carga.",

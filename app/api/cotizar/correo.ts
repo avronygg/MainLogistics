@@ -114,7 +114,8 @@ export function construirCorreo(datos: {
   nombre: string;
   correo: string;
   telefono: string;
-  canal: string;
+  /** Opcional: la solicitud de cotización no pregunta canal. */
+  canal?: string;
   bloques: Bloque[];
 }) {
   const { empresa, carga, origen, destino, nombre, correo, telefono, canal, bloques } =
@@ -150,7 +151,12 @@ export function construirCorreo(datos: {
     `<div style="font-size:11px;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:${MORADO};padding-bottom:8px">Responder a ${escapar(nombre)}</div>` +
     `<div style="font-size:16px;line-height:1.5;padding-bottom:2px"><a href="tel:${escapar(telLimpio)}" style="color:${TINTA};font-weight:700;text-decoration:none">${escapar(telefono)}</a></div>` +
     `<div style="font-size:15px;line-height:1.5"><a href="mailto:${escapar(correo)}" style="color:${TINTA};font-weight:700;text-decoration:none">${escapar(correo)}</a></div>` +
-    `<div style="font-size:12.5px;color:${TINTA_SUAVE};padding-top:4px">Canal preferido: ${escapar(canal)}</div>` +
+    /* El canal preferido solo existe si se preguntó. La solicitud de
+       cotización no lo pregunta —se responde por correo, que es por donde
+       llegó— y una línea que dijera "Canal preferido: —" sería ruido. */
+    (canal
+      ? `<div style="font-size:12.5px;color:${TINTA_SUAVE};padding-top:4px">Canal preferido: ${escapar(canal)}</div>`
+      : "") +
     `</td></tr></table></td></tr>`;
 
   const pie =
@@ -197,7 +203,7 @@ export function construirCorreo(datos: {
     ``,
     `RESPONDER A ${nombre.toUpperCase()}`,
     `  ${telefono}  ·  ${correo}`,
-    `  Canal preferido: ${canal}`,
+    ...(canal ? [`  Canal preferido: ${canal}`] : []),
     ``,
     ...bloques.flatMap(({ titulo, filas }) => [
       titulo.toUpperCase(),
