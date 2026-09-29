@@ -238,7 +238,7 @@ export default function Hoja({ datos, m }: { datos: Solicitud; m: Mensajes }) {
                     className="break-words border-b px-[10px] py-[9px] align-top text-[15px] leading-[1.35]"
                     style={{ borderColor: FILETE }}
                   >
-                    {l.equipo}
+                    {l.equipo || datos.equipo}
                   </td>
                   <td
                     className="dato border-b py-[9px] pl-[10px] text-right align-top text-[15px] leading-[1.35]"

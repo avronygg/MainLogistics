@@ -525,6 +525,9 @@ export default function SolicitudCotizacion({
             <legend className="mb-1 text-[13px] font-semibold uppercase tracking-[0.08em] text-[var(--morado-texto)]">
               {t.secciones.detalle}
             </legend>
+            <p className="-mt-1 max-w-[56ch] text-[13.5px] leading-[1.5] text-[var(--texto-sec)]">
+              {t.secciones.detalleAyuda}
+            </p>
             {datos.lineas.map((l, i) => (
               <div
                 key={i}
@@ -543,11 +546,11 @@ export default function SolicitudCotizacion({
                 <div className="grid gap-4 sm:grid-cols-[1fr_7rem]">
                   <Selector
                     id={`sol-linea-${i}-equipo`}
-                    etiqueta={t.campos.equipo}
+                    etiqueta={t.campos.equipoLinea}
                     valor={l.equipo}
                     alCambiar={(v) => setLinea(i, "equipo", v)}
                     opciones={lista(EQUIPOS)}
-                    vacio={t.campos.elija}
+                    vacio={t.campos.mismoEquipo}
                   />
                   <CampoTexto
                     id={`sol-linea-${i}-cantidad`}
