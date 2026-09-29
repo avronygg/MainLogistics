@@ -120,7 +120,7 @@ export default function Hoja({ datos, m }: { datos: Solicitud; m: Mensajes }) {
             className="dato text-[7.5px] uppercase leading-none tracking-[0.1em]"
             style={{ color: APAGADO }}
           >
-            {t.preparadaPor}
+            {t.solicitadaPor}
           </p>
           <p className="mt-[6px] truncate text-[12px] font-semibold leading-none">
             {datos.razonSocial}
@@ -180,54 +180,58 @@ export default function Hoja({ datos, m }: { datos: Solicitud; m: Mensajes }) {
         <b className="text-[13px] leading-none">{datos.destino}</b>
       </div>
 
-      <table className="mx-[42px] mt-[16px] w-[710px] border-collapse text-left">
-        <thead>
-          <tr>
-            <th
-              className="dato border-b px-[8px] pb-[6px] text-[7.5px] uppercase tracking-[0.1em]"
-              style={{ color: APAGADO, borderColor: FILETE, width: 400 }}
-            >
-              {t.colDetalle}
-            </th>
-            <th
-              className="dato border-b px-[8px] pb-[6px] text-[7.5px] uppercase tracking-[0.1em]"
-              style={{ color: APAGADO, borderColor: FILETE, width: 200 }}
-            >
-              {t.colEquipo}
-            </th>
-            <th
-              className="dato border-b px-[8px] pb-[6px] text-right text-[7.5px] uppercase tracking-[0.1em]"
-              style={{ color: APAGADO, borderColor: FILETE }}
-            >
-              {t.colCantidad}
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {lineas.map((l, i) => (
-            <tr key={i}>
-              <td
-                className="border-b px-[8px] py-[9px] align-top text-[11px] leading-[1.4]"
-                style={{ borderColor: FILETE }}
+      {/* La tabla aparece cuando hay algo que poner en ella. Un encabezado
+          de columnas sobre el vacío se lee como un documento a medio hacer. */}
+      {lineas.length > 0 && (
+        <table className="mx-[42px] mt-[16px] w-[710px] border-collapse text-left">
+          <thead>
+            <tr>
+              <th
+                className="dato border-b px-[8px] pb-[6px] text-[7.5px] uppercase tracking-[0.1em]"
+                style={{ color: APAGADO, borderColor: FILETE, width: 400 }}
               >
-                {l.descripcion}
-              </td>
-              <td
-                className="border-b px-[8px] py-[9px] align-top text-[11px] leading-[1.4]"
-                style={{ borderColor: FILETE }}
+                {t.colDetalle}
+              </th>
+              <th
+                className="dato border-b px-[8px] pb-[6px] text-[7.5px] uppercase tracking-[0.1em]"
+                style={{ color: APAGADO, borderColor: FILETE, width: 200 }}
               >
-                {l.equipo}
-              </td>
-              <td
-                className="dato border-b px-[8px] py-[9px] text-right align-top text-[11px] leading-[1.4]"
-                style={{ borderColor: FILETE }}
+                {t.colEquipo}
+              </th>
+              <th
+                className="dato border-b px-[8px] pb-[6px] text-right text-[7.5px] uppercase tracking-[0.1em]"
+                style={{ color: APAGADO, borderColor: FILETE }}
               >
-                {l.cantidad}
-              </td>
+                {t.colCantidad}
+              </th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {lineas.map((l, i) => (
+              <tr key={i}>
+                <td
+                  className="border-b px-[8px] py-[9px] align-top text-[11px] leading-[1.4]"
+                  style={{ borderColor: FILETE }}
+                >
+                  {l.descripcion}
+                </td>
+                <td
+                  className="border-b px-[8px] py-[9px] align-top text-[11px] leading-[1.4]"
+                  style={{ borderColor: FILETE }}
+                >
+                  {l.equipo}
+                </td>
+                <td
+                  className="dato border-b px-[8px] py-[9px] text-right align-top text-[11px] leading-[1.4]"
+                  style={{ borderColor: FILETE }}
+                >
+                  {l.cantidad}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
 
       {datos.observaciones.trim() && (
         <section className="mx-[42px] mt-[16px]">

@@ -72,8 +72,13 @@ for (const w of [320, 375, 390, 430, 768, 1024, 1440]) {
 
   if (primera !== despues)
     problemas.push(`reduced-motion: la frase roto de "${primera}" a "${despues}"`);
-  if (!primera.startsWith('Con Trade, su carga.'))
+  if (!primera.startsWith('Con Trade, su carga'))
     problemas.push(`reduced-motion: titular visible = "${primera}"`);
+
+  // Y una sola frase del rotador, no las tres apiladas.
+  const rotador = ['a tiempo', 'segura', 'vigilada'].filter((x) => primera.includes(x));
+  if (rotador.length !== 1)
+    problemas.push(`reduced-motion: se ven ${rotador.length} frases del rotador`);
   await ctx.close();
 }
 

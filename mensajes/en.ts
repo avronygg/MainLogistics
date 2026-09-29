@@ -1063,9 +1063,14 @@ export const en: Mensajes = {
     bajada:
       "Fill in what you know about your freight. As you type, the request takes shape beside you. When it looks right, send it.",
     avisoSinPrecios:
-      "No prices here. With these details we prepare the priced quote and email it to you.",
+      "This request carries no prices: here you tell us what you need to move. With those details we prepare the priced quote and send it to your inbox.",
     pestanaDatos: "Details",
     pestanaVista: "Preview",
+    zoom: {
+      ajustar: "Fit",
+      cerca: "Zoom in",
+      deslice: "Swipe the sheet sideways to see all of it.",
+    },
     secciones: {
       cliente: "Client",
       servicio: "Service",
@@ -1115,7 +1120,7 @@ export const en: Mensajes = {
       titulo: "Quote request",
       bajada: "Road freight across Chile",
       fecha: "Date",
-      preparadaPor: "Prepared by",
+      solicitadaPor: "Requested by",
       colDetalle: "Service detail",
       colEquipo: "Equipment",
       colCantidad: "Qty",

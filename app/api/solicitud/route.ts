@@ -53,6 +53,61 @@ const EN_LISTA: Record<string, readonly string[]> = {
   modalidad: MODALIDADES,
 };
 
+/**
+ * El cotizador interno, donde el ejecutivo le pone precio a esto.
+ *
+ * Vive en su propio despliegue, aparte del sitio: es una herramienta con
+ * valores y no tiene por qué estar en una URL pública de logisticatrade.cl.
+ */
+const COTIZADOR =
+  process.env.COTIZADOR_URL ?? "https://cotizador-logistica-trade.vercel.app";
+
+/**
+ * Arma el enlace que abre el cotizador con esta solicitud ya cargada.
+ *
+ * Los datos viajan EN LA URL, codificados, y no en una base de datos. No es
+ * pereza: sin almacenamiento no hay nada que administrar, nada que expire y
+ * nada que respaldar, y el enlace sigue funcionando el día que alguien lo
+ * reenvíe desde su bandeja. Lo que viaja es lo que el cliente ya escribió y
+ * ya está en el cuerpo del correo, así que el enlace no revela nada nuevo.
+ *
+ * Las claves son las del cotizador —`desc`, `cant`, `items`— para que
+ * entren sin traducción. `observaciones` cae en `requisitos`, que es su
+ * equivalente allá.
+ */
+function enlaceCotizador(
+  d: Record<string, string>,
+  lineas: { descripcion: string; equipo: string; cantidad: string }[],
+) {
+  const carga = {
+    razonSocial: d.razonSocial,
+    rut: d.rut,
+    contacto: d.contacto,
+    cargo: d.cargo,
+    correo: d.correo,
+    telefono: d.telefono,
+    tipoCarga: d.tipoCarga,
+    equipo: d.equipo,
+    modalidad: d.modalidad,
+    fechaEstimada: d.fechaEstimada,
+    origen: d.origen,
+    destino: d.destino,
+    requisitos: d.observaciones,
+    /* Sin `unit`: el precio es justamente lo que falta por poner, y
+       mandarlo vacío desde acá deja claro que nadie lo decidió todavía. */
+    items: lineas.map((l) => ({
+      desc: l.descripcion,
+      equipo: l.equipo,
+      cant: l.cantidad,
+      unit: "",
+      incl: false,
+    })),
+  };
+
+  const codificado = Buffer.from(JSON.stringify(carga), "utf8").toString("base64url");
+  return `${COTIZADOR}/?d=${codificado}`;
+}
+
 export async function POST(peticion: Request) {
   const clave = process.env.RESEND_API_KEY;
   const destino = CORREO;
@@ -172,6 +227,13 @@ export async function POST(peticion: Request) {
     correo: d.correo,
     telefono: d.telefono,
     bloques,
+    accion: {
+      titulo: "¿Le ponemos precio?",
+      texto:
+        "Abre el cotizador con estos datos y estos servicios ya cargados. Solo falta escribir los valores y emitir.",
+      etiqueta: "Armar la cotización con precios",
+      url: enlaceCotizador(d, lineas),
+    },
   });
 
   try {

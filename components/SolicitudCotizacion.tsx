@@ -102,17 +102,37 @@ export default function SolicitudCotizacion({
 
   /* ── La hoja, escalada al ancho que haya ─────────────────────────── */
   const marco = useRef<HTMLDivElement>(null);
-  const [escala, setEscala] = useState(0.5);
+  const [escalaAjuste, setEscalaAjuste] = useState(0.5);
+  const [zoom, setZoom] = useState<"ajustar" | "cerca">("ajustar");
+  const primeraMedida = useRef(true);
+  const acuse = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
     const el = marco.current;
     if (!el) return;
-    const medir = () => setEscala(el.clientWidth / HOJA_ANCHO);
+    const medir = () => {
+      const ajuste = el.clientWidth / HOJA_ANCHO;
+      setEscalaAjuste(ajuste);
+
+      /* En una pantalla donde la hoja tendría que achicarse a menos de la
+         mitad, "ajustar" la deja bonita y sin leer: en un teléfono el
+         cuerpo de 11px queda en menos de 5. Ahí se parte de cerca, y quien
+         quiera ver la hoja completa toca "Ajustar".
+
+         El umbral mira la LEGIBILIDAD, no el aparato: una ventana angosta
+         en un escritorio tiene el mismo problema. */
+      if (primeraMedida.current) {
+        primeraMedida.current = false;
+        if (ajuste < 0.6) setZoom("cerca");
+      }
+    };
     medir();
     const observador = new ResizeObserver(medir);
     observador.observe(el);
     return () => observador.disconnect();
   }, []);
+
+  const escala = zoom === "ajustar" ? escalaAjuste : 1;
 
   /* ── Validación ──────────────────────────────────────────────────── */
   const revisar = useCallback((d: Solicitud) => {
@@ -154,6 +174,12 @@ export default function SolicitudCotizacion({
       });
       if (!r.ok) throw new Error(String(r.status));
       setEstado("enviado");
+      /* Subir al acuse. Sin esto la página se queda donde estaba —abajo,
+         en el pie— y quien envió no ve ninguna señal de que funcionó. */
+      requestAnimationFrame(() => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        acuse.current?.focus();
+      });
       try {
         localStorage.removeItem(LLAVE);
       } catch {
@@ -188,7 +214,11 @@ export default function SolicitudCotizacion({
             />
           </svg>
         </span>
-        <h2 className="mt-6 text-[clamp(1.6rem,2vw+1.1rem,2.25rem)] font-semibold tracking-[-0.03em] text-[var(--texto)]">
+        <h2
+          ref={acuse}
+          tabIndex={-1}
+          className="mt-6 text-[clamp(1.6rem,2vw+1.1rem,2.25rem)] font-semibold tracking-[-0.03em] text-[var(--texto)] outline-none"
+        >
           {t.exito.titulo}
         </h2>
         <p className="mx-auto mt-4 max-w-[52ch] text-[16px] leading-[1.7] text-[var(--texto-sec)]">
@@ -536,10 +566,50 @@ export default function SolicitudCotizacion({
             vista === "hoja" ? "" : "hidden lg:block",
           ].join(" ")}
         >
+          {/* El zoom no es un adorno: una hoja A4 a ancho de teléfono deja
+              el texto en cinco píxeles. Dos estados, no un gesto de pellizco:
+              dos botones se descubren solos y funcionan con teclado. */}
+          <div className="mb-3 flex items-center justify-end gap-1.5">
+            {(["ajustar", "cerca"] as const).map((z) => (
+              <button
+                key={z}
+                type="button"
+                onClick={() => setZoom(z)}
+                aria-pressed={zoom === z}
+                className={[
+                  "min-h-[36px] rounded-full px-4 text-[13.5px] font-medium transition-colors duration-[var(--dur-hover)]",
+                  zoom === z
+                    ? "bg-[var(--morado-solido)] text-white"
+                    : "border border-[var(--borde)] text-[var(--texto-sec)]",
+                ].join(" ")}
+              >
+                {z === "ajustar" ? t.zoom.ajustar : t.zoom.cerca}
+              </button>
+            ))}
+          </div>
+
+          {/* De cerca la hoja es más ancha que la pantalla. Que se pueda
+              deslizar no se ve: se dice. */}
+          {zoom === "cerca" && escalaAjuste < 1 && (
+            <p className="mb-2 text-right text-[12.5px] text-[var(--texto-ter)]">
+              {t.zoom.deslice}
+            </p>
+          )}
+
           <div
             ref={marco}
-            className="w-full max-w-full overflow-hidden rounded-[var(--r-img)] shadow-[0_16px_50px_-24px_rgb(0_0_0/0.55)]"
-            style={{ height: HOJA_ALTO * escala }}
+            className="w-full max-w-full rounded-[var(--r-img)] shadow-[0_16px_50px_-24px_rgb(0_0_0/0.55)]"
+            style={{
+              /* Ajustada, la hoja cabe entera y no hay nada que desplazar.
+                 De cerca mide 794px de ancho: el marco se desplaza DE LADO y
+                 nada más. El desplazamiento vertical sigue siendo el de la
+                 página, que es como se lee en un teléfono; un visor con
+                 desplazamiento propio deja el dedo atrapado en la hoja. */
+              height: HOJA_ALTO * escala,
+              overflowX: zoom === "ajustar" ? "hidden" : "auto",
+              overflowY: "hidden",
+              overscrollBehavior: "contain",
+            }}
           >
             <div
               aria-live="polite"

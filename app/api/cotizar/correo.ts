@@ -117,8 +117,16 @@ export function construirCorreo(datos: {
   /** Opcional: la solicitud de cotización no pregunta canal. */
   canal?: string;
   bloques: Bloque[];
+  /**
+   * Opcional: el paso siguiente, como botón al final del correo.
+   *
+   * Lo usa la solicitud de cotización para abrir el cotizador con estos
+   * mismos datos ya cargados. Va al FINAL y no arriba: primero se lee qué
+   * pide el cliente, y recién después se decide qué hacer con eso.
+   */
+  accion?: { titulo: string; texto: string; etiqueta: string; url: string };
 }) {
-  const { empresa, carga, origen, destino, nombre, correo, telefono, canal, bloques } =
+  const { empresa, carga, origen, destino, nombre, correo, telefono, canal, bloques, accion } =
     datos;
 
   /* Teléfono para `tel:`: sin espacios ni signos, o el enlace no marca. */
@@ -159,6 +167,20 @@ export function construirCorreo(datos: {
       : "") +
     `</td></tr></table></td></tr>`;
 
+  /* El paso siguiente, como botón. Sin imagen y sin VML: un ancla con
+     relleno se ve bien en todos los clientes menos en Outlook de escritorio,
+     donde igual se ve como enlace y funciona. Un botón de imagen se rompe
+     con las imágenes bloqueadas, que es el caso por defecto. */
+  const siguiente = accion
+    ? `<tr><td style="padding:24px 24px 0">` +
+      `<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:${MORADO_SUAVE};border-radius:10px">` +
+      `<tr><td style="padding:20px 22px;font-family:${SANS}">` +
+      `<div style="font-size:15px;font-weight:700;color:${TINTA};padding-bottom:6px">${escapar(accion.titulo)}</div>` +
+      `<div style="font-size:13.5px;line-height:1.55;color:${TINTA_SUAVE};padding-bottom:16px">${escapar(accion.texto)}</div>` +
+      `<a href="${escapar(accion.url)}" style="display:inline-block;background:${MORADO};color:#ffffff;font-family:${SANS};font-size:14px;font-weight:700;line-height:1;text-decoration:none;padding:14px 24px;border-radius:999px">${escapar(accion.etiqueta)}</a>` +
+      `</td></tr></table></td></tr>`
+    : "";
+
   const pie =
     `<tr><td style="padding:24px 24px 24px">` +
     `<div style="border-top:1px solid ${BORDE};padding-top:14px;font-family:${SANS};font-size:11.5px;line-height:1.5;color:${TINTA_SUAVE}">` +
@@ -188,6 +210,7 @@ export function construirCorreo(datos: {
     identificacion +
     acciones +
     bloques.map(bloqueHtml).join("") +
+    siguiente +
     pie +
     `</table></td></tr></table></body></html>`;
 
@@ -210,6 +233,9 @@ export function construirCorreo(datos: {
       ...filas.map(({ k, v }) => `  ${k}: ${v}`),
       ``,
     ]),
+    ...(accion
+      ? [accion.titulo.toUpperCase(), `  ${accion.texto}`, `  ${accion.url}`, ``]
+      : []),
     `Enviado desde el formulario de logisticatrade.cl`,
   ].join("\n");
 

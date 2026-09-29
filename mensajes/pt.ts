@@ -1063,9 +1063,14 @@ export const pt: Mensajes = {
     bajada:
       "Preencha o que souber da sua carga. Conforme você escreve, a solicitação vai se montando ao lado. Quando estiver certa, é só enviar.",
     avisoSinPrecios:
-      "Aqui não se colocam preços. Com estes dados preparamos a cotação com valores e enviamos por e-mail.",
+      "Esta solicitação não leva preços: aqui você nos conta o que precisa mover. Com esses dados preparamos a cotação com valores e enviamos para o seu e-mail.",
     pestanaDatos: "Dados",
     pestanaVista: "Prévia",
+    zoom: {
+      ajustar: "Ajustar",
+      cerca: "Aproximar",
+      deslice: "Deslize a folha para o lado para vê-la inteira.",
+    },
     secciones: {
       cliente: "Cliente",
       servicio: "Serviço",
@@ -1115,7 +1120,7 @@ export const pt: Mensajes = {
       titulo: "Solicitação de cotação",
       bajada: "Transporte de cargas em todo o Chile",
       fecha: "Data",
-      preparadaPor: "Preparada por",
+      solicitadaPor: "Solicitada por",
       colDetalle: "Detalhe do serviço",
       colEquipo: "Equipamento",
       colCantidad: "Qtd.",

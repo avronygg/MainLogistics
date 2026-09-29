@@ -1088,9 +1088,14 @@ export const zh: Mensajes = {
     bajada:
       "把您已知的货物信息填进来。您每输入一项，右侧的询价单就同步成形。确认无误后发送即可。",
     avisoSinPrecios:
-      "此处不填写价格。我们会根据这些资料制作含报价的正式文件，并以邮件发送给您。",
+      "本询价单不含价格：请在此告诉我们您需要运输什么。我们会据此制作含报价的正式文件，并发送到您的邮箱。",
     pestanaDatos: "填写资料",
     pestanaVista: "预览",
+    zoom: {
+      ajustar: "适应宽度",
+      cerca: "放大",
+      deslice: "左右滑动可查看完整文件。",
+    },
     secciones: {
       cliente: "客户",
       servicio: "服务",
@@ -1140,7 +1145,7 @@ export const zh: Mensajes = {
       titulo: "询价单",
       bajada: "覆盖智利全境的货物运输",
       fecha: "日期",
-      preparadaPor: "提交方",
+      solicitadaPor: "提交方",
       colDetalle: "服务明细",
       colEquipo: "车型",
       colCantidad: "数量",

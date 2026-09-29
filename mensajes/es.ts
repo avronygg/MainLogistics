@@ -1111,9 +1111,14 @@ export const es = {
     bajada:
       "Complete lo que sepa de su carga. A medida que escribe, la solicitud se va armando al lado. Cuando esté lista, la envía.",
     avisoSinPrecios:
-      "Acá no se ponen precios. Con estos datos preparamos la cotización con valores y se la enviamos por correo.",
+      "Esta solicitud no lleva precios: acá usted nos cuenta qué necesita mover. Con esos datos preparamos la cotización con valores y se la enviamos a su correo.",
     pestanaDatos: "Datos",
     pestanaVista: "Vista previa",
+    zoom: {
+      ajustar: "Ajustar",
+      cerca: "Acercar",
+      deslice: "Deslice la hoja de lado para verla completa.",
+    },
     secciones: {
       cliente: "Cliente",
       servicio: "Servicio",
@@ -1163,7 +1168,7 @@ export const es = {
       titulo: "Solicitud de cotización",
       bajada: "Transporte de carga en todo Chile",
       fecha: "Fecha",
-      preparadaPor: "Preparada por",
+      solicitadaPor: "Solicitada por",
       colDetalle: "Detalle del servicio",
       colEquipo: "Equipo",
       colCantidad: "Cant.",
