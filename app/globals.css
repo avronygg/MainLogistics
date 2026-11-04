@@ -522,3 +522,27 @@ p {
     color: #555;
   }
 }
+
+/* ============================================================
+   /presentacion en pantalla completa (components/presentacion/Mando).
+   Va acá porque toca <html>, barra y pie, que están fuera del módulo
+   de la página. El sitio queda solo con los capítulos, y cada uno
+   calza con la pantalla.
+   ============================================================ */
+
+html.presentando {
+  scroll-snap-type: y mandatory;
+  --techo-h1: 9rem;
+  --techo-h2: 7rem;
+}
+
+html.presentando header,
+html.presentando footer {
+  display: none;
+}
+
+/* El mando flota abajo: sin esto, el elemento que recibe el foco con Tab queda
+   tapado por él. */
+html:has([data-presentacion]):not(.presentando) {
+  scroll-padding-bottom: 8rem;
+}

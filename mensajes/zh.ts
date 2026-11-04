@@ -1283,4 +1283,205 @@ export const zh: Mensajes = {
     continuar: "继续",
     completo: "或直接打开完整表单",
   },
+
+  /* ── /presentacion · 商务介绍的网页版 ─────────────────────────────────── */
+  presentacion: {
+    metaTitulo: "公司介绍 | Logística Trade",
+    metaDescripcion:
+      "覆盖智利全境的公路货运，从阿里卡到蓬塔阿雷纳斯：服务项目、各类货物的规范、在途监控与合作流程。",
+    mando: {
+      etiqueta: "浏览公司介绍",
+      anterior: "上一章",
+      siguiente: "下一章",
+      presentar: "全屏演示",
+      salir: "退出全屏",
+      compartir: "分享本章",
+      copiado: "链接已复制",
+      cotizar: "索取报价",
+    },
+    capitulos: {
+      portada: "开始",
+      servicios: "服务",
+      cumplimiento: "合规",
+      monitoreo: "技术",
+      cobertura: "覆盖范围",
+      seguridad: "安全",
+      proceso: "流程",
+      equipo: "团队",
+      clientes: "客户",
+      cierre: "联系",
+    },
+    pdf: "下载 PDF（西班牙语）",
+    portada: {
+      rotulo: "公司介绍",
+      linea1: "公路货运",
+      linea2: "覆盖智利全境",
+      bajada: "您的货物准时、安全、全程监控，从阿里卡到蓬塔阿雷纳斯。",
+      empezar: "查看介绍",
+      altFoto: "行驶中的 Logística Trade 品牌卡车",
+    },
+    servicios: {
+      titulo: "八项服务，一个运营方",
+      preguntaAsesoria: "不确定需要哪种设备？",
+      asesoria: "我们为您提供建议。",
+      mensajeWhatsapp: "您好，我看了 Logística Trade 的介绍，不确定我的货物需要哪种设备。",
+      items: {
+        contenedores: {
+          nombre: "集装箱提柜",
+          detalle: "在港口提取 20′ 和 40′ 集装箱，并直接送达目的地。",
+        },
+        camaBaja: {
+          nombre: "低平板挂车",
+          detalle: "重型机械与超限货物。",
+        },
+        ramplas: {
+          nombre: "平板挂车",
+          detalle: "适用于各类作业的普通货物与托盘货物。",
+        },
+        pequenos: {
+          nombre: "小型货车",
+          detalle: "灵活配送与最后一公里交付。",
+        },
+        bateas: {
+          nombre: "自卸车",
+          detalle: "砂石与散货，从港口到目的地。",
+        },
+        silos: {
+          nombre: "散装罐车",
+          detalle: "面向工业的封闭式散货运输。",
+        },
+        bess: {
+          nombre: "BESS 储能货物",
+          detalle: "电池与储能系统，专业搬运处理。",
+        },
+        desconsolidado: {
+          nombre: "拆箱分拨与仓储",
+          detalle: "我们在位置优越的仓库为您拆箱并存放货物。",
+        },
+      },
+    },
+    cumplimiento: {
+      titulo: "每类货物的规范",
+      bajada: "货物发运之前，一切都已核查。",
+      columnaCarga: "货物",
+      columnaRevisa: "核查内容",
+      columnaNorma: "规范",
+      columnaCotizar: "报价",
+      sinNorma: "无特定规范",
+      cotizarFila: "索取报价",
+      filas: {
+        general: {
+          carga: "普通货物",
+          revisa: "根据货量与路线选用平板挂车、厢式车或托盘运输。",
+        },
+        minera: {
+          carga: "矿业物资",
+          revisa: "矿区准入认证与途中疲劳驾驶管控。",
+        },
+        peligrosa: {
+          carga: "危险品",
+          revisa: "标识、安全数据表，以及持有效培训证书的驾驶员。",
+        },
+        refrigerada: {
+          carga: "冷藏货物",
+          revisa: "全程冷链与温度记录。",
+        },
+        forestal: {
+          carga: "林业物资",
+          revisa: "经认证的捆扎方式与通往作业区的乡村路线。",
+        },
+        contenedores: {
+          carga: "集装箱",
+          revisa: "港口协调、提柜时间窗口与铅封核验。",
+        },
+        dimensionada: {
+          carga: "按尺寸计价货物",
+          revisa: "低平板挂车、净空高度计算与通行许可。",
+        },
+        sobredimensionada: {
+          carga: "超限货物",
+          revisa: "特别许可、护送车辆与限定时段。",
+        },
+      },
+    },
+    monitoreo: {
+      estado: "GPS · 在途",
+      titulo: "在途监控",
+      bajada: "随时查看货物位置，无需打电话询问。",
+      puntos: {
+        gps: "全程 GPS 监控",
+        trazabilidad: "从提货到交付的全程可追溯",
+        reportes: "可审计的在线报告",
+      },
+      altFoto: "卡车驾驶室内的监控屏幕",
+    },
+    cobertura: {
+      titulo: "覆盖智利全境",
+      bajada: "从阿里卡到蓬塔阿雷纳斯，配备各行业要求的设备与许可。",
+      cifra: "4,270",
+      unidad: "公里",
+      etiquetaRuta: "由北向南的路线：Arica、Antofagasta、La Serena、Santiago、Concepción、Puerto Montt 和 Punta Arenas。",
+    },
+    seguridad: {
+      titulo: "每次发运都安全",
+      bajada: "每趟运输都由经过核验的承运商执行，文件齐全有效。",
+      ejemploRotulo: "示例 · 矿业",
+      ejemploTitulo: "装货之前，准入认证已就绪。",
+      ejemploCuerpo:
+        "我们在发运当天核查承运商、设备与驾驶员的文件。等到了矿区门口，就太迟了。",
+      altFoto: "平板挂车上用绑带和链条固定货物",
+    },
+    proceso: {
+      titulo: "合作流程",
+      bajada: "三个步骤，一位专人从头到尾负责您的发运。",
+      pasos: {
+        cotizacion: {
+          titulo: "报价",
+          cuerpo: "告诉我们您要运什么、从哪里到哪里。我们会确认能否承运以及使用哪种设备。",
+          entrega: "邮件答复",
+        },
+        retiro: {
+          titulo: "提货",
+          cuerpo: "经核验的承运商与适合您货物的设备。文件先于卡车出发。",
+          entrega: "电子发运单",
+        },
+        entrega: {
+          titulo: "交付",
+          cuerpo: "全程跟踪。一旦出现偏差，我们会比您先知道，并且已在处理。",
+          entrega: "交付凭证",
+        },
+      },
+    },
+    equipo: {
+      titulo: "谁在运送您的货物",
+      bajada: "驾驶员、仓库与卸货遵循同一标准，不分行业。",
+      puntos: {
+        papeles: {
+          titulo: "发运当天核查文件",
+          cuerpo: "许可证过期，卡车就走不了。所以要在当天早上核查，而不是在签合同时。",
+        },
+        experiencia: {
+          titulo: "熟悉您的货物类型",
+          cuerpo: "人员已经处理过与您类似的货物。",
+        },
+        central: {
+          titulo: "有回应的调度中心",
+          cuerpo: "全程有一位具名的专人对接，当天回复。",
+        },
+      },
+      altConductor: "戴 Logística Trade 帽子的驾驶员站在卡车旁",
+      altBodega: "身穿 Logística Trade 背心的仓库操作员正在核查货物",
+    },
+    clientes: {
+      titulo: "客户怎么说",
+    },
+    cierre: {
+      titulo: "为您的货物索取报价",
+      bajada: "我们在 24 小时内答复。",
+      cotizar: "在线索取报价",
+      whatsapp: "WhatsApp",
+      mensajeWhatsapp: "您好，我看了 Logística Trade 的介绍，想为一批货物索取报价。",
+      lema: "公路货运，覆盖智利全境",
+    },
+  },
 };

@@ -1313,6 +1313,211 @@ export const es = {
     continuar: "Continuar",
     completo: "O abra el formulario completo",
   },
+
+  /* ── /presentacion · la presentación comercial, en versión web ─────────
+     Va en tuteo a propósito: es el texto de la presentación que el cliente
+     aprobó, no el del resto del sitio. Las citas de "clientes" no están acá:
+     salen de `resenas.testimonios`, para que cuando una empresa corrija la
+     suya cambie en un solo lugar. */
+  presentacion: {
+    metaTitulo: "Presentación comercial | Logística Trade",
+    metaDescripcion:
+      "Transporte de carga en todo Chile, de Arica a Punta Arenas: servicios, normas por tipo de carga, monitoreo y cómo funciona.",
+    mando: {
+      etiqueta: "Navegar la presentación",
+      anterior: "Capítulo anterior",
+      siguiente: "Capítulo siguiente",
+      presentar: "Presentar en pantalla completa",
+      salir: "Salir de pantalla completa",
+      compartir: "Compartir este capítulo",
+      copiado: "Enlace copiado",
+      cotizar: "Cotizar",
+    },
+    capitulos: {
+      portada: "Inicio",
+      servicios: "Servicios",
+      cumplimiento: "Cumplimiento",
+      monitoreo: "Tecnología",
+      cobertura: "Cobertura",
+      seguridad: "Seguridad",
+      proceso: "Proceso",
+      equipo: "Equipo",
+      clientes: "Clientes",
+      cierre: "Contacto",
+    },
+    pdf: "Descargar PDF",
+    portada: {
+      rotulo: "Presentación comercial",
+      linea1: "Transporte de carga",
+      linea2: "en todo Chile",
+      bajada: "Tu carga a tiempo, segura y monitoreada, de Arica a Punta Arenas.",
+      empezar: "Ver la presentación",
+      altFoto: "Camión con la marca Logística Trade en ruta",
+    },
+    servicios: {
+      titulo: "Ocho servicios, un solo operador",
+      preguntaAsesoria: "¿No sabes qué equipo necesitas?",
+      asesoria: "Te asesoramos.",
+      mensajeWhatsapp: "Hola, vi la presentación de Logística Trade y no sé qué equipo necesito para mi carga.",
+      items: {
+        contenedores: {
+          nombre: "Retiro de contenedores",
+          detalle: "Retiro en puerto de 20′ y 40′ y entrega directa a destino.",
+        },
+        camaBaja: {
+          nombre: "Cama baja",
+          detalle: "Maquinaria pesada y carga sobredimensionada.",
+        },
+        ramplas: {
+          nombre: "Ramplas planas",
+          detalle: "Carga general y paletizada para cualquier operación.",
+        },
+        pequenos: {
+          nombre: "Camiones pequeños",
+          detalle: "Distribución ágil y entregas de última milla.",
+        },
+        bateas: {
+          nombre: "Bateas",
+          detalle: "Áridos y graneles, de puerto a destino.",
+        },
+        silos: {
+          nombre: "Silos",
+          detalle: "Granel cerrado para la industria.",
+        },
+        bess: {
+          nombre: "Carga BESS",
+          detalle: "Baterías y sistemas de almacenamiento de energía, con manejo especializado.",
+        },
+        desconsolidado: {
+          nombre: "Desconsolidado y almacenaje",
+          detalle: "Desconsolidamos y guardamos tu carga en bodegas estratégicas.",
+        },
+      },
+    },
+    cumplimiento: {
+      titulo: "La norma de cada carga",
+      bajada: "Todo se revisa antes de que tu carga salga.",
+      columnaCarga: "Carga",
+      columnaRevisa: "Qué se revisa",
+      columnaNorma: "Norma",
+      columnaCotizar: "Cotizar",
+      sinNorma: "Sin norma específica",
+      cotizarFila: "Cotizar",
+      filas: {
+        general: {
+          carga: "General",
+          revisa: "Rampla plana, furgón o paletizado, según volumen y ruta.",
+        },
+        minera: {
+          carga: "Minera",
+          revisa: "Homologación para faena y control de fatiga en ruta.",
+        },
+        peligrosa: {
+          carga: "Peligrosa",
+          revisa: "Rotulación, hoja de seguridad y conductor con curso vigente.",
+        },
+        refrigerada: {
+          carga: "Refrigerada",
+          revisa: "Cadena de frío continua y registro de temperatura.",
+        },
+        forestal: {
+          carga: "Forestal",
+          revisa: "Amarre certificado y rutas rurales de faena.",
+        },
+        contenedores: {
+          carga: "Contenedores",
+          revisa: "Coordinación portuaria, ventana de retiro y sello verificado.",
+        },
+        dimensionada: {
+          carga: "Dimensionada",
+          revisa: "Cama baja, cálculo de altura libre y permisos de circulación.",
+        },
+        sobredimensionada: {
+          carga: "Sobredimensionada",
+          revisa: "Permiso especial, escolta y horario restringido.",
+        },
+      },
+    },
+    monitoreo: {
+      estado: "GPS · en ruta",
+      titulo: "Monitoreo en ruta",
+      bajada: "Mira dónde está tu carga en todo momento, sin tener que llamar.",
+      puntos: {
+        gps: "Monitoreo GPS permanente",
+        trazabilidad: "Trazabilidad del retiro a la entrega",
+        reportes: "Reportes auditables en línea",
+      },
+      altFoto: "Pantalla de monitoreo en la cabina de un camión",
+    },
+    cobertura: {
+      titulo: "Cobertura en todo Chile",
+      bajada: "De Arica a Punta Arenas, con el equipo y los permisos que exige cada industria.",
+      cifra: "4.270",
+      unidad: "km",
+      etiquetaRuta: "Ruta de norte a sur: Arica, Antofagasta, La Serena, Santiago, Concepción, Puerto Montt y Punta Arenas.",
+    },
+    seguridad: {
+      titulo: "Seguridad en cada despacho",
+      bajada: "Transportistas verificados y documentación al día en cada viaje.",
+      ejemploRotulo: "Ejemplo · Minería",
+      ejemploTitulo: "Homologación lista antes de cargar.",
+      ejemploCuerpo:
+        "Revisamos los papeles del transportista, el equipo y el conductor el mismo día del despacho. En la portería ya es tarde.",
+      altFoto: "Amarre de carga con cinta y cadena sobre una rampla",
+    },
+    proceso: {
+      titulo: "Cómo funciona",
+      bajada: "Tres pasos y una persona a cargo de tu despacho, de principio a fin.",
+      pasos: {
+        cotizacion: {
+          titulo: "Cotización",
+          cuerpo: "Nos cuentas qué mueves, desde dónde y hasta dónde. Te confirmamos si podemos tomarla y con qué equipo.",
+          entrega: "Respuesta por correo",
+        },
+        retiro: {
+          titulo: "Retiro",
+          cuerpo: "Transportista verificado y equipo acorde a tu carga. La documentación sale antes que el camión.",
+          entrega: "Guía de despacho electrónica",
+        },
+        entrega: {
+          titulo: "Entrega",
+          cuerpo: "Seguimiento todo el viaje. Si algo se desvía, lo sabemos antes que tú y ya lo estamos resolviendo.",
+          entrega: "Respaldo de entrega",
+        },
+      },
+    },
+    equipo: {
+      titulo: "Quién mueve tu carga",
+      bajada: "Conductores, bodega y descarga bajo un mismo estándar, sin importar la industria.",
+      puntos: {
+        papeles: {
+          titulo: "Papeles revisados el día del despacho",
+          cuerpo: "Un permiso vencido detiene el camión. Por eso se revisa esa misma mañana, no al firmar el contrato.",
+        },
+        experiencia: {
+          titulo: "Experiencia en tu tipo de carga",
+          cuerpo: "Personal que ya ha trabajado cargas como la tuya.",
+        },
+        central: {
+          titulo: "Una central que responde",
+          cuerpo: "Una persona con nombre durante todo el viaje, que contesta el mismo día.",
+        },
+      },
+      altConductor: "Conductor con jockey de Logística Trade junto a su camión",
+      altBodega: "Operario de bodega con chaleco de Logística Trade revisando una carga",
+    },
+    clientes: {
+      titulo: "Lo que dicen nuestros clientes",
+    },
+    cierre: {
+      titulo: "Cotiza tu carga",
+      bajada: "Te respondemos en 24 horas.",
+      cotizar: "Cotizar en línea",
+      whatsapp: "WhatsApp",
+      mensajeWhatsapp: "Hola, vi la presentación de Logística Trade y quiero cotizar una carga.",
+      lema: "Transporte de carga en todo Chile",
+    },
+  },
 };
 
 /**

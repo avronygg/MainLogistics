@@ -1265,4 +1265,205 @@ export const en: Mensajes = {
     continuar: "Continue",
     completo: "Or open the full form",
   },
+
+  /* ── /presentacion · the sales presentation, web version ─────────────── */
+  presentacion: {
+    metaTitulo: "Company presentation | Logística Trade",
+    metaDescripcion:
+      "Road freight across all of Chile, from Arica to Punta Arenas: services, the rules for each type of freight, monitoring and how it works.",
+    mando: {
+      etiqueta: "Navigate the presentation",
+      anterior: "Previous chapter",
+      siguiente: "Next chapter",
+      presentar: "Present in full screen",
+      salir: "Exit full screen",
+      compartir: "Share this chapter",
+      copiado: "Link copied",
+      cotizar: "Get a quote",
+    },
+    capitulos: {
+      portada: "Start",
+      servicios: "Services",
+      cumplimiento: "Compliance",
+      monitoreo: "Technology",
+      cobertura: "Coverage",
+      seguridad: "Safety",
+      proceso: "Process",
+      equipo: "Team",
+      clientes: "Clients",
+      cierre: "Contact",
+    },
+    pdf: "Download PDF (Spanish)",
+    portada: {
+      rotulo: "Company presentation",
+      linea1: "Road freight",
+      linea2: "across all of Chile",
+      bajada: "Your freight on time, secure and monitored, from Arica to Punta Arenas.",
+      empezar: "View the presentation",
+      altFoto: "Truck with the Logística Trade brand on the road",
+    },
+    servicios: {
+      titulo: "Eight services, one operator",
+      preguntaAsesoria: "Not sure which equipment you need?",
+      asesoria: "We will advise you.",
+      mensajeWhatsapp: "Hello, I saw the Logística Trade presentation and I am not sure which equipment my freight needs.",
+      items: {
+        contenedores: {
+          nombre: "Container pickup",
+          detalle: "Port pickup of 20′ and 40′ containers with direct delivery to destination.",
+        },
+        camaBaja: {
+          nombre: "Lowboy trailers",
+          detalle: "Heavy machinery and oversized freight.",
+        },
+        ramplas: {
+          nombre: "Flatbed trailers",
+          detalle: "General and palletized freight for any operation.",
+        },
+        pequenos: {
+          nombre: "Light trucks",
+          detalle: "Agile distribution and last-mile deliveries.",
+        },
+        bateas: {
+          nombre: "Tippers",
+          detalle: "Aggregates and bulk freight, from port to destination.",
+        },
+        silos: {
+          nombre: "Silo tankers",
+          detalle: "Enclosed bulk for industry.",
+        },
+        bess: {
+          nombre: "BESS freight",
+          detalle: "Batteries and energy storage systems, with specialized handling.",
+        },
+        desconsolidado: {
+          nombre: "Deconsolidation and warehousing",
+          detalle: "We deconsolidate and store your freight in strategically located warehouses.",
+        },
+      },
+    },
+    cumplimiento: {
+      titulo: "The rules for each type of freight",
+      bajada: "Everything is checked before your freight leaves.",
+      columnaCarga: "Freight",
+      columnaRevisa: "What is checked",
+      columnaNorma: "Standard",
+      columnaCotizar: "Quote",
+      sinNorma: "No specific standard",
+      cotizarFila: "Get a quote",
+      filas: {
+        general: {
+          carga: "General",
+          revisa: "Flatbed, box trailer or palletized, depending on volume and route.",
+        },
+        minera: {
+          carga: "Mining",
+          revisa: "Site approval and fatigue control on the road.",
+        },
+        peligrosa: {
+          carga: "Hazardous",
+          revisa: "Placarding, safety data sheet and a driver with a current certification.",
+        },
+        refrigerada: {
+          carga: "Refrigerated",
+          revisa: "Unbroken cold chain and temperature log.",
+        },
+        forestal: {
+          carga: "Forestry",
+          revisa: "Certified lashing and rural routes to the worksite.",
+        },
+        contenedores: {
+          carga: "Containers",
+          revisa: "Port coordination, pickup window and verified seal.",
+        },
+        dimensionada: {
+          carga: "Quoted by dimensions",
+          revisa: "Lowboy trailer, clearance calculation and road permits.",
+        },
+        sobredimensionada: {
+          carga: "Oversized",
+          revisa: "Special permit, escort and restricted hours.",
+        },
+      },
+    },
+    monitoreo: {
+      estado: "GPS · on the road",
+      titulo: "On-road monitoring",
+      bajada: "See where your freight is at all times, without having to call.",
+      puntos: {
+        gps: "Continuous GPS monitoring",
+        trazabilidad: "Traceability from pickup to delivery",
+        reportes: "Auditable reports online",
+      },
+      altFoto: "Monitoring screen in a truck cab",
+    },
+    cobertura: {
+      titulo: "Coverage across all of Chile",
+      bajada: "From Arica to Punta Arenas, with the equipment and permits each industry requires.",
+      cifra: "4,270",
+      unidad: "km",
+      etiquetaRuta: "Route from north to south: Arica, Antofagasta, La Serena, Santiago, Concepción, Puerto Montt and Punta Arenas.",
+    },
+    seguridad: {
+      titulo: "Safety in every dispatch",
+      bajada: "Verified carriers and up-to-date paperwork on every trip.",
+      ejemploRotulo: "Example · Mining",
+      ejemploTitulo: "Approval ready before loading.",
+      ejemploCuerpo:
+        "We check the paperwork of the carrier, the equipment and the driver on the day of dispatch. At the site gate it is too late.",
+      altFoto: "Freight lashed with strap and chain on a flatbed trailer",
+    },
+    proceso: {
+      titulo: "How it works",
+      bajada: "Three steps and one person in charge of your dispatch, from start to finish.",
+      pasos: {
+        cotizacion: {
+          titulo: "Quote",
+          cuerpo: "Tell us what you move, from where and to where. We confirm whether we can take it and with which equipment.",
+          entrega: "Reply by email",
+        },
+        retiro: {
+          titulo: "Pickup",
+          cuerpo: "A verified carrier and equipment suited to your freight. The paperwork leaves before the truck.",
+          entrega: "Electronic dispatch guide",
+        },
+        entrega: {
+          titulo: "Delivery",
+          cuerpo: "Tracking for the whole trip. If something goes off course, we know before you do and are already fixing it.",
+          entrega: "Proof of delivery",
+        },
+      },
+    },
+    equipo: {
+      titulo: "Who moves your freight",
+      bajada: "Drivers, warehouse and unloading under one standard, whatever the industry.",
+      puntos: {
+        papeles: {
+          titulo: "Paperwork checked on the day of dispatch",
+          cuerpo: "An expired permit stops the truck. That is why it is checked that same morning, not when the contract is signed.",
+        },
+        experiencia: {
+          titulo: "Experience with your type of freight",
+          cuerpo: "People who have already handled freight like yours.",
+        },
+        central: {
+          titulo: "A control center that answers",
+          cuerpo: "A named person for the whole trip, who replies the same day.",
+        },
+      },
+      altConductor: "Driver in a Logística Trade cap next to the truck",
+      altBodega: "Warehouse operator in a Logística Trade vest checking a load",
+    },
+    clientes: {
+      titulo: "What our clients say",
+    },
+    cierre: {
+      titulo: "Get a quote for your freight",
+      bajada: "We reply within 24 hours.",
+      cotizar: "Quote online",
+      whatsapp: "WhatsApp",
+      mensajeWhatsapp: "Hello, I saw the Logística Trade presentation and I would like a quote for a shipment.",
+      lema: "Road freight across all of Chile",
+    },
+  },
 };

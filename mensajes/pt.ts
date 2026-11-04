@@ -1266,4 +1266,205 @@ export const pt: Mensajes = {
     continuar: "Continuar",
     completo: "Ou abra o formulário completo",
   },
+
+  /* ── /presentacion · a apresentação comercial, versão web ────────────── */
+  presentacion: {
+    metaTitulo: "Apresentação comercial | Logística Trade",
+    metaDescripcion:
+      "Transporte rodoviário de carga em todo o Chile, de Arica a Punta Arenas: serviços, as normas de cada tipo de carga, monitoramento e como funciona.",
+    mando: {
+      etiqueta: "Navegar pela apresentação",
+      anterior: "Capítulo anterior",
+      siguiente: "Próximo capítulo",
+      presentar: "Apresentar em tela cheia",
+      salir: "Sair da tela cheia",
+      compartir: "Compartilhar este capítulo",
+      copiado: "Link copiado",
+      cotizar: "Cotar",
+    },
+    capitulos: {
+      portada: "Início",
+      servicios: "Serviços",
+      cumplimiento: "Conformidade",
+      monitoreo: "Tecnologia",
+      cobertura: "Cobertura",
+      seguridad: "Segurança",
+      proceso: "Processo",
+      equipo: "Equipe",
+      clientes: "Clientes",
+      cierre: "Contato",
+    },
+    pdf: "Baixar PDF (em espanhol)",
+    portada: {
+      rotulo: "Apresentação comercial",
+      linea1: "Transporte de carga",
+      linea2: "em todo o Chile",
+      bajada: "Sua carga no prazo, segura e monitorada, de Arica a Punta Arenas.",
+      empezar: "Ver a apresentação",
+      altFoto: "Caminhão com a marca Logística Trade na estrada",
+    },
+    servicios: {
+      titulo: "Oito serviços, um só operador",
+      preguntaAsesoria: "Não sabe qual equipamento precisa?",
+      asesoria: "Nós orientamos você.",
+      mensajeWhatsapp: "Olá, vi a apresentação da Logística Trade e não sei qual equipamento minha carga precisa.",
+      items: {
+        contenedores: {
+          nombre: "Retirada de contêineres",
+          detalle: "Retirada no porto de 20′ e 40′ e entrega direta no destino.",
+        },
+        camaBaja: {
+          nombre: "Prancha baixa",
+          detalle: "Máquinas pesadas e carga superdimensionada.",
+        },
+        ramplas: {
+          nombre: "Carretas plataforma",
+          detalle: "Carga geral e paletizada para qualquer operação.",
+        },
+        pequenos: {
+          nombre: "Caminhões leves",
+          detalle: "Distribuição ágil e entregas de última milha.",
+        },
+        bateas: {
+          nombre: "Caçambas",
+          detalle: "Agregados e granéis, do porto ao destino.",
+        },
+        silos: {
+          nombre: "Silos",
+          detalle: "Granel fechado para a indústria.",
+        },
+        bess: {
+          nombre: "Carga BESS",
+          detalle: "Baterias e sistemas de armazenamento de energia, com manuseio especializado.",
+        },
+        desconsolidado: {
+          nombre: "Desconsolidação e armazenagem",
+          detalle: "Desconsolidamos e guardamos sua carga em armazéns estratégicos.",
+        },
+      },
+    },
+    cumplimiento: {
+      titulo: "A norma de cada carga",
+      bajada: "Tudo é verificado antes de sua carga sair.",
+      columnaCarga: "Carga",
+      columnaRevisa: "O que é verificado",
+      columnaNorma: "Norma",
+      columnaCotizar: "Cotar",
+      sinNorma: "Sem norma específica",
+      cotizarFila: "Cotar",
+      filas: {
+        general: {
+          carga: "Geral",
+          revisa: "Carreta plataforma, baú ou paletizado, conforme o volume e a rota.",
+        },
+        minera: {
+          carga: "Mineração",
+          revisa: "Homologação para a operação e controle de fadiga na estrada.",
+        },
+        peligrosa: {
+          carga: "Perigosa",
+          revisa: "Rotulagem, ficha de segurança e motorista com curso vigente.",
+        },
+        refrigerada: {
+          carga: "Refrigerada",
+          revisa: "Cadeia de frio contínua e registro de temperatura.",
+        },
+        forestal: {
+          carga: "Florestal",
+          revisa: "Amarração certificada e rotas rurais até a operação.",
+        },
+        contenedores: {
+          carga: "Contêineres",
+          revisa: "Coordenação portuária, janela de retirada e lacre verificado.",
+        },
+        dimensionada: {
+          carga: "Dimensionada",
+          revisa: "Prancha baixa, cálculo de gabarito e autorizações de trânsito.",
+        },
+        sobredimensionada: {
+          carga: "Superdimensionada",
+          revisa: "Licença especial, escolta e horário restrito.",
+        },
+      },
+    },
+    monitoreo: {
+      estado: "GPS · na estrada",
+      titulo: "Monitoramento na estrada",
+      bajada: "Veja onde sua carga está a todo momento, sem precisar ligar.",
+      puntos: {
+        gps: "Monitoramento GPS permanente",
+        trazabilidad: "Rastreabilidade da retirada à entrega",
+        reportes: "Relatórios auditáveis on-line",
+      },
+      altFoto: "Tela de monitoramento na cabine de um caminhão",
+    },
+    cobertura: {
+      titulo: "Cobertura em todo o Chile",
+      bajada: "De Arica a Punta Arenas, com o equipamento e as licenças que cada setor exige.",
+      cifra: "4.270",
+      unidad: "km",
+      etiquetaRuta: "Rota de norte a sul: Arica, Antofagasta, La Serena, Santiago, Concepción, Puerto Montt e Punta Arenas.",
+    },
+    seguridad: {
+      titulo: "Segurança em cada despacho",
+      bajada: "Transportadores verificados e documentação em dia em cada viagem.",
+      ejemploRotulo: "Exemplo · Mineração",
+      ejemploTitulo: "Homologação pronta antes de carregar.",
+      ejemploCuerpo:
+        "Verificamos os documentos do transportador, do equipamento e do motorista no próprio dia do despacho. Na portaria já é tarde.",
+      altFoto: "Amarração de carga com cinta e corrente sobre uma carreta",
+    },
+    proceso: {
+      titulo: "Como funciona",
+      bajada: "Três etapas e uma pessoa responsável pelo seu despacho, do início ao fim.",
+      pasos: {
+        cotizacion: {
+          titulo: "Cotação",
+          cuerpo: "Conte o que você transporta, de onde e para onde. Confirmamos se podemos atender e com qual equipamento.",
+          entrega: "Resposta por e-mail",
+        },
+        retiro: {
+          titulo: "Retirada",
+          cuerpo: "Transportador verificado e equipamento adequado à sua carga. A documentação sai antes do caminhão.",
+          entrega: "Guia de despacho eletrônica",
+        },
+        entrega: {
+          titulo: "Entrega",
+          cuerpo: "Acompanhamento durante toda a viagem. Se algo sai do previsto, sabemos antes de você e já estamos resolvendo.",
+          entrega: "Comprovante de entrega",
+        },
+      },
+    },
+    equipo: {
+      titulo: "Quem transporta sua carga",
+      bajada: "Motoristas, armazém e descarga sob um mesmo padrão, em qualquer setor.",
+      puntos: {
+        papeles: {
+          titulo: "Documentos verificados no dia do despacho",
+          cuerpo: "Uma licença vencida faz o caminhão parar. Por isso se verifica naquela mesma manhã, não ao assinar o contrato.",
+        },
+        experiencia: {
+          titulo: "Experiência no seu tipo de carga",
+          cuerpo: "Pessoas que já trabalharam com cargas como a sua.",
+        },
+        central: {
+          titulo: "Uma central que responde",
+          cuerpo: "Uma pessoa com nome durante toda a viagem, que responde no mesmo dia.",
+        },
+      },
+      altConductor: "Motorista com boné da Logística Trade junto ao caminhão",
+      altBodega: "Operador de armazém com colete da Logística Trade verificando uma carga",
+    },
+    clientes: {
+      titulo: "O que nossos clientes dizem",
+    },
+    cierre: {
+      titulo: "Cote sua carga",
+      bajada: "Respondemos em 24 horas.",
+      cotizar: "Cotar on-line",
+      whatsapp: "WhatsApp",
+      mensajeWhatsapp: "Olá, vi a apresentação da Logística Trade e quero cotar uma carga.",
+      lema: "Transporte de carga em todo o Chile",
+    },
+  },
 };

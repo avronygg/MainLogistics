@@ -222,7 +222,10 @@ export default function Cotizar({
          la persona acaba de elegir hace dos segundos, y respetar un borrador
          de la semana pasada por encima de eso se siente como que el sitio no
          escuchó. El resto del borrador se conserva. */
-      setDatos({ ...COTIZACION_VACIA, ...guardado, ...(vieneDeExpress ? desdeUrl : {}) });
+      // Solo los campos que vienen con valor: `?carga=` trae las regiones vacías,
+      // y no por eso hay que borrar las que la persona ya había elegido.
+      const elegidos = Object.fromEntries(Object.entries(desdeUrl).filter(([, valor]) => valor));
+      setDatos({ ...COTIZACION_VACIA, ...guardado, ...(vieneDeExpress ? elegidos : {}) });
       setRetomado(true);
     } catch {
       /* Almacenamiento bloqueado o JSON corrupto: se sigue en blanco. */

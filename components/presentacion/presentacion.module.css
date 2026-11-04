@@ -1,0 +1,1533 @@
+/*
+ * /presentacion
+ *
+ * La página redefine los tokens del sitio con la paleta violeta de la
+ * presentación, igual que `.tema-claro` los redefine para las bandas claras.
+ * Por eso botones y vidrio heredan solos. Valores verificados con
+ * `node scripts/presentacion.mjs`.
+ *
+ * Móvil primero. Desde 1024px, cada capítulo es una pantalla y todo se mide en
+ * `--u`: 1u equivale a 1px de la lámina original de 1920×1080, y escala con la
+ * ventana sin importar si lo que manda es el ancho o el alto. Los `clamp` ponen
+ * el piso de legibilidad para pantallas chicas.
+ */
+
+.raiz {
+  --fondo: #0b0914;
+  --sup-1: #14111f;
+  --sup-2: #1e1a2e;
+  --borde: #2d2842;
+  --texto: #ffffff;
+  --texto-sec: #b4adc8;
+  --morado-solido: #6835e1;
+  --morado-ui: #8b5cf6;
+  --morado-texto: #af97ff;
+
+  --t-h1: clamp(2.625rem, 11.5vw, 4.25rem);
+  --t-h2: clamp(2.125rem, 8.8vw, 3.25rem);
+  --t-entrada: 1.1875rem;
+  --t-cuerpo: 1.0625rem;
+  --t-chico: 0.9375rem;
+  --pad-x: var(--borde-x);
+  --pad-arriba: 5.5rem;
+  --pad-abajo: 7.5rem; /* el mando, en móvil, ocupa dos filas */
+  --hueco: 1.25rem;
+  --radio: var(--r-img);
+
+  background: var(--fondo);
+  color: var(--texto);
+  overflow-x: clip;
+}
+
+@media (min-width: 1024px) {
+  .raiz {
+    --u: min(100vw / 1920, 100vh / 1080);
+    --t-h1: clamp(3.25rem, calc(118 * var(--u)), var(--techo-h1, 6rem));
+    --t-h2: clamp(2.5rem, calc(80 * var(--u)), var(--techo-h2, 5rem));
+    --t-entrada: clamp(1.125rem, calc(34 * var(--u)), 2.25rem);
+    --t-cuerpo: clamp(1rem, calc(26 * var(--u)), 1.75rem);
+    --t-chico: clamp(0.875rem, calc(22 * var(--u)), 1.5rem);
+    --pad-x: calc(120 * var(--u));
+    --pad-arriba: max(5.5rem, calc(150 * var(--u)));
+    --pad-abajo: max(5.5rem, calc(120 * var(--u)));
+    --hueco: calc(24 * var(--u));
+  }
+}
+
+.raiz:lang(zh) .h1,
+.raiz:lang(zh) .h2 {
+  letter-spacing: 0;
+}
+
+/* ── Capítulo ──────────────────────────────────────────────── */
+
+.capitulo {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.75rem, 3vw, 3rem);
+  min-height: 100svh;
+  padding: var(--pad-arriba) var(--pad-x) var(--pad-abajo);
+  scroll-snap-align: start;
+  scroll-margin-top: 0;
+  overflow: hidden;
+}
+
+/* Recibe el foco al pasar de capítulo con el teclado; no es un control. */
+.capitulo:focus {
+  outline: none;
+}
+
+/* Una sola luz de escena por capítulo, baja y quieta. Nunca un halo por
+   elemento (DESIGN.md). Las bandas moradas y la de foto no la llevan. */
+.capitulo::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background: radial-gradient(
+    60% 70% at 88% 0%,
+    color-mix(in oklab, var(--morado-solido) 26%, transparent),
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.morado {
+  --texto-sec: #ede6ff;
+  --morado-texto: #ffffff;
+  background: var(--morado-solido);
+}
+
+.morado::before,
+.seguridad::before {
+  display: none;
+}
+
+/* ── Tipografía ────────────────────────────────────────────── */
+
+.h1,
+.h2 {
+  margin: 0;
+  font-weight: 600;
+  line-height: 1.03;
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+  color: var(--texto);
+}
+
+.h1 {
+  font-size: var(--t-h1);
+}
+
+.h1Lila {
+  display: block;
+  color: var(--morado-texto);
+}
+
+.h2 {
+  font-size: var(--t-h2);
+}
+
+.entrada {
+  margin: 0;
+  max-width: 34ch;
+  font-size: var(--t-entrada);
+  line-height: 1.4;
+  color: var(--texto-sec);
+  text-wrap: pretty;
+}
+
+.rotulo {
+  margin: 0;
+  font-size: var(--t-cuerpo);
+  font-weight: 500;
+  color: var(--morado-texto);
+}
+
+.rutaTexto {
+  margin: 0;
+  font-size: var(--t-chico);
+  color: var(--texto);
+}
+
+.nota {
+  margin: 0;
+  max-width: 32ch;
+  font-size: var(--t-cuerpo);
+  line-height: 1.4;
+  color: var(--texto-sec);
+}
+
+.enlace {
+  color: var(--morado-texto);
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+  transition: color var(--dur-hover) var(--ease-out-quart);
+}
+
+.enlace:hover {
+  color: var(--texto);
+}
+
+/* Sigue siendo un enlace de texto, pero con área táctil de 44px en el teléfono. */
+.nota .enlace {
+  display: inline-block;
+  padding-block: 0.75rem;
+  margin-block: -0.75rem;
+}
+
+.soloLector {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.encabezado {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+.acciones {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.enlacePdf {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: var(--t-chico);
+  font-weight: 500;
+  color: var(--texto);
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+  text-decoration-thickness: 1px;
+  text-decoration-color: color-mix(in oklab, currentColor 55%, transparent);
+  transition: text-decoration-color var(--dur-hover) var(--ease-out-quart);
+}
+
+.enlacePdf:hover {
+  text-decoration-color: currentColor;
+}
+
+.flecha {
+  width: 1rem;
+  height: 1rem;
+  flex: none;
+  transition: transform var(--dur-estado) var(--ease-out-expo);
+}
+
+/* ── Foto a un lado (portada y monitoreo) ──────────────────── */
+
+.fotoLado {
+  position: relative;
+  z-index: -1;
+  height: 46svh;
+  min-height: 15rem;
+  margin: calc(var(--pad-arriba) * -1) calc(var(--pad-x) * -1) -3rem;
+  -webkit-mask-image: linear-gradient(180deg, #000 58%, transparent 100%);
+  mask-image: linear-gradient(180deg, #000 58%, transparent 100%);
+}
+
+.foto,
+.fotoPortada {
+  object-fit: cover;
+}
+
+.fotoPortada {
+  object-position: 50% 62%;
+}
+
+.columnaTexto {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.125rem;
+}
+
+/* ── Servicios ─────────────────────────────────────────────── */
+
+.servicios {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.625rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.servicioCelda {
+  display: flex;
+  min-width: 0;
+}
+
+.servicio {
+  position: relative;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.375rem;
+  padding: 1.125rem 3rem 1.125rem 1.25rem;
+  border-radius: var(--r-card);
+  background: var(--sup-1);
+  color: var(--texto);
+  transition: background-color var(--dur-estado) var(--ease-out-quart);
+}
+
+.servicio .flecha {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  color: var(--morado-texto);
+}
+
+.servicio:hover {
+  background: var(--sup-2);
+}
+
+.servicio:hover .flecha {
+  transform: translate(2px, -2px);
+}
+
+.servicioSolido,
+.servicioSolido:hover {
+  background: var(--morado-solido);
+}
+
+.servicioSolido .flecha {
+  color: #fff;
+}
+
+.servicioNombre {
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.servicioDetalle {
+  font-size: var(--t-chico);
+  line-height: 1.4;
+  color: var(--texto-sec);
+}
+
+.servicioSolido .servicioDetalle {
+  color: #ede6ff;
+}
+
+/* ── Tabla ─────────────────────────────────────────────────── */
+
+.tabla {
+  display: block;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tabla thead {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+.tabla tbody {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.tabla tbody tr {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.375rem 1rem;
+  align-items: center;
+  padding: 0.875rem 0.875rem 0.875rem 1.125rem;
+  border-radius: var(--r-card);
+  background: var(--sup-1);
+}
+
+.tabla td {
+  display: block;
+  padding: 0;
+}
+
+.celdaCarga {
+  grid-column: 1;
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.celdaCotizar {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.celdaRevisa {
+  grid-column: 1 / -1;
+  font-size: var(--t-chico);
+  line-height: 1.4;
+  color: var(--texto-sec);
+}
+
+.celdaNorma {
+  grid-column: 1 / -1;
+}
+
+/* Oculta a la vista, no al lector de pantalla: con `display: none` la fila
+   queda con una celda menos y "Cotizar" se lee bajo la columna "Norma". */
+.celdaNorma:has(.sinNorma) {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+.norma {
+  display: inline-block;
+  margin-right: 0.375rem;
+  padding: 0.125rem 0.5rem;
+  border: 1px solid color-mix(in oklab, var(--morado-texto) 45%, transparent);
+  border-radius: var(--r-chip);
+  font-size: 0.875rem;
+  color: var(--morado-texto);
+}
+
+.sinNorma {
+  color: var(--texto-sec);
+}
+
+.cotizarFila {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: var(--r-pill);
+  color: var(--morado-texto);
+  font-size: var(--t-chico);
+  font-weight: 500;
+  transition: color var(--dur-hover) var(--ease-out-quart);
+}
+
+.cotizarTexto {
+  display: none;
+}
+
+.cotizarFila:hover {
+  color: var(--texto);
+}
+
+.cotizarFila:hover .flecha {
+  transform: translate(2px, -2px);
+}
+
+/* ── Lista ─────────────────────────────────────────────────── */
+
+.lista {
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  margin: 0.5rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.listaFila {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.875rem 0;
+  border-top: 1px solid color-mix(in oklab, white 10%, transparent);
+  font-size: var(--t-cuerpo);
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.listaTitulo {
+  font-weight: 600;
+}
+
+.listaCuerpo {
+  font-size: var(--t-chico);
+  font-weight: 400;
+  line-height: 1.45;
+  color: var(--texto-sec);
+}
+
+.estado {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0.375rem 0.75rem;
+  border-radius: var(--r-pill);
+  background: var(--sup-1);
+  font-size: var(--t-chico);
+  font-weight: 500;
+  color: var(--morado-texto);
+}
+
+.estadoPunto {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+/* ── Cobertura ─────────────────────────────────────────────── */
+
+.cobertura {
+  gap: 2.5rem;
+}
+
+.coberturaTexto {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.cifra {
+  margin: 0 0 0.5rem;
+  font-size: clamp(2.5rem, 12vw, 3.5rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.cifraUnidad {
+  font-size: 0.5em;
+  letter-spacing: -0.01em;
+}
+
+.ruta {
+  --x-linea: 6.5rem;
+  position: relative;
+  height: 27rem;
+  margin: 0.75rem 0;
+}
+
+.rutaPista {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--x-linea);
+  width: 2px;
+  margin-left: -1px;
+  background: repeating-linear-gradient(
+    180deg,
+    color-mix(in oklab, white 42%, transparent) 0 8px,
+    transparent 8px 14px
+  );
+}
+
+.rutaAvance {
+  width: 100%;
+  background: #fff;
+}
+
+.rutaMarca {
+  position: absolute;
+  left: 0;
+  width: var(--x-linea);
+  height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  will-change: top;
+}
+
+.rutaLectura {
+  margin-right: 1rem;
+  font-size: 0.9375rem;
+  white-space: nowrap;
+}
+
+.rutaPunto {
+  position: absolute;
+  right: -0.5625rem;
+  width: 1.125rem;
+  height: 1.125rem;
+  border: 3px solid var(--morado-solido);
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.35);
+}
+
+.ciudades {
+  position: absolute;
+  inset: 0 0 0 var(--x-linea);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ciudad {
+  position: absolute;
+  left: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 0.625rem;
+  padding-left: 1.25rem;
+  transform: translateY(-50%);
+  white-space: nowrap;
+}
+
+.ciudadPunto {
+  position: absolute;
+  left: -0.3125rem;
+  top: 50%;
+  width: 0.625rem;
+  height: 0.625rem;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: var(--morado-solido);
+  transform: translateY(-50%);
+}
+
+.ciudadRelleno {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.ciudadNombre {
+  font-size: var(--t-cuerpo);
+  font-weight: 500;
+}
+
+.ciudadCoord {
+  font-size: 0.8125rem;
+  color: var(--texto-sec);
+}
+
+/* ── Seguridad ─────────────────────────────────────────────── */
+
+.seguridad {
+  justify-content: space-between;
+}
+
+.fotoFondo {
+  z-index: -2;
+  object-fit: cover;
+  object-position: 62% 50%;
+}
+
+.velo {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    180deg,
+    rgb(11 9 20 / 0.92) 0%,
+    rgb(11 9 20 / 0.55) 45%,
+    rgb(11 9 20 / 0.82) 100%
+  );
+}
+
+.seguridadTexto {
+  display: flex;
+  flex-direction: column;
+  gap: 1.125rem;
+}
+
+.ejemplo {
+  max-width: 44rem;
+  padding: 1.25rem 1.375rem;
+  border-radius: var(--r-card);
+}
+
+.ejemploRotulo {
+  margin: 0 0 0.5rem;
+  font-size: var(--t-chico);
+  font-weight: 500;
+  color: var(--morado-texto);
+}
+
+.ejemploTitulo {
+  margin: 0 0 0.5rem;
+  font-size: clamp(1.25rem, calc(1rem + 0.8vw), 2.25rem);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.ejemploCuerpo {
+  margin: 0;
+  font-size: var(--t-cuerpo);
+  line-height: 1.45;
+  color: #d9d4e6;
+}
+
+/* ── Proceso ───────────────────────────────────────────────── */
+
+.proceso > div:first-child {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.proceso .entrada {
+  max-width: 46ch;
+}
+
+.pasosMarco {
+  --avance: 1;
+  position: relative;
+  padding-left: 1.75rem;
+}
+
+.pasos {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pasosPista {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0.3125rem;
+  width: 2px;
+  background: repeating-linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--morado-texto) 42%, transparent) 0 8px,
+    transparent 8px 14px
+  );
+}
+
+.pasosAvance {
+  position: absolute;
+  inset: 0;
+  background: var(--morado-texto);
+  transform: scaleY(var(--avance));
+  transform-origin: top;
+}
+
+.paso {
+  position: relative;
+}
+
+.paso::before {
+  content: "";
+  position: absolute;
+  top: 1.25rem;
+  left: -1.75rem;
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  background: var(--morado-texto);
+  box-shadow: 0 0 0 4px var(--fondo);
+}
+
+.pasoNumero {
+  display: block;
+  font-size: clamp(2.75rem, 11vw, 3.5rem);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--morado-texto);
+}
+
+.pasoTitulo {
+  margin: 0.5rem 0 0.375rem;
+  font-size: clamp(1.375rem, calc(1rem + 1vw), 2.5rem);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+
+.pasoCuerpo {
+  margin: 0 0 0.875rem;
+  max-width: 38ch;
+  font-size: var(--t-cuerpo);
+  line-height: 1.45;
+  color: var(--texto-sec);
+  text-wrap: pretty;
+}
+
+.pasoEntrega {
+  display: inline-block;
+  margin: 0;
+  padding: 0.375rem 0.75rem;
+  border-radius: var(--r-pill);
+  background: var(--sup-1);
+  font-size: var(--t-chico);
+  color: var(--texto);
+}
+
+/* ── Equipo ────────────────────────────────────────────────── */
+
+.equipoTexto {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.equipoFotos {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  align-items: start;
+}
+
+.equipoFoto {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border-radius: var(--radio);
+}
+
+.equipoFoto:nth-child(2) {
+  margin-top: 2rem;
+}
+
+/* ── Clientes ──────────────────────────────────────────────── */
+
+.citas {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.75rem;
+}
+
+.citaCelda {
+  display: flex;
+  min-width: 0;
+}
+
+.cita {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 0;
+  padding: 1.5rem;
+  border-radius: var(--radio);
+  background: var(--sup-1);
+}
+
+.citaIndustria {
+  margin: 0;
+  font-size: var(--t-chico);
+  font-weight: 500;
+  color: var(--morado-texto);
+}
+
+.citaTexto {
+  margin: 0;
+  font-size: var(--t-cuerpo);
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+
+.citaTexto::before {
+  content: "“";
+}
+
+.citaTexto::after {
+  content: "”";
+}
+
+.citaAutor {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: auto 0 0;
+}
+
+.avatar {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  background: var(--morado-solido);
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.citaNombre {
+  display: block;
+  font-size: var(--t-chico);
+  font-weight: 600;
+}
+
+.citaCargo {
+  display: block;
+  font-size: 0.875rem;
+  line-height: 1.35;
+  color: var(--texto-sec);
+}
+
+/* ── Contacto ──────────────────────────────────────────────── */
+
+.contacto {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 1.25rem;
+}
+
+.contactoLogo {
+  width: auto;
+  max-width: none;
+  height: clamp(3.5rem, 7vw, 6rem);
+  margin-bottom: 0.5rem;
+}
+
+.contactoAcciones {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.625rem;
+  margin-top: 0.75rem;
+}
+
+.botonBlanco,
+.botonContorno {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 48px;
+  padding: 0.5rem 1.25rem;
+  border-radius: var(--r-pill);
+  font-size: var(--t-chico);
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+
+.botonBlanco {
+  background: #fff;
+  color: #2c1578;
+  font-weight: 600;
+}
+
+.botonBlanco:hover .flecha {
+  transform: translate(2px, -2px);
+}
+
+.botonContorno {
+  border: 1px solid color-mix(in oklab, white 55%, transparent);
+  color: #fff;
+  transition:
+    background-color var(--dur-hover) var(--ease-out-quart),
+    border-color var(--dur-hover) var(--ease-out-quart);
+}
+
+.botonContorno:hover {
+  border-color: #fff;
+  background: color-mix(in oklab, white 14%, transparent);
+}
+
+.lema {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--texto-sec);
+}
+
+.lema :global(.dato) {
+  white-space: nowrap;
+}
+
+/* ── Mando ─────────────────────────────────────────────────── */
+
+.mando {
+  position: fixed;
+  inset: auto 0.625rem max(0.625rem, env(safe-area-inset-bottom)) 0.625rem;
+  z-index: var(--z-sticky);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 0.25rem;
+  padding: 0.25rem 0.5rem 0.5rem;
+  border-radius: 1.25rem;
+  transition:
+    opacity var(--dur-estado) var(--ease-out-quart),
+    transform var(--dur-estado) var(--ease-out-quart),
+    visibility var(--dur-estado);
+}
+
+.mando[data-oculto] {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(1rem);
+}
+
+.pista {
+  display: flex;
+  flex: 1 0 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tramoCelda {
+  flex: 1;
+}
+
+.tramo {
+  position: relative;
+  display: block;
+  height: 24px;
+}
+
+.tramo::after {
+  content: "";
+  position: absolute;
+  inset: auto 2px 50%;
+  height: 3px;
+  margin-bottom: -1.5px;
+  border-radius: 2px;
+  background: color-mix(in oklab, white 26%, transparent);
+  transition:
+    background-color var(--dur-estado) var(--ease-out-quart),
+    height var(--dur-hover) var(--ease-out-quart);
+}
+
+.tramo[data-estado="hecho"]::after {
+  background: var(--morado-texto);
+}
+
+.tramo[data-estado="actual"]::after {
+  height: 5px;
+  margin-bottom: -2.5px;
+  background: #fff;
+}
+
+.tramo:hover::after {
+  background: #fff;
+}
+
+.mandoRotulo {
+  display: flex;
+  flex: 1;
+  align-items: baseline;
+  gap: 0.5rem;
+  min-width: 0;
+  margin: 0;
+  padding-left: 0.25rem;
+  font-size: 0.875rem;
+}
+
+.mandoNumero {
+  display: none;
+  color: var(--texto-sec);
+  font-size: 0.8125rem;
+}
+
+@media (min-width: 600px) {
+  .mandoNumero {
+    display: inline;
+  }
+}
+
+.mandoNombre {
+  overflow: hidden;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mandoGrupo {
+  display: flex;
+  align-items: center;
+}
+
+.mandoBoton {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--texto);
+  cursor: pointer;
+  transition: background-color var(--dur-hover) var(--ease-out-quart);
+}
+
+.mandoBoton:hover:not([aria-disabled="true"]) {
+  background: color-mix(in oklab, white 12%, transparent);
+}
+
+/* `aria-disabled` y no `disabled`: un botón deshabilitado con el foco encima
+   lo pierde, y quien navega con teclado vuelve al principio de la página. */
+.mandoBoton[aria-disabled="true"] {
+  color: color-mix(in oklab, white 30%, transparent);
+  cursor: default;
+}
+
+.mandoIcono {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+/* En un teléfono no hay a qué proyectar, aunque la API exista. */
+.mandoPresentar {
+  display: none;
+}
+
+.mandoCotizar {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-left: 0.25rem;
+  padding: 0 1rem;
+  border-radius: var(--r-pill);
+  background: var(--morado-solido);
+  color: #fff;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.raiz a:focus-visible,
+.raiz button:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+.tramo:focus-visible {
+  outline-color: #fff;
+}
+
+/* ── Tablet ────────────────────────────────────────────────── */
+
+@media (min-width: 600px) {
+  .servicios {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .ruta {
+    height: 32rem;
+  }
+}
+
+/* ── Escritorio: una pantalla, una lámina ──────────────────── */
+
+@media (min-width: 1024px) {
+  .capitulo {
+    gap: calc(48 * var(--u));
+  }
+
+  .encabezado {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: calc(60 * var(--u));
+  }
+
+  .nota {
+    max-width: 24ch;
+    margin-bottom: 0.25rem;
+    text-align: right;
+  }
+
+  /* Portada y monitoreo: texto a la izquierda, foto a la derecha */
+  .portada,
+  .partido {
+    justify-content: center;
+  }
+
+  .fotoLado {
+    position: absolute;
+    inset: 0 0 0 auto;
+    width: 55%;
+    height: auto;
+    min-height: 0;
+    margin: 0;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 45%);
+    mask-image: linear-gradient(90deg, transparent 0%, #000 45%);
+  }
+
+  .columnaTexto {
+    max-width: 56%;
+    gap: calc(28 * var(--u));
+  }
+
+  .portada .h1 {
+    white-space: nowrap;
+  }
+
+  .lista {
+    margin-top: calc(32 * var(--u));
+  }
+
+  .listaFila {
+    padding: calc(20 * var(--u)) 0;
+  }
+
+  /* Servicios: la grilla de 4 × 2 de la lámina */
+  .servicios {
+    flex: 1;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-auto-rows: 1fr;
+    gap: var(--hueco);
+    margin-top: auto;
+    max-height: calc(640 * var(--u));
+  }
+
+  .servicio {
+    gap: calc(14 * var(--u));
+    padding: calc(32 * var(--u));
+    border-radius: var(--radio);
+    justify-content: flex-end;
+  }
+
+  .servicio .flecha {
+    top: calc(32 * var(--u));
+    right: calc(32 * var(--u));
+    width: max(1rem, calc(26 * var(--u)));
+    height: max(1rem, calc(26 * var(--u)));
+  }
+
+  .servicioNombre {
+    font-size: clamp(1.125rem, calc(34 * var(--u)), 2.125rem);
+    line-height: 1.15;
+  }
+
+  /* Tabla: de vuelta a tabla */
+  .tabla {
+    display: table;
+    margin-top: auto;
+  }
+
+  .tabla thead {
+    position: static;
+    display: table-header-group;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip-path: none;
+  }
+
+  .tabla thead tr {
+    display: table-row;
+  }
+
+  .tabla th {
+    padding: 0 calc(20 * var(--u)) calc(14 * var(--u));
+    border-bottom: 1px solid color-mix(in oklab, white 16%, transparent);
+    font-size: var(--t-chico);
+    font-weight: 500;
+    text-align: left;
+    color: var(--texto-sec);
+  }
+
+  .tabla tbody {
+    display: table-row-group;
+  }
+
+  .tabla tbody tr {
+    display: table-row;
+    padding: 0;
+    background: none;
+    transition: background-color var(--dur-hover) var(--ease-out-quart);
+  }
+
+  .tabla tbody tr:hover {
+    background: var(--sup-1);
+  }
+
+  .tabla td,
+  .celdaNorma:has(.sinNorma) {
+    position: static;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip-path: none;
+    display: table-cell;
+    /* A 720px de alto el relleno se apaga y manda el alto táctil del enlace. */
+    padding: max(0px, calc(14 * var(--u) - 9px)) calc(20 * var(--u));
+    border-bottom: 1px solid color-mix(in oklab, white 8%, transparent);
+    vertical-align: middle;
+  }
+
+  .celdaCarga {
+    font-size: var(--t-cuerpo);
+    white-space: nowrap;
+  }
+
+  .celdaRevisa {
+    font-size: var(--t-cuerpo);
+  }
+
+  .celdaNorma {
+    white-space: nowrap;
+  }
+
+  .celdaCotizar {
+    width: 1%;
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  .norma {
+    font-size: var(--t-chico);
+  }
+
+  .cotizarTexto {
+    display: inline;
+  }
+
+  /* Cobertura: texto a la izquierda, ruta a toda altura */
+  .cobertura {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: calc(100 * var(--u));
+  }
+
+  .coberturaTexto {
+    justify-content: space-between;
+  }
+
+  .cifra {
+    margin-bottom: calc(16 * var(--u));
+    font-size: clamp(3rem, calc(112 * var(--u)), 7rem);
+  }
+
+  .ruta {
+    --x-linea: 7rem;
+    height: auto;
+    min-height: 26rem;
+    width: calc(var(--x-linea) + max(19rem, calc(460 * var(--u))));
+    margin: 0;
+  }
+
+  .ciudadCoord {
+    font-size: var(--t-chico);
+  }
+
+  .rutaLectura {
+    font-size: var(--t-chico);
+  }
+
+  /* Seguridad: foto a sangre con el texto sobre la zona oscura */
+  .velo {
+    background: linear-gradient(
+      90deg,
+      rgb(11 9 20 / 0.94) 0%,
+      rgb(11 9 20 / 0.7) 38%,
+      rgb(11 9 20 / 0.08) 72%
+    );
+  }
+
+  .fotoFondo {
+    object-position: 50% 50%;
+  }
+
+  .seguridadTexto {
+    gap: calc(28 * var(--u));
+  }
+
+  .ejemplo {
+    width: calc(840 * var(--u));
+    min-width: 30rem;
+    padding: calc(36 * var(--u));
+    border-radius: var(--radio);
+  }
+
+  .ejemploTitulo {
+    font-size: clamp(1.25rem, calc(38 * var(--u)), 2.375rem);
+  }
+
+  /* Proceso: la carretera pasa a lo ancho */
+  .proceso {
+    justify-content: space-between;
+  }
+
+  .proceso > div:first-child {
+    gap: calc(24 * var(--u));
+  }
+
+  .pasosMarco {
+    padding: calc(48 * var(--u)) 0 0;
+  }
+
+  .pasos {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: calc(64 * var(--u));
+  }
+
+  .pasosPista {
+    inset: 0 0 auto 0;
+    width: auto;
+    height: 2px;
+    background: repeating-linear-gradient(
+      90deg,
+      color-mix(in oklab, var(--morado-texto) 42%, transparent) 0 8px,
+      transparent 8px 14px
+    );
+  }
+
+  .pasosAvance {
+    transform: scaleX(var(--avance));
+    transform-origin: left;
+  }
+
+  .paso::before {
+    top: calc(-48 * var(--u) - 0.3125rem);
+    left: 0;
+  }
+
+  .pasoNumero {
+    font-size: clamp(3rem, calc(112 * var(--u)), 7rem);
+  }
+
+  .pasoTitulo {
+    margin: calc(20 * var(--u)) 0 calc(12 * var(--u));
+    font-size: clamp(1.375rem, calc(40 * var(--u)), 2.5rem);
+  }
+
+  .pasoCuerpo {
+    margin-bottom: calc(24 * var(--u));
+  }
+
+  /* Equipo: texto y dos fotos desfasadas */
+  .equipo {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    column-gap: calc(80 * var(--u));
+    align-items: center;
+  }
+
+  .equipoTexto {
+    gap: calc(24 * var(--u));
+  }
+
+  .equipo .entrada {
+    max-width: 42ch;
+  }
+
+  .equipoFotos {
+    gap: var(--hueco);
+  }
+
+  .equipoFoto:nth-child(2) {
+    margin-top: calc(72 * var(--u));
+  }
+
+  /* Clientes */
+  .citas {
+    flex: 1;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--hueco);
+    margin-top: auto;
+    max-height: calc(620 * var(--u));
+  }
+
+  .cita {
+    gap: calc(28 * var(--u));
+    padding: calc(40 * var(--u));
+  }
+
+  .citaCargo {
+    font-size: var(--t-chico);
+  }
+
+  .avatar {
+    width: max(2.75rem, calc(64 * var(--u)));
+    height: max(2.75rem, calc(64 * var(--u)));
+    font-size: max(0.875rem, calc(22 * var(--u)));
+  }
+
+  /* Contacto */
+  .contacto {
+    gap: calc(28 * var(--u));
+  }
+
+  .contactoLogo {
+    height: clamp(4rem, calc(150 * var(--u)), 9rem);
+  }
+
+  .contacto .entrada {
+    max-width: none;
+  }
+
+  /* Mando: una sola fila, flotando al centro */
+  .mando {
+    inset: auto auto max(0.875rem, env(safe-area-inset-bottom)) 50%;
+    flex-wrap: nowrap;
+    gap: 0.5rem;
+    padding: 0.25rem 0.375rem 0.25rem 1rem;
+    border-radius: var(--r-pill);
+    transform: translateX(-50%);
+  }
+
+  .mando[data-oculto] {
+    transform: translate(-50%, 1rem);
+  }
+
+  .pista {
+    flex: none;
+  }
+
+  .tramoCelda {
+    flex: none;
+  }
+
+  .tramo {
+    width: 26px;
+    height: 44px;
+  }
+
+  .mandoRotulo {
+    flex: none;
+    width: 10rem;
+  }
+
+  .mandoPresentar {
+    display: grid;
+  }
+
+  /* La barra del sitio ya tiene su "Cotizar" y un primario por pantalla es la
+     regla. Al presentar la barra se oculta, y entonces sí hace falta acá. */
+  .mandoCotizar {
+    display: none;
+  }
+
+  :global(html.presentando) .mandoCotizar {
+    display: inline-flex;
+  }
+}
+
+
+/* Sin animación que dependa del scroll: la ruta ya está hecha. Se resuelve acá
+   porque el servidor no conoce esta preferencia al renderizar. */
+@media (prefers-reduced-motion: reduce) {
+  .rutaMarca {
+    display: none;
+  }
+
+  .rutaAvance {
+    height: 100% !important;
+  }
+
+  .ciudadRelleno {
+    opacity: 1 !important;
+  }
+
+  .pasosMarco {
+    --avance: 1 !important;
+  }
+}

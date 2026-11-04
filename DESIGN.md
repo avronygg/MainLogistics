@@ -210,3 +210,29 @@ El scrim va **solo arriba y abajo**, nunca a los lados: oscurecer los costados
 encajona el cuadro y le quita amplitud. La legibilidad del texto sobre el
 video la sostienen ese scrim superior más `text-shadow` / `drop-shadow`, no un
 oscurecido general del metraje.
+
+## /presentacion
+
+Versión web de la presentación comercial (`components/presentacion/`). Se aparta
+del sistema en lo siguiente, a propósito; quedan anotadas para que nadie las
+"corrija" sin saber por qué:
+
+| Decisión | Por qué |
+|---|---|
+| **Paleta violeta** (`#0B0914`, `#14111F`, `#6835E1`, `#AF97FF`) redefinida solo en esa página | Es la de la presentación entregada. Se hace como `.tema-claro`: redefine tokens, y botones y vidrio heredan solos |
+| **Tuteo** | Es el texto de la presentación |
+| **Ocho tarjetas en servicios** (el máximo es 6) | Son ocho servicios y la lámina los muestra juntos |
+| **Dos bandas moradas completas** | Cobertura y cierre, como en la presentación |
+
+Lo que **sí** se ajustó al sistema respecto de las láminas: sin rótulos "02 — SERVICIOS"
+ni números en las tarjetas (viven en el mando, abajo; solo los tres pasos van
+numerados), sin orbes ni halos que siguen al cursor, y mono solo para dato auditable.
+
+En escritorio cada capítulo mide una pantalla y se dimensiona con `--u` (1u = 1px de
+la lámina de 1920×1080). Al agregar texto, correr `node scripts/presentacion.mjs`:
+falla si un capítulo deja de calzar.
+
+El PDF de `public/presentacion/` es la presentación del cliente con las imágenes
+recomprimidas (13 MB → 1,9 MB). **Si cambia el contenido, hay que reemplazarlo:** no se
+genera desde la página, y hoy ya difiere en Cobertura: la página titula "Cobertura en todo
+Chile" con los km como dato secundario, y el PDF dice "Cobertura nacional" con 4.270 km grande.

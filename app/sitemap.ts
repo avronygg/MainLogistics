@@ -53,6 +53,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
        apoyo, es la puerta de entrada de quien busca "resolución 154" entre
        hoy y el 1 de noviembre. */
     { ruta: "/verificador-resolucion-154", prioridad: 0.9, actualizada: "2026-09-02" },
+    /* La presentación comercial. Es el enlace que se manda después de una
+       reunión, así que importa que se pueda compartir más que que se encuentre. */
+    { ruta: "/presentacion", prioridad: 0.6, actualizada: "2026-11-04" },
     /* Las legales entran al sitemap con prioridad baja, pero entran. El
        brief §10.3 anota que Agunsa y Loginsa tienen estos enlaces muertos
        en producción: una política que existe y se puede encontrar ya es
