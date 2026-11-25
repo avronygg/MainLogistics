@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { CORREO, TELEFONO } from "../datos/contacto";
+import { CORREO } from "../datos/contacto";
 import type { Solicitud } from "../datos/solicitud";
 import type { Mensajes } from "@/mensajes";
 
@@ -272,7 +272,7 @@ export default function Hoja({ datos, m }: { datos: Solicitud; m: Mensajes }) {
       >
         <span className="font-medium">Logística Trade</span>
         <span className="text-right">
-          {TELEFONO} · {CORREO}
+          {CORREO}
         </span>
       </footer>
     </article>

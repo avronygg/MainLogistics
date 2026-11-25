@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { CORREO, TELEFONO, TELEFONO_ENLACE } from "./datos/contacto";
+import { CORREO } from "./datos/contacto";
 import Link from "next/link";
 import type { Mensajes } from "@/mensajes";
 import type { Idioma } from "@/mensajes/idiomas";
@@ -177,14 +177,6 @@ export default function Pie({ m, idioma }: { m: Mensajes; idioma: Idioma }) {
                   arroba, y el resto solo se parte si de verdad no cabe, que
                   es lo que evita el recorte contra el `overflow-hidden`. */}
               <ul className="vidrio dato mt-4 flex flex-col gap-2.5 rounded-[var(--r-card)] p-4 text-[13px] leading-[1.5] text-[var(--texto-sec)] [overflow-wrap:break-word]">
-                <li>
-                  <a
-                    href={`tel:${TELEFONO_ENLACE}`}
-                    className="transition-colors duration-[var(--dur-hover)] hover:text-[var(--texto)]"
-                  >
-                    {TELEFONO}
-                  </a>
-                </li>
                 <li>
                   <a
                     href={`mailto:${CORREO}`}

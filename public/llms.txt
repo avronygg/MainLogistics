@@ -7,7 +7,6 @@
 
 Sitio: https://logisticatrade.cl
 Correo comercial: comercial@logisticatrade.cl
-Teléfono y WhatsApp: +56 9 9277 8013
 País de operación: Chile
 Idiomas del sitio: español (/es), inglés (/en), portugués (/pt), chino (/zh)
 
@@ -70,7 +69,7 @@ Pide tipo de carga y equipo, origen y destino por región y comuna, fecha, modal
 (puntual, recurrente o contrato), requisitos especiales y valor declarado.
 Los datos de contacto se piden al final.
 
-También se puede escribir directo por WhatsApp al +56 9 9277 8013 o al correo
+También se puede escribir directo al correo
 comercial@logisticatrade.cl.
 
 ## Qué NO afirma este sitio

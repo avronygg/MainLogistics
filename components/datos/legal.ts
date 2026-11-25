@@ -1,4 +1,4 @@
-import { CORREO, TELEFONO } from "./contacto";
+import { CORREO } from "./contacto";
 
 /**
  * Los dos documentos legales del sitio.
@@ -68,7 +68,7 @@ export const PRIVACIDAD: DocumentoLegal = {
       bloques: [
         {
           tipo: "parrafo",
-          texto: `Logística Trade, empresa de transporte terrestre de carga con operación en Chile, es responsable del tratamiento de los datos personales que usted entregue en este sitio. Para cualquier asunto relacionado con esta política puede escribir a ${CORREO} o llamar al ${TELEFONO}.`,
+          texto: `Logística Trade, empresa de transporte terrestre de carga con operación en Chile, es responsable del tratamiento de los datos personales que usted entregue en este sitio. Para cualquier asunto relacionado con esta política puede escribir a ${CORREO}.`,
         },
         {
           tipo: "parrafo",
@@ -391,7 +391,7 @@ export const TERMINOS: DocumentoLegal = {
       bloques: [
         {
           tipo: "parrafo",
-          texto: `Dudas sobre estos términos: ${CORREO}, o al ${TELEFONO}.`,
+          texto: `Dudas sobre estos términos: ${CORREO}.`,
         },
       ],
     },

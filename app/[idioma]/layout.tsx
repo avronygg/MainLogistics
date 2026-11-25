@@ -37,7 +37,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { notFound } from "next/navigation";
 import { IDIOMAS, NOMBRES, cargar, esIdioma, type Mensajes } from "@/mensajes";
 import type { Idioma } from "@/mensajes/idiomas";
-import { CORREO, TELEFONO_ENLACE } from "@/components/datos/contacto";
+import { CORREO } from "@/components/datos/contacto";
 import { BASE } from "../robots";
 import "../globals.css";
 
@@ -132,13 +132,11 @@ function datosEstructurados(idioma: Idioma, m: Mensajes) {
         },
         description: m.meta.descripcion,
         email: CORREO,
-        telephone: TELEFONO_ENLACE,
         areaServed: { "@type": "Country", name: "Chile" },
         contactPoint: {
           "@type": "ContactPoint",
           contactType: "sales",
           email: CORREO,
-          telephone: TELEFONO_ENLACE,
           areaServed: "CL",
         },
       },

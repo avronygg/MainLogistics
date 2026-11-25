@@ -4,7 +4,7 @@ import type { Mensajes } from "@/mensajes";
 import type { Idioma } from "@/mensajes/idiomas";
 import BotonPill from "@/components/ui/BotonPill";
 import Revelar from "@/components/Revelar";
-import { CORREO, TELEFONO, TELEFONO_ENLACE, WHATSAPP } from "@/components/datos/contacto";
+import { CORREO, WHATSAPP } from "@/components/datos/contacto";
 import {
   FILAS_CUMPLIMIENTO,
   PDF_PRESENTACION,
@@ -390,9 +390,6 @@ export default function Presentacion({ m, idioma }: { m: Mensajes; idioma: Idiom
             className={s.botonContorno}
           >
             {p.cierre.whatsapp}
-          </a>
-          <a href={`tel:${TELEFONO_ENLACE}`} className={`dato ${s.botonContorno}`}>
-            {TELEFONO}
           </a>
           <a href={`mailto:${CORREO}`} className={`dato ${s.botonContorno}`}>
             {CORREO}

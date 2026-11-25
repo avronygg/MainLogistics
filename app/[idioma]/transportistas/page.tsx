@@ -7,7 +7,7 @@ import Pie from "@/components/Pie";
 import Asesor from "@/components/Asesor";
 import Titulo from "@/components/Titulo";
 import { IconoEscudo, IconoReloj, IconoCarga, IconoCotizar } from "@/components/Iconos";
-import { CORREO, TELEFONO, TELEFONO_ENLACE } from "@/components/datos/contacto";
+import { CORREO } from "@/components/datos/contacto";
 import { DIAS_DE_PAGO, REQUISITOS_RED } from "@/components/datos/transportistas";
 
 /**
@@ -281,12 +281,6 @@ export default async function Transportistas({
                   className="w-fit text-[var(--texto)] underline underline-offset-4 transition-colors duration-[var(--dur-hover)] hover:text-[var(--morado-texto)]"
                 >
                   {CORREO}
-                </a>
-                <a
-                  href={`tel:${TELEFONO_ENLACE}`}
-                  className="w-fit text-[var(--texto)] underline underline-offset-4 transition-colors duration-[var(--dur-hover)] hover:text-[var(--morado-texto)]"
-                >
-                  {TELEFONO}
                 </a>
               </div>
 
