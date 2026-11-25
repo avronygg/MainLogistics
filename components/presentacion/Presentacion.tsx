@@ -7,7 +7,6 @@ import Revelar from "@/components/Revelar";
 import { CORREO, WHATSAPP } from "@/components/datos/contacto";
 import {
   FILAS_CUMPLIMIENTO,
-  PDF_PRESENTACION,
   SERVICIOS,
   TESTIMONIOS,
 } from "@/components/datos/presentacion";
@@ -101,9 +100,6 @@ export default function Presentacion({ m, idioma }: { m: Mensajes; idioma: Idiom
           </p>
           <div className={s.acciones}>
             <BotonPill href="#servicios">{p.portada.empezar}</BotonPill>
-            <a href={PDF_PRESENTACION} download className={s.enlacePdf}>
-              {p.pdf}
-            </a>
           </div>
         </div>
       </section>
@@ -395,9 +391,6 @@ export default function Presentacion({ m, idioma }: { m: Mensajes; idioma: Idiom
             {CORREO}
           </a>
         </div>
-        <a href={PDF_PRESENTACION} download className={s.enlacePdf}>
-          {p.pdf}
-        </a>
         <p className={s.lema}>
           {p.cierre.lema} · <span className="dato">Arica → Punta Arenas</span>
         </p>
