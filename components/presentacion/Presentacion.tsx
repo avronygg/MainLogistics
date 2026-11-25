@@ -113,7 +113,7 @@ export default function Presentacion({ m, idioma }: { m: Mensajes; idioma: Idiom
           <p className={s.nota}>
             {p.servicios.preguntaAsesoria}{" "}
             <a
-              href={enlaceWhatsapp(p.servicios.mensajeWhatsapp)}
+              href={WHATSAPP ? enlaceWhatsapp(p.servicios.mensajeWhatsapp) : `mailto:${CORREO}`}
               target="_blank"
               rel="noopener noreferrer"
               className={s.enlace}
@@ -379,14 +379,14 @@ export default function Presentacion({ m, idioma }: { m: Mensajes; idioma: Idiom
             {p.cierre.cotizar}
             <Flecha />
           </Link>
-          <a
+          {WHATSAPP && (<a
             href={enlaceWhatsapp(p.cierre.mensajeWhatsapp)}
             target="_blank"
             rel="noopener noreferrer"
             className={s.botonContorno}
           >
             {p.cierre.whatsapp}
-          </a>
+          </a>)}
           <a href={`mailto:${CORREO}`} className={`dato ${s.botonContorno}`}>
             {CORREO}
           </a>

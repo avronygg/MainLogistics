@@ -30,4 +30,12 @@ export const TELEFONO_ENLACE = "+56992778013";
  * sin espacios y sin guiones. Un solo carácter de más y el enlace abre un
  * chat con un número que no existe.
  */
-export const WHATSAPP = process.env.NEXT_PUBLIC_WHATSAPP || "56992778013";
+/**
+ * WhatsApp oculto por ahora (pedido del cliente, 25-11-2026): todo el contacto
+ * va por correo. Para volver a mostrar los botones, poner `true`.
+ */
+export const MOSTRAR_WHATSAPP = false;
+
+export const WHATSAPP = MOSTRAR_WHATSAPP
+  ? process.env.NEXT_PUBLIC_WHATSAPP || "56992778013"
+  : "";

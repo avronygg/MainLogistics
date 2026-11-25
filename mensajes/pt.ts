@@ -736,7 +736,7 @@ export const pt: Mensajes = {
     },
     exito: {
       titulo: "Recebemos sua solicitação.",
-      cuerpo: "Respondemos em menos de 24 horas úteis com uma avaliação de viabilidade da rota. Se precisar mover antes, escreva para nós pelo WhatsApp.",
+      cuerpo: "Respondemos em menos de 24 horas úteis com uma avaliação de viabilidade da rota.",
       otraSolicitud: "Enviar outra solicitação",
     },
     errorEnvio: {
@@ -1159,13 +1159,15 @@ export const pt: Mensajes = {
     exito: {
       titulo: "Recebemos sua solicitação.",
       detalle:
-        "Enviamos a cotação com valores em até 24 horas úteis. Se for urgente, escreva pelo WhatsApp.",
+        "Enviamos a cotação com valores em até 24 horas úteis.",
       otra: "Fazer outra solicitação",
     },
     errorEnvio: {
       titulo: "Não conseguimos enviar.",
       detalle:
         "Nada se perdeu: seus dados continuam aqui. Tente de novo ou escreva pelo {whatsapp} ou para {correo}.",
+      detalleSinWhatsapp:
+        "Nada se perdeu: seus dados continuam aqui. Tente de novo ou escreva para {correo}.",
       enlaceWhatsapp: "WhatsApp",
       reintentar: "Tentar de novo",
     },

@@ -736,7 +736,7 @@ export const en: Mensajes = {
     },
     exito: {
       titulo: "We have your request.",
-      cuerpo: "We reply in less than 24 business hours with a feasibility assessment of the route. If you need to move it sooner, write to us on WhatsApp.",
+      cuerpo: "We reply in less than 24 business hours with a feasibility assessment of the route.",
       otraSolicitud: "Send another request",
     },
     errorEnvio: {
@@ -1159,13 +1159,15 @@ export const en: Mensajes = {
     exito: {
       titulo: "We have your request.",
       detalle:
-        "We email you the priced quote within 24 working hours. If it's urgent, message us on WhatsApp.",
+        "We email you the priced quote within 24 working hours.",
       otra: "Send another request",
     },
     errorEnvio: {
       titulo: "We could not send it.",
       detalle:
         "Nothing was lost: your details are still here. Try again, or write to us on {whatsapp} or at {correo}.",
+      detalleSinWhatsapp:
+        "Nothing was lost: your details are still here. Try again, or write to us at {correo}.",
       enlaceWhatsapp: "WhatsApp",
       reintentar: "Try again",
     },

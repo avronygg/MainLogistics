@@ -760,7 +760,7 @@ export const zh: Mensajes = {
     exito: {
       titulo: "我们已收到您的申请。",
       cuerpo:
-        "我们将在 24 个工作小时内回复这条路线的可行性评估。如果需要更早发运，请通过 WhatsApp 联系我们。",
+        "我们将在 24 个工作小时内回复这条路线的可行性评估。",
       otraSolicitud: "再提交一份申请",
     },
     errorEnvio: {
@@ -1184,13 +1184,15 @@ export const zh: Mensajes = {
     exito: {
       titulo: "我们已收到您的询价单。",
       detalle:
-        "我们会在 24 个工作小时内发送含报价的文件。如果着急，请通过 WhatsApp 联系我们。",
+        "我们会在 24 个工作小时内发送含报价的文件。",
       otra: "再提交一份",
     },
     errorEnvio: {
       titulo: "发送未成功。",
       detalle:
         "内容没有丢失，仍保留在这里。请重试，或通过 {whatsapp} 或邮件 {correo} 与我们联系。",
+      detalleSinWhatsapp:
+        "内容没有丢失，仍保留在这里。请重试，或发邮件到 {correo} 与我们联系。",
       enlaceWhatsapp: "WhatsApp",
       reintentar: "重试",
     },

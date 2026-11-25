@@ -764,7 +764,7 @@ export const es = {
     },
     exito: {
       titulo: "Recibimos su solicitud.",
-      cuerpo: "Le respondemos en menos de 24 horas hábiles con una evaluación de factibilidad de la ruta. Si necesita moverlo antes, escríbanos por WhatsApp.",
+      cuerpo: "Le respondemos en menos de 24 horas hábiles con una evaluación de factibilidad de la ruta.",
       otraSolicitud: "Enviar otra solicitud",
     },
     errorEnvio: {
@@ -1207,13 +1207,15 @@ export const es = {
     exito: {
       titulo: "Recibimos su solicitud.",
       detalle:
-        "Le enviamos la cotización con valores en 24 horas hábiles. Si es urgente, escríbanos por WhatsApp.",
+        "Le enviamos la cotización con valores en 24 horas hábiles.",
       otra: "Hacer otra solicitud",
     },
     errorEnvio: {
       titulo: "No pudimos enviarla.",
       detalle:
         "No se perdió nada: sus datos siguen acá. Reintente, o escríbanos por {whatsapp} o a {correo}.",
+      detalleSinWhatsapp:
+        "No se perdió nada: sus datos siguen acá. Reintente, o escríbanos a {correo}.",
       enlaceWhatsapp: "WhatsApp",
       reintentar: "Reintentar",
     },

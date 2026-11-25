@@ -627,7 +627,7 @@ export default function SolicitudCotizacion({
               </p>
               <p className="mt-1.5 text-[14px] leading-[1.5] text-[var(--texto-sec)]">
                 <Plantilla
-                  texto={t.errorEnvio.detalle}
+                  texto={enlaceWhatsapp ? t.errorEnvio.detalle : t.errorEnvio.detalleSinWhatsapp}
                   piezas={{
                     whatsapp: enlaceWhatsapp ? (
                       <a
