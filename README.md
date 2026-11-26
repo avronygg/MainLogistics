@@ -107,9 +107,13 @@ ni se comparte nunca.**
 | Variable | Para qué |
 |---|---|
 | `RESEND_API_KEY` | Envío del formulario |
-| `COTIZA_DESTINO` | Correo que recibe las solicitudes |
 | `COTIZA_REMITENTE` | Remitente verificado en Resend |
-| `NEXT_PUBLIC_WHATSAPP` | Opcional. El número comercial ya está en el código |
+| `COTIZADOR_URL` | Dirección del cotizador interno que abre el enlace de cada correo |
+| `NEXT_PUBLIC_WHATSAPP` | Opcional. WhatsApp hoy está apagado en `components/datos/contacto.ts` |
+
+El correo que recibe las solicitudes está en el código (`components/datos/contacto.ts`), no en una variable.
+
+Traslado del sitio a las cuentas de la agencia: ver [TRASPASO-AGENCIA.md](TRASPASO-AGENCIA.md).
 
 Sin configurar, la ruta `/api/cotizar` responde 503 y el formulario **muestra
 el error** en vez de fingir que envió. Es deliberado.
@@ -121,7 +125,7 @@ el error** en vez de fingir que envió. Es deliberado.
 | Qué | Dónde |
 |---|---|
 | Clave de Resend y remitente verificado | variables en Vercel |
-| RUT, razón social y dirección | hoy el pie muestra solo correo y teléfono |
+| RUT, razón social y dirección | hoy el pie muestra solo el correo |
 | Citas reales de clientes, con autorización | `components/Resenas.tsx` |
 | Autorización de uso de marca de los 13 clientes | gestión comercial |
 | Las 6 fotos marcadas "Foto pendiente" | el encargo está escrito en cada marco |
